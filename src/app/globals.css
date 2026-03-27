@@ -1,0 +1,57 @@
+@import 'tailwindcss';
+
+:root {
+  /* Brand Colors */
+  --ciq-purple: #7B68B5;
+  --ciq-blue: #5B8DB8;
+  --ciq-coral: #E8735A;
+  --ciq-gold: #D4A017;
+  --ciq-green: #4CAF8A;
+  --ciq-pink: #C25B8A;
+  --ciq-orange: #E07B39;
+  --ciq-sky: #6B9BD2;
+
+  /* CIS Tier Colors */
+  --tier-rare: #9333EA;
+  --tier-synergistic: #16A34A;
+  --tier-compatible: #2563EB;
+  --tier-misaligned: #6B7280;
+
+  /* Neutrals */
+  --bg-primary: #FAFAFA;
+  --bg-secondary: #F3F4F6;
+  --bg-card: #FFFFFF;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-muted: #9CA3AF;
+  --border: #E5E7EB;
+  --border-focus: #7B68B5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #0A0A0B;
+    --bg-secondary: #18181B;
+    --bg-card: #1F1F23;
+    --text-primary: #F9FAFB;
+    --text-secondary: #9CA3AF;
+    --text-muted: #6B7280;
+    --border: #27272A;
+    --border-focus: #9B8DD0;
+  }
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Screenshot protection for profile photos */
+.photo-protected {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
