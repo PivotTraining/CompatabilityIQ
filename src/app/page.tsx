@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Brain, Heart, Shield, TrendingUp, Lock, Sparkles, ArrowRight, Check, Clock, MessageCircle, Flame, DollarSign, Zap, RefreshCw, Eye, BarChart3, SmilePlus } from 'lucide-react'
+import { Brain, Heart, TrendingUp, Lock, Sparkles, ArrowRight, Check, Clock, MessageCircle } from 'lucide-react'
 
 export default function LandingPage() {
   return (
@@ -8,7 +8,7 @@ export default function LandingPage() {
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 lg:px-12 py-5 max-w-7xl mx-auto">
         <div className="flex items-center gap-2">
-          <Image src="/images/logo.svg" alt="CompatibleIQ" width={220} height={55} className="h-14 w-auto" priority />
+          <Image src="/images/logo.svg" alt="CompatibleIQ" width={320} height={80} className="h-20 w-auto" priority />
         </div>
         <div className="flex items-center gap-3">
           <Link href="/login" className="px-4 py-2.5 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">
@@ -91,9 +91,9 @@ export default function LandingPage() {
       <section className="border-y border-gray-100 bg-gray-50/50">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex flex-wrap justify-center gap-x-12 gap-y-4 text-center">
           {[
-            { value: '30 min', label: 'Free Assessment' },
-            { value: '5', label: 'Free Dimensions' },
-            { value: '15', label: 'Total Dimensions' },
+            { value: '30 min', label: 'Total Assessment Time' },
+            { value: '5', label: 'Free Assessments' },
+            { value: '100%', label: 'Free to Match' },
             { value: '0', label: 'Swipes Required', highlight: true },
           ].map((stat) => (
             <div key={stat.label}>
@@ -189,125 +189,93 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto px-6 lg:px-12">
           <div className="text-center mb-16">
             <p className="text-sm font-semibold mb-3 tracking-wide uppercase" style={{ color: 'var(--ciq-purple)' }}>How It Works</p>
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">30 minutes to clarity. The rest is up to you.</h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">Start with 5 free assessments that build your compatibility profile. Then go deeper with 10 premium dimensions that sharpen your matches from &quot;probably&quot; to &quot;definitely.&quot;</p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">5 assessments. 30 minutes. Real matches.</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">Every assessment is free. Complete all five and start getting matched with people who are actually compatible — scored across the dimensions that predict real relationships.</p>
           </div>
 
-          {/* Progress Bar */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 mb-8">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-sm font-semibold text-gray-900">Your Match Clarity</p>
-              <p className="text-xs text-gray-400">The more you complete, the sharper your matches</p>
-            </div>
-            <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden mb-4">
-              <div className="h-full rounded-full" style={{ width: '33%', background: 'linear-gradient(90deg, #7B68B5, #9B8DD0)' }} />
-            </div>
-            <div className="flex justify-between text-xs">
-              <span className="font-semibold" style={{ color: 'var(--ciq-purple)' }}>5 Free Assessments</span>
-              <span className="text-gray-400">+ 10 Premium Dimensions</span>
-              <span className="text-gray-400">Full Compatibility Profile</span>
-            </div>
-          </div>
-
-          {/* Free Tier */}
-          <div className="mb-6">
-            <div className="flex items-center gap-3 mb-4">
+          {/* 5 Core Assessments */}
+          <div className="mb-10">
+            <div className="flex items-center gap-3 mb-6">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600">
                 <Check className="w-3 h-3" />
-                FREE
+                100% FREE
               </span>
               <p className="text-sm font-medium text-gray-500">~30 minutes total &bull; 5 assessments &bull; ~6 min each</p>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {[
-                { icon: Heart, title: 'Values & Priorities', desc: "What actually matters to you in a partner — beyond the surface." },
-                { icon: Lock, title: 'Attachment Style', desc: "How you connect, pull close, or push away — and why it matters." },
-                { icon: MessageCircle, title: 'Communication & Conflict', desc: "How you fight matters more than how you flirt." },
-                { icon: Sparkles, title: 'Love Languages', desc: "The difference between feeling loved and just being in a relationship." },
-                { icon: TrendingUp, title: 'Lifestyle & Ambition', desc: 'Because "work-life balance" means something different to everyone.' },
+                { icon: Heart, title: 'Values & Priorities', desc: "What actually matters to you in a partner — beyond the surface.", num: '01' },
+                { icon: Lock, title: 'Attachment Style', desc: "How you connect, pull close, or push away — and why it matters.", num: '02' },
+                { icon: MessageCircle, title: 'Communication & Conflict', desc: "How you fight matters more than how you flirt.", num: '03' },
+                { icon: Brain, title: 'Emotional Intelligence', desc: "Can they read a room? Can you? This one's a mirror.", num: '04' },
+                { icon: TrendingUp, title: 'Lifestyle & Ambition', desc: 'Because "work-life balance" means something different to everyone.', num: '05' },
               ].map((item) => (
-                <div key={item.title} className="rounded-2xl p-5 bg-white border border-gray-100 shadow-sm">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-50" style={{ color: 'var(--ciq-purple)' }}>
-                      <item.icon className="w-4 h-4" />
+                <div key={item.title} className="rounded-2xl p-6 bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all group">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-purple-50 group-hover:scale-110 transition-transform" style={{ color: 'var(--ciq-purple)' }}>
+                      <item.icon className="w-5 h-5" strokeWidth={1.5} />
                     </div>
-                    <span className="text-xs text-gray-400">~6 min</span>
+                    <span className="text-xs font-bold text-gray-200">{item.num}</span>
                   </div>
-                  <h4 className="text-sm font-semibold text-gray-900 mb-1">{item.title}</h4>
-                  <p className="text-xs text-gray-400">{item.desc}</p>
+                  <h4 className="text-base font-semibold text-gray-900 mb-2">{item.title}</h4>
+                  <p className="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
+                  <div className="mt-4 flex items-center gap-2 text-xs text-gray-300">
+                    <Clock className="w-3 h-3" />
+                    ~6 min
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Nudge */}
-          <div className="rounded-2xl p-6 border mb-8 text-center" style={{ background: 'rgba(237,233,246,0.5)', borderColor: 'rgba(123,104,181,0.1)' }}>
-            <p className="text-sm text-gray-600">
-              <span className="font-semibold" style={{ color: 'var(--ciq-purple)' }}>After your free assessments</span>, you&apos;ll see preliminary match indicators — enough to know there&apos;s real potential out there.
-              Unlock premium dimensions to go from <em>&quot;this person might work&quot;</em> to <em>&quot;this person gets me.&quot;</em>
-            </p>
-          </div>
-
-          {/* Premium Tier */}
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold" style={{ background: 'var(--ciq-purple-light)', color: 'var(--ciq-purple)' }}>
-                <Sparkles className="w-3 h-3" />
-                PREMIUM
-              </span>
-              <p className="text-sm font-medium text-gray-500">~7 minutes each &bull; Unlock individually or as bundles</p>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[
-                { icon: Flame, title: 'Sexual Compatibility', desc: "Expectations, drives, and intimacy languages — the stuff people avoid until it's too late.", color: 'var(--ciq-coral)', bg: 'rgb(255 237 213)', popular: true },
-                { icon: DollarSign, title: 'Financial Intelligence', desc: "Money breaks up more couples than infidelity. Know where you align first.", color: 'var(--ciq-green)', bg: 'rgb(236 253 245)', popular: true },
-                { icon: Brain, title: 'Emotional Intelligence', desc: "Can they read a room? Can you? This one's a mirror.", color: 'var(--ciq-purple)', bg: 'rgb(243 232 255)', popular: false },
-                { icon: Shield, title: 'Trust & Accountability', desc: 'Do they own their stuff? This dimension filters out the "it\'s never my fault" crowd.', color: 'var(--ciq-purple)', bg: 'rgb(243 232 255)', popular: false },
-                { icon: SmilePlus, title: 'Empathy & Safety', desc: "Relational safety isn't a nice-to-have. It's the baseline.", color: 'var(--ciq-purple)', bg: 'rgb(243 232 255)', popular: false },
-                { icon: RefreshCw, title: 'Growth Mindset', desc: "Are they evolving or stuck? Growth is the difference between year 1 and year 10.", color: 'var(--ciq-purple)', bg: 'rgb(243 232 255)', popular: false },
-                { icon: Zap, title: 'Neurobiology', desc: "Your nervous system has a type. Know yours.", color: 'var(--ciq-purple)', bg: 'rgb(243 232 255)', popular: false },
-                { icon: Brain, title: 'Cognitive Style', desc: "Head vs. heart. Planning vs. vibing. How you two think changes everything.", color: 'var(--ciq-purple)', bg: 'rgb(243 232 255)', popular: false },
-                { icon: Eye, title: 'Dependency Patterns', desc: "Independent or codependent? There's a sweet spot — and most people miss it.", color: 'var(--ciq-purple)', bg: 'rgb(243 232 255)', popular: false },
-                { icon: BarChart3, title: 'Long-Term Vision', desc: "Kids? Cities? Retirement age? The big-picture stuff that blindsides couples at year 3.", color: 'var(--ciq-purple)', bg: 'rgb(243 232 255)', popular: false },
-              ].map((item) => (
-                <div key={item.title} className={`rounded-2xl p-5 bg-white shadow-sm relative ${item.popular ? 'border border-[#7B68B5]/20' : 'border border-gray-100'}`}>
-                  {item.popular && (
-                    <div className="absolute top-3 right-3 px-2 py-0.5 rounded-full text-[10px] font-bold" style={{ background: 'rgba(232,115,90,0.1)', color: 'var(--ciq-coral)' }}>POPULAR</div>
-                  )}
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: item.bg, color: item.color }}>
-                      <item.icon className="w-4 h-4" />
-                    </div>
-                    <span className="text-xs text-gray-400">~7 min</span>
-                  </div>
-                  <h4 className="text-sm font-semibold text-gray-900 mb-1">{item.title}</h4>
-                  <p className="text-xs text-gray-400">{item.desc}</p>
+          {/* What Happens After */}
+          <div className="rounded-2xl p-8 bg-white border border-gray-100 shadow-sm">
+            <div className="grid lg:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ background: 'var(--ciq-purple-light)', color: 'var(--ciq-purple)' }}>
+                  <Check className="w-6 h-6" />
                 </div>
-              ))}
+                <h4 className="font-semibold text-gray-900 mb-1">Complete 5 assessments</h4>
+                <p className="text-sm text-gray-400">Free. ~30 minutes. Do them over lunch.</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ background: 'var(--ciq-purple-light)', color: 'var(--ciq-purple)' }}>
+                  <Sparkles className="w-6 h-6" />
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-1">Get your Resonances</h4>
+                <p className="text-sm text-gray-400">See how many people you&apos;re compatible with. Names, scores, and the ability to message — free.</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ background: 'var(--ciq-purple-light)', color: 'var(--ciq-purple)' }}>
+                  <ArrowRight className="w-6 h-6" />
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-1">Go deeper with Reports</h4>
+                <p className="text-sm text-gray-400">Unlock the full compatibility breakdown for any match — where you align, where you&apos;ll clash, and how to navigate it.</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Pricing */}
+      {/* Pricing — Resonance Reports + CIQ Pro */}
       <section id="pricing" className="py-24">
         <div className="max-w-5xl mx-auto px-6 lg:px-12">
           <div className="text-center mb-16">
             <p className="text-sm font-semibold mb-3 tracking-wide uppercase" style={{ color: 'var(--ciq-purple)' }}>Pricing</p>
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Go deeper. Match sharper.</h2>
-            <p className="text-gray-500 max-w-xl mx-auto">Your 5 free assessments give you a foundation. Premium dimensions turn a hunch into a match you can trust.</p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Matching is free. Insight is premium.</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">You&apos;ll see your matches, their names, and your compatibility score — all free. The Resonance Report tells you <em>why</em> you match and what to watch for.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {/* Single */}
+            {/* Resonance Report */}
             <div className="rounded-2xl p-7 bg-white border border-gray-200 shadow-sm">
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Single Dimension</p>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Resonance Report</p>
               <div className="flex items-baseline gap-1 mb-2">
-                <span className="text-4xl font-bold text-gray-900">$2.99</span>
-                <span className="text-sm text-gray-400">each</span>
+                <span className="text-4xl font-bold text-gray-900">$4.99</span>
+                <span className="text-sm text-gray-400">per match</span>
               </div>
-              <p className="text-sm text-gray-500 mb-6">Pick any premium dimension. ~7 minutes per assessment.</p>
+              <p className="text-sm text-gray-500 mb-6">The full compatibility deep dive for one match. Know exactly where you align and where to watch out.</p>
               <ul className="space-y-3 mb-8">
-                {['Unlock any single dimension', 'Improves match accuracy immediately', 'Pay only for what you want'].map((text) => (
+                {['Dimension-by-dimension breakdown', 'Your strengths as a pair', 'Friction points & how to navigate them', 'Personalized conversation starters'].map((text) => (
                   <li key={text} className="flex items-start gap-2 text-sm text-gray-600">
                     <Check className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: 'var(--ciq-green)' }} />
                     {text}
@@ -315,20 +283,21 @@ export default function LandingPage() {
                 ))}
               </ul>
               <button className="w-full py-3 rounded-xl text-sm font-semibold border-2 border-gray-200 text-gray-700 hover:border-[#7B68B5] hover:text-[#7B68B5] transition-all">
-                Add a Dimension
+                Unlock a Report
               </button>
             </div>
-            {/* Essentials */}
+            {/* CIQ Pro */}
             <div className="rounded-2xl p-7 bg-white border-2 shadow-sm relative" style={{ borderColor: 'var(--ciq-purple)', boxShadow: '0 0 40px rgba(123,104,181,0.15)' }}>
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-white text-xs font-bold" style={{ background: 'var(--ciq-purple)' }}>BEST VALUE</div>
-              <p className="text-xs font-semibold uppercase tracking-wide mb-4" style={{ color: 'var(--ciq-purple)' }}>Essentials Bundle</p>
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-white text-xs font-bold" style={{ background: 'var(--ciq-purple)' }}>MOST POPULAR</div>
+              <p className="text-xs font-semibold uppercase tracking-wide mb-4" style={{ color: 'var(--ciq-purple)' }}>CIQ Pro</p>
               <div className="flex items-baseline gap-1 mb-1">
-                <span className="text-4xl font-bold text-gray-900">$4.99</span>
+                <span className="text-4xl font-bold text-gray-900">$14.99</span>
+                <span className="text-sm text-gray-400">/mo</span>
               </div>
-              <p className="text-xs text-gray-400 mb-2"><s>$5.98</s> — Save 17%</p>
-              <p className="text-sm text-gray-500 mb-6">Sexual Compatibility + Financial Intelligence. The two dimensions that break the most relationships.</p>
+              <p className="text-xs text-gray-400 mb-2">3 reports and you&apos;ve already paid for this</p>
+              <p className="text-sm text-gray-500 mb-6">Unlimited reports, priority matching, and features that serious daters actually want.</p>
               <ul className="space-y-3 mb-8">
-                {['Sexual Compatibility assessment', 'Financial Intelligence assessment', 'Major boost to match confidence'].map((text) => (
+                {['Unlimited Resonance Reports', 'Priority Match Queue', 'Re-take any assessment', 'Compatibility Trends across matches', 'Read Receipts in messaging', 'Who Viewed Your Profile'].map((text) => (
                   <li key={text} className="flex items-start gap-2 text-sm text-gray-600">
                     <Check className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: 'var(--ciq-green)' }} />
                     {text}
@@ -336,27 +305,29 @@ export default function LandingPage() {
                 ))}
               </ul>
               <button className="w-full py-3 rounded-xl text-sm font-semibold text-white hover:opacity-90 transition-all" style={{ background: 'var(--ciq-purple)' }}>
-                Unlock Essentials
+                Go Pro
               </button>
             </div>
-            {/* Full Profile */}
-            <div className="rounded-2xl p-7 bg-white border border-gray-200 shadow-sm">
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Full Profile</p>
+            {/* Founding Member */}
+            <div className="rounded-2xl p-7 bg-white border border-gray-200 shadow-sm relative overflow-hidden">
+              <div className="absolute top-0 right-0 px-3 py-1.5 rounded-bl-xl text-[10px] font-bold text-white" style={{ background: 'var(--ciq-coral)' }}>LIMITED</div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Founding Member</p>
               <div className="flex items-baseline gap-1 mb-1">
-                <span className="text-4xl font-bold text-gray-900">$14.99</span>
+                <span className="text-4xl font-bold text-gray-900">$9.99</span>
+                <span className="text-sm text-gray-400">/mo</span>
               </div>
-              <p className="text-xs text-gray-400 mb-2"><s>$29.90</s> — Save 50%</p>
-              <p className="text-sm text-gray-500 mb-6">All 10 premium dimensions. The complete compatibility picture — no blind spots.</p>
+              <p className="text-xs text-gray-400 mb-2">Locked in forever &bull; <span style={{ color: 'var(--ciq-coral)' }}>First 1,000 only</span></p>
+              <p className="text-sm text-gray-500 mb-6">Everything in CIQ Pro at the early adopter price. This rate never goes up — ever.</p>
               <ul className="space-y-3 mb-8">
-                {['All 10 premium assessments', 'Highest match accuracy possible', 'Priority match queue', 'Detailed compatibility breakdowns'].map((text) => (
+                {['Everything in CIQ Pro', '$9.99/mo locked for life', 'Early adopter pricing', 'Help shape the product'].map((text) => (
                   <li key={text} className="flex items-start gap-2 text-sm text-gray-600">
                     <Check className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: 'var(--ciq-green)' }} />
                     {text}
                   </li>
                 ))}
               </ul>
-              <button className="w-full py-3 rounded-xl text-sm font-semibold border-2 border-gray-200 text-gray-700 hover:border-[#7B68B5] hover:text-[#7B68B5] transition-all">
-                Unlock Everything
+              <button className="w-full py-3 rounded-xl text-sm font-semibold border-2 text-white hover:opacity-90 transition-all" style={{ background: 'var(--ciq-coral)', borderColor: 'var(--ciq-coral)' }}>
+                Claim Founding Rate
               </button>
             </div>
           </div>
@@ -384,7 +355,7 @@ export default function LandingPage() {
               <div className="space-y-4">
                 {[
                   'Validated psychometric instruments — not a BuzzFeed quiz',
-                  'Financial and sexual compatibility scored before the first date',
+                  'Assessments are free. Matching is free. Messaging is free.',
                   'Designed for professionals, parents, and people rebuilding — not 22-year-olds swiping at brunch',
                 ].map((text) => (
                   <div key={text} className="flex items-start gap-3">
