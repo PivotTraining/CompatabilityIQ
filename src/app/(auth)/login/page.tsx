@@ -16,6 +16,10 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!supabase) {
+      setError('Service unavailable')
+      return
+    }
     setLoading(true)
     setError('')
 

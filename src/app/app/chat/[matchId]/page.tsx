@@ -36,7 +36,7 @@ export default function ChatPage() {
   const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!user || !matchId) return
+    if (!user || !matchId || !supabase) return
 
     // Load match info and partner
     const loadMatch = async () => {
@@ -113,7 +113,7 @@ export default function ChatPage() {
   }, [messages])
 
   const handleSend = async () => {
-    if (!user || !input.trim() || sending) return
+    if (!user || !supabase || !input.trim() || sending) return
     const content = input.trim()
     if (content.length > LIMITS.maxMessageLength) return
 
@@ -133,7 +133,7 @@ export default function ChatPage() {
   }
 
   const handleBlock = async () => {
-    if (!user || !partner) return
+    if (!user || !supabase || !partner) return
     // Get partner ID from match
     const { data: matchRaw2 } = await supabase
       .from('matches')

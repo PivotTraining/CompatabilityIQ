@@ -47,7 +47,7 @@ export default function OnboardingPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!user || !isValid) return
+    if (!user || !supabase || !isValid) return
 
     setLoading(true)
     setError('')

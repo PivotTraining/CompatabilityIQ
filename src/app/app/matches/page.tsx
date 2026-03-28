@@ -31,7 +31,7 @@ export default function MatchesPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (!user) return
+    if (!user || !supabase) return
     loadMatches()
 
     // Subscribe to new matches
@@ -50,7 +50,7 @@ export default function MatchesPage() {
   }, [user])
 
   const loadMatches = async () => {
-    if (!user) return
+    if (!user || !supabase) return
 
     const { data: matchData } = await supabase
       .from('matches')

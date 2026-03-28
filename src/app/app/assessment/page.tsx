@@ -15,7 +15,7 @@ export default function AssessmentHub() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (!user) return
+    if (!user || !supabase) return
     supabase
       .from('profiles')
       .select('assessment_progress')

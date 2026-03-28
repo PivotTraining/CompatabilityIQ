@@ -35,7 +35,7 @@ export default function DiscoverPage() {
   }, [user, assessmentProgress])
 
   const loadProfiles = async () => {
-    if (!user) return
+    if (!user || !supabase) return
     setLoading(true)
 
     // Get existing interactions to exclude
@@ -85,7 +85,7 @@ export default function DiscoverPage() {
   }
 
   const handleAction = async (action: 'connect' | 'dismiss') => {
-    if (!user || acting) return
+    if (!user || !supabase || acting) return
     const target = profiles[currentIdx]
     if (!target) return
 

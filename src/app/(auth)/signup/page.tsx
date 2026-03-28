@@ -14,6 +14,10 @@ export default function SignupPage() {
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!supabase) {
+      setError('Service unavailable')
+      return
+    }
     setLoading(true)
     setError('')
 

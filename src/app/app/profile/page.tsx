@@ -30,7 +30,7 @@ export default function ProfilePage() {
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
-    if (!user) return
+    if (!user || !supabase) return
     supabase
       .from('profiles')
       .select('display_name, date_of_birth, gender, bio, location_city, location_state, assessment_progress, cis_score, cis_tier, is_verified')
@@ -46,7 +46,7 @@ export default function ProfilePage() {
   }, [user, supabase])
 
   const saveBio = async () => {
-    if (!user) return
+    if (!user || !supabase) return
     setSaving(true)
     await supabase.from('profiles').update({ bio } as never).eq('id', user.id)
     setProfile((p) => p ? { ...p, bio } : p)

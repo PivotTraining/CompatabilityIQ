@@ -5,6 +5,9 @@ import { MODULE_CONFIG, getUnlockedProfileCount } from '@/lib/constants'
 export async function POST(request: Request) {
   try {
     const supabase = await getSupabaseServerClient()
+    if (!supabase) {
+      return NextResponse.json({ error: 'Service unavailable' }, { status: 503 })
+    }
     const { data: { user } } = await supabase.auth.getUser()
 
     if (!user) {
@@ -28,6 +31,9 @@ export async function POST(request: Request) {
     // Store answers using service client (encrypted in production via Edge Function)
     // For MVP: store as JSON in encrypted_responses field
     const serviceClient = await getSupabaseServiceClient()
+    if (!serviceClient) {
+      return NextResponse.json({ error: 'Service unavailable' }, { status: 503 })
+    }
 
     const responsePayload = JSON.stringify(answers)
     const encoder = new TextEncoder()
