@@ -8,7 +8,7 @@ export default function LandingPage() {
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 lg:px-12 py-5 max-w-7xl mx-auto">
         <div className="flex items-center gap-2">
-          <Image src="/images/logo.svg" alt="CompatibleIQ" width={180} height={45} className="h-10 w-auto" priority />
+          <Image src="/images/logo.svg" alt="CompatibleIQ" width={220} height={55} className="h-14 w-auto" priority />
         </div>
         <div className="flex items-center gap-3">
           <Link href="/login" className="px-4 py-2.5 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">
@@ -427,7 +427,7 @@ export default function LandingPage() {
       <footer className="max-w-7xl mx-auto px-6 lg:px-12 py-10 border-t border-gray-100">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-3">
-            <Image src="/images/logo.svg" alt="CompatibleIQ" width={120} height={30} className="h-7 w-auto opacity-60" />
+            <Image src="/images/logo.svg" alt="CompatibleIQ" width={150} height={38} className="h-9 w-auto opacity-60" />
             <span className="text-sm text-gray-400">&copy; {new Date().getFullYear()} Pivot Training & Development</span>
           </div>
           <p className="text-xs text-gray-400">CompatibleIQ is not a clinical diagnostic tool.</p>
