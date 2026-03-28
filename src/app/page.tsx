@@ -92,7 +92,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex flex-wrap justify-center gap-x-12 gap-y-4 text-center">
           {[
             { value: '30 min', label: 'Total Assessment Time' },
-            { value: '5', label: 'Free Assessments' },
+            { value: '6', label: 'Free Assessments' },
             { value: '100%', label: 'Free to Match' },
             { value: '0', label: 'Swipes Required', highlight: true },
           ].map((stat) => (
@@ -189,8 +189,8 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto px-6 lg:px-12">
           <div className="text-center mb-16">
             <p className="text-sm font-semibold mb-3 tracking-wide uppercase" style={{ color: 'var(--ciq-purple)' }}>How It Works</p>
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">5 assessments. 30 minutes. Real matches.</h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">Every assessment is free. Complete all five and start getting matched with people who are actually compatible — scored across the dimensions that predict real relationships.</p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">6 assessments. 30 minutes. Real matches.</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">Every assessment is free. Complete all six and start getting matched with people who are actually compatible — scored across the dimensions that predict real relationships.</p>
           </div>
 
           {/* 5 Core Assessments */}
@@ -200,15 +200,16 @@ export default function LandingPage() {
                 <Check className="w-3 h-3" />
                 100% FREE
               </span>
-              <p className="text-sm font-medium text-gray-500">~30 minutes total &bull; 5 assessments &bull; ~6 min each</p>
+              <p className="text-sm font-medium text-gray-500">~30 minutes total &bull; 6 assessments &bull; ~5 min each</p>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
               {[
                 { icon: Heart, title: 'Values & Priorities', desc: "What actually matters to you in a partner — beyond the surface.", num: '01' },
                 { icon: Lock, title: 'Attachment Style', desc: "How you connect, pull close, or push away — and why it matters.", num: '02' },
                 { icon: MessageCircle, title: 'Communication & Conflict', desc: "How you fight matters more than how you flirt.", num: '03' },
                 { icon: Brain, title: 'Emotional Intelligence', desc: "Can they read a room? Can you? This one's a mirror.", num: '04' },
                 { icon: TrendingUp, title: 'Lifestyle & Ambition', desc: 'Because "work-life balance" means something different to everyone.', num: '05' },
+                { icon: Heart, title: 'Love Languages', desc: "The difference between feeling loved and just being in a relationship.", num: '06' },
               ].map((item) => (
                 <div key={item.title} className="rounded-2xl p-6 bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all group">
                   <div className="flex items-center justify-between mb-4">
@@ -221,7 +222,7 @@ export default function LandingPage() {
                   <p className="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
                   <div className="mt-4 flex items-center gap-2 text-xs text-gray-300">
                     <Clock className="w-3 h-3" />
-                    ~6 min
+                    ~5 min
                   </div>
                 </div>
               ))}
@@ -235,7 +236,7 @@ export default function LandingPage() {
                 <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ background: 'var(--ciq-purple-light)', color: 'var(--ciq-purple)' }}>
                   <Check className="w-6 h-6" />
                 </div>
-                <h4 className="font-semibold text-gray-900 mb-1">Complete 5 assessments</h4>
+                <h4 className="font-semibold text-gray-900 mb-1">Complete 6 assessments</h4>
                 <p className="text-sm text-gray-400">Free. ~30 minutes. Do them over lunch.</p>
               </div>
               <div className="text-center">
@@ -381,7 +382,7 @@ export default function LandingPage() {
             30 minutes now.<br />Zero bad dates later.
           </h2>
           <p className="text-lg mb-10 max-w-lg mx-auto text-white/80">
-            Your free assessment is waiting. Five dimensions, no credit card, and the kind of clarity you wish you had three relationships ago.
+            Your free assessment is waiting. Six dimensions, no credit card, and the kind of clarity you wish you had three relationships ago.
           </p>
           <Link
             href="/signup"
