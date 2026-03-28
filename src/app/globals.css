@@ -3,6 +3,7 @@
 :root {
   /* Brand Colors */
   --ciq-purple: #7B68B5;
+  --ciq-purple-light: #EDE9F6;
   --ciq-blue: #5B8DB8;
   --ciq-coral: #E8735A;
   --ciq-gold: #D4A017;
@@ -17,14 +18,14 @@
   --tier-compatible: #2563EB;
   --tier-misaligned: #6B7280;
 
-  /* Neutrals */
-  --bg-primary: #FAFAFA;
-  --bg-secondary: #F3F4F6;
+  /* Light mode (default) */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F9FAFB;
   --bg-card: #FFFFFF;
   --text-primary: #111827;
   --text-secondary: #6B7280;
   --text-muted: #9CA3AF;
-  --border: #E5E7EB;
+  --border: #F3F4F6;
   --border-focus: #7B68B5;
 }
 
@@ -44,7 +45,7 @@
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 

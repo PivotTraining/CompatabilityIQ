@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CompatibleIQ — 30 Minutes. Zero Bad Dates.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['DM Sans', 'system-ui', 'sans-serif'] },
+          colors: {
+            ciq: { purple: '#7B68B5', light: '#EDE9F6', green: '#4CAF8A', coral: '#E8735A', gold: '#D4A017' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'DM Sans', system-ui, sans-serif; }
+    .gradient-hero { background: linear-gradient(135deg, #F8F6FF 0%, #FFFFFF 40%, #F0FDF9 100%); }
+    .pricing-glow { box-shadow: 0 0 40px rgba(123, 104, 181, 0.15); }
+    .progress-bar { background: linear-gradient(90deg, #7B68B5, #9B8DD0); }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+  <!-- Nav -->
+  <nav class="flex items-center justify-between px-6 lg:px-12 py-5 max-w-7xl mx-auto">
+    <div class="flex items-center gap-2.5">
+      <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-ciq-purple">
+        <span class="text-white font-bold text-sm tracking-tight">C</span>
+      </div>
+      <span class="font-semibold text-xl tracking-tight text-gray-900">CompatibleIQ</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="#" class="px-4 py-2.5 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Log in</a>
+      <a href="#" class="px-5 py-2.5 text-sm font-semibold rounded-xl text-white bg-ciq-purple hover:opacity-90 transition-all shadow-sm">Get Started Free</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="gradient-hero">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 pt-16 pb-20">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold mb-8 bg-ciq-light text-ciq-purple">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            30 minutes. That's it.
+          </div>
+          <h1 class="text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6 text-gray-900">
+            Know before<br>you <span class="text-ciq-purple">fall.</span>
+          </h1>
+          <p class="text-lg lg:text-xl text-gray-500 leading-relaxed mb-4 max-w-lg">
+            What your ex took 3 years to show you, we'll reveal in 30 minutes.
+          </p>
+          <p class="text-base text-gray-400 leading-relaxed mb-10 max-w-lg">
+            No swiping. No small talk. Just 15 science-backed dimensions that predict whether someone's actually right for you — starting with 5 free assessments you can knock out over lunch.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#intake" class="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-2xl text-white bg-ciq-purple hover:shadow-lg hover:shadow-ciq-purple/25 transition-all">
+              Start Free — Takes 30 Min
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            <a href="#how" class="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-medium rounded-2xl text-gray-600 bg-gray-100 hover:bg-gray-200 transition-all">
+              See how it works
+            </a>
+          </div>
+          <p class="mt-6 text-sm text-gray-400">Free forever for 5 core assessments. No credit card needed.</p>
+        </div>
+        <!-- Photo Collage -->
+        <div class="relative">
+          <div class="grid grid-cols-2 gap-3">
+            <div class="space-y-3">
+              <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=500&fit=crop&crop=faces" alt="Happy couple" class="w-full h-64 object-cover rounded-2xl shadow-sm" />
+              <img src="https://images.unsplash.com/photo-1545232979-8bf68ee9b1af?w=400&h=300&fit=crop&crop=faces" alt="Couple together" class="w-full h-44 object-cover rounded-2xl shadow-sm" />
+            </div>
+            <div class="space-y-3 pt-8">
+              <img src="https://images.unsplash.com/photo-1621184455862-c163dfb30e0f?w=400&h=300&fit=crop&crop=faces" alt="Diverse couple" class="w-full h-44 object-cover rounded-2xl shadow-sm" />
+              <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=400&h=500&fit=crop&crop=faces" alt="Couple on a date" class="w-full h-64 object-cover rounded-2xl shadow-sm" />
+            </div>
+          </div>
+          <div class="absolute bottom-6 left-6 bg-white/90 backdrop-blur-md rounded-2xl px-5 py-3 shadow-lg border border-gray-100">
+            <p class="text-xs font-medium text-gray-400 mb-0.5">Avg. Compatibility Score</p>
+            <p class="text-2xl font-bold text-ciq-purple">84.3<span class="text-sm font-medium text-gray-400">/100</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-y border-gray-100 bg-gray-50/50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex flex-wrap justify-center gap-x-12 gap-y-4 text-center">
+      <div><p class="text-2xl font-bold text-gray-900">30 min</p><p class="text-xs text-gray-400 font-medium">Free Assessment</p></div>
+      <div><p class="text-2xl font-bold text-gray-900">5</p><p class="text-xs text-gray-400 font-medium">Free Dimensions</p></div>
+      <div><p class="text-2xl font-bold text-gray-900">15</p><p class="text-xs text-gray-400 font-medium">Total Dimensions</p></div>
+      <div><p class="text-2xl font-bold text-ciq-purple">0</p><p class="text-xs text-gray-400 font-medium">Swipes Required</p></div>
+    </div>
+  </section>
+
+  <!-- Intake Pre-Questions -->
+  <section id="intake" class="max-w-3xl mx-auto px-6 lg:px-12 py-24">
+    <div class="text-center mb-12">
+      <p class="text-sm font-semibold text-ciq-purple mb-3 tracking-wide uppercase">Before We Start</p>
+      <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Let's get the basics out of the way</h2>
+      <p class="text-gray-500 max-w-xl mx-auto">Takes 60 seconds. We use this to personalize your assessment and make sure your matches actually make sense for you.</p>
+    </div>
+    <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-8 lg:p-10 space-y-6">
+      <!-- Name -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">What should we call you?</label>
+        <input type="text" placeholder="First name" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-ciq-purple focus:ring-2 focus:ring-ciq-purple/20 transition-all" />
+      </div>
+      <!-- Location -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Where are you based?</label>
+        <input type="text" placeholder="City, State" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-ciq-purple focus:ring-2 focus:ring-ciq-purple/20 transition-all" />
+      </div>
+      <!-- Gender / Orientation -->
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">I identify as</label>
+          <select class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-500 focus:outline-none focus:border-ciq-purple focus:ring-2 focus:ring-ciq-purple/20 transition-all bg-white">
+            <option value="">Select</option>
+            <option>Woman</option>
+            <option>Man</option>
+            <option>Non-binary</option>
+            <option>Prefer to self-describe</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">I'm interested in</label>
+          <select class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-500 focus:outline-none focus:border-ciq-purple focus:ring-2 focus:ring-ciq-purple/20 transition-all bg-white">
+            <option value="">Select</option>
+            <option>Women</option>
+            <option>Men</option>
+            <option>Everyone</option>
+            <option>Prefer to self-describe</option>
+          </select>
+        </div>
+      </div>
+      <!-- Sexual Orientation -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Sexual orientation <span class="text-gray-400 font-normal">(optional)</span></label>
+        <select class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-500 focus:outline-none focus:border-ciq-purple focus:ring-2 focus:ring-ciq-purple/20 transition-all bg-white">
+          <option value="">Prefer not to say</option>
+          <option>Straight</option>
+          <option>Gay</option>
+          <option>Lesbian</option>
+          <option>Bisexual</option>
+          <option>Pansexual</option>
+          <option>Asexual</option>
+          <option>Queer</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <!-- Relationship Goals -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-3">What are you looking for?</label>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <label class="flex items-center gap-3 p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-ciq-purple/40 hover:bg-ciq-light/30 transition-all">
+            <input type="radio" name="goal" class="accent-ciq-purple w-4 h-4" />
+            <div>
+              <p class="text-sm font-medium text-gray-900">Long-term relationship</p>
+              <p class="text-xs text-gray-400">Ready for the real thing</p>
+            </div>
+          </label>
+          <label class="flex items-center gap-3 p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-ciq-purple/40 hover:bg-ciq-light/30 transition-all">
+            <input type="radio" name="goal" class="accent-ciq-purple w-4 h-4" />
+            <div>
+              <p class="text-sm font-medium text-gray-900">Marriage-minded</p>
+              <p class="text-xs text-gray-400">Looking for a partner, not a placeholder</p>
+            </div>
+          </label>
+          <label class="flex items-center gap-3 p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-ciq-purple/40 hover:bg-ciq-light/30 transition-all">
+            <input type="radio" name="goal" class="accent-ciq-purple w-4 h-4" />
+            <div>
+              <p class="text-sm font-medium text-gray-900">Something fun</p>
+              <p class="text-xs text-gray-400">Open to where it goes</p>
+            </div>
+          </label>
+          <label class="flex items-center gap-3 p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-ciq-purple/40 hover:bg-ciq-light/30 transition-all">
+            <input type="radio" name="goal" class="accent-ciq-purple w-4 h-4" />
+            <div>
+              <p class="text-sm font-medium text-gray-900">Not sure yet</p>
+              <p class="text-xs text-gray-400">Figuring it out — that's okay</p>
+            </div>
+          </label>
+        </div>
+      </div>
+      <button class="w-full py-4 rounded-2xl text-white font-semibold bg-ciq-purple hover:opacity-90 transition-all text-base">
+        Start My Assessment →
+      </button>
+      <p class="text-center text-xs text-gray-400">Your info stays private. We never share it with matches without your permission.</p>
+    </div>
+  </section>
+
+  <!-- How It Works — Assessment Breakdown -->
+  <section id="how" class="bg-gray-50 py-24">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12">
+      <div class="text-center mb-16">
+        <p class="text-sm font-semibold text-ciq-purple mb-3 tracking-wide uppercase">How It Works</p>
+        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">30 minutes to clarity. The rest is up to you.</h2>
+        <p class="text-gray-500 max-w-2xl mx-auto">Start with 5 free assessments that build your compatibility profile. Then go deeper with 10 premium dimensions that sharpen your matches from "probably" to "definitely."</p>
+      </div>
+
+      <!-- Progress Visual -->
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 mb-8">
+        <div class="flex items-center justify-between mb-3">
+          <p class="text-sm font-semibold text-gray-900">Your Match Clarity</p>
+          <p class="text-xs text-gray-400">The more you complete, the sharper your matches</p>
+        </div>
+        <div class="w-full h-3 bg-gray-100 rounded-full overflow-hidden mb-4">
+          <div class="progress-bar h-full rounded-full" style="width: 33%"></div>
+        </div>
+        <div class="flex justify-between text-xs">
+          <span class="text-ciq-purple font-semibold">5 Free Assessments</span>
+          <span class="text-gray-400">+ 10 Premium Dimensions</span>
+          <span class="text-gray-400">Full Compatibility Profile</span>
+        </div>
+      </div>
+
+      <!-- Free Tier -->
+      <div class="mb-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            FREE
+          </span>
+          <p class="text-sm font-medium text-gray-500">~30 minutes total • 5 assessments • ~6 min each</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="rounded-2xl p-5 bg-white border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-50 text-ciq-purple">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+              </div>
+              <span class="text-xs text-gray-400">~6 min</span>
+            </div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">Values & Priorities</h4>
+            <p class="text-xs text-gray-400">What actually matters to you in a partner — beyond the surface.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-white border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-50 text-ciq-purple">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+              </div>
+              <span class="text-xs text-gray-400">~6 min</span>
+            </div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">Attachment Style</h4>
+            <p class="text-xs text-gray-400">How you connect, pull close, or push away — and why it matters.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-white border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-50 text-ciq-purple">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+              </div>
+              <span class="text-xs text-gray-400">~6 min</span>
+            </div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">Communication & Conflict</h4>
+            <p class="text-xs text-gray-400">How you fight matters more than how you flirt.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-white border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-50 text-ciq-purple">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+              </div>
+              <span class="text-xs text-gray-400">~6 min</span>
+            </div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">Love Languages</h4>
+            <p class="text-xs text-gray-400">The difference between feeling loved and just being in a relationship.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-white border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-50 text-ciq-purple">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              </div>
+              <span class="text-xs text-gray-400">~6 min</span>
+            </div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">Lifestyle & Ambition</h4>
+            <p class="text-xs text-gray-400">Because "work-life balance" means something different to everyone.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nudge -->
+      <div class="bg-ciq-light/50 rounded-2xl p-6 border border-ciq-purple/10 mb-8 text-center">
+        <p class="text-sm text-gray-600">
+          <span class="font-semibold text-ciq-purple">After your free assessments</span>, you'll see preliminary match indicators — enough to know there's real potential out there.
+          Unlock premium dimensions to go from <em>"this person might work"</em> to <em>"this person gets me."</em>
+        </p>
+      </div>
+
+      <!-- Premium Tier -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-ciq-light text-ciq-purple">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+            PREMIUM
+          </span>
+          <p class="text-sm font-medium text-gray-500">~7 minutes each • Unlock individually or as bundles</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Premium assessments -->
+          <div class="rounded-2xl p-5 bg-white border border-ciq-purple/20 shadow-sm relative">
+            <div class="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-ciq-coral/10 text-ciq-coral text-[10px] font-bold">POPULAR</div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-red-50 text-ciq-coral">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/></svg>
+              </div>
+              <span class="text-xs text-gray-400">~7 min</span>
+            </div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">Sexual Compatibility</h4>
+            <p class="text-xs text-gray-400">Expectations, drives, and intimacy languages — the stuff people avoid until it's too late.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-white border border-ciq-purple/20 shadow-sm relative">
+            <div class="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-ciq-coral/10 text-ciq-coral text-[10px] font-bold">POPULAR</div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-emerald-50 text-ciq-green">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <span class="text-xs text-gray-400">~7 min</span>
+            </div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">Financial Intelligence</h4>
+            <p class="text-xs text-gray-400">Money breaks up more couples than infidelity. Know where you align first.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-white border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-50 text-ciq-purple">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+              </div>
+              <span class="text-xs text-gray-400">~7 min</span>
+            </div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">Emotional Intelligence</h4>
+            <p class="text-xs text-gray-400">Can they read a room? Can you? This one's a mirror.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-white border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-50 text-ciq-purple">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+              <span class="text-xs text-gray-400">~7 min</span>
+            </div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">Trust & Accountability</h4>
+            <p class="text-xs text-gray-400">Do they own their stuff? This dimension filters out the "it's never my fault" crowd.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-white border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-50 text-ciq-purple">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <span class="text-xs text-gray-400">~7 min</span>
+            </div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">Empathy & Safety</h4>
+            <p class="text-xs text-gray-400">Relational safety isn't a nice-to-have. It's the baseline.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-white border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-50 text-ciq-purple">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              </div>
+              <span class="text-xs text-gray-400">~7 min</span>
+            </div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">Growth Mindset</h4>
+            <p class="text-xs text-gray-400">Are they evolving or stuck? Growth is the difference between year 1 and year 10.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-white border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-50 text-ciq-purple">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <span class="text-xs text-gray-400">~7 min</span>
+            </div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">Neurobiology</h4>
+            <p class="text-xs text-gray-400">Your nervous system has a type. Know yours.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-white border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-50 text-ciq-purple">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+              </div>
+              <span class="text-xs text-gray-400">~7 min</span>
+            </div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">Cognitive Style</h4>
+            <p class="text-xs text-gray-400">Head vs. heart. Planning vs. vibing. How you two think changes everything.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-white border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-50 text-ciq-purple">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              </div>
+              <span class="text-xs text-gray-400">~7 min</span>
+            </div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">Dependency Patterns</h4>
+            <p class="text-xs text-gray-400">Independent or codependent? There's a sweet spot — and most people miss it.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-white border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-50 text-ciq-purple">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+              </div>
+              <span class="text-xs text-gray-400">~7 min</span>
+            </div>
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">Long-Term Vision</h4>
+            <p class="text-xs text-gray-400">Kids? Cities? Retirement age? The big-picture stuff that blindsides couples at year 3.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-24">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12">
+      <div class="text-center mb-16">
+        <p class="text-sm font-semibold text-ciq-purple mb-3 tracking-wide uppercase">Pricing</p>
+        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Go deeper. Match sharper.</h2>
+        <p class="text-gray-500 max-w-xl mx-auto">Your 5 free assessments give you a foundation. Premium dimensions turn a hunch into a match you can trust.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Single -->
+        <div class="rounded-2xl p-7 bg-white border border-gray-200 shadow-sm">
+          <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Single Dimension</p>
+          <div class="flex items-baseline gap-1 mb-2">
+            <span class="text-4xl font-bold text-gray-900">$2.99</span>
+            <span class="text-sm text-gray-400">each</span>
+          </div>
+          <p class="text-sm text-gray-500 mb-6">Pick any premium dimension. ~7 minutes per assessment.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-2 text-sm text-gray-600">
+              <svg class="w-4 h-4 text-ciq-green mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Unlock any single dimension
+            </li>
+            <li class="flex items-start gap-2 text-sm text-gray-600">
+              <svg class="w-4 h-4 text-ciq-green mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Improves match accuracy immediately
+            </li>
+            <li class="flex items-start gap-2 text-sm text-gray-600">
+              <svg class="w-4 h-4 text-ciq-green mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Pay only for what you want
+            </li>
+          </ul>
+          <button class="w-full py-3 rounded-xl text-sm font-semibold border-2 border-gray-200 text-gray-700 hover:border-ciq-purple hover:text-ciq-purple transition-all">
+            Add a Dimension
+          </button>
+        </div>
+        <!-- Essentials Bundle -->
+        <div class="rounded-2xl p-7 bg-white border-2 border-ciq-purple shadow-sm pricing-glow relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-ciq-purple text-white text-xs font-bold">BEST VALUE</div>
+          <p class="text-xs font-semibold text-ciq-purple uppercase tracking-wide mb-4">Essentials Bundle</p>
+          <div class="flex items-baseline gap-1 mb-1">
+            <span class="text-4xl font-bold text-gray-900">$4.99</span>
+          </div>
+          <p class="text-xs text-gray-400 mb-2"><s>$5.98</s> — Save 17%</p>
+          <p class="text-sm text-gray-500 mb-6">Sexual Compatibility + Financial Intelligence. The two dimensions that break the most relationships.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-2 text-sm text-gray-600">
+              <svg class="w-4 h-4 text-ciq-green mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Sexual Compatibility assessment
+            </li>
+            <li class="flex items-start gap-2 text-sm text-gray-600">
+              <svg class="w-4 h-4 text-ciq-green mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Financial Intelligence assessment
+            </li>
+            <li class="flex items-start gap-2 text-sm text-gray-600">
+              <svg class="w-4 h-4 text-ciq-green mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Major boost to match confidence
+            </li>
+          </ul>
+          <button class="w-full py-3 rounded-xl text-sm font-semibold bg-ciq-purple text-white hover:opacity-90 transition-all">
+            Unlock Essentials
+          </button>
+        </div>
+        <!-- Full Profile -->
+        <div class="rounded-2xl p-7 bg-white border border-gray-200 shadow-sm">
+          <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Full Profile</p>
+          <div class="flex items-baseline gap-1 mb-1">
+            <span class="text-4xl font-bold text-gray-900">$14.99</span>
+          </div>
+          <p class="text-xs text-gray-400 mb-2"><s>$29.90</s> — Save 50%</p>
+          <p class="text-sm text-gray-500 mb-6">All 10 premium dimensions. The complete compatibility picture — no blind spots.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-2 text-sm text-gray-600">
+              <svg class="w-4 h-4 text-ciq-green mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              All 10 premium assessments
+            </li>
+            <li class="flex items-start gap-2 text-sm text-gray-600">
+              <svg class="w-4 h-4 text-ciq-green mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Highest match accuracy possible
+            </li>
+            <li class="flex items-start gap-2 text-sm text-gray-600">
+              <svg class="w-4 h-4 text-ciq-green mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Priority match queue
+            </li>
+            <li class="flex items-start gap-2 text-sm text-gray-600">
+              <svg class="w-4 h-4 text-ciq-green mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Detailed compatibility breakdowns
+            </li>
+          </ul>
+          <button class="w-full py-3 rounded-xl text-sm font-semibold border-2 border-gray-200 text-gray-700 hover:border-ciq-purple hover:text-ciq-purple transition-all">
+            Unlock Everything
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why It Works -->
+  <section class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="grid grid-cols-2 gap-3">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=faces" alt="Confident man" class="w-full h-72 object-cover rounded-2xl shadow-sm" />
+          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=500&fit=crop&crop=faces" alt="Confident woman" class="w-full h-72 object-cover rounded-2xl shadow-sm mt-8" />
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop&crop=faces" alt="Woman smiling" class="w-full h-72 object-cover rounded-2xl shadow-sm -mt-4" />
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop&crop=faces" alt="Man portrait" class="w-full h-72 object-cover rounded-2xl shadow-sm mt-4" />
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-ciq-purple mb-3 tracking-wide uppercase">Built for people who are done wasting time</p>
+          <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+            Chemistry fades.<br>Compatibility compounds.
+          </h2>
+          <p class="text-lg text-gray-500 leading-relaxed mb-6">
+            You've built a career, raised kids, rebuilt yourself after something hard. You don't need another app that ranks people by jawlines. You need one that respects your time and actually works.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-ciq-light flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-ciq-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <p class="text-gray-600 text-sm">Validated psychometric instruments — not a BuzzFeed quiz</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-ciq-light flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-ciq-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <p class="text-gray-600 text-sm">Financial and sexual compatibility scored before the first date</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-ciq-light flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-ciq-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <p class="text-gray-600 text-sm">Designed for professionals, parents, and people rebuilding — not 22-year-olds swiping at brunch</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-5xl mx-auto px-6 lg:px-12 py-16">
+    <div class="rounded-3xl p-12 lg:p-16 text-center" style="background: linear-gradient(135deg, #7B68B5 0%, #9B8DD0 100%);">
+      <h2 class="text-3xl lg:text-4xl font-bold mb-4 text-white">
+        30 minutes now.<br>Zero bad dates later.
+      </h2>
+      <p class="text-lg mb-10 max-w-lg mx-auto text-white/80">
+        Your free assessment is waiting. Five dimensions, no credit card, and the kind of clarity you wish you had three relationships ago.
+      </p>
+      <a href="#intake" class="inline-flex items-center gap-2 px-10 py-4 text-base font-semibold rounded-2xl bg-white text-ciq-purple hover:shadow-xl transition-all">
+        Start Free Assessment
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="max-w-7xl mx-auto px-6 lg:px-12 py-10 border-t border-gray-100">
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-lg flex items-center justify-center bg-ciq-purple">
+          <span class="text-white font-bold text-xs">C</span>
+        </div>
+        <span class="text-sm text-gray-400">&copy; 2026 Pivot Training & Development</span>
+      </div>
+      <p class="text-xs text-gray-400">CompatibleIQ is not a clinical diagnostic tool.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

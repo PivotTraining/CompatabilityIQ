@@ -2,7 +2,14 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import type { Database } from './types'
 
+function isSupabaseConfigured(): boolean {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  return !!url && !url.includes('placeholder')
+}
+
 export async function getSupabaseServerClient() {
+  if (!isSupabaseConfigured()) return null
+
   const cookieStore = await cookies()
 
   return createServerClient<Database>(
@@ -28,6 +35,8 @@ export async function getSupabaseServerClient() {
 }
 
 export async function getSupabaseServiceClient() {
+  if (!isSupabaseConfigured()) return null
+
   const { createClient } = await import('@supabase/supabase-js')
   return createClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
