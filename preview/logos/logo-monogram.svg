@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" width="150" height="150">
+  <rect width="150" height="150" fill="white"/>
+  <!-- Rounded square container -->
+  <rect x="15" y="15" width="120" height="120" rx="24" ry="24" fill="#7B68B5"/>
+  <!-- C letter - left arc -->
+  <path d="M 52 50 C 38 50, 30 60, 30 75 C 30 90, 38 100, 52 100"
+        stroke="white" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- I letter - center vertical -->
+  <line x1="68" y1="50" x2="68" y2="100" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  <!-- Dot on I with accent color -->
+  <circle cx="68" cy="40" r="4" fill="#4CAF8A"/>
+  <!-- Q letter - circle with tail -->
+  <circle cx="92" cy="75" r="22" stroke="white" stroke-width="6" fill="none"/>
+  <line x1="104" y1="90" x2="118" y2="106" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  <!-- Subtle connection line between C and I -->
+  <line x1="52" y1="75" x2="62" y2="75" stroke="#4CAF8A" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+</svg>

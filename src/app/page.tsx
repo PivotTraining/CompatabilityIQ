@@ -7,11 +7,8 @@ export default function LandingPage() {
     <div className="min-h-screen bg-white text-gray-900">
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 lg:px-12 py-5 max-w-7xl mx-auto">
-        <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: 'var(--ciq-purple)' }}>
-            <span className="text-white font-bold text-sm tracking-tight">C</span>
-          </div>
-          <span className="font-semibold text-xl tracking-tight text-gray-900">CompatibleIQ</span>
+        <div className="flex items-center gap-2">
+          <Image src="/images/logo.svg" alt="CompatibleIQ" width={180} height={45} className="h-10 w-auto" priority />
         </div>
         <div className="flex items-center gap-3">
           <Link href="/login" className="px-4 py-2.5 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">
@@ -40,10 +37,10 @@ export default function LandingPage() {
                 30 minutes. That&apos;s it.
               </div>
               <h1 className="text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6 text-gray-900">
-                Know before<br />you <span style={{ color: 'var(--ciq-purple)' }}>fall.</span>
+                Date with<br /><span style={{ color: 'var(--ciq-purple)' }}>proof.</span>
               </h1>
               <p className="text-lg lg:text-xl text-gray-500 leading-relaxed mb-4 max-w-lg">
-                What your ex took 3 years to show you, we&apos;ll reveal in 30 minutes.
+                15 science-backed dimensions. One compatibility score. Zero wasted time.
               </p>
               <p className="text-base text-gray-400 leading-relaxed mb-10 max-w-lg">
                 No swiping. No small talk. Just 15 science-backed dimensions that predict whether someone&apos;s actually right for you — starting with 5 free assessments you can knock out over lunch.
@@ -429,10 +426,8 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="max-w-7xl mx-auto px-6 lg:px-12 py-10 border-t border-gray-100">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--ciq-purple)' }}>
-              <span className="text-white font-bold text-xs">C</span>
-            </div>
+          <div className="flex items-center gap-3">
+            <Image src="/images/logo.svg" alt="CompatibleIQ" width={120} height={30} className="h-7 w-auto opacity-60" />
             <span className="text-sm text-gray-400">&copy; {new Date().getFullYear()} Pivot Training & Development</span>
           </div>
           <p className="text-xs text-gray-400">CompatibleIQ is not a clinical diagnostic tool.</p>

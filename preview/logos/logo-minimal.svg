@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 150" width="400" height="150">
+  <rect width="400" height="150" fill="white"/>
+  <!-- Clean wordmark -->
+  <text x="30" y="82" font-family="'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="34" font-weight="300" fill="#2D2D3D" letter-spacing="-0.8">
+    Compat
+  </text>
+  <!-- "i" without dot - positioned after "Compat" -->
+  <text x="168" y="82" font-family="'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="34" font-weight="300" fill="#2D2D3D" letter-spacing="-0.8">
+    <tspan>i</tspan>
+  </text>
+  <!-- Diamond shape replacing the dot on the "i" -->
+  <rect x="170.5" y="50" width="7" height="7" rx="1" fill="#7B68B5" transform="rotate(45, 174, 53.5)"/>
+  <!-- Rest of the word -->
+  <text x="178" y="82" font-family="'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="34" font-weight="300" fill="#2D2D3D" letter-spacing="-0.8">
+    ble
+  </text>
+  <!-- IQ in brand color, medium weight -->
+  <text x="236" y="82" font-family="'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="34" font-weight="600" fill="#7B68B5" letter-spacing="-0.8">
+    IQ
+  </text>
+  <!-- Subtle dot accent after IQ -->
+  <circle cx="286" cy="78" r="3.5" fill="#4CAF8A"/>
+  <!-- Thin line accent -->
+  <line x1="30" y1="95" x2="80" y2="95" stroke="#7B68B5" stroke-width="1.5" opacity="0.3"/>
+</svg>

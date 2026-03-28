@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 150" width="400" height="150">
+  <rect width="400" height="150" fill="white"/>
+  <defs>
+    <linearGradient id="pulseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7B68B5"/>
+      <stop offset="50%" stop-color="#E8735A"/>
+      <stop offset="100%" stop-color="#4CAF8A"/>
+    </linearGradient>
+  </defs>
+  <!-- Pulse/heartbeat line that forms a brain-like connection shape -->
+  <g transform="translate(10, 0)">
+    <!-- Main pulse line -->
+    <path d="M 12 75
+             L 30 75
+             L 38 75
+             L 44 60
+             L 50 90
+             L 56 45
+             L 62 95
+             L 68 55
+             L 74 75
+             L 82 75
+             L 90 75"
+          stroke="url(#pulseGrad)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Brain-like curved arcs above the pulse -->
+    <path d="M 38 60 Q 42 30, 56 35 Q 62 36, 62 45"
+          stroke="#7B68B5" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round"/>
+    <path d="M 56 45 Q 58 28, 72 32 Q 78 34, 74 55"
+          stroke="#7B68B5" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round"/>
+    <!-- Small heart shape at the peak -->
+    <path d="M 56 42 C 54 38, 49 38, 49 42 C 49 46, 56 50, 56 50 C 56 50, 63 46, 63 42 C 63 38, 58 38, 56 42 Z"
+          fill="#E8735A" opacity="0.6"/>
+    <!-- Connection nodes -->
+    <circle cx="12" cy="75" r="3" fill="#7B68B5"/>
+    <circle cx="90" cy="75" r="3" fill="#4CAF8A"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="115" y="68" font-family="'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="28" font-weight="600" fill="#2D2D3D" letter-spacing="-0.5">
+    Compatible<tspan fill="#7B68B5" font-weight="700">IQ</tspan>
+  </text>
+  <!-- Subtle underline pulse -->
+  <path d="M 115 80 L 145 80 L 150 76 L 155 84 L 160 80 L 340 80"
+        stroke="#7B68B5" stroke-width="1.5" fill="none" opacity="0.3" stroke-linecap="round"/>
+</svg>

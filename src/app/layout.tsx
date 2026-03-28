@@ -6,8 +6,8 @@ import './globals.css'
 const dmSans = DM_Sans({ variable: '--font-dm-sans', subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'CompatibleIQ — Know Before You Fall',
-  description: 'Real compatibility isn\'t a vibe check. 19 validated dimensions — psychology, finances, and behavior — scored before you ever match.',
+  title: 'CompatibleIQ — Date with Proof',
+  description: '15 science-backed dimensions. One compatibility score. Zero wasted time. The psychometric dating platform for people who are done guessing.',
   robots: 'noindex, nofollow',
 }
 
