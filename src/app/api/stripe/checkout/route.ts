@@ -101,6 +101,7 @@ export async function POST(request: NextRequest) {
     const sessionParams: Parameters<typeof stripe.checkout.sessions.create>[0] = {
       customer: stripeCustomerId,
       mode: isSubscription ? 'subscription' : 'payment',
+      allow_promotion_codes: true,
       line_items: [
         {
           price: priceId,
