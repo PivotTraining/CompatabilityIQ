@@ -159,7 +159,10 @@ export default function SignupPage() {
         </form>
 
         <p className="text-center text-xs mt-6 leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-          By creating an account, you agree to our Terms of Service and Privacy Policy.
+          By creating an account, you agree to our{' '}
+          <Link href="/terms" className="underline" style={{ color: 'var(--ciq-purple)' }}>Terms of Service</Link>{' '}
+          and{' '}
+          <Link href="/privacy" className="underline" style={{ color: 'var(--ciq-purple)' }}>Privacy Policy</Link>.
           CompatibleIQ is not a clinical diagnostic tool.
         </p>
 
