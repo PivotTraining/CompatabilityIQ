@@ -102,27 +102,9 @@ export async function POST(request: Request) {
     }
 
     // ── 5. Update assessment progress ──
-    await serviceClient
-      .from('profiles')
-      .update({ assessment_progress: module } as never)
-      .eq('id', user.id)
-      .lt('assessment_progress', module) // Only advance, never regress
+    // Profile progress tracked via assessment_responses count + trigger in DB
 
-    // ── 6. Audit log ──
-    await serviceClient.from('audit_log').insert({
-      user_id: user.id,
-      action: 'assessment_submitted',
-      resource_type: 'assessment_responses',
-      resource_id: `module_${module}`,
-      metadata: {
-        question_count: Object.keys(answers).length,
-        dimensions_scored: computedScores.map(s => s.dimensionId),
-        scores: computedScores.map(s => ({
-          dimension: s.dimensionId,
-          overall: Math.round(s.overallScore * 100) / 100,
-        })),
-      },
-    } as never)
+    // Audit log skipped — audit_log table not yet in schema
 
     // ── 7. Build response ──
     const unlocked = getUnlockedProfileCount(module)
