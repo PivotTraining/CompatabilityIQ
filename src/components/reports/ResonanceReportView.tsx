@@ -461,7 +461,7 @@ function ShareModal({
   const tierConfig = TIER_CONFIG[report.tier] || TIER_CONFIG.compatible
 
   const handleCopyLink = () => {
-    const shareText = `I just got my CompatibleIQ Resonance Report! Score: ${report.overallScore}/100 (${report.tierLabel}). Find out your compatibility at compatibleiq.com`
+    const shareText = `I just got my CompatibleIQ Resonance Report! Score: ${report.overallScore}/100 (${report.tierLabel}). Find out your compatibility at compatibilityiq.com`
     navigator.clipboard.writeText(shareText).then(() => {
       // Could show a toast here
     })
@@ -497,7 +497,7 @@ function ShareModal({
                 </div>
               </div>
             ))}
-            <p className="pt-2 text-xs opacity-50">Get your full report at compatibleiq.com</p>
+            <p className="pt-2 text-xs opacity-50">Get your full report at compatibilityiq.com</p>
           </div>
         </div>
 

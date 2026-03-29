@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">1. Introduction</h2>
             <p>
-              CompatibleIQ is operated by <strong>Pivot Training &amp; Development</strong> (&quot;Company,&quot; &quot;we,&quot; &quot;us&quot;). This Privacy Policy explains how we collect, use, share, and protect your personal information when you use the CompatibleIQ platform (the &quot;Platform&quot;), available at compatibleiq.com and hosted on Vercel.
+              CompatibleIQ is operated by <strong>Pivot Training &amp; Development</strong> (&quot;Company,&quot; &quot;we,&quot; &quot;us&quot;). This Privacy Policy explains how we collect, use, share, and protect your personal information when you use the CompatibleIQ platform (the &quot;Platform&quot;), available at compatibilityiq.com and hosted on Vercel.
             </p>
             <p className="mt-3">
               We take privacy seriously &mdash; especially given the sensitive nature of psychometric and relationship data. Please read this policy carefully.
@@ -184,7 +184,7 @@ export default function PrivacyPolicy() {
               <li>Opt out of the sale of personal information (we do not sell your data)</li>
               <li>Non-discrimination for exercising your privacy rights</li>
             </ul>
-            <p className="mt-2">To exercise any of these rights, contact us at privacy@compatibleiq.com. We will respond within 30 days (45 days for CCPA requests).</p>
+            <p className="mt-2">To exercise any of these rights, contact us at privacy@compatibilityiq.com. We will respond within 30 days (45 days for CCPA requests).</p>
           </section>
 
           {/* 8 */}
@@ -228,7 +228,7 @@ export default function PrivacyPolicy() {
           {/* 11 */}
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">11. Children&apos;s Privacy</h2>
-            <p>CompatibleIQ is not intended for anyone under 18 years of age. We do not knowingly collect personal information from minors. If you believe a minor has created an account, please contact us immediately at privacy@compatibleiq.com and we will delete the account.</p>
+            <p>CompatibleIQ is not intended for anyone under 18 years of age. We do not knowingly collect personal information from minors. If you believe a minor has created an account, please contact us immediately at privacy@compatibilityiq.com and we will delete the account.</p>
           </section>
 
           {/* 12 */}
@@ -249,7 +249,7 @@ export default function PrivacyPolicy() {
             <p>If you have questions about this Privacy Policy or want to exercise your data rights, contact us at:</p>
             <p className="mt-2 text-sm">
               <strong>Pivot Training &amp; Development</strong><br />
-              Email: privacy@compatibleiq.com
+              Email: privacy@compatibilityiq.com
             </p>
           </section>
         </div>

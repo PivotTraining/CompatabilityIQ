@@ -175,7 +175,7 @@ export default function TermsOfService() {
             <p>If you have questions about these Terms, contact us at:</p>
             <p className="mt-2 text-sm">
               <strong>Pivot Training &amp; Development</strong><br />
-              Email: legal@compatibleiq.com
+              Email: legal@compatibilityiq.com
             </p>
           </section>
         </div>
