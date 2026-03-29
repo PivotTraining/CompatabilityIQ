@@ -1,10 +1,15 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft } from 'lucide-react'
 
-export const metadata = {
-  title: 'Privacy Policy | CompatibleIQ',
-  description: 'Privacy Policy for CompatibleIQ, a psychometric compatibility platform by Pivot Training & Development.',
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  description:
+    'Privacy Policy for CompatibleIQ. Learn how we collect, store, and protect your psychometric assessment data and personal information.',
+  alternates: {
+    canonical: 'https://compatibilityiq.com/privacy',
+  },
 }
 
 export default function PrivacyPolicy() {
@@ -184,7 +189,7 @@ export default function PrivacyPolicy() {
               <li>Opt out of the sale of personal information (we do not sell your data)</li>
               <li>Non-discrimination for exercising your privacy rights</li>
             </ul>
-            <p className="mt-2">To exercise any of these rights, contact us at privacy@compatibilityiq.com. We will respond within 30 days (45 days for CCPA requests).</p>
+            <p className="mt-2">To exercise any of these rights, contact us at Hello@PivotTraining.us. We will respond within 30 days (45 days for CCPA requests).</p>
           </section>
 
           {/* 8 */}
@@ -228,7 +233,7 @@ export default function PrivacyPolicy() {
           {/* 11 */}
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">11. Children&apos;s Privacy</h2>
-            <p>CompatibleIQ is not intended for anyone under 18 years of age. We do not knowingly collect personal information from minors. If you believe a minor has created an account, please contact us immediately at privacy@compatibilityiq.com and we will delete the account.</p>
+            <p>CompatibleIQ is not intended for anyone under 18 years of age. We do not knowingly collect personal information from minors. If you believe a minor has created an account, please contact us immediately at Hello@PivotTraining.us and we will delete the account.</p>
           </section>
 
           {/* 12 */}
@@ -249,7 +254,7 @@ export default function PrivacyPolicy() {
             <p>If you have questions about this Privacy Policy or want to exercise your data rights, contact us at:</p>
             <p className="mt-2 text-sm">
               <strong>Pivot Training &amp; Development</strong><br />
-              Email: privacy@compatibilityiq.com
+              Email: Hello@PivotTraining.us
             </p>
           </section>
         </div>

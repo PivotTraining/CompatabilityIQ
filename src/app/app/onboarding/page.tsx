@@ -1,11 +1,10 @@
-// @ts-nocheck
 'use client'
 
 import { useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context'
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
-import { ArrowRight, ArrowLeft, Check } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Check, Heart, Brain } from 'lucide-react'
 import type {
   GenderIdentity,
   SexualOrientation,
@@ -13,10 +12,13 @@ import type {
   RelationshipGoal,
 } from '@/lib/supabase/types'
 
+// ─── Types ──────────────────────────────────────────────
+type UserMode = 'dating' | 'self_discovery'
+
 // ─── Constants ───────────────────────────────────────────
 
-const STEPS = ['About You', 'Preferences', 'Goals'] as const
-const TOTAL_STEPS = STEPS.length
+const DATING_STEPS = ['About You', 'Preferences', 'Goals'] as const
+const SELF_DISCOVERY_STEPS = ['About You', 'Identity'] as const
 
 const GENDER_OPTIONS: { value: GenderIdentity; label: string }[] = [
   { value: 'woman', label: 'Woman' },
@@ -65,6 +67,9 @@ export default function OnboardingPage() {
   const router = useRouter()
   const supabase = getSupabaseBrowserClient()
 
+  // Mode selection (shown before intake steps)
+  const [mode, setMode] = useState<UserMode | null>(null)
+
   const [step, setStep] = useState(0)
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward')
   const [loading, setLoading] = useState(false)
@@ -76,21 +81,34 @@ export default function OnboardingPage() {
   const [locationCity, setLocationCity] = useState('')
   const [locationState, setLocationState] = useState('')
 
-  // Step 2: Preferences
+  // Step 2: Preferences (dating mode) / Identity (self-discovery mode)
   const [genderIdentity, setGenderIdentity] = useState<GenderIdentity | ''>('')
   const [sexualOrientation, setSexualOrientation] = useState<SexualOrientation | ''>('')
   const [interestedIn, setInterestedIn] = useState<InterestedIn | ''>('')
 
-  // Step 3: Goals
+  // Step 3: Goals (dating mode only)
   const [relationshipGoal, setRelationshipGoal] = useState<RelationshipGoal | ''>('')
 
-  // ─── Validation ──────────────────────────────────────
+  // ─── Step config based on mode ───────────────────────
+  const STEPS = mode === 'self_discovery' ? SELF_DISCOVERY_STEPS : DATING_STEPS
+  const TOTAL_STEPS = STEPS.length
 
+  // ─── Validation ──────────────────────────────────────
   const isStep1Valid = firstName.trim() && dateOfBirth && locationCity.trim() && locationState
-  const isStep2Valid = genderIdentity && sexualOrientation && interestedIn
+
+  // For self_discovery mode, only gender + orientation (no interested_in)
+  const isStep2ValidDating = genderIdentity && sexualOrientation && interestedIn
+  const isStep2ValidSelfDiscovery = genderIdentity && sexualOrientation
+  const isStep2Valid = mode === 'self_discovery' ? isStep2ValidSelfDiscovery : isStep2ValidDating
+
   const isStep3Valid = relationshipGoal
 
-  const isCurrentStepValid = step === 0 ? isStep1Valid : step === 1 ? isStep2Valid : isStep3Valid
+  const isCurrentStepValid = (() => {
+    if (step === 0) return isStep1Valid
+    if (step === 1) return isStep2Valid
+    if (step === 2 && mode === 'dating') return isStep3Valid
+    return false
+  })()
 
   // ─── Navigation ──────────────────────────────────────
 
@@ -99,7 +117,7 @@ export default function OnboardingPage() {
       setDirection('forward')
       setStep((s) => s + 1)
     }
-  }, [step])
+  }, [step, TOTAL_STEPS])
 
   const goBack = useCallback(() => {
     if (step > 0) {
@@ -115,18 +133,25 @@ export default function OnboardingPage() {
     setLoading(true)
     setError('')
 
+    const updateData: Record<string, unknown> = {
+      first_name: firstName.trim(),
+      date_of_birth: dateOfBirth,
+      location_city: locationCity.trim(),
+      location_state: locationState,
+      gender_identity: genderIdentity as GenderIdentity,
+      sexual_orientation: sexualOrientation as SexualOrientation,
+      mode: mode,
+    }
+
+    // Only include dating-specific fields for dating mode
+    if (mode === 'dating') {
+      updateData.interested_in = interestedIn as InterestedIn
+      updateData.relationship_goal = relationshipGoal as RelationshipGoal
+    }
+
     const { error: err } = await supabase
       .from('profiles')
-      .update({
-        first_name: firstName.trim(),
-        date_of_birth: dateOfBirth,
-        location_city: locationCity.trim(),
-        location_state: locationState,
-        gender_identity: genderIdentity as GenderIdentity,
-        sexual_orientation: sexualOrientation as SexualOrientation,
-        interested_in: interestedIn as InterestedIn,
-        relationship_goal: relationshipGoal as RelationshipGoal,
-      } as never)
+      .update(updateData as never)
       .eq('id', user.id)
 
     setLoading(false)
@@ -208,6 +233,105 @@ export default function OnboardingPage() {
       </div>
     </div>
   )
+
+  // ─── Mode Selection ──────────────────────────────────
+
+  if (mode === null) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-6 py-12" style={{ background: 'var(--bg-primary)' }}>
+        <div className="w-full max-w-md">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--ciq-purple)' }}>
+                <span className="text-white font-bold text-sm">C</span>
+              </div>
+              <span className="font-semibold text-lg" style={{ color: 'var(--text-primary)' }}>
+                CompatibleIQ
+              </span>
+            </div>
+            <h1 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+              What brings you here?
+            </h1>
+            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+              Choose your path. You can always switch later.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {/* Dating Mode Card */}
+            <button
+              type="button"
+              onClick={() => setMode('dating')}
+              className="w-full p-6 rounded-2xl border-2 text-left transition-all duration-200 hover:shadow-md group"
+              style={{
+                borderColor: 'var(--ciq-purple)',
+                background: 'var(--bg-card)',
+              }}
+            >
+              <div className="flex items-start gap-4">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
+                  style={{ background: 'var(--ciq-purple-light)' }}
+                >
+                  <Heart className="w-6 h-6" style={{ color: 'var(--ciq-purple)' }} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
+                    I&apos;m here to date
+                  </h3>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                    Find compatible matches based on science. Take the assessment, get scored, and connect with people who are actually right for you.
+                  </p>
+                </div>
+              </div>
+            </button>
+
+            {/* Self-Discovery Mode Card */}
+            <button
+              type="button"
+              onClick={() => setMode('self_discovery')}
+              className="w-full p-6 rounded-2xl border-2 text-left transition-all duration-200 hover:shadow-md group"
+              style={{
+                borderColor: 'var(--ciq-green)',
+                background: 'var(--bg-card)',
+              }}
+            >
+              <div className="flex items-start gap-4">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
+                  style={{ background: '#E8F5E9' }}
+                >
+                  <Brain className="w-6 h-6" style={{ color: 'var(--ciq-green)' }} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
+                    Know Yourself
+                  </h3>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                    Discover your relationship patterns and blind spots. Get a personal compatibility profile without entering the dating pool.
+                  </p>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        {/* Animations */}
+        <style jsx global>{`
+          @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+          }
+          @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+          }
+          .animate-slide-in-right { animation: slideInRight 0.3s ease-out; }
+          .animate-slide-in-left { animation: slideInLeft 0.3s ease-out; }
+        `}</style>
+      </div>
+    )
+  }
 
   // ─── Step Content ────────────────────────────────────
 
@@ -298,13 +422,18 @@ export default function OnboardingPage() {
     }
 
     if (step === 1) {
+      const isSelfDiscovery = mode === 'self_discovery'
+
       return (
         <div key="step-1" className={animationClass}>
           <h2 className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>
-            Preferences
+            {isSelfDiscovery ? 'Your Identity' : 'Preferences'}
           </h2>
           <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
-            Help us understand who you are and who you&apos;re looking for.
+            {isSelfDiscovery
+              ? 'Tell us about yourself so we can personalize your assessment.'
+              : "Help us understand who you are and who you're looking for."
+            }
           </p>
 
           <div className="space-y-6">
@@ -342,27 +471,31 @@ export default function OnboardingPage() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-2.5" style={{ color: 'var(--text-primary)' }}>
-                I&apos;m interested in
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {INTERESTED_IN_OPTIONS.map((i) => (
-                  <PillButton
-                    key={i.value}
-                    selected={interestedIn === i.value}
-                    onClick={() => setInterestedIn(i.value)}
-                  >
-                    {i.label}
-                  </PillButton>
-                ))}
+            {/* Only show "Interested in" for dating mode */}
+            {!isSelfDiscovery && (
+              <div>
+                <label className="block text-sm font-medium mb-2.5" style={{ color: 'var(--text-primary)' }}>
+                  I&apos;m interested in
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {INTERESTED_IN_OPTIONS.map((i) => (
+                    <PillButton
+                      key={i.value}
+                      selected={interestedIn === i.value}
+                      onClick={() => setInterestedIn(i.value)}
+                    >
+                      {i.label}
+                    </PillButton>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       )
     }
 
+    // Step 2 (dating mode only): Relationship Goals
     return (
       <div key="step-2" className={animationClass}>
         <h2 className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>
@@ -419,6 +552,22 @@ export default function OnboardingPage() {
               CompatibleIQ
             </span>
           </div>
+          {/* Mode badge */}
+          <div className="flex justify-center mb-2">
+            <span
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
+              style={{
+                background: mode === 'self_discovery' ? '#E8F5E9' : 'var(--ciq-purple-light)',
+                color: mode === 'self_discovery' ? 'var(--ciq-green)' : 'var(--ciq-purple)',
+              }}
+            >
+              {mode === 'self_discovery' ? (
+                <><Brain className="w-3 h-3" /> Know Yourself</>
+              ) : (
+                <><Heart className="w-3 h-3" /> Dating Mode</>
+              )}
+            </span>
+          </div>
         </div>
 
         <ProgressBar />
@@ -432,7 +581,7 @@ export default function OnboardingPage() {
         )}
 
         <div className="flex items-center gap-3 mt-8">
-          {step > 0 && (
+          {step > 0 ? (
             <button
               type="button"
               onClick={goBack}
@@ -445,6 +594,20 @@ export default function OnboardingPage() {
             >
               <ArrowLeft className="w-4 h-4" />
               Back
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setMode(null)}
+              className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl border text-sm font-medium transition-all hover:opacity-80"
+              style={{
+                borderColor: 'var(--border)',
+                color: 'var(--text-primary)',
+                background: 'var(--bg-card)',
+              }}
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Change Mode
             </button>
           )}
 
@@ -469,34 +632,15 @@ export default function OnboardingPage() {
       {/* Step transition animations */}
       <style jsx global>{`
         @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
+          from { opacity: 0; transform: translateX(30px); }
+          to { opacity: 1; transform: translateX(0); }
         }
-
         @keyframes slideInLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
+          from { opacity: 0; transform: translateX(-30px); }
+          to { opacity: 1; transform: translateX(0); }
         }
-
-        .animate-slide-in-right {
-          animation: slideInRight 0.3s ease-out;
-        }
-
-        .animate-slide-in-left {
-          animation: slideInLeft 0.3s ease-out;
-        }
+        .animate-slide-in-right { animation: slideInRight 0.3s ease-out; }
+        .animate-slide-in-left { animation: slideInLeft 0.3s ease-out; }
       `}</style>
     </div>
   )

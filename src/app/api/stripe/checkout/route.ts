@@ -1,4 +1,3 @@
-// @ts-nocheck — Types will be regenerated after Supabase migration
 // CompatibleIQ™ — Stripe Checkout Session API
 // POST /api/stripe/checkout
 // Creates a Stripe Checkout Session for one-time purchases or subscriptions

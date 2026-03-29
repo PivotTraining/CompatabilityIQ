@@ -1,6 +1,5 @@
-// @ts-nocheck
 import { NextRequest, NextResponse } from 'next/server'
-import { getSupabaseServerClient, getSupabaseServiceClient } from '@/lib/supabase/server'
+import { getSupabaseServerClient } from '@/lib/supabase/server'
 
 const MAX_PHOTOS = 6
 const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB

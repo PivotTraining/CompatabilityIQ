@@ -1,10 +1,15 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft } from 'lucide-react'
 
-export const metadata = {
-  title: 'Terms of Service | CompatibleIQ',
-  description: 'Terms of Service for CompatibleIQ, a psychometric compatibility platform by Pivot Training & Development.',
+export const metadata: Metadata = {
+  title: 'Terms of Service',
+  description:
+    'Terms of Service for CompatibleIQ, the psychometric compatibility platform by Pivot Training & Development. Review usage terms, data handling, and user responsibilities.',
+  alternates: {
+    canonical: 'https://compatibilityiq.com/terms',
+  },
 }
 
 export default function TermsOfService() {
@@ -175,7 +180,7 @@ export default function TermsOfService() {
             <p>If you have questions about these Terms, contact us at:</p>
             <p className="mt-2 text-sm">
               <strong>Pivot Training &amp; Development</strong><br />
-              Email: legal@compatibilityiq.com
+              Email: Hello@PivotTraining.us
             </p>
           </section>
         </div>

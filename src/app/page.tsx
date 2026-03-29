@@ -1,6 +1,22 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Brain, Heart, TrendingUp, Lock, Sparkles, ArrowRight, Check, Clock, MessageCircle } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'CompatibleIQ — Date with Proof | Science-Backed Compatibility Scoring',
+  description:
+    'Take a free 15-dimension psychometric assessment and get a real compatibility score before your first date. No swiping, no guessing -- just science.',
+  openGraph: {
+    title: 'CompatibleIQ — Date with Proof',
+    description:
+      '15 science-backed dimensions. One compatibility score. Zero wasted time.',
+    url: 'https://compatibilityiq.com',
+  },
+  alternates: {
+    canonical: 'https://compatibilityiq.com',
+  },
+}
 
 export default function LandingPage() {
   return (
@@ -103,6 +119,84 @@ export default function LandingPage() {
               <p className="text-xs text-gray-400 font-medium">{stat.label}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Self-Discovery CTA */}
+      <section className="max-w-5xl mx-auto px-6 lg:px-12 py-16">
+        <div
+          className="rounded-3xl p-10 lg:p-12 relative overflow-hidden"
+          style={{ background: 'linear-gradient(135deg, #E8F5E9 0%, #F8F6FF 50%, #F0FDF9 100%)' }}
+        >
+          <div className="relative z-10 grid lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <div
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-4"
+                style={{ background: 'white', color: '#4CAF8A' }}
+              >
+                <Brain className="w-3.5 h-3.5" />
+                Know Yourself First
+              </div>
+              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
+                Not ready to date?<br />Know yourself first.
+              </h2>
+              <p className="text-base text-gray-500 leading-relaxed mb-6">
+                Take the same science-backed assessments without entering the dating pool. Discover your attachment style, communication patterns, emotional intelligence, and relationship blind spots -- all for free.
+              </p>
+              <ul className="space-y-2 mb-8">
+                {[
+                  'Personal compatibility profile with 6 dimensions',
+                  'Attachment style deep dive',
+                  'Dating readiness score',
+                  'Shareable CIQ personality card',
+                ].map((text) => (
+                  <li key={text} className="flex items-center gap-2 text-sm text-gray-600">
+                    <Check className="w-4 h-4 flex-shrink-0" style={{ color: '#4CAF8A' }} />
+                    {text}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/signup?mode=self_discovery"
+                className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold rounded-xl text-white hover:opacity-90 transition-all"
+                style={{ background: '#4CAF8A' }}
+              >
+                Take the Assessment for Yourself
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+            <div className="hidden lg:flex justify-center">
+              <div className="w-64 h-[450px] rounded-3xl relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #7B68B5 0%, #5A4A99 100%)' }}>
+                <div className="absolute -top-12 -right-12 w-40 h-40 rounded-full bg-white/10" />
+                <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-white/10" />
+                <div className="relative z-10 p-6 flex flex-col justify-between h-full">
+                  <div>
+                    <p className="text-white/50 text-[10px] uppercase tracking-widest mb-1">Profile</p>
+                    <p className="text-white text-xl font-bold mb-6">Sarah</p>
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-400" /><span className="text-white/80 text-xs">Emotionally Grounded</span></div>
+                      <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full" style={{ background: '#E8735A' }} /><span className="text-white/80 text-xs">High EQ</span></div>
+                      <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full" style={{ background: '#5B8DB8' }} /><span className="text-white/80 text-xs">Relationship-Focused</span></div>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="px-3 py-1.5 rounded-full bg-white/15 inline-flex items-center gap-1.5">
+                      <div className="w-2 h-2 rounded-full bg-green-400" />
+                      <span className="text-white text-[10px] font-semibold">Secure Attachment</span>
+                    </div>
+                    <div>
+                      <p className="text-white/40 text-[9px] uppercase">Love Language</p>
+                      <p className="text-white text-xs font-medium">Quality Time</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1 opacity-30">
+                    <div className="w-3 h-3 rounded-sm bg-white/30 flex items-center justify-center"><span className="text-white text-[6px] font-bold">C</span></div>
+                    <span className="text-white text-[8px]">CompatibleIQ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

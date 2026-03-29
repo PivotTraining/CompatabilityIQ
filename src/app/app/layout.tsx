@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 
 import { useAuth } from '@/lib/auth-context'
@@ -8,13 +7,7 @@ import { useEffect, useState } from 'react'
 import { Brain, Compass, Heart, User, Settings, LogOut } from 'lucide-react'
 import Link from 'next/link'
 
-const NAV_ITEMS = [
-  { href: '/app/discover', icon: Compass, label: 'Discover' },
-  { href: '/app/matches', icon: Heart, label: 'Matches' },
-  { href: '/app/assessment', icon: Brain, label: 'Assess' },
-  { href: '/app/profile', icon: User, label: 'Profile' },
-  { href: '/app/profile/settings', icon: Settings, label: 'Settings' },
-] as const
+type UserMode = 'dating' | 'self_discovery'
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const { user, loading, signOut } = useAuth()
@@ -22,6 +15,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const supabase = getSupabaseBrowserClient()
   const [unreadCount, setUnreadCount] = useState(0)
+  const [userMode, setUserMode] = useState<UserMode>('dating')
 
   // Auth guard
   useEffect(() => {
@@ -30,12 +24,30 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     }
   }, [user, loading, router])
 
-  // Fetch unread message count for Matches tab badge
+  // Fetch user mode from profile
   useEffect(() => {
     if (!user || !supabase) return
 
+    supabase
+      .from('profiles')
+      .select('mode')
+      .eq('id', user.id)
+      .single()
+      .then(({ data }) => {
+        const row = data as { mode?: string } | null
+        if (row?.mode === 'self_discovery') {
+          setUserMode('self_discovery')
+        } else {
+          setUserMode('dating')
+        }
+      })
+  }, [user, supabase])
+
+  // Fetch unread message count for Matches tab badge (dating mode only)
+  useEffect(() => {
+    if (!user || !supabase || userMode === 'self_discovery') return
+
     const fetchUnread = async () => {
-      // Get active match IDs
       const { data: matchData } = await supabase
         .from('matches')
         .select('id')
@@ -60,7 +72,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
     fetchUnread()
 
-    // Subscribe to new messages to update badge
     const channel = supabase
       .channel('layout-unread')
       .on(
@@ -78,7 +89,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     return () => {
       supabase.removeChannel(channel)
     }
-  }, [user, supabase])
+  }, [user, supabase, userMode])
 
   if (loading) {
     return (
@@ -98,6 +109,22 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   const isOnboarding = pathname === '/app/onboarding'
   const isChatView = pathname.startsWith('/app/chat/')
+
+  // Build nav items based on user mode
+  const NAV_ITEMS = userMode === 'self_discovery'
+    ? [
+        { href: '/app/self-discovery', icon: User, label: 'My Profile' },
+        { href: '/app/assessment', icon: Brain, label: 'Assess' },
+        { href: '/app/profile', icon: User, label: 'Profile' },
+        { href: '/app/profile/settings', icon: Settings, label: 'Settings' },
+      ]
+    : [
+        { href: '/app/discover', icon: Compass, label: 'Discover' },
+        { href: '/app/matches', icon: Heart, label: 'Matches' },
+        { href: '/app/assessment', icon: Brain, label: 'Assess' },
+        { href: '/app/profile', icon: User, label: 'Profile' },
+        { href: '/app/profile/settings', icon: Settings, label: 'Settings' },
+      ]
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg-primary)' }}>
@@ -121,6 +148,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <span className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>
               CompatibleIQ
             </span>
+            {userMode === 'self_discovery' && (
+              <span
+                className="ml-2 px-2 py-0.5 rounded-full text-[10px] font-semibold"
+                style={{ background: '#E8F5E9', color: 'var(--ciq-green)' }}
+              >
+                Self-Discovery
+              </span>
+            )}
           </div>
           <button
             onClick={() => signOut().then(() => router.replace('/login'))}
@@ -146,7 +181,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             opacity: 0.97,
           }}
         >
-          {/* Desktop sidebar alternative: show as horizontal nav on mobile, could be sidebar on md+ */}
           <div className="flex items-center justify-around px-2 py-2 max-w-lg mx-auto">
             {NAV_ITEMS.map((item) => {
               const isActive = pathname.startsWith(item.href)
@@ -165,7 +199,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                         color: isActive ? 'var(--ciq-purple)' : 'var(--text-muted)',
                       }}
                     />
-                    {/* Unread badge on Matches */}
                     {isMatches && unreadCount > 0 && (
                       <span
                         className="absolute -top-1.5 -right-2 min-w-[16px] h-4 px-1 rounded-full flex items-center justify-center text-[9px] font-bold text-white"

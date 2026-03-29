@@ -1,4 +1,3 @@
-// @ts-nocheck
 // CompatibleIQ -- Safety & Moderation
 // Report, block, and unblock users
 

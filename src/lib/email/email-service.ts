@@ -20,7 +20,7 @@ import {
 // ═══════════════════════════════════════════
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY
-const FROM_EMAIL = process.env.EMAIL_FROM || 'CompatibleIQ <hello@compatibilityiq.com>'
+const FROM_EMAIL = process.env.EMAIL_FROM || 'CompatibleIQ <Hello@PivotTraining.us>'
 const RESEND_ENDPOINT = 'https://api.resend.com/emails'
 
 // ═══════════════════════════════════════════

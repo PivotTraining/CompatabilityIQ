@@ -1,4 +1,3 @@
-// @ts-nocheck — Types will be regenerated after Supabase migration
 // CompatibleIQ™ — Stripe Webhook Handler
 // POST /api/stripe/webhook
 // Handles Stripe events for payments, subscriptions, and invoices
