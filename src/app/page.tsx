@@ -402,7 +402,11 @@ export default function LandingPage() {
             <Image src="/images/logo.svg" alt="CompatibleIQ" width={150} height={38} className="h-9 w-auto opacity-60" />
             <span className="text-sm text-gray-400">&copy; {new Date().getFullYear()} Pivot Training & Development</span>
           </div>
-          <p className="text-xs text-gray-400">CompatibleIQ is not a clinical diagnostic tool.</p>
+          <div className="flex items-center gap-6">
+            <Link href="/terms" className="text-xs text-gray-400 hover:text-gray-600 transition-colors">Terms of Service</Link>
+            <Link href="/privacy" className="text-xs text-gray-400 hover:text-gray-600 transition-colors">Privacy Policy</Link>
+            <p className="text-xs text-gray-400">Not a clinical diagnostic tool.</p>
+          </div>
         </div>
       </footer>
     </div>
