@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
       .from('profiles')
       .select('stripe_customer_id, first_name')
       .eq('id', user.id)
-      .single()
+      .single() as { data: { stripe_customer_id: string | null; first_name: string | null } | null }
 
     let stripeCustomerId = profile?.stripe_customer_id
 
