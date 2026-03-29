@@ -119,10 +119,6 @@ export default function ChatPage() {
     if (content.length > LIMITS.maxMessageLength) return
 
     const filtered = filterMessage(content)
-    if (!filtered.allowed) {
-      // Message blocked by PII/content filter
-      return
-    }
 
     setSending(true)
     setInput('')
@@ -130,7 +126,7 @@ export default function ChatPage() {
     const { error } = await supabase.from('messages').insert({
       match_id: matchId,
       sender_id: user.id,
-      content: filtered.sanitized,
+      content: filtered.clean,
     } as never)
 
     setSending(false)
