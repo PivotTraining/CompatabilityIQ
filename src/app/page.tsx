@@ -89,7 +89,7 @@ export default function LandingPage() {
                 </div>
                 <div className="space-y-3 pt-8">
                   <Image src="https://images.unsplash.com/photo-1621184455862-c163dfb30e0f?w=400&h=300&fit=crop&crop=faces" alt="Diverse couple" width={400} height={300} className="w-full h-44 object-cover rounded-2xl shadow-sm" />
-                  <Image src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=400&h=500&fit=crop&crop=faces" alt="Couple on a date" width={400} height={500} className="w-full h-64 object-cover rounded-2xl shadow-sm" />
+                  <Image src="https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?w=400&h=500&fit=crop&crop=faces" alt="Couple laughing together" width={400} height={500} className="w-full h-64 object-cover rounded-2xl shadow-sm" />
                 </div>
               </div>
               <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-md rounded-2xl px-5 py-3 shadow-lg border border-gray-100">
@@ -122,13 +122,76 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Self-Discovery CTA */}
-      <section className="max-w-5xl mx-auto px-6 lg:px-12 py-16">
-        <div
-          className="rounded-3xl p-10 lg:p-12 relative overflow-hidden"
-          style={{ background: 'linear-gradient(135deg, #E8F5E9 0%, #F8F6FF 50%, #F0FDF9 100%)' }}
-        >
-          <div className="relative z-10 grid lg:grid-cols-2 gap-8 items-center">
+      {/* Intake + Self-Discovery — Side by Side */}
+      <section id="intake" className="max-w-7xl mx-auto px-6 lg:px-12 py-24">
+        <div className="text-center mb-12">
+          <p className="text-sm font-semibold mb-3 tracking-wide uppercase" style={{ color: 'var(--ciq-purple)' }}>Before We Start</p>
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Let&apos;s get the basics out of the way</h2>
+          <p className="text-gray-500 max-w-xl mx-auto">Takes 60 seconds. We use this to personalize your experience.</p>
+        </div>
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          {/* Left: Intake Form */}
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-8 lg:p-10 space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">What should we call you?</label>
+              <input type="text" placeholder="First name" className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#7B68B5] focus:ring-2 focus:ring-[#7B68B5]/20 transition-all" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Where are you based?</label>
+              <input type="text" placeholder="City, State" className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#7B68B5] focus:ring-2 focus:ring-[#7B68B5]/20 transition-all" />
+            </div>
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">I identify as</label>
+                <select className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-500 focus:outline-none focus:border-[#7B68B5] focus:ring-2 focus:ring-[#7B68B5]/20 transition-all bg-white">
+                  <option value="">Select</option>
+                  <option>Woman</option>
+                  <option>Man</option>
+                  <option>Non-binary</option>
+                  <option>Prefer to self-describe</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">I&apos;m interested in</label>
+                <select className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-500 focus:outline-none focus:border-[#7B68B5] focus:ring-2 focus:ring-[#7B68B5]/20 transition-all bg-white">
+                  <option value="">Select</option>
+                  <option>Women</option>
+                  <option>Men</option>
+                  <option>Everyone</option>
+                  <option>Prefer to self-describe</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-3">What are you looking for?</label>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {[
+                  { title: 'Long-term relationship', sub: 'Ready for the real thing' },
+                  { title: 'Marriage-minded', sub: 'Not a placeholder' },
+                  { title: 'Something fun', sub: 'Open to where it goes' },
+                  { title: 'Not sure yet', sub: "That's okay" },
+                ].map((goal) => (
+                  <label key={goal.title} className="flex items-center gap-3 p-3 rounded-xl border border-gray-200 cursor-pointer hover:border-[#7B68B5]/40 hover:bg-[#EDE9F6]/30 transition-all">
+                    <input type="radio" name="goal" className="accent-[#7B68B5] w-4 h-4" />
+                    <div>
+                      <p className="text-sm font-medium text-gray-900">{goal.title}</p>
+                      <p className="text-xs text-gray-400">{goal.sub}</p>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <Link href="/signup" className="block w-full py-4 rounded-2xl text-white font-semibold hover:opacity-90 transition-all text-base text-center" style={{ background: 'var(--ciq-purple)' }}>
+              Start My Assessment →
+            </Link>
+            <p className="text-center text-xs text-gray-400">Your info stays private. We never share it with matches without your permission.</p>
+          </div>
+
+          {/* Right: Self-Discovery Path */}
+          <div
+            className="rounded-3xl p-8 lg:p-10 relative overflow-hidden h-full flex flex-col justify-between"
+            style={{ background: 'linear-gradient(135deg, #E8F5E9 0%, #F8F6FF 50%, #F0FDF9 100%)' }}
+          >
             <div>
               <div
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-4"
@@ -137,15 +200,15 @@ export default function LandingPage() {
                 <Brain className="w-3.5 h-3.5" />
                 Know Yourself First
               </div>
-              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
-                Not ready to date?<br />Know yourself first.
-              </h2>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                Not ready to date?
+              </h3>
               <p className="text-base text-gray-500 leading-relaxed mb-6">
-                Take the same science-backed assessments without entering the dating pool. Discover your attachment style, communication patterns, emotional intelligence, and relationship blind spots -- all for free.
+                Take the same science-backed assessments without entering the dating pool. Discover your attachment style, communication patterns, and relationship blind spots.
               </p>
-              <ul className="space-y-2 mb-8">
+              <ul className="space-y-3 mb-8">
                 {[
-                  'Personal compatibility profile with 6 dimensions',
+                  'Personal compatibility profile',
                   'Attachment style deep dive',
                   'Dating readiness score',
                   'Shareable CIQ personality card',
@@ -156,125 +219,19 @@ export default function LandingPage() {
                   </li>
                 ))}
               </ul>
+            </div>
+            <div>
               <Link
                 href="/signup?mode=self_discovery"
                 className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold rounded-xl text-white hover:opacity-90 transition-all"
                 style={{ background: '#4CAF8A' }}
               >
-                Take the Assessment for Yourself
+                Know Yourself — Free
                 <ArrowRight className="w-4 h-4" />
               </Link>
-            </div>
-            <div className="hidden lg:flex justify-center">
-              <div className="w-64 h-[450px] rounded-3xl relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #7B68B5 0%, #5A4A99 100%)' }}>
-                <div className="absolute -top-12 -right-12 w-40 h-40 rounded-full bg-white/10" />
-                <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-white/10" />
-                <div className="relative z-10 p-6 flex flex-col justify-between h-full">
-                  <div>
-                    <p className="text-white/50 text-[10px] uppercase tracking-widest mb-1">Profile</p>
-                    <p className="text-white text-xl font-bold mb-6">Sarah</p>
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-400" /><span className="text-white/80 text-xs">Emotionally Grounded</span></div>
-                      <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full" style={{ background: '#E8735A' }} /><span className="text-white/80 text-xs">High EQ</span></div>
-                      <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full" style={{ background: '#5B8DB8' }} /><span className="text-white/80 text-xs">Relationship-Focused</span></div>
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="px-3 py-1.5 rounded-full bg-white/15 inline-flex items-center gap-1.5">
-                      <div className="w-2 h-2 rounded-full bg-green-400" />
-                      <span className="text-white text-[10px] font-semibold">Secure Attachment</span>
-                    </div>
-                    <div>
-                      <p className="text-white/40 text-[9px] uppercase">Love Language</p>
-                      <p className="text-white text-xs font-medium">Quality Time</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-1 opacity-30">
-                    <div className="w-3 h-3 rounded-sm bg-white/30 flex items-center justify-center"><span className="text-white text-[6px] font-bold">C</span></div>
-                    <span className="text-white text-[8px]">CompatibleIQ</span>
-                  </div>
-                </div>
-              </div>
+              <p className="mt-3 text-xs text-gray-400">Same assessments. No dating pool. Switch anytime.</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Intake Pre-Questions */}
-      <section id="intake" className="max-w-3xl mx-auto px-6 lg:px-12 py-24">
-        <div className="text-center mb-12">
-          <p className="text-sm font-semibold mb-3 tracking-wide uppercase" style={{ color: 'var(--ciq-purple)' }}>Before We Start</p>
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Let&apos;s get the basics out of the way</h2>
-          <p className="text-gray-500 max-w-xl mx-auto">Takes 60 seconds. We use this to personalize your assessment and make sure your matches actually make sense for you.</p>
-        </div>
-        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-8 lg:p-10 space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">What should we call you?</label>
-            <input type="text" placeholder="First name" className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#7B68B5] focus:ring-2 focus:ring-[#7B68B5]/20 transition-all" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Where are you based?</label>
-            <input type="text" placeholder="City, State" className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#7B68B5] focus:ring-2 focus:ring-[#7B68B5]/20 transition-all" />
-          </div>
-          <div className="grid sm:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">I identify as</label>
-              <select className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-500 focus:outline-none focus:border-[#7B68B5] focus:ring-2 focus:ring-[#7B68B5]/20 transition-all bg-white">
-                <option value="">Select</option>
-                <option>Woman</option>
-                <option>Man</option>
-                <option>Non-binary</option>
-                <option>Prefer to self-describe</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">I&apos;m interested in</label>
-              <select className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-500 focus:outline-none focus:border-[#7B68B5] focus:ring-2 focus:ring-[#7B68B5]/20 transition-all bg-white">
-                <option value="">Select</option>
-                <option>Women</option>
-                <option>Men</option>
-                <option>Everyone</option>
-                <option>Prefer to self-describe</option>
-              </select>
-            </div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Sexual orientation <span className="text-gray-400 font-normal">(optional)</span></label>
-            <select className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-500 focus:outline-none focus:border-[#7B68B5] focus:ring-2 focus:ring-[#7B68B5]/20 transition-all bg-white">
-              <option value="">Prefer not to say</option>
-              <option>Straight</option>
-              <option>Gay</option>
-              <option>Lesbian</option>
-              <option>Bisexual</option>
-              <option>Pansexual</option>
-              <option>Asexual</option>
-              <option>Queer</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">What are you looking for?</label>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {[
-                { title: 'Long-term relationship', sub: 'Ready for the real thing' },
-                { title: 'Marriage-minded', sub: 'Looking for a partner, not a placeholder' },
-                { title: 'Something fun', sub: 'Open to where it goes' },
-                { title: 'Not sure yet', sub: "Figuring it out — that's okay" },
-              ].map((goal) => (
-                <label key={goal.title} className="flex items-center gap-3 p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-[#7B68B5]/40 hover:bg-[#EDE9F6]/30 transition-all">
-                  <input type="radio" name="goal" className="accent-[#7B68B5] w-4 h-4" />
-                  <div>
-                    <p className="text-sm font-medium text-gray-900">{goal.title}</p>
-                    <p className="text-xs text-gray-400">{goal.sub}</p>
-                  </div>
-                </label>
-              ))}
-            </div>
-          </div>
-          <Link href="/signup" className="block w-full py-4 rounded-2xl text-white font-semibold hover:opacity-90 transition-all text-base text-center" style={{ background: 'var(--ciq-purple)' }}>
-            Start My Assessment →
-          </Link>
-          <p className="text-center text-xs text-gray-400">Your info stays private. We never share it with matches without your permission.</p>
         </div>
       </section>
 
