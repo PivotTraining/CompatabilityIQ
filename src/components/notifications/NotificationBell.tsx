@@ -1,15 +1,8 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { createBrowserClient } from '@supabase/ssr'
+import { getSupabaseBrowserClient } from '@/lib/supabase/client'
 import type { Notification } from '@/lib/supabase/types'
-
-// ═══════════════════════════════════════════
-// Config
-// ═══════════════════════════════════════════
-
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
 // ═══════════════════════════════════════════
 // Helpers
@@ -73,7 +66,7 @@ export default function NotificationBell() {
   const [loading, setLoading] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  const supabase = createBrowserClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+  const supabase = getSupabaseBrowserClient()
 
   // ─── Fetch notifications ───────────────
   const fetchNotifications = useCallback(async () => {

@@ -694,17 +694,18 @@ export default function ProfilePage() {
           {
             icon: Bell,
             label: 'Notification Preferences',
-            href: '/app/profile/notifications',
+            href: '/app/settings/notifications',
           },
-          {
-            icon: CreditCard,
-            label: 'Subscription Management',
-            href: '/app/profile/subscription',
-          },
+          // TODO: Re-enable once /app/settings/subscription page exists
+          // {
+          //   icon: CreditCard,
+          //   label: 'Subscription Management',
+          //   href: '/app/settings/subscription',
+          // },
           {
             icon: Shield,
             label: 'Privacy & Safety',
-            href: '/app/profile/privacy',
+            href: '/privacy',
           },
         ].map((item, idx) => (
           <Link key={item.href} href={item.href}>

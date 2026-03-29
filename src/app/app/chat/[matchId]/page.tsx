@@ -6,6 +6,7 @@ import { useAuth } from '@/lib/auth-context'
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
 import { ArrowLeft, Send, Shield, Flag } from 'lucide-react'
 import { LIMITS } from '@/lib/constants'
+import { filterMessage } from '@/lib/messaging/content-filter'
 
 interface Message {
   id: string
@@ -17,7 +18,7 @@ interface Message {
 }
 
 interface PartnerInfo {
-  display_name: string
+  first_name: string
   location_city: string | null
 }
 
@@ -42,12 +43,12 @@ export default function ChatPage() {
     const loadMatch = async () => {
       const { data: matchRaw } = await supabase
         .from('matches')
-        .select('id, user_a_id, user_b_id, is_active')
+        .select('id, user_a_id, user_b_id, status')
         .eq('id', matchId)
         .single()
 
-      const match = matchRaw as { id: string; user_a_id: string; user_b_id: string; is_active: boolean } | null
-      if (!match || !match.is_active) {
+      const match = matchRaw as { id: string; user_a_id: string; user_b_id: string; status: string } | null
+      if (!match || match.status !== 'active') {
         router.replace('/app/matches')
         return
       }
@@ -55,7 +56,7 @@ export default function ChatPage() {
       const partnerId = match.user_a_id === user.id ? match.user_b_id : match.user_a_id
       const { data: profile } = await supabase
         .from('profiles')
-        .select('display_name, location_city')
+        .select('first_name, location_city')
         .eq('id', partnerId)
         .single()
 
@@ -117,13 +118,19 @@ export default function ChatPage() {
     const content = input.trim()
     if (content.length > LIMITS.maxMessageLength) return
 
+    const filtered = filterMessage(content)
+    if (!filtered.allowed) {
+      // Message blocked by PII/content filter
+      return
+    }
+
     setSending(true)
     setInput('')
 
     const { error } = await supabase.from('messages').insert({
       match_id: matchId,
       sender_id: user.id,
-      content,
+      content: filtered.sanitized,
     } as never)
 
     setSending(false)
@@ -177,7 +184,7 @@ export default function ChatPage() {
         </button>
         <div className="flex-1">
           <h2 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
-            {partner.display_name}
+            {partner.first_name}
           </h2>
           {partner.location_city && (
             <p className="text-[10px]" style={{ color: 'var(--text-muted)' }}>

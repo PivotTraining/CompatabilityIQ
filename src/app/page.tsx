@@ -6,11 +6,11 @@ import { Brain, Heart, TrendingUp, Lock, Sparkles, ArrowRight, Check, Clock, Mes
 export const metadata: Metadata = {
   title: 'CompatibleIQ — Date with Proof | Science-Backed Compatibility Scoring',
   description:
-    'Take a free 15-dimension psychometric assessment and get a real compatibility score before your first date. No swiping, no guessing -- just science.',
+    'Take a free 6-dimension psychometric assessment and get a real compatibility score before your first date. No swiping, no guessing -- just science.',
   openGraph: {
     title: 'CompatibleIQ — Date with Proof',
     description:
-      '15 science-backed dimensions. One compatibility score. Zero wasted time.',
+      '6 science-backed dimensions. One compatibility score. Zero wasted time.',
     url: 'https://compatibilityiq.com',
   },
   alternates: {
@@ -56,10 +56,10 @@ export default function LandingPage() {
                 Date with<br /><span style={{ color: 'var(--ciq-purple)' }}>proof.</span>
               </h1>
               <p className="text-lg lg:text-xl text-gray-500 leading-relaxed mb-4 max-w-lg">
-                15 science-backed dimensions. One compatibility score. Zero wasted time.
+                6 science-backed dimensions. One compatibility score. Zero wasted time.
               </p>
               <p className="text-base text-gray-400 leading-relaxed mb-10 max-w-lg">
-                No swiping. No small talk. Just 15 science-backed dimensions that predict whether someone&apos;s actually right for you — starting with 5 free assessments you can knock out over lunch.
+                No swiping. No small talk. Just 6 science-backed dimensions that predict whether someone&apos;s actually right for you — starting with 6 free assessments you can knock out over lunch.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
@@ -77,7 +77,7 @@ export default function LandingPage() {
                   See how it works
                 </a>
               </div>
-              <p className="mt-6 text-sm text-gray-400">Free forever for 5 core assessments. No credit card needed.</p>
+              <p className="mt-6 text-sm text-gray-400">Free forever for 6 core assessments. No credit card needed.</p>
             </div>
 
             {/* Photo Collage */}
@@ -271,9 +271,9 @@ export default function LandingPage() {
               ))}
             </div>
           </div>
-          <button className="w-full py-4 rounded-2xl text-white font-semibold hover:opacity-90 transition-all text-base" style={{ background: 'var(--ciq-purple)' }}>
+          <Link href="/signup" className="block w-full py-4 rounded-2xl text-white font-semibold hover:opacity-90 transition-all text-base text-center" style={{ background: 'var(--ciq-purple)' }}>
             Start My Assessment →
-          </button>
+          </Link>
           <p className="text-center text-xs text-gray-400">Your info stays private. We never share it with matches without your permission.</p>
         </div>
       </section>
@@ -377,9 +377,9 @@ export default function LandingPage() {
                   </li>
                 ))}
               </ul>
-              <button className="w-full py-3 rounded-xl text-sm font-semibold border-2 border-gray-200 text-gray-700 hover:border-[#7B68B5] hover:text-[#7B68B5] transition-all">
+              <Link href="/signup" className="block w-full py-3 rounded-xl text-sm font-semibold border-2 border-gray-200 text-gray-700 hover:border-[#7B68B5] hover:text-[#7B68B5] transition-all text-center">
                 Unlock a Report
-              </button>
+              </Link>
             </div>
             {/* CIQ Pro */}
             <div className="rounded-2xl p-7 bg-white border-2 shadow-sm relative" style={{ borderColor: 'var(--ciq-purple)', boxShadow: '0 0 40px rgba(123,104,181,0.15)' }}>
@@ -399,9 +399,9 @@ export default function LandingPage() {
                   </li>
                 ))}
               </ul>
-              <button className="w-full py-3 rounded-xl text-sm font-semibold text-white hover:opacity-90 transition-all" style={{ background: 'var(--ciq-purple)' }}>
+              <Link href="/signup" className="block w-full py-3 rounded-xl text-sm font-semibold text-white hover:opacity-90 transition-all text-center" style={{ background: 'var(--ciq-purple)' }}>
                 Go Pro
-              </button>
+              </Link>
             </div>
             {/* Founding Member */}
             <div className="rounded-2xl p-7 bg-white border border-gray-200 shadow-sm relative overflow-hidden">
@@ -421,9 +421,9 @@ export default function LandingPage() {
                   </li>
                 ))}
               </ul>
-              <button className="w-full py-3 rounded-xl text-sm font-semibold border-2 text-white hover:opacity-90 transition-all" style={{ background: 'var(--ciq-coral)', borderColor: 'var(--ciq-coral)' }}>
+              <Link href="/signup" className="block w-full py-3 rounded-xl text-sm font-semibold border-2 text-white hover:opacity-90 transition-all text-center" style={{ background: 'var(--ciq-coral)', borderColor: 'var(--ciq-coral)' }}>
                 Claim Founding Rate
-              </button>
+              </Link>
             </div>
           </div>
         </div>

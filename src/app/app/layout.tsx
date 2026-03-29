@@ -116,14 +116,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         { href: '/app/self-discovery', icon: User, label: 'My Profile' },
         { href: '/app/assessment', icon: Brain, label: 'Assess' },
         { href: '/app/profile', icon: User, label: 'Profile' },
-        { href: '/app/profile/settings', icon: Settings, label: 'Settings' },
+        { href: '/app/settings/notifications', icon: Settings, label: 'Settings' },
       ]
     : [
         { href: '/app/discover', icon: Compass, label: 'Discover' },
         { href: '/app/matches', icon: Heart, label: 'Matches' },
         { href: '/app/assessment', icon: Brain, label: 'Assess' },
         { href: '/app/profile', icon: User, label: 'Profile' },
-        { href: '/app/profile/settings', icon: Settings, label: 'Settings' },
+        { href: '/app/settings/notifications', icon: Settings, label: 'Settings' },
       ]
 
   return (

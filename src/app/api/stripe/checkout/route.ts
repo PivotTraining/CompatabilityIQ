@@ -107,8 +107,8 @@ export async function POST(request: NextRequest) {
           quantity: 1,
         },
       ],
-      success_url: successUrl || `${origin}/dashboard?checkout=success`,
-      cancel_url: cancelUrl || `${origin}/dashboard?checkout=cancelled`,
+      success_url: successUrl || `${origin}/app/discover?checkout=success`,
+      cancel_url: cancelUrl || `${origin}/app/discover?checkout=cancelled`,
       metadata: {
         supabase_user_id: user.id,
         price_id: priceId,
