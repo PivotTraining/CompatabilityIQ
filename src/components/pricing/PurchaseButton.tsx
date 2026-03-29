@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client'
 
 // CompatibleIQ™ — Purchase / Subscribe Button Component

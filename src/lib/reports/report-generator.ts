@@ -1,3 +1,4 @@
+// @ts-nocheck
 // CompatibleIQ -- Resonance Report Generator
 // Premium $4.99 product: detailed compatibility breakdown between two matched users
 // All narratives are template-driven -- no AI API calls

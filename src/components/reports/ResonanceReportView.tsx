@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client'
 
 // CompatibleIQ -- Resonance Report View

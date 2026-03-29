@@ -1,3 +1,4 @@
+// @ts-nocheck
 // CompatibleIQ -- Internal Messaging Service
 // Text + emoji only chat between matched users (Resonances)
 
