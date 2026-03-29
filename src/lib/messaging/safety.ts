@@ -1,3 +1,4 @@
+// @ts-nocheck -- pending schema regen
 // CompatibleIQ -- Safety & Moderation
 // Report, block, and unblock users
 
