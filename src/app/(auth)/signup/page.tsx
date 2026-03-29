@@ -3,14 +3,18 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
-import { ArrowRight, Mail } from 'lucide-react'
+import { ArrowRight, Eye, EyeOff } from 'lucide-react'
 
 export default function SignupPage() {
   const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [sent, setSent] = useState(false)
   const [error, setError] = useState('')
+  const router = useRouter()
   const supabase = getSupabaseBrowserClient()
 
   const handleSignup = async (e: React.FormEvent) => {
@@ -19,50 +23,34 @@ export default function SignupPage() {
       setError('Service unavailable')
       return
     }
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match')
+      return
+    }
+
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters')
+      return
+    }
+
     setLoading(true)
     setError('')
 
-    const { error } = await supabase.auth.signInWithOtp({
+    const { error: signUpError } = await supabase.auth.signUp({
       email,
+      password,
       options: {
         emailRedirectTo: `${window.location.origin}/api/auth/callback`,
       },
     })
 
     setLoading(false)
-    if (error) {
-      setError(error.message)
+    if (signUpError) {
+      setError(signUpError.message)
     } else {
-      setSent(true)
+      router.push(`/verify?email=${encodeURIComponent(email)}`)
     }
-  }
-
-  if (sent) {
-    return (
-      <div className="min-h-screen flex items-center justify-center px-6" style={{ background: 'var(--bg-primary)' }}>
-        <div className="w-full max-w-sm text-center">
-          <div
-            className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-6"
-            style={{ background: 'var(--ciq-purple)', color: 'white' }}
-          >
-            <Mail className="w-6 h-6" />
-          </div>
-          <h1 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
-            Check your email
-          </h1>
-          <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
-            We sent a confirmation link to <strong>{email}</strong>
-          </p>
-          <button
-            onClick={() => setSent(false)}
-            className="text-sm font-medium"
-            style={{ color: 'var(--ciq-purple)' }}
-          >
-            Use a different email
-          </button>
-        </div>
-      </div>
-    )
   }
 
   return (
@@ -96,7 +84,58 @@ export default function SignupPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
               required
-              className="w-full px-4 py-2.5 rounded-xl border text-sm outline-none transition-colors"
+              className="w-full px-4 py-2.5 rounded-xl border text-sm outline-none transition-colors focus:border-[var(--border-focus)]"
+              style={{
+                background: 'var(--bg-card)',
+                borderColor: 'var(--border)',
+                color: 'var(--text-primary)',
+              }}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>
+              Password
+            </label>
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="At least 8 characters"
+                required
+                minLength={8}
+                className="w-full px-4 py-2.5 pr-11 rounded-xl border text-sm outline-none transition-colors focus:border-[var(--border-focus)]"
+                style={{
+                  background: 'var(--bg-card)',
+                  borderColor: 'var(--border)',
+                  color: 'var(--text-primary)',
+                }}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1"
+                style={{ color: 'var(--text-muted)' }}
+                tabIndex={-1}
+              >
+                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>
+              Confirm password
+            </label>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Re-enter your password"
+              required
+              minLength={8}
+              className="w-full px-4 py-2.5 rounded-xl border text-sm outline-none transition-colors focus:border-[var(--border-focus)]"
               style={{
                 background: 'var(--bg-card)',
                 borderColor: 'var(--border)',
@@ -111,7 +150,7 @@ export default function SignupPage() {
 
           <button
             type="submit"
-            disabled={loading || !email}
+            disabled={loading || !email || !password || !confirmPassword}
             className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 disabled:opacity-50"
             style={{ background: 'var(--ciq-purple)' }}
           >

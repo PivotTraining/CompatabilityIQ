@@ -4,7 +4,7 @@ import { getSupabaseServerClient, getSupabaseServiceClient } from '@/lib/supabas
 import { MODULE_CONFIG, getUnlockedProfileCount } from '@/lib/constants'
 import { mapModuleAnswers, getDimensionsForModule } from '@/lib/assessment/answer-mapper'
 import { computeDimensionScores } from '@/lib/scoring/cis-engine'
-import type { DimensionId, DimensionScore } from '@/lib/scoring/types'
+import type { DimensionScore } from '@/lib/scoring/types'
 
 export async function POST(request: Request) {
   try {

@@ -1,202 +1,722 @@
 // @ts-nocheck
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useAuth } from '@/lib/auth-context'
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
 import { useAssessmentStore } from '@/store/assessment-store'
-import { CIS_TIERS, MODULE_CONFIG, type CISTierKey } from '@/lib/constants'
-import { Camera, Edit3, MapPin, Calendar, Shield, ChevronRight } from 'lucide-react'
+import {
+  CIS_TIERS,
+  MODULE_CONFIG,
+  LIMITS,
+  getCISTier,
+  type CISTierKey,
+} from '@/lib/constants'
+import {
+  Camera,
+  Edit3,
+  MapPin,
+  Calendar,
+  Shield,
+  ChevronRight,
+  Plus,
+  X,
+  User,
+  Heart,
+  Bell,
+  CreditCard,
+  Brain,
+  Check,
+  Sparkles,
+} from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 
+// ── Types ──
+
 interface ProfileData {
-  display_name: string
-  date_of_birth: string
-  gender: string
-  bio: string
+  first_name: string
+  date_of_birth: string | null
+  gender_identity: string | null
+  sexual_orientation: string | null
+  relationship_goal: string | null
+  bio: string | null
   location_city: string | null
   location_state: string | null
-  assessment_progress: number
-  cis_score: number | null
-  cis_tier: CISTierKey | null
-  is_verified: boolean
+  assessment_completed: boolean
+  subscription_tier: string
+  photo_urls: string[] | null
+  is_verified?: boolean
 }
+
+interface EditableFields {
+  first_name: string
+  bio: string
+  location_city: string
+  location_state: string
+  date_of_birth: string
+}
+
+// ── Helper ──
+
+const GENDER_LABELS: Record<string, string> = {
+  woman: 'Woman',
+  man: 'Man',
+  nonbinary: 'Non-binary',
+  self_describe: 'Self-described',
+}
+
+const ORIENTATION_LABELS: Record<string, string> = {
+  straight: 'Straight',
+  gay: 'Gay',
+  lesbian: 'Lesbian',
+  bisexual: 'Bisexual',
+  pansexual: 'Pansexual',
+  queer: 'Queer',
+  asexual: 'Asexual',
+  demisexual: 'Demisexual',
+  other: 'Other',
+}
+
+const GOAL_LABELS: Record<string, string> = {
+  long_term: 'Long-term relationship',
+  marriage: 'Marriage',
+  fun: 'Something fun',
+  not_sure: 'Not sure yet',
+}
+
+const TIER_LABELS: Record<string, string> = {
+  free: 'Free',
+  pro: 'CIQ Pro',
+  founding_member: 'Founding Member',
+}
+
+function getAge(dob: string): number {
+  return Math.floor((Date.now() - new Date(dob).getTime()) / (365.25 * 24 * 60 * 60 * 1000))
+}
+
+// ── Main Page ──
 
 export default function ProfilePage() {
   const { user } = useAuth()
   const supabase = getSupabaseBrowserClient()
+  const { assessmentProgress } = useAssessmentStore()
+
   const [profile, setProfile] = useState<ProfileData | null>(null)
-  const [bio, setBio] = useState('')
   const [editing, setEditing] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [editFields, setEditFields] = useState<EditableFields>({
+    first_name: '',
+    bio: '',
+    location_city: '',
+    location_state: '',
+    date_of_birth: '',
+  })
+  const [avgCIS, setAvgCIS] = useState<number | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
+  // Load profile
   useEffect(() => {
     if (!user || !supabase) return
     supabase
       .from('profiles')
-      .select('display_name, date_of_birth, gender, bio, location_city, location_state, assessment_progress, cis_score, cis_tier, is_verified')
+      .select(
+        'first_name, date_of_birth, gender_identity, sexual_orientation, relationship_goal, bio, location_city, location_state, assessment_completed, subscription_tier, photo_urls'
+      )
       .eq('id', user.id)
       .single()
       .then(({ data }) => {
         const row = data as unknown as ProfileData | null
         if (row) {
           setProfile(row)
-          setBio(row.bio || '')
+          setEditFields({
+            first_name: row.first_name || '',
+            bio: row.bio || '',
+            location_city: row.location_city || '',
+            location_state: row.location_state || '',
+            date_of_birth: row.date_of_birth || '',
+          })
+        }
+      })
+
+    // Load average CIS across matches
+    supabase
+      .from('matches')
+      .select('cis_score')
+      .or(`user_a_id.eq.${user.id},user_b_id.eq.${user.id}`)
+      .eq('status', 'active')
+      .then(({ data }) => {
+        const rows = (data ?? []) as unknown as { cis_score: number | null }[]
+        const scores = rows.filter((r) => r.cis_score !== null).map((r) => r.cis_score as number)
+        if (scores.length > 0) {
+          setAvgCIS(Math.round(scores.reduce((a, b) => a + b, 0) / scores.length))
         }
       })
   }, [user, supabase])
 
-  const saveBio = async () => {
+  // Save edits
+  const handleSave = async () => {
     if (!user || !supabase) return
     setSaving(true)
-    await supabase.from('profiles').update({ bio } as never).eq('id', user.id)
-    setProfile((p) => p ? { ...p, bio } : p)
+
+    await supabase
+      .from('profiles')
+      .update({
+        first_name: editFields.first_name,
+        bio: editFields.bio || null,
+        location_city: editFields.location_city || null,
+        location_state: editFields.location_state || null,
+        date_of_birth: editFields.date_of_birth || null,
+      } as never)
+      .eq('id', user.id)
+
+    setProfile((p) =>
+      p
+        ? {
+            ...p,
+            first_name: editFields.first_name,
+            bio: editFields.bio || null,
+            location_city: editFields.location_city || null,
+            location_state: editFields.location_state || null,
+            date_of_birth: editFields.date_of_birth || null,
+          }
+        : p
+    )
+
     setSaving(false)
     setEditing(false)
   }
 
-  const getAge = (dob: string) => {
-    const diff = Date.now() - new Date(dob).getTime()
-    return Math.floor(diff / (365.25 * 24 * 60 * 60 * 1000))
+  // Photo upload
+  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!user || !supabase || !e.target.files?.length) return
+    const file = e.target.files[0]
+    const ext = file.name.split('.').pop()
+    const path = `${user.id}/${Date.now()}.${ext}`
+
+    const { error: uploadError } = await supabase.storage
+      .from('photos')
+      .upload(path, file, { cacheControl: '3600', upsert: false })
+
+    if (uploadError) return
+
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from('photos').getPublicUrl(path)
+
+    const currentPhotos = profile?.photo_urls ?? []
+    const newPhotos = [...currentPhotos, publicUrl]
+
+    await supabase
+      .from('profiles')
+      .update({ photo_urls: newPhotos } as never)
+      .eq('id', user.id)
+
+    setProfile((p) => (p ? { ...p, photo_urls: newPhotos } : p))
   }
 
+  // Remove photo
+  const handleRemovePhoto = async (index: number) => {
+    if (!user || !supabase || !profile?.photo_urls) return
+    const newPhotos = profile.photo_urls.filter((_, i) => i !== index)
+
+    await supabase
+      .from('profiles')
+      .update({ photo_urls: newPhotos.length > 0 ? newPhotos : null } as never)
+      .eq('id', user.id)
+
+    setProfile((p) => (p ? { ...p, photo_urls: newPhotos.length > 0 ? newPhotos : null } : p))
+  }
+
+  // ── Loading state ──
   if (!profile) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-6 h-6 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: 'var(--ciq-purple)', borderTopColor: 'transparent' }} />
+        <div
+          className="w-6 h-6 rounded-full border-2 border-t-transparent animate-spin"
+          style={{ borderColor: 'var(--ciq-purple)', borderTopColor: 'transparent' }}
+        />
       </div>
     )
   }
 
-  const tier = profile.cis_tier ? CIS_TIERS[profile.cis_tier] : null
-  const completedModules = profile.assessment_progress
+  const photos = profile.photo_urls ?? []
+  const completedModules = assessmentProgress
+  const totalModules = MODULE_CONFIG.length
   const percentComplete = Math.round(
     (MODULE_CONFIG.filter((_, i) => i < completedModules).reduce((s, m) => s + m.questionCount, 0) /
-      MODULE_CONFIG.reduce((s, m) => s + m.questionCount, 0)) * 100
+      MODULE_CONFIG.reduce((s, m) => s + m.questionCount, 0)) *
+      100
   )
 
   return (
-    <div className="max-w-lg mx-auto px-4 py-6">
-      {/* Profile header */}
-      <div className="text-center mb-6">
-        {/* Avatar placeholder */}
+    <div className="max-w-lg mx-auto px-4 py-6 space-y-5">
+      {/* ── Profile Header ── */}
+      <div className="text-center">
+        {/* Primary photo */}
         <div
-          className="w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center border-2"
+          className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-2 flex items-center justify-center"
           style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border)' }}
         >
-          <Camera className="w-8 h-8" style={{ color: 'var(--text-muted)' }} />
+          {photos[0] ? (
+            <Image
+              src={photos[0]}
+              alt={profile.first_name}
+              width={96}
+              height={96}
+              className="object-cover w-full h-full"
+            />
+          ) : (
+            <Camera className="w-8 h-8" style={{ color: 'var(--text-muted)' }} />
+          )}
         </div>
 
         <h1 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
-          {profile.display_name || 'Your Name'}
+          {profile.first_name || 'Your Name'}
         </h1>
 
-        <div className="flex items-center justify-center gap-2 mt-1">
+        <div className="flex items-center justify-center gap-3 mt-1 flex-wrap">
           {profile.date_of_birth && (
             <span className="flex items-center gap-1 text-sm" style={{ color: 'var(--text-secondary)' }}>
               <Calendar className="w-3.5 h-3.5" />
               {getAge(profile.date_of_birth)}
             </span>
           )}
-          {profile.location_city && (
+          {(profile.location_city || profile.location_state) && (
             <span className="flex items-center gap-1 text-sm" style={{ color: 'var(--text-secondary)' }}>
               <MapPin className="w-3.5 h-3.5" />
-              {profile.location_city}{profile.location_state ? `, ${profile.location_state}` : ''}
-            </span>
-          )}
-          {profile.is_verified && (
-            <span className="flex items-center gap-1 text-xs font-medium" style={{ color: 'var(--ciq-green)' }}>
-              <Shield className="w-3.5 h-3.5" /> Verified
+              {[profile.location_city, profile.location_state].filter(Boolean).join(', ')}
             </span>
           )}
         </div>
 
-        {/* CIS badge */}
-        {tier && profile.cis_score !== null && (
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mt-3"
-            style={{ background: tier.bg, color: tier.color }}
-          >
-            {tier.label} — {Math.round(profile.cis_score)}
-          </div>
-        )}
+        {/* Edit toggle */}
+        <button
+          onClick={() => (editing ? handleSave() : setEditing(true))}
+          className="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold transition-all"
+          style={{
+            background: editing ? 'var(--ciq-purple)' : 'var(--ciq-purple-light)',
+            color: editing ? '#fff' : 'var(--ciq-purple)',
+          }}
+        >
+          {editing ? (
+            saving ? (
+              'Saving...'
+            ) : (
+              <>
+                <Check className="w-3.5 h-3.5" /> Save Changes
+              </>
+            )
+          ) : (
+            <>
+              <Edit3 className="w-3.5 h-3.5" /> Edit Profile
+            </>
+          )}
+        </button>
       </div>
 
-      {/* Assessment progress */}
-      {completedModules < 6 && (
-        <Link href="/app/assessment">
-          <div
-            className="flex items-center gap-3 p-4 rounded-2xl border mb-4"
-            style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
-          >
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center"
-              style={{ background: `var(--ciq-purple)15`, color: 'var(--ciq-purple)' }}
-            >
-              <span className="text-sm font-bold">{percentComplete}%</span>
-            </div>
-            <div className="flex-1">
-              <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
-                Assessment {percentComplete}% complete
-              </p>
-              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
-                Complete all 6 modules to unlock all matches
-              </p>
-            </div>
-            <ChevronRight className="w-4 h-4" style={{ color: 'var(--text-muted)' }} />
-          </div>
-        </Link>
-      )}
-
-      {/* Bio */}
+      {/* ── Photo Grid ── */}
       <div
-        className="p-4 rounded-2xl border mb-4"
+        className="p-4 rounded-2xl border"
         style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
       >
-        <div className="flex items-center justify-between mb-2">
-          <h3 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>About</h3>
-          <button
-            onClick={() => editing ? saveBio() : setEditing(true)}
-            className="text-xs font-medium flex items-center gap-1"
-            style={{ color: 'var(--ciq-purple)' }}
-          >
-            {editing ? (saving ? 'Saving...' : 'Save') : <><Edit3 className="w-3 h-3" /> Edit</>}
-          </button>
+        <h3 className="text-sm font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>
+          Photos
+        </h3>
+        <div className="grid grid-cols-3 gap-2">
+          {Array.from({ length: LIMITS.maxPhotos }).map((_, i) => {
+            const photo = photos[i]
+            return (
+              <div
+                key={i}
+                className="aspect-square rounded-xl overflow-hidden relative flex items-center justify-center border"
+                style={{
+                  background: 'var(--bg-secondary)',
+                  borderColor: 'var(--border)',
+                }}
+              >
+                {photo ? (
+                  <>
+                    <Image
+                      src={photo}
+                      alt={`Photo ${i + 1}`}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 512px) 33vw, 160px"
+                    />
+                    {editing && (
+                      <button
+                        onClick={() => handleRemovePhoto(i)}
+                        className="absolute top-1 right-1 w-6 h-6 rounded-full bg-black/60 text-white flex items-center justify-center"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </>
+                ) : (
+                  <button
+                    onClick={() => fileInputRef.current?.click()}
+                    className="w-full h-full flex flex-col items-center justify-center gap-1 transition-all hover:opacity-70"
+                    style={{ color: 'var(--text-muted)' }}
+                  >
+                    <Plus className="w-5 h-5" />
+                    <span className="text-[10px]">Add</span>
+                  </button>
+                )}
+              </div>
+            )
+          })}
         </div>
-        {editing ? (
-          <textarea
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-            maxLength={500}
-            rows={3}
-            placeholder="Tell potential matches a little about yourself..."
-            className="w-full text-sm p-2 rounded-lg border resize-none outline-none"
-            style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
-          />
-        ) : (
-          <p className="text-sm" style={{ color: bio ? 'var(--text-secondary)' : 'var(--text-muted)' }}>
-            {bio || 'No bio yet. Tap Edit to add one.'}
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          onChange={handlePhotoUpload}
+          className="hidden"
+        />
+      </div>
+
+      {/* ── Editable Fields ── */}
+      {editing && (
+        <div
+          className="p-4 rounded-2xl border space-y-4"
+          style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+        >
+          <h3 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+            Edit Info
+          </h3>
+
+          {/* First name */}
+          <div>
+            <label className="text-xs font-medium mb-1 block" style={{ color: 'var(--text-secondary)' }}>
+              First Name
+            </label>
+            <input
+              type="text"
+              value={editFields.first_name}
+              onChange={(e) => setEditFields((f) => ({ ...f, first_name: e.target.value }))}
+              className="w-full px-3 py-2 rounded-lg text-sm border outline-none focus:ring-1"
+              style={{
+                background: 'var(--bg-secondary)',
+                borderColor: 'var(--border)',
+                color: 'var(--text-primary)',
+              }}
+            />
+          </div>
+
+          {/* Bio */}
+          <div>
+            <label className="text-xs font-medium mb-1 block" style={{ color: 'var(--text-secondary)' }}>
+              Bio
+            </label>
+            <textarea
+              value={editFields.bio}
+              onChange={(e) => setEditFields((f) => ({ ...f, bio: e.target.value }))}
+              maxLength={LIMITS.maxBioLength}
+              rows={3}
+              placeholder="Tell potential matches about yourself..."
+              className="w-full px-3 py-2 rounded-lg text-sm border outline-none resize-none focus:ring-1"
+              style={{
+                background: 'var(--bg-secondary)',
+                borderColor: 'var(--border)',
+                color: 'var(--text-primary)',
+              }}
+            />
+            <p className="text-[10px] text-right mt-0.5" style={{ color: 'var(--text-muted)' }}>
+              {editFields.bio.length}/{LIMITS.maxBioLength}
+            </p>
+          </div>
+
+          {/* Location */}
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="text-xs font-medium mb-1 block" style={{ color: 'var(--text-secondary)' }}>
+                City
+              </label>
+              <input
+                type="text"
+                value={editFields.location_city}
+                onChange={(e) => setEditFields((f) => ({ ...f, location_city: e.target.value }))}
+                placeholder="Austin"
+                className="w-full px-3 py-2 rounded-lg text-sm border outline-none focus:ring-1"
+                style={{
+                  background: 'var(--bg-secondary)',
+                  borderColor: 'var(--border)',
+                  color: 'var(--text-primary)',
+                }}
+              />
+            </div>
+            <div>
+              <label className="text-xs font-medium mb-1 block" style={{ color: 'var(--text-secondary)' }}>
+                State
+              </label>
+              <input
+                type="text"
+                value={editFields.location_state}
+                onChange={(e) => setEditFields((f) => ({ ...f, location_state: e.target.value }))}
+                placeholder="TX"
+                className="w-full px-3 py-2 rounded-lg text-sm border outline-none focus:ring-1"
+                style={{
+                  background: 'var(--bg-secondary)',
+                  borderColor: 'var(--border)',
+                  color: 'var(--text-primary)',
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Date of Birth */}
+          <div>
+            <label className="text-xs font-medium mb-1 block" style={{ color: 'var(--text-secondary)' }}>
+              Date of Birth
+            </label>
+            <input
+              type="date"
+              value={editFields.date_of_birth}
+              onChange={(e) => setEditFields((f) => ({ ...f, date_of_birth: e.target.value }))}
+              className="w-full px-3 py-2 rounded-lg text-sm border outline-none focus:ring-1"
+              style={{
+                background: 'var(--bg-secondary)',
+                borderColor: 'var(--border)',
+                color: 'var(--text-primary)',
+              }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* ── Bio display (non-editing) ── */}
+      {!editing && (
+        <div
+          className="p-4 rounded-2xl border"
+          style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+        >
+          <h3 className="text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
+            About
+          </h3>
+          <p
+            className="text-sm"
+            style={{ color: profile.bio ? 'var(--text-secondary)' : 'var(--text-muted)' }}
+          >
+            {profile.bio || 'No bio yet. Tap Edit Profile to add one.'}
           </p>
-        )}
-        {editing && (
-          <p className="text-[10px] text-right mt-1" style={{ color: 'var(--text-muted)' }}>
-            {bio.length}/500
+        </div>
+      )}
+
+      {/* ── Read-only info ── */}
+      <div
+        className="p-4 rounded-2xl border space-y-3"
+        style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+      >
+        <h3 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+          Details
+        </h3>
+        {[
+          {
+            label: 'Gender',
+            value: profile.gender_identity ? GENDER_LABELS[profile.gender_identity] ?? profile.gender_identity : 'Not set',
+          },
+          {
+            label: 'Orientation',
+            value: profile.sexual_orientation
+              ? ORIENTATION_LABELS[profile.sexual_orientation] ?? profile.sexual_orientation
+              : 'Not set',
+          },
+          {
+            label: 'Looking for',
+            value: profile.relationship_goal
+              ? GOAL_LABELS[profile.relationship_goal] ?? profile.relationship_goal
+              : 'Not set',
+          },
+          {
+            label: 'Subscription',
+            value: TIER_LABELS[profile.subscription_tier] ?? profile.subscription_tier,
+          },
+        ].map((item) => (
+          <div key={item.label} className="flex items-center justify-between">
+            <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
+              {item.label}
+            </span>
+            <span className="text-xs font-medium" style={{ color: 'var(--text-primary)' }}>
+              {item.value}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* ── My Resonance Score ── */}
+      <div
+        className="p-4 rounded-2xl border"
+        style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+      >
+        <div className="flex items-center gap-2 mb-2">
+          <Sparkles className="w-4 h-4" style={{ color: 'var(--ciq-purple)' }} />
+          <h3 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+            My Resonance Score
+          </h3>
+        </div>
+        {avgCIS !== null ? (
+          <div className="flex items-center gap-3">
+            <div
+              className="text-3xl font-bold"
+              style={{ color: 'var(--ciq-purple)' }}
+            >
+              {avgCIS}
+            </div>
+            <div>
+              <p className="text-xs font-medium" style={{ color: 'var(--text-primary)' }}>
+                {CIS_TIERS[getCISTier(avgCIS)].label}
+              </p>
+              <p className="text-[10px]" style={{ color: 'var(--text-muted)' }}>
+                Average across your matches
+              </p>
+            </div>
+          </div>
+        ) : (
+          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+            Match with people to see your average Resonance Score here.
           </p>
         )}
       </div>
 
-      {/* Settings links */}
-      <div className="space-y-2">
+      {/* ── Assessment Progress ── */}
+      <div
+        className="p-4 rounded-2xl border"
+        style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+      >
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <Brain className="w-4 h-4" style={{ color: 'var(--ciq-purple)' }} />
+            <h3 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+              Assessment Progress
+            </h3>
+          </div>
+          <span className="text-xs font-medium" style={{ color: 'var(--ciq-purple)' }}>
+            {percentComplete}%
+          </span>
+        </div>
+
+        {/* Progress bar */}
+        <div
+          className="h-2 rounded-full mb-4 overflow-hidden"
+          style={{ background: 'var(--bg-secondary)' }}
+        >
+          <div
+            className="h-full rounded-full transition-all duration-500"
+            style={{
+              width: `${percentComplete}%`,
+              background: 'var(--ciq-purple)',
+            }}
+          />
+        </div>
+
+        {/* Module list */}
+        <div className="space-y-2">
+          {MODULE_CONFIG.map((mod, idx) => {
+            const isCompleted = idx < completedModules
+            const isCurrent = idx === completedModules
+            return (
+              <Link
+                key={mod.module}
+                href={isCurrent || !isCompleted ? '/app/assessment' : '#'}
+                className="block"
+              >
+                <div
+                  className="flex items-center gap-3 p-2.5 rounded-xl transition-all"
+                  style={{
+                    background: isCurrent ? 'var(--ciq-purple-light)' : 'transparent',
+                  }}
+                >
+                  <div
+                    className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{
+                      background: isCompleted
+                        ? 'var(--ciq-green)'
+                        : isCurrent
+                          ? 'var(--ciq-purple)'
+                          : 'var(--bg-secondary)',
+                      color: isCompleted || isCurrent ? '#fff' : 'var(--text-muted)',
+                    }}
+                  >
+                    {isCompleted ? (
+                      <Check className="w-3.5 h-3.5" />
+                    ) : (
+                      <span className="text-xs font-bold">{mod.module}</span>
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p
+                      className="text-xs font-medium truncate"
+                      style={{
+                        color: isCompleted || isCurrent ? 'var(--text-primary)' : 'var(--text-muted)',
+                      }}
+                    >
+                      {mod.title}
+                    </p>
+                    <p className="text-[10px]" style={{ color: 'var(--text-muted)' }}>
+                      {mod.subtitle}
+                    </p>
+                  </div>
+                  {isCurrent && (
+                    <span
+                      className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
+                      style={{ background: 'var(--ciq-purple)', color: '#fff' }}
+                    >
+                      Next
+                    </span>
+                  )}
+                  {isCompleted && (
+                    <span
+                      className="text-[10px] font-medium"
+                      style={{ color: 'var(--ciq-green)' }}
+                    >
+                      Retake
+                    </span>
+                  )}
+                </div>
+              </Link>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* ── Settings Section ── */}
+      <div
+        className="rounded-2xl border overflow-hidden"
+        style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+      >
+        <h3
+          className="text-sm font-semibold px-4 pt-4 pb-2"
+          style={{ color: 'var(--text-primary)' }}
+        >
+          Settings
+        </h3>
         {[
-          { label: 'Photos', href: '/app/profile/photos' },
-          { label: 'Search Preferences', href: '/app/profile/settings' },
-        ].map((item) => (
+          {
+            icon: Bell,
+            label: 'Notification Preferences',
+            href: '/app/profile/notifications',
+          },
+          {
+            icon: CreditCard,
+            label: 'Subscription Management',
+            href: '/app/profile/subscription',
+          },
+          {
+            icon: Shield,
+            label: 'Privacy & Safety',
+            href: '/app/profile/privacy',
+          },
+        ].map((item, idx) => (
           <Link key={item.href} href={item.href}>
             <div
-              className="flex items-center justify-between p-4 rounded-2xl border"
-              style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+              className="flex items-center gap-3 px-4 py-3.5 transition-all hover:opacity-70"
+              style={{
+                borderTop: idx > 0 ? '1px solid var(--border)' : undefined,
+              }}
             >
-              <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
+              <item.icon className="w-4 h-4" style={{ color: 'var(--text-muted)' }} />
+              <span className="text-sm flex-1" style={{ color: 'var(--text-primary)' }}>
                 {item.label}
               </span>
               <ChevronRight className="w-4 h-4" style={{ color: 'var(--text-muted)' }} />
