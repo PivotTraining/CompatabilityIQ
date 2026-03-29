@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
         break
 
       case 'invoice.payment_failed':
-        await handlePaymentFailed(event.data.object as Stripe.Invoice)
+        await handlePaymentFailed(event.data.object as Stripe.Invoice, supabase)
         break
 
       default:
@@ -245,7 +245,10 @@ async function handleSubscriptionDeleted(
   }
 }
 
-async function handlePaymentFailed(invoice: Stripe.Invoice) {
+async function handlePaymentFailed(
+  invoice: Stripe.Invoice,
+  supabase: NonNullable<Awaited<ReturnType<typeof getSupabaseServiceClient>>>
+) {
   const customerId = typeof invoice.customer === 'string'
     ? invoice.customer
     : invoice.customer?.id || 'unknown'
@@ -257,7 +260,24 @@ async function handlePaymentFailed(invoice: Stripe.Invoice) {
     attemptCount: invoice.attempt_count,
   })
 
-  // Future: send notification to the user via the notifications table
+  // Look up the user by stripe_customer_id and send a notification
+  if (customerId !== 'unknown') {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('id')
+      .eq('stripe_customer_id', customerId)
+      .single()
+
+    if (profile) {
+      await supabase.from('notifications').insert({
+        user_id: profile.id,
+        type: 'assessment_reminder', // closest available type
+        title: 'Payment Failed',
+        body: 'Your subscription payment failed. Please update your payment method to keep your CIQ Pro benefits.',
+        data: { event: 'payment_failed' },
+      })
+    }
+  }
 }
 
 // ─── Report Generation ───────────────────────────────────────────

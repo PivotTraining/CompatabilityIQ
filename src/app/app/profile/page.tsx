@@ -186,25 +186,25 @@ export default function ProfilePage() {
     setEditing(false)
   }
 
-  // Photo upload
+  // Photo upload — goes through server validation at /api/photos/upload
   const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!user || !supabase || !e.target.files?.length) return
     const file = e.target.files[0]
-    const ext = file.name.split('.').pop()
-    const path = `${user.id}/${Date.now()}.${ext}`
 
-    const { error: uploadError } = await supabase.storage
-      .from('photos')
-      .upload(path, file, { cacheControl: '3600', upsert: false })
+    const formData = new FormData()
+    formData.append('file', file)
 
-    if (uploadError) return
+    const res = await fetch('/api/photos/upload', {
+      method: 'POST',
+      body: formData,
+    })
 
-    const {
-      data: { publicUrl },
-    } = supabase.storage.from('photos').getPublicUrl(path)
+    if (!res.ok) return
+
+    const { url: photoUrl } = await res.json()
 
     const currentPhotos = profile?.photo_urls ?? []
-    const newPhotos = [...currentPhotos, publicUrl]
+    const newPhotos = [...currentPhotos, photoUrl]
 
     await supabase
       .from('profiles')
