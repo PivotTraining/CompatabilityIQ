@@ -68,7 +68,7 @@ export default function LandingPage() {
             <div className="relative">
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-3">
-                  <Image src="https://images.unsplash.com/photo-1543132220-4f525d5f6e77?w=400&h=500&fit=crop&crop=faces" alt="Happy couple" width={400} height={500} className="w-full h-64 object-cover rounded-2xl shadow-sm" />
+                  <Image src="https://images.unsplash.com/photo-1515015520803-1a2e0aadb290?w=400&h=500&fit=crop&crop=faces" alt="Happy couple" width={400} height={500} className="w-full h-64 object-cover rounded-2xl shadow-sm" />
                   <Image src="https://images.unsplash.com/photo-1545232979-8bf68ee9b1af?w=400&h=300&fit=crop&crop=faces" alt="Couple together" width={400} height={300} className="w-full h-44 object-cover rounded-2xl shadow-sm" />
                 </div>
                 <div className="space-y-3 pt-8">
@@ -342,7 +342,7 @@ export default function LandingPage() {
             <div className="grid grid-cols-2 gap-3">
               <Image src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=400&h=500&fit=crop&crop=faces" alt="Confident man" width={400} height={500} className="w-full h-72 object-cover rounded-2xl shadow-sm" />
               <Image src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=500&fit=crop&crop=faces" alt="Confident woman" width={400} height={500} className="w-full h-72 object-cover rounded-2xl shadow-sm mt-8" />
-              <Image src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&crop=faces" alt="Woman smiling" width={400} height={500} className="w-full h-72 object-cover rounded-2xl shadow-sm -mt-4" />
+              <Image src="https://images.unsplash.com/photo-1573496527892-904f897eb744?w=400&h=500&fit=crop&crop=faces" alt="Woman smiling" width={400} height={500} className="w-full h-72 object-cover rounded-2xl shadow-sm -mt-4" />
               <Image src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop&crop=faces" alt="Man portrait" width={400} height={500} className="w-full h-72 object-cover rounded-2xl shadow-sm mt-4" />
             </div>
             <div>
