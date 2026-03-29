@@ -1,0 +1,756 @@
+{
+  "dimensions": [
+    {
+      "dimension_id": "emotional_intelligence",
+      "dimension_number": 4,
+      "title": "Emotional Intelligence",
+      "description": "Measures your ability to recognize, understand, and manage emotions in yourself and in your relationships. High EQ predicts better conflict resolution, deeper emotional attunement, and more satisfying partnerships.",
+      "scientific_basis": "Adapted from the Wong & Law Emotional Intelligence Scale (WLEIS; Wong & Law, 2002), a 16-item validated measure of EQ widely used in organizational and relationship research. Items reframed from workplace to romantic relationship contexts. Supplemented by findings from Brackett, Warner, & Bosco (2005) linking EQ to relationship satisfaction.",
+      "weight": 16,
+      "compatibility_type": "similarity_with_floor",
+      "compatibility_type_rationale": "Both partners benefit from similar EQ levels, but low-low pairings are high risk. A minimum floor of 2.5 (on 5-point scale) is enforced: if either partner scores below the floor, a penalty is applied. High-high pairings score highest; mismatched pairings where one partner significantly outscores the other create frustration for the higher-EQ partner and shame for the lower.",
+      "floor_threshold": 2.5,
+      "floor_penalty": 0.6,
+      "sub_scales": [
+        {
+          "id": "self_awareness",
+          "title": "Self-Awareness",
+          "description": "Recognizing your own emotions and understanding how they influence your behavior in relationships.",
+          "question_ids": ["ei_01", "ei_02", "ei_03", "ei_04", "ei_05"]
+        },
+        {
+          "id": "empathy",
+          "title": "Empathy",
+          "description": "Reading and responding to your partner's emotional state, even when they haven't spelled it out.",
+          "question_ids": ["ei_06", "ei_07", "ei_08", "ei_09", "ei_10"]
+        },
+        {
+          "id": "emotional_regulation",
+          "title": "Emotional Regulation",
+          "description": "Managing your emotional reactions under stress, especially during conflict or disappointment.",
+          "question_ids": ["ei_11", "ei_12", "ei_13", "ei_14", "ei_15"]
+        }
+      ],
+      "questions": [
+        {
+          "id": "ei_01",
+          "text": "I can usually tell the difference between being angry at my partner and being angry about something else that's spilling over into the relationship.",
+          "sub_scale": "self_awareness",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ei_02",
+          "text": "When I'm being distant or short with someone I'm dating, I usually know why.",
+          "sub_scale": "self_awareness",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ei_03",
+          "text": "I sometimes catch myself being moody and have no idea where it's coming from.",
+          "sub_scale": "self_awareness",
+          "reverse_scored": true,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ei_04",
+          "text": "I know which situations tend to trigger my worst reactions in a relationship (jealousy, insecurity, shutting down).",
+          "sub_scale": "self_awareness",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ei_05",
+          "text": "After an argument, I can honestly assess what part of the problem was mine.",
+          "sub_scale": "self_awareness",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ei_06",
+          "text": "I can usually sense when my partner is upset even before they say anything.",
+          "sub_scale": "empathy",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ei_07",
+          "text": "When my partner is going through something difficult, I find it easy to put myself in their shoes.",
+          "sub_scale": "empathy",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ei_08",
+          "text": "Honestly, I sometimes struggle to understand why my partner is upset about something that seems minor to me.",
+          "sub_scale": "empathy",
+          "reverse_scored": true,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ei_09",
+          "text": "When someone I'm dating shares something vulnerable, my instinct is to listen and validate rather than jump to fixing it.",
+          "sub_scale": "empathy",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ei_10",
+          "text": "I pay attention to the little changes in my partner's tone or energy, not just their words.",
+          "sub_scale": "empathy",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ei_11",
+          "text": "When I'm upset about something my partner did, I can usually pause before reacting.",
+          "sub_scale": "emotional_regulation",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ei_12",
+          "text": "In the heat of an argument, I tend to say things I later regret.",
+          "sub_scale": "emotional_regulation",
+          "reverse_scored": true,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ei_13",
+          "text": "When a conversation starts getting heated, I can bring down the temperature without shutting down or walking away.",
+          "sub_scale": "emotional_regulation",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ei_14",
+          "text": "If I'm having a bad day, I'm pretty good at not taking it out on the person I'm with.",
+          "sub_scale": "emotional_regulation",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ei_15",
+          "text": "When I feel myself getting jealous or insecure, I can sit with that feeling instead of immediately acting on it.",
+          "sub_scale": "emotional_regulation",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        }
+      ],
+      "scoring": {
+        "method": "mean_score",
+        "reverse_items": ["ei_03", "ei_08", "ei_12"],
+        "reverse_formula": "reversed_value = 6 - raw_value",
+        "sub_scale_computation": "Each sub-scale score = mean of its 5 items (after reversals). Range: 1.0 - 5.0.",
+        "dimension_score_computation": "Dimension score = mean of all 15 items (after reversals). Range: 1.0 - 5.0.",
+        "compatibility_function": "similarity_with_floor: (1) If either partner scores below floor_threshold (2.5), apply floor_penalty multiplier (0.6) to the pair score. (2) Compute raw similarity = 1 - (|score_A - score_B| / 4). (3) Apply level bonus: avg_score_normalized = (avg(score_A, score_B) - 1) / 4; pair_score = raw_similarity * (0.7 + 0.3 * avg_score_normalized). (4) If floor triggered, final_score = pair_score * floor_penalty. This rewards high-high pairings, penalizes low-low pairings, and moderately scores mismatched pairs.",
+        "weight_in_cis": 16
+      }
+    },
+    {
+      "dimension_id": "lifestyle_ambition",
+      "dimension_number": 5,
+      "title": "Lifestyle & Ambition",
+      "description": "Captures how you prefer to spend your time, energy, and attention. Mismatches here don't cause dramatic fights -- they cause slow erosion as one partner feels dragged along or held back.",
+      "scientific_basis": "Draws from Big Five personality subscales: Conscientiousness (industriousness, orderliness) and Openness to Experience (aesthetic sensitivity, intellectual curiosity, adventurousness), adapted from the IPIP-NEO-120 (Johnson, 2014). Social energy items adapted from the Eysenck Personality Questionnaire Extraversion subscale. Framing shifted from trait measurement to lifestyle preference expression for relationship context.",
+      "weight": 14,
+      "compatibility_type": "similarity",
+      "compatibility_type_rationale": "Lifestyle compatibility is about shared rhythm. Two homebodies thrive together; two adventurers thrive together. But one of each creates daily friction over how to spend weekends, vacations, and free time. Unlike values or attachment, there is no complementarity benefit -- you are simply more compatible with someone who wants a similar life.",
+      "sub_scales": [
+        {
+          "id": "pace_of_life",
+          "title": "Pace of Life",
+          "description": "How driven and fast-paced you are versus how much you prioritize presence and ease.",
+          "question_ids": ["la_01", "la_02", "la_03", "la_04", "la_05"]
+        },
+        {
+          "id": "social_energy",
+          "title": "Social Energy",
+          "description": "How much social interaction you want as a couple and how you recharge.",
+          "question_ids": ["la_06", "la_07", "la_08", "la_09", "la_10"]
+        },
+        {
+          "id": "future_orientation",
+          "title": "Future Orientation",
+          "description": "How much you plan ahead versus go with the flow, especially around career and life goals.",
+          "question_ids": ["la_11", "la_12", "la_13", "la_14", "la_15"]
+        }
+      ],
+      "questions": [
+        {
+          "id": "la_01",
+          "text": "A perfect Saturday is packed with activities, not open-ended.",
+          "sub_scale": "pace_of_life",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "la_02",
+          "text": "I feel restless if I go a full weekend without being productive.",
+          "sub_scale": "pace_of_life",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "la_03",
+          "text": "My ideal vacation involves doing as little as possible.",
+          "sub_scale": "pace_of_life",
+          "reverse_scored": true,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "la_04",
+          "text": "I'd rather be overcommitted than bored.",
+          "sub_scale": "pace_of_life",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "la_05",
+          "text": "I regularly take on new projects, side hustles, or goals outside of my main job.",
+          "sub_scale": "pace_of_life",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "la_06",
+          "text": "I love hosting friends at our place or going out as a couple most weekends.",
+          "sub_scale": "social_energy",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "la_07",
+          "text": "After a long work week, I'd rather stay in with my partner than meet up with friends.",
+          "sub_scale": "social_energy",
+          "reverse_scored": true,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "la_08",
+          "text": "I need a good amount of solo time to feel like myself, even when I'm in a great relationship.",
+          "sub_scale": "social_energy",
+          "reverse_scored": true,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "la_09",
+          "text": "I'd pick a lively dinner party over a quiet night in almost every time.",
+          "sub_scale": "social_energy",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "la_10",
+          "text": "It's important to me that my partner and I have an active social life together.",
+          "sub_scale": "social_energy",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "la_11",
+          "text": "I have a pretty clear picture of where I want to be in five years.",
+          "sub_scale": "future_orientation",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "la_12",
+          "text": "I tend to figure things out as I go rather than mapping out a long-term plan.",
+          "sub_scale": "future_orientation",
+          "reverse_scored": true,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "la_13",
+          "text": "I want a partner who's as ambitious about their career as I am about mine.",
+          "sub_scale": "future_orientation",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "la_14",
+          "text": "Financial goals and milestones (savings targets, investment plans) are something I actively track.",
+          "sub_scale": "future_orientation",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "la_15",
+          "text": "The best things in my life have come from spontaneous decisions, not careful planning.",
+          "sub_scale": "future_orientation",
+          "reverse_scored": true,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        }
+      ],
+      "scoring": {
+        "method": "mean_score",
+        "reverse_items": ["la_03", "la_07", "la_08", "la_12", "la_15"],
+        "reverse_formula": "reversed_value = 6 - raw_value",
+        "sub_scale_computation": "Each sub-scale score = mean of its 5 items (after reversals). Range: 1.0 - 5.0. Higher scores indicate faster pace / more social / more future-oriented.",
+        "dimension_score_computation": "Dimension score = mean of all 15 items (after reversals). Range: 1.0 - 5.0.",
+        "compatibility_function": "similarity: pair_score = 1 - (|score_A - score_B| / 4). Sub-scale similarity is also computed independently: sub_scale_pair_score = 1 - (|sub_A - sub_B| / 4). Final compatibility = 0.4 * dimension_similarity + 0.6 * mean(sub_scale_similarities). The sub-scale weighting matters here because a couple can have the same overall score but mismatch on critical sub-scales (e.g., both score 3.0 overall, but one is high-pace/low-social and the other is low-pace/high-social).",
+        "weight_in_cis": 14
+      }
+    },
+    {
+      "dimension_id": "love_languages",
+      "dimension_number": 6,
+      "title": "Love Languages",
+      "description": "Identifies how you naturally give and receive love, and how flexible you are in adapting to a partner's preferences. The goal is not to match -- it's to ensure what you give is what they need.",
+      "scientific_basis": "Based on Chapman's Five Love Languages framework (Chapman, 1992), operationalized through a forced-choice pair methodology similar to Egbert & Polk's (2006) Love Languages Scale. The forced-choice format reduces social desirability bias and produces a rank ordering rather than inflated endorsement across all languages. Language Flexibility items draw from Lemay, Clark, & Feeney's (2007) work on responsiveness in relationships.",
+      "weight": 12,
+      "compatibility_type": "complementarity",
+      "compatibility_type_rationale": "Love languages are about the give-receive loop. What matters is not whether two people share the same love language, but whether Partner A's natural giving language matches Partner B's primary receiving language, and vice versa. A person who naturally gives acts of service paired with a person who most values receiving acts of service is a strong match -- even if their own receiving preferences differ entirely. Language Flexibility moderates the score: high flexibility in one or both partners compensates for give-receive mismatches.",
+      "sub_scales": [
+        {
+          "id": "receiving_language",
+          "title": "Primary Receiving Language",
+          "description": "How you most prefer to receive love. Determined by forced-choice pairs.",
+          "question_ids": ["ll_01", "ll_02", "ll_03", "ll_04", "ll_05"]
+        },
+        {
+          "id": "giving_language",
+          "title": "Primary Giving Language",
+          "description": "How you naturally express love to your partner. Determined by forced-choice pairs.",
+          "question_ids": ["ll_06", "ll_07", "ll_08", "ll_09", "ll_10"]
+        },
+        {
+          "id": "language_flexibility",
+          "title": "Language Flexibility",
+          "description": "How willing and able you are to express love in ways that don't come naturally to you.",
+          "question_ids": ["ll_11", "ll_12", "ll_13", "ll_14", "ll_15"]
+        }
+      ],
+      "languages": [
+        { "id": "words_of_affirmation", "label": "Words of Affirmation", "short": "Words" },
+        { "id": "acts_of_service", "label": "Acts of Service", "short": "Acts" },
+        { "id": "receiving_gifts", "label": "Receiving Gifts", "short": "Gifts" },
+        { "id": "quality_time", "label": "Quality Time", "short": "Time" },
+        { "id": "physical_touch", "label": "Physical Touch", "short": "Touch" }
+      ],
+      "questions": [
+        {
+          "id": "ll_01",
+          "text": "Which feels more meaningful to you?",
+          "options": {
+            "a": { "text": "Your partner tells you specifically what they love about you", "language": "words_of_affirmation" },
+            "b": { "text": "Your partner plans a full day for just the two of you, no phones", "language": "quality_time" }
+          },
+          "sub_scale": "receiving_language",
+          "response_type": "forced_choice"
+        },
+        {
+          "id": "ll_02",
+          "text": "Which would make you feel more loved?",
+          "options": {
+            "a": { "text": "Your partner surprises you with a thoughtful gift that shows they really know you", "language": "receiving_gifts" },
+            "b": { "text": "Your partner holds your hand, rubs your back, or pulls you close without being asked", "language": "physical_touch" }
+          },
+          "sub_scale": "receiving_language",
+          "response_type": "forced_choice"
+        },
+        {
+          "id": "ll_03",
+          "text": "Which hits harder after a rough week?",
+          "options": {
+            "a": { "text": "Your partner handles dinner, dishes, and your errands so you can rest", "language": "acts_of_service" },
+            "b": { "text": "Your partner writes you a note saying how proud they are of you", "language": "words_of_affirmation" }
+          },
+          "sub_scale": "receiving_language",
+          "response_type": "forced_choice"
+        },
+        {
+          "id": "ll_04",
+          "text": "Which makes you feel more connected?",
+          "options": {
+            "a": { "text": "Sitting together on the couch, legs intertwined, not necessarily talking", "language": "physical_touch" },
+            "b": { "text": "Your partner takes something off your plate without you having to ask", "language": "acts_of_service" }
+          },
+          "sub_scale": "receiving_language",
+          "response_type": "forced_choice"
+        },
+        {
+          "id": "ll_05",
+          "text": "Which means more on your birthday?",
+          "options": {
+            "a": { "text": "Your partner clears their whole schedule to spend the day with you", "language": "quality_time" },
+            "b": { "text": "Your partner finds you a gift you mentioned wanting months ago", "language": "receiving_gifts" }
+          },
+          "sub_scale": "receiving_language",
+          "response_type": "forced_choice"
+        },
+        {
+          "id": "ll_06",
+          "text": "When your partner is stressed, what's your first instinct?",
+          "options": {
+            "a": { "text": "Tell them you believe in them and remind them what they're great at", "language": "words_of_affirmation" },
+            "b": { "text": "Take over some of their responsibilities so they have less on their plate", "language": "acts_of_service" }
+          },
+          "sub_scale": "giving_language",
+          "response_type": "forced_choice"
+        },
+        {
+          "id": "ll_07",
+          "text": "How do you most naturally show someone you're thinking of them?",
+          "options": {
+            "a": { "text": "Pick up something small you know they'd love", "language": "receiving_gifts" },
+            "b": { "text": "Send a text telling them what you appreciate about them", "language": "words_of_affirmation" }
+          },
+          "sub_scale": "giving_language",
+          "response_type": "forced_choice"
+        },
+        {
+          "id": "ll_08",
+          "text": "On a random Tuesday night, how do you show love?",
+          "options": {
+            "a": { "text": "Put your phone away and give them your full, undivided attention", "language": "quality_time" },
+            "b": { "text": "Reach over and give them a long hug or a shoulder massage", "language": "physical_touch" }
+          },
+          "sub_scale": "giving_language",
+          "response_type": "forced_choice"
+        },
+        {
+          "id": "ll_09",
+          "text": "When you want to celebrate your partner's win, what do you do?",
+          "options": {
+            "a": { "text": "Take them somewhere special or plan a night out together", "language": "quality_time" },
+            "b": { "text": "Buy or make them something to mark the occasion", "language": "receiving_gifts" }
+          },
+          "sub_scale": "giving_language",
+          "response_type": "forced_choice"
+        },
+        {
+          "id": "ll_10",
+          "text": "When your partner seems down, what comes most naturally?",
+          "options": {
+            "a": { "text": "Pull them close, hold them, be physically present", "language": "physical_touch" },
+            "b": { "text": "Handle whatever's stressing them out -- cook, clean, fix something", "language": "acts_of_service" }
+          },
+          "sub_scale": "giving_language",
+          "response_type": "forced_choice"
+        },
+        {
+          "id": "ll_11",
+          "text": "If I found out my partner feels most loved through something that doesn't come naturally to me, I'd put in the effort to learn.",
+          "sub_scale": "language_flexibility",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ll_12",
+          "text": "I think people shouldn't have to change how they express love -- your partner should appreciate your natural style.",
+          "sub_scale": "language_flexibility",
+          "reverse_scored": true,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ll_13",
+          "text": "I've successfully adapted how I show love in past relationships based on what my partner needed.",
+          "sub_scale": "language_flexibility",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ll_14",
+          "text": "Even if it feels awkward at first, I'm willing to express love in new ways if it matters to my partner.",
+          "sub_scale": "language_flexibility",
+          "reverse_scored": false,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        },
+        {
+          "id": "ll_15",
+          "text": "Love should feel effortless -- if you have to think about how to show it, something's off.",
+          "sub_scale": "language_flexibility",
+          "reverse_scored": true,
+          "response_type": "likert_5",
+          "response_labels": {
+            "1": "Strongly Disagree",
+            "2": "Disagree",
+            "3": "Neutral",
+            "4": "Agree",
+            "5": "Strongly Agree"
+          }
+        }
+      ],
+      "scoring": {
+        "method": "hybrid_forced_choice_and_likert",
+        "forced_choice_scoring": {
+          "description": "For questions ll_01 through ll_10, tally the number of times each love language is selected. Each language can appear 0-4 times in receiving (ll_01-ll_05) and 0-4 times in giving (ll_06-ll_10). Each language appears in exactly 2 of the 5 receiving questions and 2 of the 5 giving questions.",
+          "receiving_language_profile": "Count selections per language across ll_01-ll_05. Primary receiving language = language with highest count. If tied, both are recorded as co-primary.",
+          "giving_language_profile": "Count selections per language across ll_06-ll_10. Primary giving language = language with highest count. If tied, both are recorded as co-primary.",
+          "language_distribution": {
+            "receiving_pairs": {
+              "ll_01": ["words_of_affirmation", "quality_time"],
+              "ll_02": ["receiving_gifts", "physical_touch"],
+              "ll_03": ["acts_of_service", "words_of_affirmation"],
+              "ll_04": ["physical_touch", "acts_of_service"],
+              "ll_05": ["quality_time", "receiving_gifts"]
+            },
+            "giving_pairs": {
+              "ll_06": ["words_of_affirmation", "acts_of_service"],
+              "ll_07": ["receiving_gifts", "words_of_affirmation"],
+              "ll_08": ["quality_time", "physical_touch"],
+              "ll_09": ["quality_time", "receiving_gifts"],
+              "ll_10": ["physical_touch", "acts_of_service"]
+            }
+          }
+        },
+        "likert_scoring": {
+          "reverse_items": ["ll_12", "ll_15"],
+          "reverse_formula": "reversed_value = 6 - raw_value",
+          "flexibility_score": "Mean of ll_11 through ll_15 (after reversals). Range: 1.0 - 5.0."
+        },
+        "compatibility_function": "complementarity: (1) Compute give-receive match score: check if Partner A's primary giving language matches Partner B's primary receiving language, and vice versa. Full match (both directions) = 1.0, one-direction match = 0.6, no match = 0.2. If co-primary languages exist, partial credit is given for any overlap. (2) Compute flexibility modifier: flexibility_mod = mean(flex_A, flex_B) normalized to 0.0-1.0 range. (3) Final pair_score = base_match * (0.6 + 0.4 * flexibility_mod). High flexibility rescues mismatched languages (up to 0.4 bonus); low flexibility makes even matched languages slightly less effective. (4) A perfectly matched pair with high flexibility scores ~1.0; a mismatched pair with low flexibility scores ~0.12.",
+        "weight_in_cis": 12
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "dimensions_covered": [4, 5, 6],
+    "total_questions": 45,
+    "total_weight": 42,
+    "estimated_completion_time_minutes": 8,
+    "notes": "These dimensions (4-6) complement dimensions 1-3 to form the complete 6-dimension CompatibleIQ assessment. Combined weight of all 6 dimensions should equal 100. Dimensions 1-3 carry the remaining 58 points."
+  }
+}
