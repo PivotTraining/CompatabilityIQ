@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     'CIS score',
   ],
   robots: { index: true, follow: true },
-  metadataBase: new URL('https://compatibilityiq.com'),
+  metadataBase: new URL('https://compatibleiq.com'),
   alternates: {
     canonical: '/',
   },
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title: 'CompatibleIQ — Date with Proof',
     description:
       '15 science-backed dimensions. One compatibility score. Zero wasted time. The psychometric dating platform for people who are done guessing.',
-    url: 'https://compatibilityiq.com',
+    url: 'https://compatibleiq.com',
     // TODO: Create an actual OG image at public/images/og-image.png (1200x630px recommended)
     images: [
       {

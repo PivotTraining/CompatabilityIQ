@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'Privacy Policy for CompatibleIQ. Learn how we collect, store, and protect your psychometric assessment data and personal information.',
   alternates: {
-    canonical: 'https://compatibilityiq.com/privacy',
+    canonical: 'https://compatibleiq.com/privacy',
   },
 }
 
@@ -36,7 +36,7 @@ export default function PrivacyPolicy() {
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">1. Introduction</h2>
             <p>
-              CompatibleIQ is operated by <strong>Pivot Training &amp; Development</strong> (&quot;Company,&quot; &quot;we,&quot; &quot;us&quot;). This Privacy Policy explains how we collect, use, share, and protect your personal information when you use the CompatibleIQ platform (the &quot;Platform&quot;), available at compatibilityiq.com and hosted on Vercel.
+              CompatibleIQ is operated by <strong>Pivot Training &amp; Development</strong> (&quot;Company,&quot; &quot;we,&quot; &quot;us&quot;). This Privacy Policy explains how we collect, use, share, and protect your personal information when you use the CompatibleIQ platform (the &quot;Platform&quot;), available at compatibleiq.com and hosted on Vercel.
             </p>
             <p className="mt-3">
               We take privacy seriously &mdash; especially given the sensitive nature of psychometric and relationship data. Please read this policy carefully.

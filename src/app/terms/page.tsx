@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'Terms of Service for CompatibleIQ, the psychometric compatibility platform by Pivot Training & Development. Review usage terms, data handling, and user responsibilities.',
   alternates: {
-    canonical: 'https://compatibilityiq.com/terms',
+    canonical: 'https://compatibleiq.com/terms',
   },
 }
 

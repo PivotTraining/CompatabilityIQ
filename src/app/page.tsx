@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     title: 'CompatibleIQ — Date with Proof',
     description:
       '6 science-backed dimensions. One compatibility score. Zero wasted time.',
-    url: 'https://compatibilityiq.com',
+    url: 'https://compatibleiq.com',
   },
   alternates: {
-    canonical: 'https://compatibilityiq.com',
+    canonical: 'https://compatibleiq.com',
   },
 }
 

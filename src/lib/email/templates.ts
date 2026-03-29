@@ -57,12 +57,12 @@ function baseLayout(content: string): string {
                 &copy; ${new Date().getFullYear()} Pivot Training &amp; Development. All rights reserved.
               </p>
               <p style="margin:0 0 8px;font-size:12px;color:${CIQ_GRAY_TEXT};">
-                <a href="https://compatibilityiq.com" style="color:${CIQ_PURPLE};text-decoration:none;">compatibilityiq.com</a>
+                <a href="https://compatibleiq.com" style="color:${CIQ_PURPLE};text-decoration:none;">compatibleiq.com</a>
               </p>
               <p style="margin:0;font-size:11px;color:#9ca3af;">
                 <a href="{{unsubscribe_url}}" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a>
                 &nbsp;&middot;&nbsp;
-                <a href="https://compatibilityiq.com/privacy" style="color:#9ca3af;text-decoration:underline;">Privacy Policy</a>
+                <a href="https://compatibleiq.com/privacy" style="color:#9ca3af;text-decoration:underline;">Privacy Policy</a>
               </p>
             </td>
           </tr>
@@ -154,7 +154,7 @@ export function welcomeEmailTemplate(data: WelcomeEmailData): string {
         </td>
       </tr>
     </table>
-    ${ctaButton('Get Started', 'https://compatibilityiq.com/app/onboarding')}
+    ${ctaButton('Get Started', 'https://compatibleiq.com/app/onboarding')}
   `)
 }
 
@@ -189,7 +189,7 @@ export function matchNotificationTemplate(data: MatchNotificationData): string {
     <p style="margin:24px 0 0;font-size:15px;line-height:1.6;color:${CIQ_BODY_TEXT};text-align:center;">
       View their profile and start a conversation to see if the science translates to chemistry.
     </p>
-    ${ctaButton('View Resonance', 'https://compatibilityiq.com/app/matches', CIQ_GREEN)}
+    ${ctaButton('View Resonance', 'https://compatibleiq.com/app/matches', CIQ_GREEN)}
   `)
 }
 
@@ -220,7 +220,7 @@ export function reportReadyTemplate(data: ReportReadyData): string {
       <li>Communication style insights</li>
       <li>Personalized conversation starters</li>
     </ul>
-    ${ctaButton('View Report', 'https://compatibilityiq.com/app/matches', CIQ_PURPLE)}
+    ${ctaButton('View Report', 'https://compatibleiq.com/app/matches', CIQ_PURPLE)}
   `)
 }
 
@@ -269,7 +269,7 @@ export function weeklyDigestTemplate(data: WeeklyDigestData): string {
           You are all caught up. Check out your latest resonances!
         </p>`
     }
-    ${ctaButton('Open CompatibleIQ', 'https://compatibilityiq.com/app/matches')}
+    ${ctaButton('Open CompatibleIQ', 'https://compatibleiq.com/app/matches')}
   `)
 }
 
@@ -314,6 +314,6 @@ export function assessmentReminderTemplate(data: AssessmentReminderData): string
       Each module takes about 3-4 minutes. The more you complete, the more accurate your
       compatibility scores become.
     </p>
-    ${ctaButton('Continue Assessment', 'https://compatibilityiq.com/app/assessment', CIQ_GREEN)}
+    ${ctaButton('Continue Assessment', 'https://compatibleiq.com/app/assessment', CIQ_GREEN)}
   `)
 }
