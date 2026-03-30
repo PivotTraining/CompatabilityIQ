@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 // CompatibleIQ™ — Stripe Checkout Session API
 // POST /api/stripe/checkout
 // Creates a Stripe Checkout Session for one-time purchases or subscriptions

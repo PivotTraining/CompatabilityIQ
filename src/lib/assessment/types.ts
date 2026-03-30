@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 export type QuotientKey =
   | 'VP' | 'AS' | 'CC' | 'LL' | 'HT'
   | 'EI' | 'LA' | 'IC'

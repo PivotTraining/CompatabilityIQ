@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 // CompatibleIQ -- Notification Triggers
 // Business-event handlers that create in-app notifications + send emails
 // Each trigger checks user preferences before dispatching.

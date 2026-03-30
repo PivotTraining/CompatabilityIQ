@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 // CompatibleIQ -- CIS Scoring Engine Constants
 // Dimension weights, tier thresholds, and configuration
 // Updated for 5 free + 3 paid module structure

@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 // CompatibleIQ -- Notifications API
 // GET  /api/notifications?limit=20&offset=0  — list notifications for current user
 // PATCH /api/notifications                    — mark single or all as read

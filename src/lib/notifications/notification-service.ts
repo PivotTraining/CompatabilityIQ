@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 // CompatibleIQ -- Notification Service
 // Core CRUD operations for the notifications & notification_preferences tables
 

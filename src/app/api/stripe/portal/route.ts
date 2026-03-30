@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 // CompatibleIQ™ — Stripe Customer Portal API
 // POST /api/stripe/portal
 // Creates a Stripe Customer Portal session for managing subscriptions

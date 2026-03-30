@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 // NOTE: `as never` casts below are intentional — the assessment_responses, dimension_scores,
 // profiles, and audit_log tables have columns (module, encrypted_responses, response_hash, etc.)
 // that exist in the live DB but are not yet in the auto-generated database.types.ts.

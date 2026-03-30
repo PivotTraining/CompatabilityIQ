@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 // CompatibleIQ -- Internal Messaging Service
 // Text + emoji only chat between matched users (Resonances)
 

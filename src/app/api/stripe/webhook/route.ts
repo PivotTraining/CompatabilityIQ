@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 // CompatibleIQ™ — Stripe Webhook Handler
 // POST /api/stripe/webhook
 // Handles Stripe events for payments, subscriptions, and invoices
@@ -14,6 +13,7 @@ import {
   isValidPriceId,
 } from '@/lib/stripe/config'
 import { getSupabaseServiceClient } from '@/lib/supabase/server'
+import { generateSelfDiscoveryReport } from '@/lib/reports/self-discovery-report'
 import type { PaymentProductType, SubscriptionTier } from '@/lib/supabase/types'
 
 const WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET
@@ -149,6 +149,11 @@ async function handleCheckoutCompleted(
     if (priceId === STRIPE_PRICES.RESONANCE_REPORT && matchId) {
       await generateResonanceReport(userId, matchId, paymentIntentId, supabase)
     }
+
+    // Generate Self-Discovery Report if this is a self-discovery purchase
+    if (priceId === STRIPE_PRICES.SELF_DISCOVERY_REPORT) {
+      await generateSelfDiscoveryReportWebhook(userId, paymentIntentId, supabase)
+    }
   } else if (session.mode === 'subscription') {
     // ── Subscription purchase ──
     const subscriptionId = typeof session.subscription === 'string'
@@ -282,6 +287,44 @@ async function handlePaymentFailed(
 }
 
 // ─── Report Generation ───────────────────────────────────────────
+
+async function generateSelfDiscoveryReportWebhook(
+  userId: string,
+  paymentIntentId: string | null,
+  supabase: NonNullable<Awaited<ReturnType<typeof getSupabaseServiceClient>>>
+) {
+  try {
+    // Check if report already exists (idempotency)
+    const { data: existing } = await supabase
+      .from('self_discovery_reports')
+      .select('id')
+      .eq('user_id', userId)
+      .maybeSingle()
+
+    if (existing) {
+      console.log(`[stripe/webhook] Self-discovery report already exists for user ${userId}`)
+      return
+    }
+
+    const report = await generateSelfDiscoveryReport(userId)
+
+    const { error } = await supabase
+      .from('self_discovery_reports')
+      .insert({
+        user_id: userId,
+        report_data: report as unknown as Record<string, unknown>,
+        stripe_payment_intent_id: paymentIntentId,
+      })
+
+    if (error) {
+      console.error('[stripe/webhook] Failed to insert self-discovery report:', error)
+    } else {
+      console.log(`[stripe/webhook] Self-discovery report generated for user ${userId}`)
+    }
+  } catch (error) {
+    console.error('[stripe/webhook] Self-discovery report generation error:', error)
+  }
+}
 
 async function generateResonanceReport(
   userId: string,

@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 'use client'
 
 import { useEffect, useState, useMemo } from 'react'

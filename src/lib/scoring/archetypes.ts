@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 // CompatibleIQ -- Archetype Scoring Engine
 // Computes primary + secondary archetype from dimension scores
 

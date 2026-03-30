@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 // CompatibleIQ -- Resonance Report Types
 // Types for the premium $4.99 compatibility breakdown report
 

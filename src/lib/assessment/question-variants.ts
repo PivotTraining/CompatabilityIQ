@@ -1,5 +1,3 @@
-// @ts-nocheck -- pending schema regen
-// @ts-nocheck -- pending schema regen
 import type { AssessmentQuestion } from './types'
 
 // ════════════════════════════════════════════

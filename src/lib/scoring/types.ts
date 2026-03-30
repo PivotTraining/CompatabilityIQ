@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 // CompatibleIQ -- CIS Scoring Engine Types
 // All types for the Compatibility Index Score system
 // Updated for 5 free + 3 paid module structure

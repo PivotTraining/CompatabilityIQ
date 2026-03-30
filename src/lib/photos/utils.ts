@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 import { getSupabaseServerClient } from '@/lib/supabase/server'
 
 const SIGNED_URL_EXPIRY = 3600 // 1 hour in seconds

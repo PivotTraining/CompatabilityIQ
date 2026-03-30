@@ -1,4 +1,3 @@
-// @ts-nocheck -- pending schema regen
 // CompatibleIQ -- Mode Switch API
 // PATCH /api/profile/mode
 // Switches between 'dating' and 'self_discovery' mode
