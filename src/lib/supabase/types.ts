@@ -45,6 +45,9 @@ export type NotificationInsert = Tables['notifications']['Insert']
 
 export type NotificationPreference = Tables['notification_preferences']['Row']
 
+export type SelfDiscoveryReport = Tables['self_discovery_reports']['Row']
+export type SelfDiscoveryReportInsert = Tables['self_discovery_reports']['Insert']
+
 // ═══════════════════════════════════════════
 // Convenience Aliases — Enums
 // ═══════════════════════════════════════════

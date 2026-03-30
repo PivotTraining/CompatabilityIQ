@@ -354,6 +354,7 @@ export type Database = {
             | null
           location_city: string | null
           location_state: string | null
+          mode: string
           photo_urls: string[] | null
           relationship_goal:
             | Database["public"]["Enums"]["relationship_goal_type"]
@@ -381,6 +382,7 @@ export type Database = {
             | null
           location_city?: string | null
           location_state?: string | null
+          mode?: string
           photo_urls?: string[] | null
           relationship_goal?:
             | Database["public"]["Enums"]["relationship_goal_type"]
@@ -408,6 +410,7 @@ export type Database = {
             | null
           location_city?: string | null
           location_state?: string | null
+          mode?: string
           photo_urls?: string[] | null
           relationship_goal?:
             | Database["public"]["Enums"]["relationship_goal_type"]
@@ -508,6 +511,38 @@ export type Database = {
           },
         ]
       }
+      self_discovery_reports: {
+        Row: {
+          generated_at: string
+          id: string
+          report_data: Json
+          stripe_payment_intent_id: string | null
+          user_id: string
+        }
+        Insert: {
+          generated_at?: string
+          id?: string
+          report_data?: Json
+          stripe_payment_intent_id?: string | null
+          user_id: string
+        }
+        Update: {
+          generated_at?: string
+          id?: string
+          report_data?: Json
+          stripe_payment_intent_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "self_discovery_reports_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -554,7 +589,11 @@ export type Database = {
         | "report_available"
         | "assessment_reminder"
         | "weekly_digest"
-      payment_product_type: "resonance_report" | "ciq_pro" | "founding_member"
+      payment_product_type:
+        | "resonance_report"
+        | "ciq_pro"
+        | "founding_member"
+        | "self_discovery_report"
       payment_status_type: "pending" | "succeeded" | "failed" | "refunded"
       relationship_goal_type: "long_term" | "marriage" | "fun" | "not_sure"
       report_reason_type:
@@ -713,7 +752,12 @@ export const Constants = {
         "assessment_reminder",
         "weekly_digest",
       ],
-      payment_product_type: ["resonance_report", "ciq_pro", "founding_member"],
+      payment_product_type: [
+        "resonance_report",
+        "ciq_pro",
+        "founding_member",
+        "self_discovery_report",
+      ],
       payment_status_type: ["pending", "succeeded", "failed", "refunded"],
       relationship_goal_type: ["long_term", "marriage", "fun", "not_sure"],
       report_reason_type: [
