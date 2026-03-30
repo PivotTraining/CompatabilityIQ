@@ -56,7 +56,7 @@ export default function TermsOfService() {
           {/* 4 */}
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">4. Psychometric Assessments</h2>
-            <p className="mb-3">CompatibleIQ offers six psychometric assessments covering values, attachment style, communication, emotional intelligence, lifestyle, and love languages. These assessments are provided free of charge and are required before you can be matched with other users.</p>
+            <p className="mb-3">CompatibleIQ offers six psychometric assessments covering values, attachment style, communication, emotional intelligence, lifestyle, and how you love. These assessments are provided free of charge and are required before you can be matched with other users.</p>
             <div className="bg-purple-50 border border-purple-100 rounded-xl p-5 my-4">
               <p className="text-sm font-semibold text-gray-900 mb-1">Important Disclaimer</p>
               <p className="text-sm text-gray-600">

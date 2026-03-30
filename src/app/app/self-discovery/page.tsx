@@ -46,7 +46,7 @@ const DIMENSION_COLORS: Record<string, string> = {
   communication: '#D4A017',
   emotional_intelligence: '#E8735A',
   lifestyle_ambition: '#4CAF8A',
-  love_languages: '#C25B8A',
+  how_you_loves: '#C25B8A',
 }
 
 const DIMENSION_ICONS: Record<string, typeof Brain> = {
@@ -55,7 +55,7 @@ const DIMENSION_ICONS: Record<string, typeof Brain> = {
   communication: MessageCircle,
   emotional_intelligence: Brain,
   lifestyle_ambition: Sparkles,
-  love_languages: Heart,
+  how_you_loves: Heart,
 }
 
 const ATTACHMENT_LABELS: Record<string, string> = {
@@ -98,7 +98,7 @@ const CONFLICT_WEAKNESSES: Record<string, string[]> = {
   unclassified: ['No reliable default under stress', 'May confuse partners', 'Inconsistent conflict patterns'],
 }
 
-const LOVE_LANGUAGE_LABELS: Record<string, string> = {
+const LOVE_STYLE_LABELS: Record<string, string> = {
   words_of_affirmation: 'Words of Affirmation',
   acts_of_service: 'Acts of Service',
   receiving_gifts: 'Receiving Gifts',
@@ -194,7 +194,7 @@ export default function SelfDiscoveryDashboard() {
   const commDim = dimensions.find((d) => d.dimensionId === 'communication')
   const eiDim = dimensions.find((d) => d.dimensionId === 'emotional_intelligence')
   const valuesDim = dimensions.find((d) => d.dimensionId === 'values')
-  const loveLangDim = dimensions.find((d) => d.dimensionId === 'love_languages')
+  const loveLangDim = dimensions.find((d) => d.dimensionId === 'how_you_loves')
 
   const attachmentStyle = attachmentDim?.attachmentStyle || 'secure'
   const conflictApproach = commDim?.conflictApproach || 'collaborator'
@@ -207,7 +207,7 @@ export default function SelfDiscoveryDashboard() {
     'Social Skills': ((eiDim?.subScaleScores?.empathy || 3.0) + (eiDim?.subScaleScores?.self_awareness || 3.0)) / 2,
   }), [eiDim])
 
-  // Love language ranking
+  // How you love ranking
   const loveLanguageRanking = useMemo(() => {
     const allLangs = ['words_of_affirmation', 'acts_of_service', 'receiving_gifts', 'quality_time', 'physical_touch']
     const tally = loveLangDim?.loveLangProfile?.receivingTally || {}
@@ -216,7 +216,7 @@ export default function SelfDiscoveryDashboard() {
     return allLangs
       .map((lang) => ({
         key: lang,
-        label: LOVE_LANGUAGE_LABELS[lang] || lang,
+        label: LOVE_STYLE_LABELS[lang] || lang,
         percentage: Math.round(((tally[lang] || 0) / total) * 100) || 20,
       }))
       .sort((a, b) => b.percentage - a.percentage)
@@ -227,7 +227,7 @@ export default function SelfDiscoveryDashboard() {
     if (dimensions.length === 0) return 0
     const weights: Record<string, number> = {
       values: 0.12, attachment: 0.28, communication: 0.20,
-      emotional_intelligence: 0.22, lifestyle_ambition: 0.08, love_languages: 0.10,
+      emotional_intelligence: 0.22, lifestyle_ambition: 0.08, how_you_loves: 0.10,
     }
     let total = 0, totalWeight = 0
     for (const dim of dimensions) {
@@ -447,8 +447,8 @@ export default function SelfDiscoveryDashboard() {
         />
       </SectionCard>
 
-      {/* Love Languages */}
-      <SectionCard title="Love Languages" icon={Heart} color="#C25B8A">
+      {/* How You Love */}
+      <SectionCard title="How You Love" icon={Heart} color="#C25B8A">
         <div className="space-y-3">
           {loveLanguageRanking.map((lang, i) => (
             <div key={lang.key}>

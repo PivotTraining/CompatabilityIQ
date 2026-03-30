@@ -97,7 +97,7 @@ function cosineSimilarity(a: number[], b: number[]): number {
 
 /**
  * Compute a user's dimension scores from their raw assessment answers.
- * Handles all 6 dimension types including forced-choice love languages.
+ * Handles all 6 dimension types including forced-choice how-you-love.
  */
 export function computeDimensionScores(
   dimensionId: DimensionId,
@@ -117,7 +117,7 @@ export function computeDimensionScores(
       return computeEIScores(answers, config.reverseItems)
     case 'lifestyle_ambition':
       return computeLifestyleScores(answers, config.reverseItems)
-    case 'love_languages':
+    case 'how_you_love':
       return computeLoveLanguageScores(answers, config.reverseItems)
     default: {
       // Generic Likert mean computation for unknown dimensions
@@ -341,7 +341,7 @@ function computeLifestyleScores(
   }
 }
 
-// ── Love Languages ──
+// ── How You Loves ──
 
 function computeLoveLanguageScores(
   answers: Record<string, number | string>,
@@ -406,8 +406,8 @@ function computeLoveLanguageScores(
   }
 
   return {
-    dimensionId: 'love_languages',
-    dimensionName: 'Love Languages',
+    dimensionId: 'how_you_love',
+    dimensionName: 'How You Loves',
     overallScore: flexibilityScore, // The meaningful numeric score is flexibility
     subScaleScores,
     loveLangProfile: {
@@ -463,7 +463,7 @@ export function computeCIS(
       case 'lifestyle_ambition':
         rawScore = scoreLifestyle(a, b)
         break
-      case 'love_languages':
+      case 'how_you_love':
         rawScore = scoreLoveLanguages(a, b)
         break
       default:
@@ -666,7 +666,7 @@ function scoreLifestyle(a: DimensionScore, b: DimensionScore): number {
 }
 
 /**
- * LOVE LANGUAGES: Complementarity (give-receive cross-matching)
+ * HOW YOU LOVE: Complementarity (give-receive cross-matching)
  * - Check if A's giving language matches B's receiving language, and vice versa
  * - Flexibility modifier rescues mismatches
  * - Final = base_match * (0.6 + 0.4 * flexibility_mod)
@@ -924,13 +924,13 @@ function generateDimensionNarrative(
       break
     }
 
-    case 'love_languages': {
+    case 'how_you_love': {
       if (dim.score >= 75) {
         narrative = 'What you naturally give is what your partner needs to receive, and vice versa. This creates an effortless give-receive loop that keeps both partners feeling loved.'
       } else if (dim.score >= 60) {
-        narrative = 'Your love languages don\'t perfectly align, but flexibility scores suggest you can adapt. The key is learning your partner\'s primary receiving language and practicing it.'
+        narrative = 'Your how-you-love don\'t perfectly align, but flexibility scores suggest you can adapt. The key is learning your partner\'s primary receiving language and practicing it.'
       } else {
-        narrative = 'Your love languages are mismatched, and flexibility is limited. This means intentional effort will be required to make your partner feel loved in the way they need.'
+        narrative = 'Your how-you-love are mismatched, and flexibility is limited. This means intentional effort will be required to make your partner feel loved in the way they need.'
       }
       if (a?.loveLangProfile && b?.loveLangProfile) {
         const aGives = a.loveLangProfile.givingLanguages

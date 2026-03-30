@@ -176,10 +176,10 @@ export default function CIQCard({
 
           {/* Middle section */}
           <div className="space-y-6">
-            {/* Love Language */}
+            {/* How You Love */}
             <div>
               <p className="text-white/50 text-[10px] font-semibold uppercase tracking-wider mb-1">
-                Love Language
+                How You Love
               </p>
               <p className="text-white text-base font-semibold">{primaryLoveLanguage}</p>
             </div>

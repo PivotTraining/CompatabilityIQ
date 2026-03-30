@@ -21,7 +21,7 @@ const QUOTIENT_TO_DIMENSION: Record<string, DimensionId> = {
   CQ: 'communication',
   EQ: 'emotional_intelligence',
   NQ: 'emotional_intelligence', // NQ items contribute to EI dimension's sub-scales
-  LQ: 'love_languages',
+  LQ: 'how_you_love',
   GQ: 'lifestyle_ambition', // GQ items map to lifestyle/ambition dimension
   CSQ: 'communication', // CSQ items contribute to communication dimension
   // Layer 2 & 3 don't map to the 6-dimension scoring engine directly
@@ -79,7 +79,7 @@ for (let i = 1; i <= 12; i++) {
   const padded = String(i).padStart(2, '0')
   QUESTION_ID_MAP[`m2_aq_${padded}`] = `att_${padded}`
 }
-// Module 2 -> Love Languages (LQ) maps to ll_01..ll_15
+// Module 2 -> How You Love (LQ) maps to ll_01..ll_15
 for (let i = 1; i <= 10; i++) {
   const padded = String(i).padStart(2, '0')
   QUESTION_ID_MAP[`m2_lq_${padded}`] = `ll_${padded}`
@@ -190,7 +190,7 @@ export function getDimensionForQuotient(quotientKey: string): DimensionId | unde
 export function getDimensionsForModule(moduleNum: number): DimensionId[] {
   const MODULE_DIMENSIONS: Record<number, DimensionId[]> = {
     1: ['values', 'lifestyle_ambition'],
-    2: ['attachment', 'love_languages'],
+    2: ['attachment', 'how_you_love'],
     3: ['emotional_intelligence'],
     4: ['communication'],
     5: [], // Shadow clusters -- not scored via CIS dimensions

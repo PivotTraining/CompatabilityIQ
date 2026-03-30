@@ -19,7 +19,7 @@ const ALL_DIMENSIONS: DimensionId[] = [
   'communication',
   'emotional_intelligence',
   'lifestyle_ambition',
-  'love_languages',
+  'how_you_love',
 ]
 
 /**
@@ -32,7 +32,7 @@ const DB_TO_SCORING_DIMENSION: Record<string, DimensionId> = {
   communication: 'communication',
   emotional_intelligence: 'emotional_intelligence',
   lifestyle: 'lifestyle_ambition',
-  love_languages: 'love_languages',
+  how_you_loves: 'how_you_love',
 }
 
 // ═══════════════════════════════════════════

@@ -1,5 +1,6 @@
 // CompatibleIQ -- CIS Scoring Engine Constants
 // Dimension weights, tier thresholds, and configuration
+// Updated for 5 free + 3 paid module structure
 
 import type {
   DimensionId,
@@ -22,58 +23,93 @@ export interface DimensionConfig {
   subScales: string[]
   /** Question IDs that are reverse-scored */
   reverseItems: string[]
+  /** Whether this is a paid add-on dimension */
+  paid: boolean
+  /** Price in USD if paid */
+  price?: number
 }
 
 export const DIMENSION_CONFIGS: Record<DimensionId, DimensionConfig> = {
-  values: {
-    id: 'values',
+  values_priorities: {
+    id: 'values_priorities',
     name: 'Values & Priorities',
-    weight: 20,
+    weight: 18,
     compatibilityType: 'similarity',
-    subScales: ['life_direction', 'moral_ethical', 'relationship_priority'],
-    reverseItems: ['val_12', 'val_14'],
+    subScales: ['life_direction', 'moral_flexibility', 'relationship_priority'],
+    reverseItems: [],
+    paid: false,
   },
-  attachment: {
-    id: 'attachment',
+  attachment_style: {
+    id: 'attachment_style',
     name: 'Attachment Style',
     weight: 20,
     compatibilityType: 'complementary_with_guardrails',
     subScales: ['anxiety', 'avoidance', 'security'],
-    reverseItems: ['att_05', 'att_10', 'att_15'],
+    reverseItems: [],
+    paid: false,
   },
-  communication: {
-    id: 'communication',
+  communication_conflict: {
+    id: 'communication_conflict',
     name: 'Communication & Conflict',
-    weight: 18,
+    weight: 17,
     compatibilityType: 'complementarity',
-    subScales: ['conflict_approach', 'repair_attempts', 'emotional_expression'],
-    reverseItems: ['com_03', 'com_09', 'com_12', 'com_14'],
+    subScales: ['conflict_style', 'repair_capacity', 'emotional_expression'],
+    reverseItems: [],
+    paid: false,
+  },
+  how_you_love: {
+    id: 'how_you_love',
+    name: 'How You Love',
+    weight: 12,
+    compatibilityType: 'complementarity',
+    subScales: ['receiving_language', 'giving_language'],
+    reverseItems: [],
+    paid: false,
+  },
+  hot_takes_dealbreakers: {
+    id: 'hot_takes_dealbreakers',
+    name: 'Hot Takes & Dealbreakers',
+    weight: 8,
+    compatibilityType: 'similarity',
+    subScales: ['boundaries', 'gender_dynamics', 'vulnerability'],
+    reverseItems: [],
+    paid: false,
   },
   emotional_intelligence: {
     id: 'emotional_intelligence',
     name: 'Emotional Intelligence',
-    weight: 16,
+    weight: 10,
     compatibilityType: 'similarity_with_floor',
     subScales: ['self_awareness', 'empathy', 'emotional_regulation'],
-    reverseItems: ['ei_03', 'ei_08', 'ei_12'],
+    reverseItems: [],
+    paid: true,
+    price: 4.99,
   },
   lifestyle_ambition: {
     id: 'lifestyle_ambition',
     name: 'Lifestyle & Ambition',
-    weight: 14,
+    weight: 8,
     compatibilityType: 'similarity',
-    subScales: ['pace_of_life', 'social_energy', 'future_orientation'],
-    reverseItems: ['la_03', 'la_07', 'la_08', 'la_12', 'la_15'],
+    subScales: ['pace_of_life', 'social_energy', 'future_vision'],
+    reverseItems: [],
+    paid: true,
+    price: 4.99,
   },
-  love_languages: {
-    id: 'love_languages',
-    name: 'Love Languages',
-    weight: 12,
-    compatibilityType: 'complementarity',
-    subScales: ['receiving_language', 'giving_language', 'language_flexibility'],
-    reverseItems: ['ll_12', 'll_15'],
+  intimacy_chemistry: {
+    id: 'intimacy_chemistry',
+    name: 'Intimacy & Chemistry',
+    weight: 7,
+    compatibilityType: 'similarity',
+    subScales: ['physical_chemistry', 'emotional_intimacy', 'desire_dynamics'],
+    reverseItems: [],
+    paid: true,
+    price: 4.99,
   },
 } as const
+
+// Total free weight: 18 + 20 + 17 + 12 + 8 = 75
+// Total paid weight: 10 + 8 + 7 = 25
+// Grand total: 100
 
 // ═══════════════════════════════════════════
 // CIS Tier Thresholds
@@ -124,8 +160,8 @@ export const FEARFUL_AVOIDANT_CAP = 0.70
 
 /** Sub-scale weights within Communication dimension */
 export const COMMUNICATION_WEIGHTS = {
-  conflict_approach: 0.30,
-  repair_attempts: 0.45,
+  conflict_style: 0.30,
+  repair_capacity: 0.45,
   emotional_expression: 0.25,
 } as const
 
@@ -156,10 +192,10 @@ export const CONFLICT_PAIRING_SCORES: Record<string, number> = {
   unclassified_unclassified: 0.50,
 }
 
-/** Penalty applied when either partner scores >= 4 on com_05 (contempt/hostility) */
+/** Penalty applied when either partner scores >= 4 on m3_cc_02 (contempt/hostility) */
 export const HORSEMAN_PENALTY = 0.10
 
-/** Threshold for com_05 that triggers the horseman penalty */
+/** Threshold for m3_cc_02 that triggers the horseman penalty */
 export const HORSEMAN_THRESHOLD = 4
 
 // ═══════════════════════════════════════════
@@ -168,7 +204,7 @@ export const HORSEMAN_THRESHOLD = 4
 
 export const VALUES_SUB_SCALE_WEIGHTS = {
   life_direction: 0.35,
-  moral_ethical: 0.30,
+  moral_flexibility: 0.30,
   relationship_priority: 0.35,
 } as const
 
@@ -181,7 +217,7 @@ export const LIFESTYLE_DIMENSION_WEIGHT = 0.40
 export const LIFESTYLE_SUBSCALE_WEIGHT = 0.60
 
 // ═══════════════════════════════════════════
-// Love Language Scoring
+// How You Love Scoring
 // ═══════════════════════════════════════════
 
 /** Base scores for give-receive cross-matching */
@@ -202,31 +238,27 @@ export const LOVE_LANG_FLEX_WEIGHT = 0.4
 // Question-to-Language Mappings (Forced Choice)
 // ═══════════════════════════════════════════
 
-/** Maps forced-choice question IDs to the two love languages in each pair */
+/** Maps forced-choice question IDs to the two how-you-love in each pair */
 export const RECEIVING_LANGUAGE_PAIRS: Record<string, [LoveLanguage, LoveLanguage]> = {
-  ll_01: ['words_of_affirmation', 'quality_time'],
-  ll_02: ['receiving_gifts', 'physical_touch'],
-  ll_03: ['acts_of_service', 'words_of_affirmation'],
-  ll_04: ['physical_touch', 'acts_of_service'],
-  ll_05: ['quality_time', 'receiving_gifts'],
+  m4_ll_01: ['quality_time', 'acts_of_service'],
+  m4_ll_02: ['words_of_affirmation', 'words_of_affirmation'],
+  m4_ll_03: ['physical_touch', 'acts_of_service'],
 }
 
 export const GIVING_LANGUAGE_PAIRS: Record<string, [LoveLanguage, LoveLanguage]> = {
-  ll_06: ['words_of_affirmation', 'acts_of_service'],
-  ll_07: ['receiving_gifts', 'words_of_affirmation'],
-  ll_08: ['quality_time', 'physical_touch'],
-  ll_09: ['quality_time', 'receiving_gifts'],
-  ll_10: ['physical_touch', 'acts_of_service'],
+  m4_ll_04: ['quality_time', 'receiving_gifts'],
+  m4_ll_05: ['quality_time', 'physical_touch'],
+  m4_ll_06: ['words_of_affirmation', 'acts_of_service'],
 }
 
 // ═══════════════════════════════════════════
 // Likert Scale Constants
 // ═══════════════════════════════════════════
 
-/** Maximum value on the Likert scale */
+/** Maximum value on the Likert/scenario scale */
 export const LIKERT_MAX = 5
 
-/** Minimum value on the Likert scale */
+/** Minimum value on the Likert/scenario scale */
 export const LIKERT_MIN = 1
 
 /** Maximum possible difference between two scores on a 1-5 scale */
@@ -241,28 +273,35 @@ export const REVERSE_CONSTANT = 6
 
 /** Maps sub-scale IDs to their question IDs across all dimensions */
 export const SUB_SCALE_QUESTIONS: Record<string, string[]> = {
-  // Values
-  life_direction: ['val_01', 'val_02', 'val_03', 'val_04', 'val_05'],
-  moral_ethical: ['val_06', 'val_07', 'val_08', 'val_09', 'val_10'],
-  relationship_priority: ['val_11', 'val_12', 'val_13', 'val_14', 'val_15'],
-  // Attachment
-  anxiety: ['att_01', 'att_02', 'att_03', 'att_04', 'att_05'],
-  avoidance: ['att_06', 'att_07', 'att_08', 'att_09', 'att_10'],
-  security: ['att_11', 'att_12', 'att_13', 'att_14', 'att_15'],
-  // Communication
-  conflict_approach: ['com_01', 'com_02', 'com_03', 'com_04', 'com_05'],
-  repair_attempts: ['com_06', 'com_07', 'com_08', 'com_09', 'com_10'],
-  emotional_expression: ['com_11', 'com_12', 'com_13', 'com_14', 'com_15'],
-  // Emotional Intelligence
-  self_awareness: ['ei_01', 'ei_02', 'ei_03', 'ei_04', 'ei_05'],
-  empathy: ['ei_06', 'ei_07', 'ei_08', 'ei_09', 'ei_10'],
-  emotional_regulation: ['ei_11', 'ei_12', 'ei_13', 'ei_14', 'ei_15'],
-  // Lifestyle & Ambition
-  pace_of_life: ['la_01', 'la_02', 'la_03', 'la_04', 'la_05'],
-  social_energy: ['la_06', 'la_07', 'la_08', 'la_09', 'la_10'],
-  future_orientation: ['la_11', 'la_12', 'la_13', 'la_14', 'la_15'],
-  // Love Languages
-  receiving_language: ['ll_01', 'll_02', 'll_03', 'll_04', 'll_05'],
-  giving_language: ['ll_06', 'll_07', 'll_08', 'll_09', 'll_10'],
-  language_flexibility: ['ll_11', 'll_12', 'll_13', 'll_14', 'll_15'],
+  // Values & Priorities
+  life_direction: ['m1_vp_01', 'm1_vp_02', 'm1_vp_03'],
+  moral_flexibility: ['m1_vp_04', 'm1_vp_05', 'm1_vp_06'],
+  relationship_priority: ['m1_vp_07', 'm1_vp_08'],
+  // Attachment Style
+  anxiety: ['m2_as_01', 'm2_as_02', 'm2_as_03'],
+  avoidance: ['m2_as_04', 'm2_as_05', 'm2_as_06'],
+  security: ['m2_as_07', 'm2_as_08'],
+  // Communication & Conflict
+  conflict_style: ['m3_cc_01', 'm3_cc_02', 'm3_cc_03'],
+  repair_capacity: ['m3_cc_04', 'm3_cc_05', 'm3_cc_06'],
+  emotional_expression: ['m3_cc_07', 'm3_cc_08'],
+  // How You Love
+  receiving_language: ['m4_ll_01', 'm4_ll_02', 'm4_ll_03'],
+  giving_language: ['m4_ll_04', 'm4_ll_05', 'm4_ll_06'],
+  // Hot Takes & Dealbreakers
+  boundaries: ['m5_ht_01', 'm5_ht_02', 'm5_ht_03'],
+  gender_dynamics: ['m5_ht_04', 'm5_ht_05'],
+  vulnerability: ['m5_ht_06', 'm5_ht_07', 'm5_ht_08'],
+  // Emotional Intelligence (PAID)
+  self_awareness: ['m6_ei_01', 'm6_ei_02', 'm6_ei_03'],
+  empathy: ['m6_ei_04', 'm6_ei_05', 'm6_ei_06'],
+  emotional_regulation: ['m6_ei_07', 'm6_ei_08', 'm6_ei_09', 'm6_ei_10'],
+  // Lifestyle & Ambition (PAID)
+  pace_of_life: ['m7_la_01', 'm7_la_02', 'm7_la_03'],
+  social_energy: ['m7_la_04', 'm7_la_05', 'm7_la_06'],
+  future_vision: ['m7_la_07', 'm7_la_08', 'm7_la_09', 'm7_la_10'],
+  // Intimacy & Chemistry (PAID)
+  physical_chemistry: ['m8_ic_01', 'm8_ic_02', 'm8_ic_03'],
+  emotional_intimacy: ['m8_ic_04', 'm8_ic_05', 'm8_ic_06'],
+  desire_dynamics: ['m8_ic_07', 'm8_ic_08', 'm8_ic_09', 'm8_ic_10'],
 }

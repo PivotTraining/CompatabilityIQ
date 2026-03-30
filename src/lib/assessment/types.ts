@@ -1,7 +1,6 @@
 export type QuotientKey =
-  | 'VQ' | 'AQ' | 'EQ' | 'CQ' | 'NQ' | 'LQ' | 'GQ' | 'CSQ'
-  | 'FMI' | 'FSB' | 'FPL' | 'FIQ' | 'FCM' | 'CDF'
-  | 'ACC' | 'EMP' | 'STB' | 'SAF' | 'DEP'
+  | 'VP' | 'AS' | 'CC' | 'LL' | 'HT'
+  | 'EI' | 'LA' | 'IC'
 
 export type QuestionFormat = 'likert' | 'forced_choice' | 'scenario' | 'multi_select' | 'frequency'
 
@@ -12,16 +11,20 @@ export interface AssessmentOption {
 
 export interface AssessmentQuestion {
   id: string
-  module: 1 | 2 | 3 | 4 | 5 | 6
+  module: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
   quotient: QuotientKey
   dimension: string
   text: string
   options: AssessmentOption[]
   format: QuestionFormat
-  /** For LQ: distinguishes giving vs receiving */
+  /** For LL: distinguishes giving vs receiving */
   subtype?: 'give' | 'receive'
-  /** If true, high values indicate risk (for shadow clusters) */
+  /** If true, high values indicate risk or reverse direction */
   reverseScored?: boolean
+  /** Whether this module is a paid add-on */
+  paid?: boolean
+  /** Price in USD for the paid module this question belongs to */
+  price?: number
 }
 
 export interface ModuleSubmission {

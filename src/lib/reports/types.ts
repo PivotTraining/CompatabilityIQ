@@ -95,13 +95,13 @@ export interface TemplateContext {
   userAConflict?: ConflictApproach
   /** User B's conflict approach (if applicable) */
   userBConflict?: ConflictApproach
-  /** User A's primary receiving love language */
+  /** User A's primary receiving love style */
   userAReceiving?: LoveLanguage
-  /** User B's primary receiving love language */
+  /** User B's primary receiving love style */
   userBReceiving?: LoveLanguage
-  /** User A's primary giving love language */
+  /** User A's primary giving love style */
   userAGiving?: LoveLanguage
-  /** User B's primary giving love language */
+  /** User B's primary giving love style */
   userBGiving?: LoveLanguage
   /** User A's dimension overall score (1-5 scale) */
   userAScore: number

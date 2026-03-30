@@ -260,7 +260,7 @@ export default function LandingPage() {
                 { icon: MessageCircle, title: 'Communication & Conflict', desc: "How you fight matters more than how you flirt.", num: '03' },
                 { icon: Brain, title: 'Emotional Intelligence', desc: "Can they read a room? Can you? This one's a mirror.", num: '04' },
                 { icon: TrendingUp, title: 'Lifestyle & Ambition', desc: 'Because "work-life balance" means something different to everyone.', num: '05' },
-                { icon: Heart, title: 'Love Languages', desc: "The difference between feeling loved and just being in a relationship.", num: '06' },
+                { icon: Heart, title: 'How You Love', desc: "The difference between feeling loved and just being in a relationship.", num: '06' },
               ].map((item) => (
                 <div key={item.title} className="rounded-2xl p-6 bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all group">
                   <div className="flex items-center justify-between mb-4">

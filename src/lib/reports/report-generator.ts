@@ -372,7 +372,7 @@ function generateUserProfile(
       }
       break
     }
-    case 'love_languages': {
+    case 'how_you_love': {
       const profile = dimScore.loveLangProfile
       if (profile && profile.receivingLanguages.length > 0) {
         const primary = profile.receivingLanguages[0]
@@ -381,7 +381,7 @@ function generateUserProfile(
           parts.push(pickAndInterpolate(langTemplates, { name }))
         }
       } else {
-        parts.push(`${name} shows a balanced love language profile, responsive to multiple forms of affection without a dominant preference.`)
+        parts.push(`${name} shows a balanced love style profile, responsive to multiple forms of affection without a dominant preference.`)
       }
       break
     }
@@ -678,8 +678,8 @@ function formatSubScaleName(subScaleId: string): string {
     pace_of_life: 'pace of life',
     social_energy: 'social energy',
     future_orientation: 'future orientation',
-    receiving_language: 'receiving love language',
-    giving_language: 'giving love language',
+    receiving_language: 'receiving love style',
+    giving_language: 'giving love style',
     language_flexibility: 'language flexibility',
   }
   return nameMap[subScaleId] || subScaleId.replace(/_/g, ' ')

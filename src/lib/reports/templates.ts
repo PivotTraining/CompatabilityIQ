@@ -105,20 +105,20 @@ export const DIMENSION_NARRATIVES: Record<string, ScoreRangeNarratives> = {
     ]
   },
 
-  love_languages: {
+  how_you_loves: {
     high: [
       "The way you naturally express love is exactly what the other person needs to feel it. This give-receive alignment means affection won't get lost in translation -- what you offer will actually land.",
-      "Your love language compatibility is exceptional. You instinctively show love in the way your partner most values receiving it. This kind of alignment means your effort actually registers -- no wasted gestures, no unmet needs.",
-      "Most couples have to learn each other's love languages through trial and error. You two are starting with a natural advantage: what feels like love to you is what the other person is already offering.",
-      "Your love languages create a virtuous cycle -- the more naturally you express affection, the more your partner feels loved, the more they reciprocate in your language. This dynamic builds momentum instead of frustration."
+      "Your love style compatibility is exceptional. You instinctively show love in the way your partner most values receiving it. This kind of alignment means your effort actually registers -- no wasted gestures, no unmet needs.",
+      "Most couples have to learn each other's love styles through trial and error. You two are starting with a natural advantage: what feels like love to you is what the other person is already offering.",
+      "Your love styles create a virtuous cycle -- the more naturally you express affection, the more your partner feels loved, the more they reciprocate in your language. This dynamic builds momentum instead of frustration."
     ],
     medium: [
-      "Your love language compatibility has real strengths, with some areas where you'll need to stretch. The good news: your flexibility scores suggest you're both willing to adapt how you show love, which compensates for any give-receive mismatch.",
-      "There's a partial love language match here that works in your favor, and both of you show the kind of flexibility that bridges the gap. You may need to explicitly tell each other what makes you feel most loved -- but you'll both actually listen.",
-      "Your love languages don't perfectly align, but your willingness to adapt is high. The couples who struggle with love languages aren't the ones who differ -- they're the ones who refuse to learn. You two don't have that problem.",
+      "Your love style compatibility has real strengths, with some areas where you'll need to stretch. The good news: your flexibility scores suggest you're both willing to adapt how you show love, which compensates for any give-receive mismatch.",
+      "There's a partial love style match here that works in your favor, and both of you show the kind of flexibility that bridges the gap. You may need to explicitly tell each other what makes you feel most loved -- but you'll both actually listen.",
+      "Your love styles don't perfectly align, but your willingness to adapt is high. The couples who struggle with love styles aren't the ones who differ -- they're the ones who refuse to learn. You two don't have that problem.",
     ],
     low: [
-      "Your love languages are notably different -- what feels like love to you may not register at all for your partner, and vice versa. The path forward is explicit communication: telling each other exactly what you need instead of hoping they'll intuit it.",
+      "Your love styles are notably different -- what feels like love to you may not register at all for your partner, and vice versa. The path forward is explicit communication: telling each other exactly what you need instead of hoping they'll intuit it.",
       "This is the dimension where effort matters more than instinct. Your natural ways of expressing love don't align with what the other person most values receiving. The fix is straightforward but requires intentionality: learn their language and practice it.",
       "Love language mismatch creates a frustrating dynamic where both people feel like they're giving and neither feels like they're receiving. Your gap here is real but solvable -- the key is translating intention into the format your partner actually absorbs.",
     ]
@@ -236,21 +236,21 @@ export const USER_PROFILE_TEMPLATES: Record<string, Record<string, string[]>> = 
     ],
   },
 
-  love_languages: {
+  how_you_loves: {
     words_of_affirmation: [
-      "{name}'s primary love language is Words of Affirmation. They feel most loved when their partner is specific, verbal, and expressive about what they appreciate and admire.",
+      "{name}'s primary love style is Words of Affirmation. They feel most loved when their partner is specific, verbal, and expressive about what they appreciate and admire.",
     ],
     acts_of_service: [
-      "{name}'s primary love language is Acts of Service. Actions speak louder than words for them -- when a partner handles responsibilities or takes something off their plate, that's love.",
+      "{name}'s primary love style is Acts of Service. Actions speak louder than words for them -- when a partner handles responsibilities or takes something off their plate, that's love.",
     ],
     receiving_gifts: [
-      "{name}'s primary love language is Receiving Gifts. It's not about the price tag -- it's about a partner who noticed, remembered, and translated that into something tangible.",
+      "{name}'s primary love style is Receiving Gifts. It's not about the price tag -- it's about a partner who noticed, remembered, and translated that into something tangible.",
     ],
     quality_time: [
-      "{name}'s primary love language is Quality Time. Undivided attention, phones away, fully present -- that's what makes them feel most connected.",
+      "{name}'s primary love style is Quality Time. Undivided attention, phones away, fully present -- that's what makes them feel most connected.",
     ],
     physical_touch: [
-      "{name}'s primary love language is Physical Touch. Holding hands, a hand on the small of the back, pulling close without being asked -- that's how they feel loved.",
+      "{name}'s primary love style is Physical Touch. Holding hands, a hand on the small of the back, pulling close without being asked -- that's how they feel loved.",
     ],
   },
 }
@@ -286,9 +286,9 @@ export const STRENGTH_NARRATIVES: Record<string, string[]> = {
     "Lifestyle compatibility is what makes a relationship feel easy. You share a similar pace, similar social needs, and a similar vision for the future -- which means your default days together actually look alike.",
     "While other couples argue about how to spend their weekends, you'll be spending them the same way. Your lifestyle alignment eliminates the quiet friction that erodes so many otherwise strong connections.",
   ],
-  love_languages: [
+  how_you_loves: [
     "The way you naturally show love is exactly what the other person needs to feel it. This give-receive alignment means your affection actually lands -- no wasted effort, no missed signals.",
-    "Your love language compatibility means you'll spend less time guessing what the other person needs and more time actually meeting those needs. It's the difference between effort that registers and effort that gets lost in translation.",
+    "Your love style compatibility means you'll spend less time guessing what the other person needs and more time actually meeting those needs. It's the difference between effort that registers and effort that gets lost in translation.",
     "Love language alignment this strong is rare. Most couples have to deliberately learn each other's language -- you two are already speaking it naturally.",
   ],
 }
@@ -324,10 +324,10 @@ export const FRICTION_NARRATIVES: Record<string, string[]> = {
     "Lifestyle mismatch is death by a thousand paper cuts. You won't break up over it, but you might start resenting the other person's idea of a good time. The fix: build a shared weekly rhythm that gives both of you enough of what you need.",
     "Your lifestyle gap is the dimension most likely to cause quiet dissatisfaction. One of you wants more stimulation, social energy, or planning than the other. Name it, negotiate it, and build intentional compromises before it becomes a sore spot.",
   ],
-  love_languages: [
-    "Your love languages are mismatched, which means your natural expressions of love may not register with your partner. The fix is surprisingly simple: ask each other \"what makes you feel most loved?\" and then actually do that thing, even when it doesn't come naturally.",
+  how_you_loves: [
+    "Your love styles are mismatched, which means your natural expressions of love may not register with your partner. The fix is surprisingly simple: ask each other \"what makes you feel most loved?\" and then actually do that thing, even when it doesn't come naturally.",
     "Love language differences create a frustrating dynamic where both people feel like they're giving but neither feels like they're receiving. Your task: learn each other's language and practice it deliberately. It feels awkward at first and becomes natural with repetition.",
-    "Your love language gap is your most actionable growth area. Unlike values or attachment, this one has a clear, concrete solution: learn what your partner needs, tell them what you need, and practice showing up in each other's language consistently.",
+    "Your love style gap is your most actionable growth area. Unlike values or attachment, this one has a clear, concrete solution: learn what your partner needs, tell them what you need, and practice showing up in each other's language consistently.",
   ],
 }
 
@@ -371,9 +371,9 @@ export const CONVERSATION_STARTERS: Record<string, string[]> = {
     "Ask them: \"Where do you see yourself career-wise in five years -- and how much does that matter to you?\" Ambition alignment (or comfortable misalignment) is worth establishing early.",
     "Over dinner, ask: \"Do you recharge by doing things or by doing nothing?\" Simple question, profound implications for how you'll share your lives.",
   ],
-  love_languages: [
-    "Ask {partnerName}: \"What's the most loved you've ever felt in a relationship? What was the person doing?\" Their answer is their love language in action.",
-    "You scored {scoreLabel} on love language compatibility. Ask: \"If I could only show you I love you in one way for the rest of our lives, what would you want that way to be?\"",
+  how_you_loves: [
+    "Ask {partnerName}: \"What's the most loved you've ever felt in a relationship? What was the person doing?\" Their answer is their love style in action.",
+    "You scored {scoreLabel} on love style compatibility. Ask: \"If I could only show you I love you in one way for the rest of our lives, what would you want that way to be?\"",
     "Try: \"Do you feel more loved when someone tells you how they feel about you, or when they show it through actions?\" This binary question cuts to the core of their receiving language.",
     "Ask them: \"What's something small a partner did that made you feel incredibly loved?\" The \"small\" detail is the real data -- it reveals their primary language without them having to categorize it.",
     "Over a quiet moment, ask: \"Is there a way past partners have tried to show love that didn't really land for you?\" What doesn't work is just as revealing as what does.",

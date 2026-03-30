@@ -59,7 +59,7 @@ const DIMENSION_ICONS: Record<string, string> = {
   communication: '\u2604',
   emotional_intelligence: '\u2728',
   lifestyle_ambition: '\u2600',
-  love_languages: '\u2661',
+  how_you_loves: '\u2661',
 }
 
 // ═══════════════════════════════════════════

@@ -100,10 +100,10 @@ const CONFLICT_DESCRIPTIONS: Record<string, string> = {
 }
 
 // ═══════════════════════════════════════════
-// Love Language Labels
+// How You Love Labels
 // ═══════════════════════════════════════════
 
-const LOVE_LANGUAGE_LABELS: Record<string, string> = {
+const LOVE_STYLE_LABELS: Record<string, string> = {
   words_of_affirmation: 'Words of Affirmation',
   acts_of_service: 'Acts of Service',
   receiving_gifts: 'Receiving Gifts',
@@ -111,8 +111,8 @@ const LOVE_LANGUAGE_LABELS: Record<string, string> = {
   physical_touch: 'Physical Touch',
 }
 
-const LOVE_LANGUAGE_IMPLICATIONS: Record<string, string> = {
-  words_of_affirmation: 'You feel most loved when a partner verbalizes their appreciation, admiration, and affection. A genuine compliment or a heartfelt "I\'m proud of you" lands deeper than any gift. In a relationship, you\'ll need a partner who isn\'t afraid to express themselves verbally -- and who understands that your need to hear it isn\'t insecurity, it\'s your love language.',
+const LOVE_STYLE_IMPLICATIONS: Record<string, string> = {
+  words_of_affirmation: 'You feel most loved when a partner verbalizes their appreciation, admiration, and affection. A genuine compliment or a heartfelt "I\'m proud of you" lands deeper than any gift. In a relationship, you\'ll need a partner who isn\'t afraid to express themselves verbally -- and who understands that your need to hear it isn\'t insecurity, it\'s your love style.',
   acts_of_service: 'You feel most loved when a partner shows up through action -- taking something off your plate, handling a chore without being asked, or making your life tangibly easier. Words are nice, but follow-through is what makes you feel secure. In a relationship, you\'ll need a partner who demonstrates love through what they do, not just what they say.',
   receiving_gifts: 'You feel most loved through thoughtful gestures and tokens of affection. It\'s not about materialism -- it\'s about the thought behind it. A $5 coffee that shows someone was thinking about you can mean more than an expensive gift chosen without care. In a relationship, you\'ll need a partner who understands that small, intentional gestures are how you feel remembered.',
   quality_time: 'You feel most loved when a partner is fully present -- phone down, eye contact, undivided attention. It\'s not about doing elaborate things together; it\'s about being together without distraction. In a relationship, you\'ll need a partner who prioritizes presence over productivity and who understands that half-attention feels worse than no attention.',
@@ -165,7 +165,7 @@ export async function generateSelfDiscoveryReport(
   const commDim = dimensions.get('communication')
   const eiDim = dimensions.get('emotional_intelligence')
   const valuesDim = dimensions.get('values')
-  const loveLangDim = dimensions.get('love_languages')
+  const loveLangDim = dimensions.get('how_you_love')
   const lifestyleDim = dimensions.get('lifestyle_ambition')
 
   const attachmentStyle = attachmentDim?.attachmentStyle || 'secure'
@@ -186,7 +186,7 @@ export async function generateSelfDiscoveryReport(
     relationship_priority: valuesDim?.subScaleScores?.relationship_priority || 3.0,
   }
 
-  // Build love language ranking
+  // Build love style ranking
   const loveLanguageRanking = buildLoveLanguageRanking(loveLangDim)
 
   // Compute dimension summaries
@@ -283,7 +283,7 @@ function buildLoveLanguageRanking(
     // Even distribution
     return allLanguages.map((lang) => ({
       language: lang,
-      label: LOVE_LANGUAGE_LABELS[lang],
+      label: LOVE_STYLE_LABELS[lang],
       percentage: 20,
     }))
   }
@@ -294,7 +294,7 @@ function buildLoveLanguageRanking(
   return allLanguages
     .map((lang) => ({
       language: lang,
-      label: LOVE_LANGUAGE_LABELS[lang],
+      label: LOVE_STYLE_LABELS[lang],
       percentage: Math.round(((tally[lang] || 0) / total) * 100),
     }))
     .sort((a, b) => b.percentage - a.percentage)
@@ -309,7 +309,7 @@ function buildDimensionSummaries(
     'communication',
     'emotional_intelligence',
     'lifestyle_ambition',
-    'love_languages',
+    'how_you_love',
   ]
 
   return dimIds.map((dimId) => {
@@ -335,7 +335,7 @@ function computeDatingReadiness(dimensions: Map<DimensionId, DimensionScore>): n
     communication: 0.20,
     emotional_intelligence: 0.22,
     lifestyle_ambition: 0.08,
-    love_languages: 0.10,
+    how_you_loves: 0.10,
   }
 
   let totalScore = 0
@@ -594,7 +594,7 @@ function buildWhatYouNeed(
     const primary = ranking[0]
     const secondary = ranking.length > 1 ? ranking[1] : null
 
-    narrative = `Your primary love language is ${primary.label}. ${LOVE_LANGUAGE_IMPLICATIONS[primary.language] || ''}`
+    narrative = `Your primary love style is ${primary.label}. ${LOVE_STYLE_IMPLICATIONS[primary.language] || ''}`
 
     highlights.push(`Primary: ${primary.label} (${primary.percentage}%)`)
     if (secondary && secondary.percentage > 10) {
@@ -602,13 +602,13 @@ function buildWhatYouNeed(
       narrative += ` Your secondary language, ${secondary.label}, also plays an important role -- a partner who can speak both will make you feel deeply understood.`
     }
   } else {
-    narrative = `${name}, your love language profile shows a balanced distribution, meaning you respond to multiple forms of affection without a strong dominant preference. This can be an asset -- you're adaptable -- but it also means you may need to communicate more explicitly about what makes you feel loved in any given moment.`
-    highlights.push('Balanced love language profile -- responsive to multiple forms')
+    narrative = `${name}, your love style profile shows a balanced distribution, meaning you respond to multiple forms of affection without a strong dominant preference. This can be an asset -- you're adaptable -- but it also means you may need to communicate more explicitly about what makes you feel loved in any given moment.`
+    highlights.push('Balanced love style profile -- responsive to multiple forms')
   }
 
   const flexibility = loveLangDim?.loveLangProfile?.flexibilityScore || 3.0
   if (flexibility >= 4.0) {
-    highlights.push('High flexibility -- you can adapt to a partner\'s love language')
+    highlights.push('High flexibility -- you can adapt to a partner\'s love style')
   } else if (flexibility <= 2.5) {
     highlights.push('Lower flexibility -- you need a partner who speaks your language')
   }
@@ -730,8 +730,8 @@ function formatSubScaleName(subScaleId: string): string {
     pace_of_life: 'Pace of Life',
     social_energy: 'Social Energy',
     future_orientation: 'Future Orientation',
-    receiving_language: 'Receiving Love Language',
-    giving_language: 'Giving Love Language',
+    receiving_language: 'Receiving Love Style',
+    giving_language: 'Giving Love Style',
     language_flexibility: 'Language Flexibility',
   }
   return nameMap[subScaleId] || subScaleId.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())

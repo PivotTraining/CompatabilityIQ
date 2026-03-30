@@ -22,7 +22,7 @@ export const CORE_QUOTIENTS = {
   EQ:  { name: 'Emotional Intelligence Quotient', weight: 0.20, matchType: 'mirror' as const,        color: '#E8735A' },
   CQ:  { name: 'Conflict Quotient',             weight: 0.18, matchType: 'complementary' as const,  color: '#D4A017' },
   NQ:  { name: 'Neurobiological Quotient',       weight: 0.15, matchType: 'complementary' as const,  color: '#4CAF8A' },
-  LQ:  { name: 'Love Language Quotient',         weight: 0.10, matchType: 'bidirectional' as const,  color: '#C25B8A' },
+  LQ:  { name: 'How You Love Quotient',         weight: 0.10, matchType: 'bidirectional' as const,  color: '#C25B8A' },
   GQ:  { name: 'Growth Quotient',               weight: 0.08, matchType: 'mirror' as const,         color: '#E07B39' },
   CSQ: { name: 'Cognitive Style Quotient',       weight: 0.07, matchType: 'flexible' as const,       color: '#6B9BD2' },
 } as const

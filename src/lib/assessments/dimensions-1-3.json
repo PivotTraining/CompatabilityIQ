@@ -1,578 +1,349 @@
 {
   "meta": {
-    "version": "1.0.0",
-    "created": "2026-03-28",
-    "total_dimensions": 6,
+    "version": "2.0.0",
+    "created": "2026-03-29",
+    "total_dimensions": 8,
     "dimensions_included": [1, 2, 3],
-    "total_questions": 45,
-    "estimated_completion_minutes": 12,
-    "notes": "Dimensions 1-3 of 6. Maps to CIQ quotients VQ, AQ, CQ from constants.ts. All Likert-5 unless noted. Designed for 25-45 year old professionals."
+    "total_questions": 24,
+    "estimated_completion_minutes": 5,
+    "tier": "free",
+    "notes": "Dimensions 1-3 of 8 (5 free + 3 paid). Maps to quotients VP, AS, CC. Conversational tone, culturally resonant scenarios. Designed for 25-45 year old professionals."
   },
   "dimensions": [
     {
-      "dimension_id": "values",
-      "quotient_key": "VQ",
+      "dimension_id": "values_priorities",
+      "quotient_key": "VP",
       "title": "Values & Priorities",
-      "description": "Measures alignment on life direction, moral compass, and how central the relationship is in your world. Values misalignment is the single strongest predictor of long-term relationship failure -- couples can negotiate habits but not core beliefs.",
-      "scientific_basis": "Adapted from the Schwartz Values Survey (SVS) 10 universal value domains, filtered to the 4 domains most predictive of romantic satisfaction (security/tradition, benevolence/universalism, self-direction, stimulation/hedonism). Supplemented with Relationship Priority items from Aron & Aron's Inclusion of Other in the Self scale. Schwartz (1992) demonstrated cross-cultural stability across 82 countries; Leikas et al. (2018) confirmed value similarity predicts relationship satisfaction beyond personality.",
-      "weight": 20,
+      "display_name": "Values & Priorities",
+      "tagline": "The hot takes that reveal what actually matters to you.",
+      "description": "Measures alignment on life direction, moral flexibility, and how central the relationship is in your world. Values misalignment is the single strongest predictor of long-term relationship failure -- couples can negotiate habits but not core beliefs.",
+      "scientific_basis": "Adapted from the Schwartz Values Survey (SVS) 10 universal value domains, filtered to the 4 domains most predictive of romantic satisfaction. Supplemented with Relationship Priority items from Aron & Aron's Inclusion of Other in the Self scale. Schwartz (1992) demonstrated cross-cultural stability across 82 countries; Leikas et al. (2018) confirmed value similarity predicts relationship satisfaction beyond personality.",
+      "weight": 18,
       "compatibility_type": "similarity",
-      "compatibility_rationale": "Rokeach (1973) and Schwartz (2012) both found that value similarity -- not complementarity -- predicts long-term relationship satisfaction. Partners do not benefit from opposing values; they benefit from shared ones. The scoring uses cosine similarity across the value profile vector so partial overlaps are rewarded proportionally.",
+      "compatibility_rationale": "Value similarity -- not complementarity -- predicts long-term relationship satisfaction. Partners do not benefit from opposing values; they benefit from shared ones.",
       "sub_scales": [
         {
           "id": "life_direction",
           "name": "Life Direction",
-          "description": "Where you want your life to go -- career ambition vs. family focus vs. adventure-seeking vs. stability-building. Not about what you do today, but what you would optimize for if you had to choose.",
-          "question_ids": ["val_01", "val_02", "val_03", "val_04", "val_05"]
+          "description": "Where you want your life to go -- career ambition vs. family focus vs. adventure-seeking vs. stability-building.",
+          "question_ids": ["m1_vp_01", "m1_vp_02", "m1_vp_03"]
         },
         {
-          "id": "moral_ethical",
-          "name": "Moral & Ethical Alignment",
-          "description": "Your non-negotiable principles -- fairness, honesty, loyalty, social responsibility. These are the hills you would die on, and the ones that cause the deepest resentment when a partner does not share them.",
-          "question_ids": ["val_06", "val_07", "val_08", "val_09", "val_10"]
+          "id": "moral_flexibility",
+          "name": "Moral Flexibility",
+          "description": "How you process gray areas -- moral absolutism vs. contextual ethics. Not about right or wrong, but about how you navigate ambiguity.",
+          "question_ids": ["m1_vp_04", "m1_vp_05", "m1_vp_06"]
         },
         {
           "id": "relationship_priority",
           "name": "Relationship Priority",
-          "description": "How central the romantic relationship is in your life hierarchy. Some people build their life around the relationship; others fit the relationship into an already full life. Neither is wrong, but mismatches here breed resentment.",
-          "question_ids": ["val_11", "val_12", "val_13", "val_14", "val_15"]
+          "description": "How central the romantic relationship is in your life hierarchy.",
+          "question_ids": ["m1_vp_07", "m1_vp_08"]
         }
       ],
       "questions": [
         {
-          "id": "val_01",
-          "text": "If I had to choose between a major career opportunity and more time with my partner, I'd pick the career move and trust we'd figure it out.",
+          "id": "m1_vp_01",
+          "text": "Your partner gets a dream job offer across the country. You just got promoted. What happens?",
           "sub_scale": "life_direction",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = career-oriented life direction. Not inherently good or bad -- used for similarity matching."
+          "response_type": "scenario_5",
+          "scoring_note": "High = relationship-centric life direction. Low = career/independence priority."
         },
         {
-          "id": "val_02",
-          "text": "My idea of a great life in 10 years involves a house full of family -- kids, maybe parents nearby, Sunday dinners, the whole thing.",
+          "id": "m1_vp_02",
+          "text": "You just inherited $500K. No strings attached. What's your first move?",
           "sub_scale": "life_direction",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = family-centric life direction."
+          "response_type": "scenario_5",
+          "scoring_note": "Measures life priority orientation: security (1-2), balance (3), experience (4), family (5)."
         },
         {
-          "id": "val_03",
-          "text": "I would rather have an unpredictable, adventure-filled life than a comfortable, stable one.",
+          "id": "m1_vp_03",
+          "text": "Curb Your Enthusiasm or Martin?",
           "sub_scale": "life_direction",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = adventure/stimulation orientation. Reverse-polarity to val_04 for internal consistency check."
+          "response_type": "scenario_5",
+          "scoring_note": "Cultural alignment proxy. Measures humor style and cultural touchstones. Used for profile matching, not judgment."
         },
         {
-          "id": "val_04",
-          "text": "Financial security and a solid plan for the future matter more to me than once-in-a-lifetime experiences.",
-          "sub_scale": "life_direction",
+          "id": "m1_vp_04",
+          "text": "Should Barry Bonds be in the Hall of Fame even though he used steroids at the end of his career?",
+          "sub_scale": "moral_flexibility",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = stability orientation. Natural tension with val_03 provides validity check."
+          "response_type": "scenario_5",
+          "scoring_note": "Low = moral absolutism (rules are rules). High = contextual ethics (nuance matters). Neither is better; used for similarity matching."
         },
         {
-          "id": "val_05",
-          "text": "When I imagine the best version of my future, it is more about what I have built than where I have traveled.",
-          "sub_scale": "life_direction",
+          "id": "m1_vp_05",
+          "text": "Your best friend tells you they cheated on their partner. They're crying. What do you do?",
+          "sub_scale": "moral_flexibility",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = builder/legacy orientation vs. experiential orientation."
+          "response_type": "scenario_5",
+          "scoring_note": "Low = accountability-first orientation. High = compassion-first orientation. Measures moral processing style."
         },
         {
-          "id": "val_06",
-          "text": "I could not be with someone who regularly bends the truth, even about small things.",
-          "sub_scale": "moral_ethical",
+          "id": "m1_vp_06",
+          "text": "How someone treats a waiter tells you everything you need to know about them.",
+          "sub_scale": "moral_flexibility",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = honesty as a non-negotiable value."
+          "response_type": "scenario_5",
+          "scoring_note": "High = strong moral conviction applied broadly. Low = contextual/flexible judgment."
         },
         {
-          "id": "val_07",
-          "text": "How someone treats a waiter tells me more about them than how they treat me on a first date.",
-          "sub_scale": "moral_ethical",
-          "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = fairness/universalism -- applying moral standards broadly, not just to in-group."
-        },
-        {
-          "id": "val_08",
-          "text": "I would lose respect for a partner who stayed silent about something unethical happening at their workplace.",
-          "sub_scale": "moral_ethical",
-          "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = moral courage as a core value."
-        },
-        {
-          "id": "val_09",
-          "text": "Loyalty means standing by someone even when it costs you something personally.",
-          "sub_scale": "moral_ethical",
-          "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = loyalty/commitment as a core value."
-        },
-        {
-          "id": "val_10",
-          "text": "I think about the social or environmental impact of my choices more than most people around me.",
-          "sub_scale": "moral_ethical",
-          "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = universalism/social responsibility orientation."
-        },
-        {
-          "id": "val_11",
-          "text": "My relationship should be my home base -- the thing everything else in my life orbits around.",
+          "id": "m1_vp_07",
+          "text": "Your career is on fire right now. Your partner says they feel neglected. Honestly, what do you feel first?",
           "sub_scale": "relationship_priority",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = relationship as central organizing principle of life."
+          "response_type": "scenario_5",
+          "scoring_note": "Low = career-first instinct. High = relationship-first instinct. Measures gut-level priority hierarchy."
         },
         {
-          "id": "val_12",
-          "text": "I need a lot of space for my own friendships, hobbies, and goals outside the relationship.",
-          "sub_scale": "relationship_priority",
-          "reverse_scored": true,
-          "response_type": "likert_5",
-          "scoring_note": "REVERSE SCORED. High raw = lower relationship centrality. After reversal, high = relationship-centric."
-        },
-        {
-          "id": "val_13",
-          "text": "I would turn down a dream job in another city if my partner could not come with me.",
+          "id": "m1_vp_08",
+          "text": "Real talk: a great relationship is something you fit into a great life, or something you build your life around?",
           "sub_scale": "relationship_priority",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = relationship takes priority over individual ambition."
-        },
-        {
-          "id": "val_14",
-          "text": "A great relationship is something you fit into a great life -- it should not BE your whole life.",
-          "sub_scale": "relationship_priority",
-          "reverse_scored": true,
-          "response_type": "likert_5",
-          "scoring_note": "REVERSE SCORED. High raw = relationship as one component, not the center. After reversal, high = relationship-centric."
-        },
-        {
-          "id": "val_15",
-          "text": "I expect my partner and me to check in with each other before making any major life decisions.",
-          "sub_scale": "relationship_priority",
-          "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = relationship as integrated partnership with shared decision-making."
+          "response_type": "scenario_5",
+          "scoring_note": "Low = relationship as component. High = relationship as foundation."
         }
       ],
       "scoring": {
-        "method": "Sub-scale means computed separately, then combined as weighted average. Life Direction uses PROFILE matching (not mean) since it captures categorical orientation.",
-        "reverse_items": ["val_12", "val_14"],
-        "sub_scale_computation": {
-          "life_direction": {
-            "method": "profile_vector",
-            "description": "Create a 5-item profile vector [career, family, adventure, stability, legacy]. Compatibility = cosine similarity between two partners' vectors. High cosine = aligned life direction.",
-            "items": ["val_01", "val_02", "val_03", "val_04", "val_05"]
-          },
-          "moral_ethical": {
-            "method": "mean_score",
-            "description": "Average of 5 items. Higher = stronger moral conviction. Compatibility = 1 - abs(partner_A - partner_B) / 4, normalized to 0-1.",
-            "items": ["val_06", "val_07", "val_08", "val_09", "val_10"]
-          },
-          "relationship_priority": {
-            "method": "mean_score_with_reversal",
-            "description": "Average of 5 items after reversing val_12 and val_14. Higher = relationship is more central. Compatibility = 1 - abs(partner_A - partner_B) / 4.",
-            "items": ["val_11", "val_12", "val_13", "val_14", "val_15"]
-          }
+        "method": "Sub-scale means computed separately via scenario response values (1-5). Combined as weighted average.",
+        "reverse_items": [],
+        "sub_scale_weights": {
+          "life_direction": 0.35,
+          "moral_flexibility": 0.30,
+          "relationship_priority": 0.35
         },
-        "dimension_score": "0.35 * life_direction_similarity + 0.30 * moral_ethical_similarity + 0.35 * relationship_priority_similarity",
-        "compatibility_function": "For similarity type: dimension_score is already a 0-1 similarity measure. Multiply by weight (20) to get CIS contribution. Range: 0-20 points."
+        "compatibility_function": "Similarity: 1 - abs(partner_A - partner_B) / 4, normalized to 0-1. Multiply by weight (18) for CIS contribution."
       }
     },
     {
-      "dimension_id": "attachment",
-      "quotient_key": "AQ",
+      "dimension_id": "attachment_style",
+      "quotient_key": "AS",
       "title": "Attachment Style",
-      "description": "Maps your attachment pattern -- how you seek closeness, handle separation, and respond to perceived threats in a relationship. Attachment style predicts approximately 80% of relationship dynamics including conflict patterns, sexual satisfaction, and long-term stability.",
-      "scientific_basis": "Adapted from the ECR-R (Experiences in Close Relationships - Revised, Fraley et al. 2000). The ECR-R is the gold-standard self-report measure of adult attachment, validated across 30+ cultures with test-retest reliability of 0.93 (anxiety) and 0.95 (avoidance). We reduce the original 36 items to 15 while preserving the two-dimensional structure and adding a third Security sub-scale derived from Bartholomew & Horowitz (1991) four-category model. Items are reworded for conversational tone while preserving factor loadings from the original validation studies.",
+      "display_name": "Attachment Style",
+      "tagline": "How you love when nobody's watching.",
+      "description": "Maps your attachment pattern -- how you seek closeness, handle separation, and respond to perceived threats in a relationship.",
+      "scientific_basis": "Adapted from the ECR-R (Experiences in Close Relationships - Revised, Fraley et al. 2000). The ECR-R is the gold-standard self-report measure of adult attachment. Items reworded as culturally resonant scenarios while preserving the two-dimensional structure (anxiety x avoidance) plus a Security sub-scale.",
       "weight": 20,
       "compatibility_type": "complementary_with_guardrails",
-      "compatibility_rationale": "Attachment compatibility is not simple similarity or complementarity. The evidence (Kirkpatrick & Davis 1994; Feeney 2016) shows: (1) Secure + Any style = best outcomes, because the secure partner provides a regulatory anchor. (2) Anxious + Avoidant = worst outcomes due to the pursue-withdraw cycle. (3) Anxious + Anxious = moderate risk (high intensity but mutual understanding). (4) Avoidant + Avoidant = moderate risk (parallel lives, low intimacy). The scoring function applies a BONUS when either partner scores high-secure, and a PENALTY when one scores high-anxious AND the other scores high-avoidant.",
+      "compatibility_rationale": "Secure + Any style = best outcomes. Anxious + Avoidant = worst outcomes (pursue-withdraw cycle). Scoring applies BONUS when either partner is secure, PENALTY for anxious-avoidant pairings.",
       "sub_scales": [
         {
           "id": "anxiety",
           "name": "Attachment Anxiety",
-          "description": "Fear of abandonment, need for reassurance, hypervigilance to relationship threats. High scorers tend to pursue closeness intensely and interpret ambiguity as rejection.",
-          "question_ids": ["att_01", "att_02", "att_03", "att_04", "att_05"]
+          "description": "Fear of abandonment, need for reassurance, hypervigilance to relationship threats.",
+          "question_ids": ["m2_as_01", "m2_as_02", "m2_as_03"]
         },
         {
           "id": "avoidance",
           "name": "Attachment Avoidance",
-          "description": "Discomfort with emotional closeness, compulsive self-reliance, tendency to withdraw under stress. High scorers value independence and may suppress attachment needs.",
-          "question_ids": ["att_06", "att_07", "att_08", "att_09", "att_10"]
+          "description": "Discomfort with emotional closeness, compulsive self-reliance, tendency to withdraw under stress.",
+          "question_ids": ["m2_as_04", "m2_as_05", "m2_as_06"]
         },
         {
           "id": "security",
           "name": "Attachment Security",
-          "description": "Baseline felt safety in relationships, comfort with both intimacy and autonomy, ability to trust without hypervigilance. This is the regulatory anchor that stabilizes any pairing.",
-          "question_ids": ["att_11", "att_12", "att_13", "att_14", "att_15"]
+          "description": "Baseline felt safety in relationships, comfort with both intimacy and autonomy.",
+          "question_ids": ["m2_as_07", "m2_as_08"]
         }
       ],
       "questions": [
         {
-          "id": "att_01",
-          "text": "When my partner does not text back for a few hours, my mind starts going to worst-case scenarios.",
+          "id": "m2_as_01",
+          "text": "Your partner hasn't texted back in 6 hours. You...",
           "sub_scale": "anxiety",
           "reverse_scored": false,
-          "response_type": "likert_5",
+          "response_type": "scenario_5",
           "scoring_note": "High = attachment anxiety. Hypervigilance to availability signals."
         },
         {
-          "id": "att_02",
-          "text": "I sometimes test my partner -- pulling away a little to see if they will come after me.",
+          "id": "m2_as_02",
+          "text": "How many times have you gone back to an ex? Be honest.",
           "sub_scale": "anxiety",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = protest behavior, a hallmark of anxious attachment."
+          "response_type": "scenario_5",
+          "scoring_note": "High = attachment patterns indicating difficulty letting go. Anxious preoccupation marker."
         },
         {
-          "id": "att_03",
-          "text": "I need more reassurance than most people that my partner actually wants to be with me.",
+          "id": "m2_as_03",
+          "text": "After an argument, you can't sleep until things are resolved. Even if it's 2 AM.",
           "sub_scale": "anxiety",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = reassurance-seeking, core anxious attachment behavior."
+          "response_type": "scenario_5",
+          "scoring_note": "High = difficulty self-soothing, need for immediate repair. Core anxious attachment behavior."
         },
         {
-          "id": "att_04",
-          "text": "After an argument, I cannot relax until we have fully made up -- even if it means bringing it up again at 2 AM.",
-          "sub_scale": "anxiety",
-          "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = difficulty self-soothing, need for immediate repair."
-        },
-        {
-          "id": "att_05",
-          "text": "I rarely worry about being abandoned or about my partner losing interest in me.",
-          "sub_scale": "anxiety",
-          "reverse_scored": true,
-          "response_type": "likert_5",
-          "scoring_note": "REVERSE SCORED. High raw = low anxiety. After reversal, high = anxious."
-        },
-        {
-          "id": "att_06",
-          "text": "When things get emotionally intense, my instinct is to take space rather than talk it through.",
+          "id": "m2_as_04",
+          "text": "Your partner wants to combine finances after 6 months. Your gut says...",
           "sub_scale": "avoidance",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = avoidant deactivation under stress."
+          "response_type": "scenario_5",
+          "scoring_note": "High = avoidant (resistance to enmeshment). Low = comfort with interdependence."
         },
         {
-          "id": "att_07",
-          "text": "I find it hard to fully depend on a partner -- I would rather know I can handle things on my own.",
+          "id": "m2_as_05",
+          "text": "When things get emotionally intense in a relationship, your instinct is to...",
           "sub_scale": "avoidance",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = compulsive self-reliance, core avoidant trait."
+          "response_type": "scenario_5",
+          "scoring_note": "High = avoidant deactivation under stress. Low = secure/anxious approach behavior."
         },
         {
-          "id": "att_08",
-          "text": "Too much closeness in a relationship starts to feel suffocating, even when I love the person.",
+          "id": "m2_as_06",
+          "text": "An ex once described you as 'hard to read.' Your honest reaction?",
           "sub_scale": "avoidance",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = discomfort with intimacy, avoidant deactivation."
+          "response_type": "scenario_5",
+          "scoring_note": "High = self-identified emotional guardedness. Low = self-identified openness."
         },
         {
-          "id": "att_09",
-          "text": "I have been told by past partners that I am emotionally unavailable or hard to read.",
-          "sub_scale": "avoidance",
-          "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = behavioral avoidance recognized by others. Indirect item -- references partner feedback."
-        },
-        {
-          "id": "att_10",
-          "text": "I enjoy sharing my deepest thoughts and vulnerabilities with a romantic partner.",
-          "sub_scale": "avoidance",
-          "reverse_scored": true,
-          "response_type": "likert_5",
-          "scoring_note": "REVERSE SCORED. High raw = comfort with vulnerability (low avoidance). After reversal, high = avoidant."
-        },
-        {
-          "id": "att_11",
-          "text": "I trust that if my partner and I hit a rough patch, we will work through it together.",
+          "id": "m2_as_07",
+          "text": "Your partner is going through it. Like, really going through it. You...",
           "sub_scale": "security",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = secure base, confidence in relationship resilience."
+          "response_type": "scenario_5",
+          "scoring_note": "High = secure caregiving. Ability to show up without enmeshment or withdrawal."
         },
         {
-          "id": "att_12",
-          "text": "I am comfortable being close to my partner AND comfortable when we spend time apart.",
+          "id": "m2_as_08",
+          "text": "Can you tell your partner what you actually need without worrying they'll think you're 'too much'?",
           "sub_scale": "security",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = balanced attachment -- hallmark of secure style."
-        },
-        {
-          "id": "att_13",
-          "text": "I can tell my partner what I need without worrying they will think I am too much.",
-          "sub_scale": "security",
-          "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = felt security in expressing needs."
-        },
-        {
-          "id": "att_14",
-          "text": "When my partner is upset, I can stay calm and supportive without taking it personally.",
-          "sub_scale": "security",
-          "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = emotional regulation in relational context, secure functioning."
-        },
-        {
-          "id": "att_15",
-          "text": "Relationships have always been a source of stress and uncertainty for me more than comfort.",
-          "sub_scale": "security",
-          "reverse_scored": true,
-          "response_type": "likert_5",
-          "scoring_note": "REVERSE SCORED. High raw = insecurity baseline. After reversal, high = secure."
+          "response_type": "scenario_5",
+          "scoring_note": "High = felt security in expressing needs. Low = insecure self-silencing."
         }
       ],
       "scoring": {
-        "method": "Sub-scale means computed on 1-5 scale after reversals. Attachment classification derived from anxiety/avoidance/security profile. Compatibility uses the guardrail function.",
-        "reverse_items": ["att_05", "att_10", "att_15"],
-        "sub_scale_computation": {
-          "anxiety": {
-            "method": "mean_score_with_reversal",
-            "description": "Average of att_01 through att_05 after reversing att_05. Range 1-5. Score >= 3.5 = high anxiety.",
-            "items": ["att_01", "att_02", "att_03", "att_04", "att_05"],
-            "thresholds": { "low": [1.0, 2.4], "moderate": [2.5, 3.4], "high": [3.5, 5.0] }
-          },
-          "avoidance": {
-            "method": "mean_score_with_reversal",
-            "description": "Average of att_06 through att_10 after reversing att_10. Range 1-5. Score >= 3.5 = high avoidance.",
-            "items": ["att_06", "att_07", "att_08", "att_09", "att_10"],
-            "thresholds": { "low": [1.0, 2.4], "moderate": [2.5, 3.4], "high": [3.5, 5.0] }
-          },
-          "security": {
-            "method": "mean_score_with_reversal",
-            "description": "Average of att_11 through att_15 after reversing att_15. Range 1-5. Score >= 3.5 = securely attached.",
-            "items": ["att_11", "att_12", "att_13", "att_14", "att_15"],
-            "thresholds": { "low": [1.0, 2.4], "moderate": [2.5, 3.4], "high": [3.5, 5.0] }
-          }
-        },
+        "method": "Sub-scale means from scenario responses. Classification derived from anxiety/avoidance/security profile.",
+        "reverse_items": [],
         "attachment_classification": {
           "secure": "security >= 3.5 AND anxiety < 3.5 AND avoidance < 3.5",
           "anxious_preoccupied": "anxiety >= 3.5 AND avoidance < 3.5",
           "dismissive_avoidant": "avoidance >= 3.5 AND anxiety < 3.5",
-          "fearful_avoidant": "anxiety >= 3.5 AND avoidance >= 3.5",
-          "earned_secure": "security >= 3.5 AND (anxiety >= 3.0 OR avoidance >= 3.0) -- indicates someone who has done the work"
+          "fearful_avoidant": "anxiety >= 3.5 AND avoidance >= 3.5"
         },
         "compatibility_function": {
-          "description": "Guardrail-based complementarity scoring with bonuses and penalties.",
-          "base_score": "1.0 - (abs(A.anxiety - B.anxiety) + abs(A.avoidance - B.avoidance)) / 8.0 -- normalized distance",
-          "secure_bonus": "+0.20 if either partner classifies as secure or earned_secure",
-          "both_secure_bonus": "+0.30 if BOTH partners classify as secure (triggers BONUS_CONDITIONS.bothSecureAttachment)",
-          "anxious_avoidant_penalty": "-0.35 if one partner is high-anxious AND the other is high-avoidant (the pursue-withdraw trap)",
-          "fearful_avoidant_flag": "If either partner is fearful_avoidant, cap max score at 0.70 and surface recommendation for individual therapy before dating",
+          "base_score": "1.0 - (abs(A.anxiety - B.anxiety) + abs(A.avoidance - B.avoidance)) / 8.0",
+          "secure_bonus": "+0.20 if either partner classifies as secure",
+          "both_secure_bonus": "+0.30 if BOTH partners classify as secure",
+          "anxious_avoidant_penalty": "-0.35 if one is high-anxious AND the other is high-avoidant",
           "final_range": "Clamp to [0, 1]. Multiply by weight (20) for CIS contribution."
         }
       }
     },
     {
-      "dimension_id": "communication",
-      "quotient_key": "CQ",
+      "dimension_id": "communication_conflict",
+      "quotient_key": "CC",
       "title": "Communication & Conflict",
-      "description": "How you fight, how you make up, and how openly you share what is actually going on inside. Communication style is the most trainable dimension but also the most immediately damaging when mismatched. Two conflict-avoiders build resentment; two confronters exhaust each other; the right balance comes from complementary approaches.",
-      "scientific_basis": "Integrates two validated frameworks: (1) Gottman's Four Horsemen of the Apocalypse (criticism, contempt, defensiveness, stonewalling) -- the four behaviors that predict divorce with 93.6% accuracy (Gottman & Levenson, 2000). (2) Thomas-Kilmann Conflict Mode Instrument (TKI) -- the 5 conflict styles (competing, collaborating, compromising, avoiding, accommodating) mapped onto assertiveness x cooperativeness axes. We prioritize repair attempts (Gottman's #1 predictor of relationship success) as a distinct sub-scale.",
-      "weight": 18,
-      "compatibility_type": "complementary",
-      "compatibility_rationale": "Gottman's research shows that it is not whether couples fight but HOW they fight and whether they can repair. Two avoiders accumulate unresolved grievances. Two high-confrontation partners escalate without braking. The optimal pairing is one partner who is slightly more willing to initiate difficult conversations paired with one who is slightly more willing to de-escalate -- creating a natural regulate-and-repair cycle. Repair Attempts sub-scale is weighted highest because repair capacity transcends conflict style.",
+      "display_name": "Communication & Conflict",
+      "tagline": "How you fight matters more than how you flirt.",
+      "description": "How you fight, how you make up, and how openly you share what's actually going on inside. Communication style is the most trainable dimension but the most immediately damaging when mismatched.",
+      "scientific_basis": "Integrates Gottman's Four Horsemen framework (predicts divorce with 93.6% accuracy) and the Thomas-Kilmann Conflict Mode Instrument (TKI). Repair attempts are weighted highest as Gottman's #1 predictor of relationship success.",
+      "weight": 17,
+      "compatibility_type": "complementarity",
+      "compatibility_rationale": "It's not whether couples fight but HOW they fight and whether they can repair. Repair capacity transcends conflict style.",
       "sub_scales": [
         {
-          "id": "conflict_approach",
-          "name": "Conflict Approach",
-          "description": "Your default mode when tension arises -- do you lean in, shut down, accommodate, or negotiate? Maps to Thomas-Kilmann's assertiveness x cooperativeness grid.",
-          "question_ids": ["com_01", "com_02", "com_03", "com_04", "com_05"]
+          "id": "conflict_style",
+          "name": "Conflict Style",
+          "description": "Your default mode when tension arises -- lean in, shut down, accommodate, or negotiate.",
+          "question_ids": ["m3_cc_01", "m3_cc_02", "m3_cc_03"]
         },
         {
-          "id": "repair_attempts",
-          "name": "Repair Attempts",
-          "description": "Your ability and willingness to de-escalate, take accountability, and reconnect after conflict. Gottman's single strongest predictor of relationship longevity.",
-          "question_ids": ["com_06", "com_07", "com_08", "com_09", "com_10"]
+          "id": "repair_capacity",
+          "name": "Repair Capacity",
+          "description": "Ability and willingness to de-escalate, take accountability, and reconnect after conflict.",
+          "question_ids": ["m3_cc_04", "m3_cc_05", "m3_cc_06"]
         },
         {
           "id": "emotional_expression",
           "name": "Emotional Expression",
-          "description": "How openly and directly you share your internal emotional state. Ranges from highly expressive to deeply private. Neither extreme is ideal, but large gaps between partners create a 'mind-reading' expectation that always fails.",
-          "question_ids": ["com_11", "com_12", "com_13", "com_14", "com_15"]
+          "description": "How openly and directly you share your internal emotional state.",
+          "question_ids": ["m3_cc_07", "m3_cc_08"]
         }
       ],
       "questions": [
         {
-          "id": "com_01",
-          "text": "When your partner brings up something that bothers them about you, your first instinct is to explain your side before fully hearing theirs.",
-          "sub_scale": "conflict_approach",
+          "id": "m3_cc_01",
+          "text": "Your partner roasts you a little too hard in front of friends. You...",
+          "sub_scale": "conflict_style",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = defensiveness (Gottman Horseman #3). Also maps to competing on TKI.",
-          "item_type": "scenario"
+          "response_type": "scenario_5",
+          "scoring_note": "Measures conflict approach from avoidant (1) to confrontational (5)."
         },
         {
-          "id": "com_02",
-          "text": "You notice your partner has been distant for a few days. You would rather wait for them to bring it up than ask what is wrong.",
-          "sub_scale": "conflict_approach",
-          "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = conflict avoidance. Maps to avoiding on TKI.",
-          "item_type": "scenario"
-        },
-        {
-          "id": "com_03",
-          "text": "In a disagreement, I would rather find a solution we both feel okay about than win the argument.",
-          "sub_scale": "conflict_approach",
-          "reverse_scored": true,
-          "response_type": "likert_5",
-          "scoring_note": "REVERSE SCORED. High raw = collaborative approach (healthy). After reversal, high = more confrontational/competitive.",
-          "item_type": "belief"
-        },
-        {
-          "id": "com_04",
-          "text": "Your partner makes a decision you disagree with without consulting you. You bring it up directly, even knowing it might start an argument.",
-          "sub_scale": "conflict_approach",
-          "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = direct confrontation style. Maps to competing/assertive on TKI. Not inherently negative -- measures willingness to engage.",
-          "item_type": "scenario"
-        },
-        {
-          "id": "com_05",
+          "id": "m3_cc_02",
           "text": "During a heated argument, I have a hard time stopping myself from saying things I know will hurt.",
-          "sub_scale": "conflict_approach",
+          "sub_scale": "conflict_style",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = contempt/criticism under stress (Gottman Horsemen #1 and #2). Red flag item at score 5.",
-          "item_type": "belief"
+          "response_type": "scenario_5",
+          "scoring_note": "High = contempt/hostility under stress (Gottman Horsemen #1 and #2). Red flag item at score 5."
         },
         {
-          "id": "com_06",
-          "text": "After a fight, you are the first one to reach out -- a touch, a joke, a 'hey, I hated that' -- even if you still feel hurt.",
-          "sub_scale": "repair_attempts",
+          "id": "m3_cc_03",
+          "text": "Your partner says 'we need to talk.' Your heart rate goes from 0 to...",
+          "sub_scale": "conflict_style",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = strong repair initiation. Gottman's #1 predictor of relationship success.",
-          "item_type": "scenario"
+          "response_type": "scenario_5",
+          "scoring_note": "Measures conflict-related anxiety. High = hyperactivation to conflict cues."
         },
         {
-          "id": "com_07",
+          "id": "m3_cc_04",
+          "text": "How long can you hold a grudge? Be honest.",
+          "sub_scale": "repair_capacity",
+          "reverse_scored": false,
+          "response_type": "scenario_5",
+          "scoring_note": "High = strong forgiveness capacity. Low = poor repair ability."
+        },
+        {
+          "id": "m3_cc_05",
+          "text": "After a bad fight, who reaches out first to make up?",
+          "sub_scale": "repair_capacity",
+          "reverse_scored": false,
+          "response_type": "scenario_5",
+          "scoring_note": "High = strong repair initiation. Gottman's #1 predictor of relationship success."
+        },
+        {
+          "id": "m3_cc_06",
           "text": "I can genuinely apologize and mean it, even when I think I was only partly wrong.",
-          "sub_scale": "repair_attempts",
+          "sub_scale": "repair_capacity",
           "reverse_scored": false,
-          "response_type": "likert_5",
+          "response_type": "scenario_5",
           "scoring_note": "High = accountability and partial-fault ownership. Critical repair skill."
         },
         {
-          "id": "com_08",
-          "text": "Your partner says something hurtful during an argument but apologizes the next morning. You can accept it and actually move on -- not just say you do.",
-          "sub_scale": "repair_attempts",
-          "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = repair receptivity. Ability to accept and integrate partner's repair attempts.",
-          "item_type": "scenario"
-        },
-        {
-          "id": "com_09",
-          "text": "When I realize I have been wrong about something in an argument, I find it very hard to back down in the moment.",
-          "sub_scale": "repair_attempts",
-          "reverse_scored": true,
-          "response_type": "likert_5",
-          "scoring_note": "REVERSE SCORED. High raw = rigid, cannot course-correct. After reversal, high = flexible repair capacity."
-        },
-        {
-          "id": "com_10",
-          "text": "Even after a bad argument, I never question whether my partner and I will be okay -- I know we will get through it.",
-          "sub_scale": "repair_attempts",
-          "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = relationship confidence that enables repair. Overlaps with secure attachment but measured here as repair-specific trust."
-        },
-        {
-          "id": "com_11",
-          "text": "My partner would say they always know how I am feeling -- I am an open book.",
+          "id": "m3_cc_07",
+          "text": "You've had a terrible day. Your partner asks how you're doing. You say...",
           "sub_scale": "emotional_expression",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = high emotional transparency."
+          "response_type": "scenario_5",
+          "scoring_note": "Low = emotional suppression. High = emotional transparency."
         },
         {
-          "id": "com_12",
-          "text": "You have had a terrible day at work. When your partner asks how your day was, you say 'fine' and change the subject.",
-          "sub_scale": "emotional_expression",
-          "reverse_scored": true,
-          "response_type": "likert_5",
-          "scoring_note": "REVERSE SCORED. High raw = emotional suppression. After reversal, high = emotionally expressive.",
-          "item_type": "scenario"
-        },
-        {
-          "id": "com_13",
-          "text": "I believe that if something is bothering me in the relationship, it is my responsibility to say it out loud -- not my partner's job to figure it out.",
+          "id": "m3_cc_08",
+          "text": "You're feeling insecure about where things stand with your partner. Do you tell them?",
           "sub_scale": "emotional_expression",
           "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = ownership of emotional communication. Anti-mind-reading stance."
-        },
-        {
-          "id": "com_14",
-          "text": "I get uncomfortable when conversations get too emotionally deep -- I prefer to keep things lighter.",
-          "sub_scale": "emotional_expression",
-          "reverse_scored": true,
-          "response_type": "likert_5",
-          "scoring_note": "REVERSE SCORED. High raw = emotional depth avoidance. After reversal, high = comfort with emotional depth.",
-          "item_type": "belief"
-        },
-        {
-          "id": "com_15",
-          "text": "You are feeling insecure about where things stand with your partner. You tell them exactly that, even though it makes you feel vulnerable.",
-          "sub_scale": "emotional_expression",
-          "reverse_scored": false,
-          "response_type": "likert_5",
-          "scoring_note": "High = vulnerability willingness. Combines emotional expression with courage.",
-          "item_type": "scenario"
+          "response_type": "scenario_5",
+          "scoring_note": "High = vulnerability willingness. Combines emotional expression with courage."
         }
       ],
       "scoring": {
-        "method": "Sub-scale means computed after reversals. Conflict Approach produces a profile (not a single score). Repair and Expression produce mean scores. Compatibility uses complementarity with repair weighting.",
-        "reverse_items": ["com_03", "com_09", "com_12", "com_14"],
-        "sub_scale_computation": {
-          "conflict_approach": {
-            "method": "profile_classification",
-            "description": "Items map to TKI styles. com_01 = defensive/competing, com_02 = avoiding, com_03(R) = anti-collaborative, com_04 = assertive/competing, com_05 = hostile escalation. Classify into: confronter (high com_01, com_04, com_05), avoider (high com_02, low com_04), collaborator (high com_03-raw, low com_05), or accommodator (low com_01, low com_04, high com_02).",
-            "items": ["com_01", "com_02", "com_03", "com_04", "com_05"],
-            "classification": {
-              "confronter": "Mean of [com_01, com_04, com_05] >= 3.5",
-              "avoider": "com_02 >= 3.5 AND com_04 <= 2.5",
-              "collaborator": "com_03_raw >= 3.5 AND com_05 <= 2.5",
-              "accommodator": "com_01 <= 2.5 AND com_04 <= 2.5 AND com_02 >= 3.0"
-            }
-          },
-          "repair_attempts": {
-            "method": "mean_score_with_reversal",
-            "description": "Average of com_06 through com_10 after reversing com_09. Range 1-5. Higher = stronger repair capacity. This is the most important sub-scale in this dimension.",
-            "items": ["com_06", "com_07", "com_08", "com_09", "com_10"],
-            "thresholds": { "low": [1.0, 2.4], "moderate": [2.5, 3.4], "high": [3.5, 5.0] }
-          },
-          "emotional_expression": {
-            "method": "mean_score_with_reversal",
-            "description": "Average of com_11 through com_15 after reversing com_12 and com_14. Range 1-5. Higher = more emotionally expressive and transparent.",
-            "items": ["com_11", "com_12", "com_13", "com_14", "com_15"],
-            "thresholds": { "low": [1.0, 2.4], "moderate": [2.5, 3.4], "high": [3.5, 5.0] }
-          }
+        "method": "Sub-scale means. Repair weighted highest. Complementarity scoring with repair weighting.",
+        "reverse_items": [],
+        "sub_scale_weights": {
+          "conflict_style": 0.30,
+          "repair_capacity": 0.45,
+          "emotional_expression": 0.25
         },
         "compatibility_function": {
-          "description": "Complementarity scoring with heavy repair weighting.",
-          "conflict_approach_score": "Optimal pairings scored 0-1: confronter + avoider = 0.55 (functional but risky), confronter + collaborator = 0.75, avoider + collaborator = 0.70, collaborator + collaborator = 0.90, confronter + confronter = 0.35, avoider + avoider = 0.30, any + accommodator = 0.60. These base scores reflect Gottman's outcome data.",
-          "repair_score": "min(A.repair, B.repair) / 5.0 -- the relationship's repair capacity is only as strong as the weaker partner's ability",
-          "expression_score": "1.0 - abs(A.expression - B.expression) / 4.0 -- similarity scoring here because large gaps create mind-reading expectations",
-          "dimension_score": "0.30 * conflict_approach_score + 0.45 * repair_score + 0.25 * expression_score",
-          "horseman_penalty": "If com_05 >= 4 for either partner, apply -0.10 penalty (contempt/hostility flag)",
-          "final_range": "Clamp to [0, 1]. Multiply by weight (18) for CIS contribution."
+          "repair_score": "min(A.repair, B.repair) / 5.0",
+          "expression_score": "1.0 - abs(A.expression - B.expression) / 4.0",
+          "dimension_score": "0.30 * conflict_style_score + 0.45 * repair_score + 0.25 * expression_score",
+          "horseman_penalty": "If m3_cc_02 >= 4 for either partner, apply -0.10 penalty",
+          "final_range": "Clamp to [0, 1]. Multiply by weight (17) for CIS contribution."
         }
       }
     }
