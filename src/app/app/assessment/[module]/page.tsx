@@ -6,7 +6,7 @@ import { useRouter, useParams } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context'
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
 import { useAssessmentStore } from '@/store/assessment-store'
-import { getModuleQuestions } from '@/lib/assessment/question-bank'
+import { getPersonalizedQuestions } from '@/lib/assessment/question-router'
 import { MODULE_CONFIG, getUnlockedProfileCount } from '@/lib/constants'
 import { ArrowLeft, ArrowRight, CheckCircle2, Sparkles, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -82,7 +82,10 @@ export default function ModuleAssessmentPage() {
     assessmentProgress,
   } = useAssessmentStore()
 
-  const questions = useMemo(() => getModuleQuestions(moduleNum), [moduleNum])
+  const questions = useMemo(
+    () => getPersonalizedQuestions(moduleNum, userDob, userCulture),
+    [moduleNum, userDob, userCulture]
+  )
   const moduleConfig = MODULE_CONFIG[moduleNum - 1]
   const qIndex = currentIndex[moduleNum] ?? 0
   const currentQuestion = questions[qIndex]
@@ -96,6 +99,24 @@ export default function ModuleAssessmentPage() {
   const [direction, setDirection] = useState(1)
   const [selectedValue, setSelectedValue] = useState<number | null>(null)
   const [scoreSummary, setScoreSummary] = useState<Record<string, { overall: number }> | null>(null)
+  const [userDob, setUserDob] = useState<string | null>(null)
+  const [userCulture, setUserCulture] = useState<string | null>(null)
+
+  // Fetch user profile for demographic question personalization
+  useEffect(() => {
+    if (!user || !supabase) return
+    supabase
+      .from('profiles')
+      .select('date_of_birth, cultural_background')
+      .eq('id', user.id)
+      .single()
+      .then(({ data }) => {
+        if (data) {
+          setUserDob(data.date_of_birth ?? null)
+          setUserCulture(data.cultural_background ?? null)
+        }
+      })
+  }, [user?.id])
 
   // Validate module number
   if (!moduleConfig || questions.length === 0) {

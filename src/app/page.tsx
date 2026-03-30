@@ -50,7 +50,7 @@ export default function LandingPage() {
                 style={{ background: 'var(--ciq-purple-light)', color: 'var(--ciq-purple)' }}
               >
                 <Clock className="w-3.5 h-3.5" />
-                30 minutes. That&apos;s it.
+                7-10 minutes. That&apos;s it.
               </div>
               <h1 className="text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6 text-gray-900">
                 Date with<br /><span style={{ color: 'var(--ciq-purple)' }}>proof.</span>
@@ -67,7 +67,7 @@ export default function LandingPage() {
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-2xl text-white hover:shadow-lg transition-all"
                   style={{ background: 'var(--ciq-purple)' }}
                 >
-                  Start Free — Takes 30 Min
+                  Start Free — Takes 7-10 Min
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <a
@@ -107,7 +107,7 @@ export default function LandingPage() {
       <section className="border-y border-gray-100 bg-gray-50/50">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex flex-wrap justify-center gap-x-12 gap-y-4 text-center">
           {[
-            { value: '30 min', label: 'Total Assessment Time' },
+            { value: '7-10 min', label: 'Initial Assessment Time' },
             { value: '6', label: 'Free Assessments' },
             { value: '100%', label: 'Free to Match' },
             { value: '0', label: 'Swipes Required', highlight: true },
@@ -240,7 +240,7 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto px-6 lg:px-12">
           <div className="text-center mb-16">
             <p className="text-sm font-semibold mb-3 tracking-wide uppercase" style={{ color: 'var(--ciq-purple)' }}>How It Works</p>
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">6 assessments. 30 minutes. Real matches.</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">6 assessments. 7-10 minutes. Real matches.</h2>
             <p className="text-gray-500 max-w-2xl mx-auto">Every assessment is free. Complete all six and start getting matched with people who are actually compatible — scored across the dimensions that predict real relationships.</p>
           </div>
 
@@ -251,7 +251,7 @@ export default function LandingPage() {
                 <Check className="w-3 h-3" />
                 100% FREE
               </span>
-              <p className="text-sm font-medium text-gray-500">~30 minutes total &bull; 6 assessments &bull; ~5 min each</p>
+              <p className="text-sm font-medium text-gray-500">7-10 min total &bull; 6 assessments &bull; ~1-2 min each</p>
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
               {[
@@ -273,7 +273,7 @@ export default function LandingPage() {
                   <p className="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
                   <div className="mt-4 flex items-center gap-2 text-xs text-gray-300">
                     <Clock className="w-3 h-3" />
-                    ~5 min
+                    ~1-2 min
                   </div>
                 </div>
               ))}
@@ -288,7 +288,7 @@ export default function LandingPage() {
                   <Check className="w-6 h-6" />
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-1">Complete 6 assessments</h4>
-                <p className="text-sm text-gray-400">Free. ~30 minutes. Do them over lunch.</p>
+                <p className="text-sm text-gray-400">Free. 7-10 minutes. Do them between meetings.</p>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ background: 'var(--ciq-purple-light)', color: 'var(--ciq-purple)' }}>
@@ -430,7 +430,7 @@ export default function LandingPage() {
           style={{ background: 'linear-gradient(135deg, #7B68B5 0%, #9B8DD0 100%)' }}
         >
           <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-white">
-            30 minutes now.<br />Zero bad dates later.
+            7-10 minutes now.<br />Zero bad dates later.
           </h2>
           <p className="text-lg mb-10 max-w-lg mx-auto text-white/80">
             Your free assessment is waiting. Six dimensions, no credit card, and the kind of clarity you wish you had three relationships ago.
