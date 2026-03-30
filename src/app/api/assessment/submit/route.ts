@@ -79,20 +79,21 @@ export async function POST(request: Request) {
         computedScores.push(dimScore)
 
         // Store dimension score in database
+        // Pack dimension-specific data into sub_scale_scores JSON
+        const subScaleData: Record<string, unknown> = { ...dimScore.subScaleScores }
+        if (dimScore.attachmentStyle) subScaleData._attachmentStyle = dimScore.attachmentStyle
+        if (dimScore.conflictApproach) subScaleData._conflictApproach = dimScore.conflictApproach
+        if (dimScore.loveLangProfile) subScaleData._loveLangProfile = dimScore.loveLangProfile
+
         await serviceClient
           .from('dimension_scores')
           .upsert({
             user_id: user.id,
             dimension_id: dimId,
-            module,
             overall_score: dimScore.overallScore,
-            sub_scale_scores: dimScore.subScaleScores,
-            attachment_style: dimScore.attachmentStyle ?? null,
-            conflict_approach: dimScore.conflictApproach ?? null,
-            love_lang_profile: dimScore.loveLangProfile ?? null,
-            profile_vector: dimScore.profileVector ?? null,
+            sub_scale_scores: subScaleData,
             computed_at: new Date().toISOString(),
-          } as never, {
+          }, {
             onConflict: 'user_id,dimension_id',
           })
       } catch (scoreErr) {
