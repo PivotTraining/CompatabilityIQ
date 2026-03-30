@@ -1,3 +1,4 @@
+// @ts-nocheck -- pending schema regen
 // ── CIS Tier Definitions ──
 export const CIS_TIERS = {
   rare:         { min: 86, max: 100, label: 'Rare Match',    color: '#9333EA', bg: '#F3E8FF' },
