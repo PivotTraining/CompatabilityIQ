@@ -54,6 +54,16 @@ const RELATIONSHIP_GOAL_OPTIONS: { value: RelationshipGoal; label: string }[] = 
   { value: 'not_sure', label: 'Not sure yet' },
 ]
 
+const CULTURAL_BACKGROUND_OPTIONS = [
+  { value: 'Black / African American', label: 'Black / African American' },
+  { value: 'Latino / Hispanic', label: 'Latino / Hispanic' },
+  { value: 'Asian / Pacific Islander', label: 'Asian / Pacific Islander' },
+  { value: 'White / European', label: 'White / European' },
+  { value: 'Mixed / Multiracial', label: 'Mixed / Multiracial' },
+  { value: 'Other', label: 'Other' },
+  { value: 'Prefer not to say', label: 'Prefer not to say' },
+]
+
 const US_STATES = [
   'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA',
   'KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ',
@@ -81,6 +91,9 @@ export default function OnboardingPage() {
   const [dateOfBirth, setDateOfBirth] = useState('')
   const [locationCity, setLocationCity] = useState('')
   const [locationState, setLocationState] = useState('')
+
+  // Cultural background (optional)
+  const [culturalBackground, setCulturalBackground] = useState('')
 
   // Step 2: Preferences (dating mode) / Identity (self-discovery mode)
   const [genderIdentity, setGenderIdentity] = useState<GenderIdentity | ''>('')
@@ -142,6 +155,11 @@ export default function OnboardingPage() {
       gender_identity: genderIdentity as GenderIdentity,
       sexual_orientation: sexualOrientation as SexualOrientation,
       mode: mode,
+    }
+
+    // Include cultural background if provided (optional field)
+    if (culturalBackground) {
+      updateData.cultural_background = culturalBackground
     }
 
     // Only include dating-specific fields for dating mode
@@ -416,6 +434,27 @@ export default function OnboardingPage() {
                   <option key={s} value={s}>{s}</option>
                 ))}
               </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>
+                Cultural background{' '}
+                <span className="font-normal" style={{ color: 'var(--text-muted)' }}>(optional — helps personalize your experience)</span>
+              </label>
+              <select
+                value={culturalBackground}
+                onChange={(e) => setCulturalBackground(e.target.value)}
+                className="w-full px-4 py-2.5 rounded-xl border text-sm outline-none transition-colors focus:border-[var(--border-focus)]"
+                style={{ background: 'var(--bg-card)', borderColor: 'var(--border)', color: culturalBackground ? 'var(--text-primary)' : 'var(--text-muted)' }}
+              >
+                <option value="">Select if you&apos;d like</option>
+                {CULTURAL_BACKGROUND_OPTIONS.map((opt) => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+              </select>
+              <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
+                This is completely optional and only used to tailor assessment questions to feel more relevant to you.
+              </p>
             </div>
           </div>
         </div>
