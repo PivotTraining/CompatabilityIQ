@@ -144,12 +144,42 @@ export default function ModuleAssessmentPage() {
     setSelectedValue(value)
     setAnswer(moduleNum, currentQuestion.id, value)
 
-    // Auto-advance after brief delay
     if (!isLastQuestion) {
+      // Auto-advance after brief delay
       setTimeout(() => {
         setDirection(1)
         setCurrentIndex(moduleNum, qIndex + 1)
       }, 350)
+    } else {
+      // Last question answered — auto-submit after a brief pause
+      const updatedAnswers = { ...answers, [currentQuestion.id]: value }
+      setTimeout(() => {
+        submitModule(updatedAnswers)
+      }, 500)
+    }
+  }
+
+  const submitModule = async (finalAnswers: Record<string, number>) => {
+    if (!user || submitting) return
+    setSubmitting(true)
+
+    // Show celebration immediately — don't wait for API
+    setTimeout(() => {
+      completeModule(moduleNum)
+      setAssessmentProgress(moduleNum)
+      clearDraft(moduleNum)
+      setShowComplete(true)
+    }, 800)
+
+    // Fire-and-forget API call to store answers
+    try {
+      await fetch('/api/assessment/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ module: moduleNum, answers: finalAnswers }),
+      })
+    } catch (err) {
+      console.error('Assessment submit (background):', err)
     }
   }
 
@@ -167,40 +197,9 @@ export default function ModuleAssessmentPage() {
     }
   }
 
-  const handleSubmit = async () => {
-    if (!user || !allAnswered) return
-    setSubmitting(true)
-
-    try {
-      const res = await fetch('/api/assessment/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          module: moduleNum,
-          answers,
-        }),
-      })
-
-      if (!res.ok) throw new Error('Submission failed')
-
-      const result = await res.json()
-
-      // Store score summary if returned
-      if (result.scores) {
-        setScoreSummary(result.scores)
-      }
-
-      // Update local state
-      completeModule(moduleNum)
-      setAssessmentProgress(moduleNum)
-      clearDraft(moduleNum)
-
-      // Show completion celebration
-      setShowComplete(true)
-    } catch (err) {
-      console.error('Assessment submission error:', err)
-      setSubmitting(false)
-    }
+  // handleSubmit kept as fallback for the "Complete Module" button
+  const handleSubmit = () => {
+    submitModule(answers)
   }
 
   // ── Completion Celebration Screen ──
