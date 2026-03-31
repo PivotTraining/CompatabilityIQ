@@ -197,10 +197,63 @@ export default function ProfilePage() {
     setEditing(false)
   }
 
+  // Compress image client-side before upload (canvas resize + JPEG at 85%)
+  const compressImage = (file: File): Promise<File> => {
+    return new Promise((resolve) => {
+      const MAX_DIM = 1200
+      const QUALITY = 0.85
+      const img = new window.Image()
+      const url = URL.createObjectURL(file)
+
+      img.onload = () => {
+        URL.revokeObjectURL(url)
+        let { width, height } = img
+
+        // Downscale if larger than MAX_DIM on either axis
+        if (width > MAX_DIM || height > MAX_DIM) {
+          if (width > height) {
+            height = Math.round((height * MAX_DIM) / width)
+            width = MAX_DIM
+          } else {
+            width = Math.round((width * MAX_DIM) / height)
+            height = MAX_DIM
+          }
+        }
+
+        const canvas = document.createElement('canvas')
+        canvas.width = width
+        canvas.height = height
+        const ctx = canvas.getContext('2d')
+        if (!ctx) { resolve(file); return }
+        ctx.drawImage(img, 0, 0, width, height)
+
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) { resolve(file); return }
+            const compressed = new File([blob], file.name.replace(/\.[^.]+$/, '.jpg'), {
+              type: 'image/jpeg',
+              lastModified: Date.now(),
+            })
+            // Only use compressed version if it's actually smaller
+            resolve(compressed.size < file.size ? compressed : file)
+          },
+          'image/jpeg',
+          QUALITY
+        )
+      }
+
+      img.onerror = () => { URL.revokeObjectURL(url); resolve(file) }
+      img.src = url
+    })
+  }
+
   // Photo upload — goes through server validation at /api/photos/upload
   const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!user || !supabase || !e.target.files?.length) return
-    const file = e.target.files[0]
+    const raw = e.target.files[0]
+
+    // Compress before upload — reduces avg photo from ~3MB → ~400KB
+    const file = await compressImage(raw)
 
     const formData = new FormData()
     formData.append('photo', file) // API expects key 'photo'
