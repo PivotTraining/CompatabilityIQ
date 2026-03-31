@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Brain, Heart, TrendingUp, Lock, Sparkles, ArrowRight, Check, Clock, MessageCircle } from 'lucide-react'
+import WaitlistModal from '@/components/WaitlistModal'
 
 export const metadata: Metadata = {
   title: 'CompatibleIQ — Date with Proof | Science-Backed Compatibility Scoring',
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
+      <WaitlistModal />
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 lg:px-12 py-5 max-w-7xl mx-auto">
         <div className="flex items-center gap-2">
