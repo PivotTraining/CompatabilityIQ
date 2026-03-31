@@ -26,13 +26,13 @@ export async function POST(request: Request) {
     const body = await request.json()
     const { module, answers } = body as { module: number; answers: Record<string, number> }
 
-    if (!module || module < 1 || module > 6) {
+    if (!module || module < 1 || module > 8) {
       return NextResponse.json({ error: 'Invalid module' }, { status: 400 })
     }
 
-    const expectedCount = MODULE_CONFIG[module - 1]?.questionCount
-    if (!expectedCount || Object.keys(answers).length !== expectedCount) {
-      return NextResponse.json({ error: 'Incomplete answers' }, { status: 400 })
+    const answerCount = Object.keys(answers).length
+    if (answerCount === 0) {
+      return NextResponse.json({ error: 'No answers provided' }, { status: 400 })
     }
 
     // ── 3. Store raw answers ──

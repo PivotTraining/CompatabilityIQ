@@ -81,12 +81,12 @@ export const CIS_WEIGHTS = {
 
 // ── Assessment Module Config ──
 export const MODULE_CONFIG = [
-  { module: 1, title: 'Who You Are',        subtitle: 'Values & Growth',        quotients: ['VQ', 'GQ'] as const,                      questionCount: 24, unlockCount: 3,  estimatedMinutes: 8  },
-  { module: 2, title: 'How You Love',       subtitle: 'Attachment & Love',       quotients: ['AQ', 'LQ'] as const,                      questionCount: 22, unlockCount: 5,  estimatedMinutes: 7  },
-  { module: 3, title: 'How You Feel',       subtitle: 'Emotional & Neurobiological', quotients: ['EQ', 'NQ'] as const,                  questionCount: 26, unlockCount: 7,  estimatedMinutes: 9  },
-  { module: 4, title: 'How You Communicate', subtitle: 'Conflict & Cognitive Style', quotients: ['CQ', 'CSQ'] as const,                 questionCount: 20, unlockCount: 10, estimatedMinutes: 7  },
-  { module: 5, title: 'Your Depth Profile', subtitle: 'Relational History',      quotients: ['ACC', 'EMP', 'STB', 'SAF', 'DEP'] as const, questionCount: 28, unlockCount: 15, estimatedMinutes: 10 },
-  { module: 6, title: 'Money & Life',       subtitle: 'Financial Alignment',     quotients: ['FMI', 'FSB', 'FPL', 'FIQ', 'FCM', 'CDF'] as const, questionCount: 22, unlockCount: -1, estimatedMinutes: 8  },
+  { module: 1, title: 'Who You Are',        subtitle: 'Values & Growth',        quotients: ['VQ', 'GQ'] as const,                      questionCount: 16, unlockCount: 3,  estimatedMinutes: 3  },
+  { module: 2, title: 'How You Love',       subtitle: 'Attachment & Love',       quotients: ['AQ', 'LQ'] as const,                      questionCount: 16, unlockCount: 5,  estimatedMinutes: 3  },
+  { module: 3, title: 'How You Feel',       subtitle: 'Emotional & Neurobiological', quotients: ['EQ', 'NQ'] as const,                  questionCount: 16, unlockCount: 7,  estimatedMinutes: 3  },
+  { module: 4, title: 'How You Communicate', subtitle: 'Conflict & Cognitive Style', quotients: ['CQ', 'CSQ'] as const,                 questionCount: 16, unlockCount: 10, estimatedMinutes: 3  },
+  { module: 5, title: 'Your Depth Profile', subtitle: 'Relational History',      quotients: ['ACC', 'EMP', 'STB', 'SAF', 'DEP'] as const, questionCount: 16, unlockCount: 15, estimatedMinutes: 3  },
+  { module: 6, title: 'Money & Life',       subtitle: 'Financial Alignment',     quotients: ['FMI', 'FSB', 'FPL', 'FIQ', 'FCM', 'CDF'] as const, questionCount: 16, unlockCount: -1, estimatedMinutes: 3  },
 ] as const
 
 // ── Progressive Unlock ──
