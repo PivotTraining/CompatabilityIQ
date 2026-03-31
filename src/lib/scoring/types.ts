@@ -1,31 +1,31 @@
 // CompatibleIQ -- CIS Scoring Engine Types
 // All types for the Compatibility Index Score system
-// Updated for 5 free + 3 paid module structure
+// 6-module free assessment + paid add-ons
 
 // ═══════════════════════════════════════════
 // Dimension & Sub-Scale Types
 // ═══════════════════════════════════════════
 
-/** The 8 assessment dimensions (5 free + 3 paid) */
+/** The 6 core assessment dimensions + 2 paid add-ons */
 export type DimensionId =
-  | 'values_priorities'
-  | 'attachment_style'
-  | 'communication_conflict'
+  | 'values'
+  | 'attachment'
+  | 'communication'
   | 'how_you_love'
-  | 'hot_takes_dealbreakers'
+  | 'hot_takes'
   | 'emotional_intelligence'
   | 'lifestyle_ambition'
   | 'intimacy_chemistry'
 
-/** Free dimensions (included in The Vibe Check) */
+/** Free dimensions (modules 1-5) */
 export type FreeDimensionId =
-  | 'values_priorities'
-  | 'attachment_style'
-  | 'communication_conflict'
+  | 'values'
+  | 'attachment'
+  | 'communication'
   | 'how_you_love'
-  | 'hot_takes_dealbreakers'
+  | 'hot_takes'
 
-/** Paid add-on dimensions ($4.99 each) */
+/** Paid add-on dimensions */
 export type PaidDimensionId =
   | 'emotional_intelligence'
   | 'lifestyle_ambition'
@@ -40,7 +40,7 @@ export type CompatibilityType =
 
 /** A user's computed scores for a single dimension */
 export interface DimensionScore {
-  dimensionId: DimensionId
+  dimensionId: DimensionId | string
   dimensionName: string
   /** Overall mean score for the dimension (1.0-5.0 for scenario scales) */
   overallScore: number
@@ -52,6 +52,8 @@ export interface DimensionScore {
   conflictApproach?: ConflictApproach
   /** For how-you-love dimension: primary giving and receiving languages */
   loveLangProfile?: LoveLanguageProfile
+  /** For values dimension: raw profile vector for cosine similarity */
+  profileVector?: number[]
   /** Whether this dimension is from a paid module */
   paid?: boolean
 }
@@ -101,6 +103,8 @@ export interface LoveLanguageProfile {
   receivingTally: Record<LoveLanguage, number>
   /** Tally of how many times each language was selected for giving */
   givingTally: Record<LoveLanguage, number>
+  /** Flexibility score from Likert items */
+  flexibilityScore: number
 }
 
 // ═══════════════════════════════════════════
@@ -116,12 +120,12 @@ export interface CISResult {
   /** Compatibility tier based on overall score */
   tier: CISTier
   /** Whether paid dimensions were included in the scoring */
-  includesPaidDimensions: boolean
+  includesPaidDimensions?: boolean
 }
 
 /** Compatibility score for a single dimension */
 export interface DimensionCompatibility {
-  dimensionId: DimensionId
+  dimensionId: DimensionId | string
   dimensionName: string
   /** Raw compatibility score for this dimension (0-100) */
   score: number
@@ -132,7 +136,7 @@ export interface DimensionCompatibility {
   /** The scoring method used for this dimension */
   compatibilityType: CompatibilityType
   /** Whether this is a paid dimension */
-  paid: boolean
+  paid?: boolean
 }
 
 /** Compatibility tier thresholds */
@@ -154,7 +158,7 @@ export interface CompatibilityBreakdown {
 
 /** Per-dimension insight for the Resonance Report */
 export interface DimensionInsight {
-  dimensionId: DimensionId
+  dimensionId: DimensionId | string
   dimensionName: string
   score: number
   weight: number

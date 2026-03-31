@@ -145,18 +145,21 @@ function computeValuesScores(
   const subScaleScores: Record<string, number> = {}
 
   // Life Direction: store as profile vector (raw scores, no mean -- used for cosine similarity)
-  const ldQuestions = SUB_SCALE_QUESTIONS.life_direction
+  const ldQuestions = SUB_SCALE_QUESTIONS.life_direction || []
   const profileVector = ldQuestions.map((qId) => getAnswer(qId, answers, reverseItems))
-  // Also compute a mean for the sub-scale score display
-  subScaleScores.life_direction = mean(profileVector)
+  subScaleScores.life_direction = ldQuestions.length > 0 ? mean(profileVector) : 3.0
 
   // Moral & Ethical: mean score
-  const meQuestions = SUB_SCALE_QUESTIONS.moral_ethical
-  subScaleScores.moral_ethical = mean(meQuestions.map((qId) => getAnswer(qId, answers, reverseItems)))
+  const meQuestions = SUB_SCALE_QUESTIONS.moral_ethical || []
+  subScaleScores.moral_ethical = meQuestions.length > 0
+    ? mean(meQuestions.map((qId) => getAnswer(qId, answers, reverseItems)))
+    : 3.0
 
   // Relationship Priority: mean score with reversals
-  const rpQuestions = SUB_SCALE_QUESTIONS.relationship_priority
-  subScaleScores.relationship_priority = mean(rpQuestions.map((qId) => getAnswer(qId, answers, reverseItems)))
+  const rpQuestions = SUB_SCALE_QUESTIONS.relationship_priority || []
+  subScaleScores.relationship_priority = rpQuestions.length > 0
+    ? mean(rpQuestions.map((qId) => getAnswer(qId, answers, reverseItems)))
+    : 3.0
 
   return {
     dimensionId: 'values',
@@ -193,15 +196,20 @@ function computeAttachmentScores(
 ): DimensionScore {
   const subScaleScores: Record<string, number> = {}
 
-  subScaleScores.anxiety = mean(
-    SUB_SCALE_QUESTIONS.anxiety.map((qId) => getAnswer(qId, answers, reverseItems))
-  )
-  subScaleScores.avoidance = mean(
-    SUB_SCALE_QUESTIONS.avoidance.map((qId) => getAnswer(qId, answers, reverseItems))
-  )
-  subScaleScores.security = mean(
-    SUB_SCALE_QUESTIONS.security.map((qId) => getAnswer(qId, answers, reverseItems))
-  )
+  const anxQs = SUB_SCALE_QUESTIONS.anxiety || []
+  subScaleScores.anxiety = anxQs.length > 0
+    ? mean(anxQs.map((qId) => getAnswer(qId, answers, reverseItems)))
+    : 3.0
+
+  const avdQs = SUB_SCALE_QUESTIONS.avoidance || []
+  subScaleScores.avoidance = avdQs.length > 0
+    ? mean(avdQs.map((qId) => getAnswer(qId, answers, reverseItems)))
+    : 3.0
+
+  const secQs = SUB_SCALE_QUESTIONS.security || []
+  subScaleScores.security = secQs.length > 0
+    ? mean(secQs.map((qId) => getAnswer(qId, answers, reverseItems)))
+    : 3.0
 
   const attachmentStyle = classifyAttachment(
     subScaleScores.anxiety,
@@ -212,7 +220,7 @@ function computeAttachmentScores(
   return {
     dimensionId: 'attachment',
     dimensionName: 'Attachment Style',
-    overallScore: subScaleScores.security, // Security score represents overall attachment health
+    overallScore: subScaleScores.security,
     subScaleScores,
     attachmentStyle,
   }
@@ -224,26 +232,25 @@ function classifyConflictApproach(
   answers: Record<string, number | string>,
   reverseItems: string[]
 ): ConflictApproach {
-  const com01 = getAnswer('com_01', answers, reverseItems)
-  const com02 = getAnswer('com_02', answers, reverseItems)
-  // com_03 is reverse-scored, so getAnswer returns the reversed value (high = confrontational)
-  // We need the RAW value for collaborator classification
-  const com03Raw = Number(answers['com_03']) || 3
-  const com04 = getAnswer('com_04', answers, reverseItems)
-  const com05 = getAnswer('com_05', answers, reverseItems)
+  // Use actual question-bank IDs (m3_cc_*)
+  const cc01 = getAnswer('m3_cc_01', answers, reverseItems)
+  const cc02 = getAnswer('m3_cc_02', answers, reverseItems)
+  const cc03Raw = Number(answers['m3_cc_03']) || 3
+  const cc04 = getAnswer('m3_cc_04', answers, reverseItems)
+  const cc05 = getAnswer('m3_cc_05', answers, reverseItems)
 
-  // Confronter: high on com_01, com_04, com_05
-  const confronterMean = mean([com01, com04, com05])
+  // Confronter: high on cc_01, cc_04, cc_05
+  const confronterMean = mean([cc01, cc04, cc05])
   if (confronterMean >= 3.5) return 'confronter'
 
-  // Collaborator: high raw com_03 (seeks solutions), low com_05 (no hostility)
-  if (com03Raw >= 3.5 && com05 <= 2.5) return 'collaborator'
+  // Collaborator: high raw cc_03 (seeks solutions), low cc_05 (no hostility)
+  if (cc03Raw >= 3.5 && cc05 <= 2.5) return 'collaborator'
 
-  // Avoider: high com_02 (waits), low com_04 (won't initiate)
-  if (com02 >= 3.5 && com04 <= 2.5) return 'avoider'
+  // Avoider: high cc_02 (waits), low cc_04 (won't initiate)
+  if (cc02 >= 3.5 && cc04 <= 2.5) return 'avoider'
 
-  // Accommodator: low com_01 (not defensive), low com_04 (not assertive), moderate+ com_02
-  if (com01 <= 2.5 && com04 <= 2.5 && com02 >= 3.0) return 'accommodator'
+  // Accommodator: low cc_01 (not defensive), low cc_04 (not assertive), moderate+ cc_02
+  if (cc01 <= 2.5 && cc04 <= 2.5 && cc02 >= 3.0) return 'accommodator'
 
   return 'unclassified'
 }
@@ -254,23 +261,26 @@ function computeCommunicationScores(
 ): DimensionScore {
   const subScaleScores: Record<string, number> = {}
 
-  // Conflict approach: compute a mean score for display, but classification matters more for compatibility
-  subScaleScores.conflict_approach = mean(
-    SUB_SCALE_QUESTIONS.conflict_approach.map((qId) => getAnswer(qId, answers, reverseItems))
-  )
+  // Conflict approach: compute a mean score for display
+  const conflictQs = SUB_SCALE_QUESTIONS.conflict_approach || []
+  subScaleScores.conflict_approach = conflictQs.length > 0
+    ? mean(conflictQs.map((qId) => getAnswer(qId, answers, reverseItems)))
+    : 3.0
 
   // Repair attempts: mean with reversal
-  subScaleScores.repair_attempts = mean(
-    SUB_SCALE_QUESTIONS.repair_attempts.map((qId) => getAnswer(qId, answers, reverseItems))
-  )
+  const repairQs = SUB_SCALE_QUESTIONS.repair_attempts || []
+  subScaleScores.repair_attempts = repairQs.length > 0
+    ? mean(repairQs.map((qId) => getAnswer(qId, answers, reverseItems)))
+    : 3.0
 
   // Emotional expression: mean with reversal
-  subScaleScores.emotional_expression = mean(
-    SUB_SCALE_QUESTIONS.emotional_expression.map((qId) => getAnswer(qId, answers, reverseItems))
-  )
+  const expressionQs = SUB_SCALE_QUESTIONS.emotional_expression || []
+  subScaleScores.emotional_expression = expressionQs.length > 0
+    ? mean(expressionQs.map((qId) => getAnswer(qId, answers, reverseItems)))
+    : 3.0
 
-  // Store com_05 raw score for horseman penalty check
-  subScaleScores._com05_raw = Number(answers['com_05']) || 3
+  // Store m3_cc_05 raw score for horseman penalty check
+  subScaleScores._com05_raw = Number(answers['m3_cc_05']) || 3
 
   const conflictApproach = classifyConflictApproach(answers, reverseItems)
 
@@ -295,15 +305,20 @@ function computeEIScores(
 ): DimensionScore {
   const subScaleScores: Record<string, number> = {}
 
-  subScaleScores.self_awareness = mean(
-    SUB_SCALE_QUESTIONS.self_awareness.map((qId) => getAnswer(qId, answers, reverseItems))
-  )
-  subScaleScores.empathy = mean(
-    SUB_SCALE_QUESTIONS.empathy.map((qId) => getAnswer(qId, answers, reverseItems))
-  )
-  subScaleScores.emotional_regulation = mean(
-    SUB_SCALE_QUESTIONS.emotional_regulation.map((qId) => getAnswer(qId, answers, reverseItems))
-  )
+  const saQs = SUB_SCALE_QUESTIONS.self_awareness || []
+  subScaleScores.self_awareness = saQs.length > 0
+    ? mean(saQs.map((qId) => getAnswer(qId, answers, reverseItems)))
+    : 3.0
+
+  const empQs = SUB_SCALE_QUESTIONS.empathy || []
+  subScaleScores.empathy = empQs.length > 0
+    ? mean(empQs.map((qId) => getAnswer(qId, answers, reverseItems)))
+    : 3.0
+
+  const erQs = SUB_SCALE_QUESTIONS.emotional_regulation || []
+  subScaleScores.emotional_regulation = erQs.length > 0
+    ? mean(erQs.map((qId) => getAnswer(qId, answers, reverseItems)))
+    : 3.0
 
   const overallScore = mean(Object.values(subScaleScores))
 
@@ -323,15 +338,20 @@ function computeLifestyleScores(
 ): DimensionScore {
   const subScaleScores: Record<string, number> = {}
 
-  subScaleScores.pace_of_life = mean(
-    SUB_SCALE_QUESTIONS.pace_of_life.map((qId) => getAnswer(qId, answers, reverseItems))
-  )
-  subScaleScores.social_energy = mean(
-    SUB_SCALE_QUESTIONS.social_energy.map((qId) => getAnswer(qId, answers, reverseItems))
-  )
-  subScaleScores.future_orientation = mean(
-    SUB_SCALE_QUESTIONS.future_orientation.map((qId) => getAnswer(qId, answers, reverseItems))
-  )
+  const paceQs = SUB_SCALE_QUESTIONS.pace_of_life || []
+  subScaleScores.pace_of_life = paceQs.length > 0
+    ? mean(paceQs.map((qId) => getAnswer(qId, answers, reverseItems)))
+    : 3.0
+
+  const socialQs = SUB_SCALE_QUESTIONS.social_energy || []
+  subScaleScores.social_energy = socialQs.length > 0
+    ? mean(socialQs.map((qId) => getAnswer(qId, answers, reverseItems)))
+    : 3.0
+
+  const futureQs = SUB_SCALE_QUESTIONS.future_orientation || []
+  subScaleScores.future_orientation = futureQs.length > 0
+    ? mean(futureQs.map((qId) => getAnswer(qId, answers, reverseItems)))
+    : 3.0
 
   return {
     dimensionId: 'lifestyle_ambition',
@@ -392,11 +412,15 @@ function computeLoveLanguageScores(
   const maxGiving = Math.max(...Object.values(givingTally))
   const givingLanguages = ALL_LANGUAGES.filter((l) => givingTally[l] === maxGiving)
 
-  // Compute flexibility score from Likert items (ll_11 through ll_15)
-  const flexQuestions = SUB_SCALE_QUESTIONS.language_flexibility
-  const flexibilityScore = mean(
-    flexQuestions.map((qId) => getAnswer(qId, answers, reverseItems))
-  )
+  // Compute flexibility score from tally spread (how evenly distributed the tallies are)
+  // Higher spread = more flexible; all concentrated = less flexible
+  const totalReceiving = Object.values(receivingTally).reduce((s, v) => s + v, 0) || 1
+  const receivingSpread = 1 - (maxReceiving / totalReceiving) // 0 = all one lang, higher = more flexible
+  const totalGiving = Object.values(givingTally).reduce((s, v) => s + v, 0) || 1
+  const maxGivingVal = Math.max(...Object.values(givingTally))
+  const givingSpread = 1 - (maxGivingVal / totalGiving)
+  // Convert to 1-5 scale: 1.0 (rigid) to 5.0 (highly flexible)
+  const flexibilityScore = 1 + ((receivingSpread + givingSpread) / 2) * 4
 
   const subScaleScores: Record<string, number> = {
     // Store max tally counts for reference
@@ -465,6 +489,10 @@ export function computeCIS(
         break
       case 'how_you_love':
         rawScore = scoreLoveLanguages(a, b)
+        break
+      case 'hot_takes':
+        // Hot takes: pure similarity scoring
+        rawScore = similarityScore(a.overallScore, b.overallScore)
         break
       default:
         rawScore = 0.5
@@ -593,7 +621,7 @@ function scoreCommunication(a: DimensionScore, b: DimensionScore): number {
   const conflictScore = CONFLICT_PAIRING_SCORES[pairingKey] ?? 0.50
 
   // Repair attempts: min of both (only as strong as the weaker partner)
-  const repairScore = Math.min(a.subScaleScores.repair_attempts, b.subScaleScores.repair_attempts) / 5.0
+  const repairScore = Math.min(a.subScaleScores.repair_attempts || 3, b.subScaleScores.repair_attempts || 3) / 5.0
 
   // Emotional expression: similarity (gap creates problems)
   const expressionScore = similarityScore(

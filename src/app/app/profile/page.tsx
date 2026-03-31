@@ -323,7 +323,7 @@ export default function ProfilePage() {
   )
 
   return (
-    <div className="max-w-lg mx-auto px-4 py-6 space-y-5">
+    <div className="max-w-2xl mx-auto px-4 py-6 space-y-5">
       {/* ── Profile Header ── */}
       <div className="text-center">
         {/* Primary photo */}
