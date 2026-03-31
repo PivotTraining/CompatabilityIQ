@@ -112,9 +112,10 @@ export default function ProfilePage() {
     date_of_birth: '',
   })
   const [avgCIS, setAvgCIS] = useState<number | null>(null)
+  const [displayPhotos, setDisplayPhotos] = useState<string[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  // Load profile
+  // Load profile + resolve signed URLs for photos
   useEffect(() => {
     if (!user || !supabase) return
     supabase
@@ -124,7 +125,7 @@ export default function ProfilePage() {
       )
       .eq('id', user.id)
       .single()
-      .then(({ data }) => {
+      .then(async ({ data }) => {
         const row = data as unknown as ProfileData | null
         if (row) {
           setProfile(row)
@@ -135,6 +136,16 @@ export default function ProfilePage() {
             location_state: row.location_state || '',
             date_of_birth: row.date_of_birth || '',
           })
+          // Convert storage paths → signed URLs for display
+          const paths = row.photo_urls ?? []
+          if (paths.length > 0) {
+            const { data: signedData } = await supabase.storage
+              .from('photos')
+              .createSignedUrls(paths, 3600)
+            if (signedData) {
+              setDisplayPhotos(signedData.map((s: { signedUrl: string }) => s.signedUrl).filter(Boolean))
+            }
+          }
         }
       })
 
@@ -192,39 +203,48 @@ export default function ProfilePage() {
     const file = e.target.files[0]
 
     const formData = new FormData()
-    formData.append('file', file)
+    formData.append('photo', file) // API expects key 'photo'
 
     const res = await fetch('/api/photos/upload', {
       method: 'POST',
       body: formData,
     })
 
-    if (!res.ok) return
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}))
+      console.error('Photo upload failed:', err)
+      return
+    }
 
-    const { url: photoUrl } = await res.json()
+    // API returns { path, signedUrl, photoCount } and already updated photo_urls in DB
+    const { path, signedUrl } = await res.json()
 
-    const currentPhotos = profile?.photo_urls ?? []
-    const newPhotos = [...currentPhotos, photoUrl]
+    // Update local state: storage path for profile tracking, signedUrl for display
+    setProfile((p) => p ? { ...p, photo_urls: [...(p.photo_urls ?? []), path] } : p)
+    setDisplayPhotos((prev) => [...prev, signedUrl])
 
-    await supabase
-      .from('profiles')
-      .update({ photo_urls: newPhotos } as never)
-      .eq('id', user.id)
-
-    setProfile((p) => (p ? { ...p, photo_urls: newPhotos } : p))
+    // Reset file input so same file can be re-selected if needed
+    e.target.value = ''
   }
 
   // Remove photo
   const handleRemovePhoto = async (index: number) => {
     if (!user || !supabase || !profile?.photo_urls) return
-    const newPhotos = profile.photo_urls.filter((_, i) => i !== index)
+    const pathToRemove = profile.photo_urls[index]
+    const newPaths = profile.photo_urls.filter((_, i) => i !== index)
+
+    // Delete from storage
+    if (pathToRemove) {
+      await supabase.storage.from('photos').remove([pathToRemove])
+    }
 
     await supabase
       .from('profiles')
-      .update({ photo_urls: newPhotos.length > 0 ? newPhotos : null } as never)
+      .update({ photo_urls: newPaths.length > 0 ? newPaths : null } as never)
       .eq('id', user.id)
 
-    setProfile((p) => (p ? { ...p, photo_urls: newPhotos.length > 0 ? newPhotos : null } : p))
+    setProfile((p) => (p ? { ...p, photo_urls: newPaths.length > 0 ? newPaths : null } : p))
+    setDisplayPhotos((prev) => prev.filter((_, i) => i !== index))
   }
 
   // ── Loading state ──
@@ -239,7 +259,8 @@ export default function ProfilePage() {
     )
   }
 
-  const photos = profile.photo_urls ?? []
+  const photos = profile.photo_urls ?? [] // storage paths (for count/tracking)
+  // displayPhotos (signed URLs) is in state above — use that for <Image> src
   const completedModules = assessmentProgress
   const totalModules = MODULE_CONFIG.length
   const percentComplete = Math.round(
@@ -257,13 +278,14 @@ export default function ProfilePage() {
           className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-2 flex items-center justify-center"
           style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border)' }}
         >
-          {photos[0] ? (
+          {displayPhotos[0] ? (
             <Image
-              src={photos[0]}
+              src={displayPhotos[0]}
               alt={profile.first_name}
               width={96}
               height={96}
               className="object-cover w-full h-full"
+              unoptimized
             />
           ) : (
             <Camera className="w-8 h-8" style={{ color: 'var(--text-muted)' }} />
@@ -324,7 +346,7 @@ export default function ProfilePage() {
         </h3>
         <div className="grid grid-cols-3 gap-2">
           {Array.from({ length: LIMITS.maxPhotos }).map((_, i) => {
-            const photo = photos[i]
+            const signedUrl = displayPhotos[i]
             return (
               <div
                 key={i}
@@ -334,14 +356,15 @@ export default function ProfilePage() {
                   borderColor: 'var(--border)',
                 }}
               >
-                {photo ? (
+                {signedUrl ? (
                   <>
                     <Image
-                      src={photo}
+                      src={signedUrl}
                       alt={`Photo ${i + 1}`}
                       fill
                       className="object-cover"
                       sizes="(max-width: 512px) 33vw, 160px"
+                      unoptimized
                     />
                     {editing && (
                       <button
