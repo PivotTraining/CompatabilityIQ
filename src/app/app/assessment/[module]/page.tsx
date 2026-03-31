@@ -81,6 +81,14 @@ export default function ModuleAssessmentPage() {
     assessmentProgress,
   } = useAssessmentStore()
 
+  const [submitting, setSubmitting] = useState(false)
+  const [showComplete, setShowComplete] = useState(false)
+  const [direction, setDirection] = useState(1)
+  const [selectedValue, setSelectedValue] = useState<number | null>(null)
+  const [scoreSummary, setScoreSummary] = useState<Record<string, { overall: number }> | null>(null)
+  const [userDob, setUserDob] = useState<string | null>(null)
+  const [userCulture, setUserCulture] = useState<string | null>(null)
+
   const questions = useMemo(
     () => getPersonalizedQuestions(moduleNum, userDob, userCulture),
     [moduleNum, userDob, userCulture]
@@ -92,14 +100,6 @@ export default function ModuleAssessmentPage() {
   const answeredCount = Object.keys(answers).length
   const isLastQuestion = qIndex === questions.length - 1
   const allAnswered = answeredCount === questions.length
-
-  const [submitting, setSubmitting] = useState(false)
-  const [showComplete, setShowComplete] = useState(false)
-  const [direction, setDirection] = useState(1)
-  const [selectedValue, setSelectedValue] = useState<number | null>(null)
-  const [scoreSummary, setScoreSummary] = useState<Record<string, { overall: number }> | null>(null)
-  const [userDob, setUserDob] = useState<string | null>(null)
-  const [userCulture, setUserCulture] = useState<string | null>(null)
 
   // Fetch user profile for demographic question personalization
   useEffect(() => {
@@ -279,7 +279,7 @@ export default function ModuleAssessmentPage() {
               </div>
 
               {/* Question text */}
-              <p className="text-[17px] font-medium leading-relaxed mb-8" style={{ color: 'var(--text-primary)' }}>
+              <p className="text-xl sm:text-2xl font-semibold leading-relaxed mb-8" style={{ color: 'var(--text-primary)' }}>
                 {currentQuestion.text}
               </p>
 
@@ -380,7 +380,7 @@ function OptionsList({
             initial="hidden"
             animate="visible"
             onClick={() => onSelect(opt.value)}
-            className="w-full text-left px-4 py-3.5 rounded-xl border text-sm transition-all"
+            className="w-full text-left px-4 py-4 rounded-xl border text-base transition-all"
             style={{
               background: isSelected ? 'var(--ciq-purple)' : 'var(--bg-card)',
               borderColor: isSelected ? 'var(--ciq-purple)' : 'var(--border)',
@@ -506,7 +506,7 @@ function ForcedChoicePair({
             initial="hidden"
             animate="visible"
             onClick={() => onSelect(opt.value)}
-            className="w-full text-left p-5 rounded-2xl border-2 text-sm leading-relaxed transition-all"
+            className="w-full text-left p-5 rounded-2xl border-2 text-base leading-relaxed transition-all"
             style={{
               background: isSelected ? 'var(--ciq-purple)' : 'var(--bg-card)',
               borderColor: isSelected ? 'var(--ciq-purple)' : 'var(--border)',
