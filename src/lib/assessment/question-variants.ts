@@ -1071,153 +1071,153 @@ const MODULE_7_VARIANTS: QuestionVariant[] = [
 // ════════════════════════════════════════════
 
 const MODULE_8_VARIANTS: QuestionVariant[] = [
-  // ── Replaces m8_ic_01 (physical_chemistry — touch vs eye contact) ──
+  // ── Replaces m8_ic_01 (desire_dynamics — spontaneous vs responsive desire) ──
   {
-    id: 'm8_ic_01_v1', module: 8, quotient: 'IC', dimension: 'physical_chemistry', format: 'scenario',
+    id: 'm8_ic_01_v1', module: 8, quotient: 'IC', dimension: 'desire_dynamics', format: 'scenario',
     replaces: 'm8_ic_01',
-    demographics: { age_brackets: ['young_professional'], cultural_contexts: ['universal'] },
-    text: 'What builds more tension: a hand on your lower back in public or lingering eye contact across a crowded room?',
+    demographics: { age_brackets: ['established', 'seasoned'], cultural_contexts: ['universal'] },
+    text: 'Think about your most recent relationship. When your partner showed interest in being intimate, how did your desire typically respond?',
     options: [
-      { value: 1, label: 'The hand. Physical contact is electric.' },
-      { value: 2, label: 'The hand, but that eye contact moment is something else' },
-      { value: 3, label: 'Both. Completely depends on who it is.' },
-      { value: 4, label: 'The eye contact. That unspoken thing is everything.' },
-      { value: 5, label: 'Eye contact. When someone locks in on you across a room? Game over.' },
+      { value: 1, label: 'Matched their energy immediately. My body just knows.' },
+      { value: 2, label: 'Usually quick to get there once the signal was clear.' },
+      { value: 3, label: 'Varied a lot. Some days instant, some days slow.' },
+      { value: 4, label: 'I usually needed emotional connection first -- a good conversation, feeling seen.' },
+      { value: 5, label: 'I rarely felt desire out of nowhere. It built from closeness and context.' },
     ],
   },
 
-  // ── Replaces m8_ic_02 (physical_chemistry — chemistry on first date) ──
+  // ── Replaces m8_ic_02 (desire_dynamics — initiation patterns) ──
   {
-    id: 'm8_ic_02_v1', module: 8, quotient: 'IC', dimension: 'physical_chemistry', format: 'scenario',
+    id: 'm8_ic_02_v1', module: 8, quotient: 'IC', dimension: 'desire_dynamics', format: 'scenario',
     replaces: 'm8_ic_02',
-    demographics: { age_brackets: ['seasoned'], cultural_contexts: ['universal'] },
-    text: 'At this point in your life, how quickly can you tell if the physical chemistry is there?',
+    demographics: { age_brackets: ['young_professional'], cultural_contexts: ['universal'] },
+    text: 'You\'re really into someone new. When it comes to making the first move toward physical intimacy, what\'s your style?',
     options: [
-      { value: 5, label: 'Immediately. Within seconds of meeting. I trust my instincts.' },
-      { value: 4, label: 'First date. One conversation and I know.' },
-      { value: 3, label: 'A few dates. It can take time to feel it.' },
-      { value: 2, label: 'Months. Real chemistry builds with emotional safety.' },
-      { value: 1, label: 'I\'ve learned chemistry can grow from nothing. I stay open.' },
+      { value: 1, label: 'I lead. If I want something, I make it known.' },
+      { value: 2, label: 'I\'ll drop strong hints and see if they pick up on it.' },
+      { value: 3, label: 'It depends on the vibe. Sometimes I lead, sometimes I follow.' },
+      { value: 4, label: 'I prefer them to come to me. I respond better than I initiate.' },
+      { value: 5, label: 'I wait. I need to feel completely safe before I open that door.' },
     ],
   },
 
-  // ── Replaces m8_ic_03 (physical_chemistry — soundtrack) ──
+  // ── Replaces m8_ic_03 (desire_dynamics — frequency expectations) ──
   {
-    id: 'm8_ic_03_v1', module: 8, quotient: 'IC', dimension: 'physical_chemistry', format: 'scenario',
+    id: 'm8_ic_03_v1', module: 8, quotient: 'IC', dimension: 'desire_dynamics', format: 'scenario',
     replaces: 'm8_ic_03',
-    demographics: { age_brackets: ['young_professional'], cultural_contexts: ['general_pop'] },
-    text: 'Setting the mood: candles and a playlist or spontaneous, no setup needed?',
+    demographics: { age_brackets: ['seasoned'], cultural_contexts: ['universal'] },
+    text: 'After years together, your partner mentions they wish you were intimate more often. Your honest internal reaction:',
     options: [
-      { value: 1, label: 'Full production. Candles, playlist, vibe curated. Atmosphere matters.' },
-      { value: 2, label: 'Some effort goes a long way. At least dim the lights.' },
-      { value: 3, label: 'Both. Planned is beautiful, but spontaneous hits different.' },
-      { value: 4, label: 'Spontaneous. The best moments aren\'t choreographed.' },
-      { value: 5, label: 'Zero setup. If the energy is there, nothing else matters.' },
+      { value: 1, label: 'I\'d feel the same way. Physical connection keeps us alive.' },
+      { value: 2, label: 'Fair point. I\'d want to work on that together.' },
+      { value: 3, label: 'I hear them. Life gets busy but intimacy matters.' },
+      { value: 4, label: 'I wouldn\'t take it personally. We just have different rhythms.' },
+      { value: 5, label: 'I\'d feel pressure. Quality over quantity, always.' },
     ],
   },
 
-  // ── Replaces m8_ic_04 (emotional_intimacy — worst vs deepest fear) ──
+  // ── Replaces m8_ic_04 (intimacy_communication — expressing what feels good) ──
   {
-    id: 'm8_ic_04_v1', module: 8, quotient: 'IC', dimension: 'emotional_intimacy', format: 'scenario',
+    id: 'm8_ic_04_v1', module: 8, quotient: 'IC', dimension: 'intimacy_communication', format: 'scenario',
     replaces: 'm8_ic_04',
-    demographics: { age_brackets: ['established', 'seasoned'], cultural_contexts: ['universal'] },
-    text: 'What\'s scarier to share with a partner: your biggest failure or your biggest insecurity?',
-    options: [
-      { value: 1, label: 'My failure. That\'s evidence of where I fell short.' },
-      { value: 2, label: 'Failure, slightly. At least insecurities feel more universal.' },
-      { value: 3, label: 'Both terrifying. Both require deep trust.' },
-      { value: 4, label: 'My insecurity. Failures are the past. Insecurities are right now.' },
-      { value: 5, label: 'My insecurity. Letting someone see the thing you can\'t fix -- that\'s real vulnerability.' },
-    ],
-  },
-
-  // ── Replaces m8_ic_05 (emotional_intimacy — letting someone see all of you) ──
-  {
-    id: 'm8_ic_05_v1', module: 8, quotient: 'IC', dimension: 'emotional_intimacy', format: 'scenario',
-    replaces: 'm8_ic_05',
     demographics: { age_brackets: ['young_professional'], cultural_contexts: ['black_culture'] },
-    text: 'How many people in your life have seen the real you -- no mask, no performance, no code-switching?',
+    text: 'Real talk: when something isn\'t working in an intimate moment, can you actually say so -- or do you just power through?',
     options: [
-      { value: 1, label: 'A lot. What you see is what you get.' },
-      { value: 2, label: 'My inner circle. Maybe 5-6 people.' },
-      { value: 3, label: 'A few. It takes time to trust like that.' },
-      { value: 4, label: 'One or two. And it took years.' },
-      { value: 5, label: 'Honestly? I\'m not sure anyone has seen everything.' },
+      { value: 1, label: 'Power through. Every time. Saying something feels too awkward.' },
+      { value: 2, label: 'I might redirect without words -- shift position, guide their hand.' },
+      { value: 3, label: 'Depends on the person. With the right one, I can speak up.' },
+      { value: 4, label: 'I say something. Gently, but I say it.' },
+      { value: 5, label: 'Absolutely. If I can\'t be honest in that moment, we have bigger issues.' },
     ],
   },
 
-  // ── Replaces m8_ic_06 (emotional_intimacy — pillow talk vs dinner) ──
+  // ── Replaces m8_ic_05 (intimacy_communication — receiving feedback) ──
   {
-    id: 'm8_ic_06_v1', module: 8, quotient: 'IC', dimension: 'emotional_intimacy', format: 'scenario',
-    replaces: 'm8_ic_06',
+    id: 'm8_ic_05_v1', module: 8, quotient: 'IC', dimension: 'intimacy_communication', format: 'scenario',
+    replaces: 'm8_ic_05',
     demographics: { age_brackets: ['established', 'seasoned'], cultural_contexts: ['universal'] },
-    text: 'Where do the deepest conversations happen: in the car, late at night in bed, or over a long meal?',
+    text: 'Your partner suggests you both read a book together about deepening intimacy. How does that land?',
     options: [
-      { value: 1, label: 'Late at night. Something about the dark makes truth easier.' },
-      { value: 2, label: 'Night time, but car talks hit different too' },
-      { value: 3, label: 'All three. Depth isn\'t about location, it\'s about safety.' },
-      { value: 4, label: 'Over a meal. Eye contact, intention, presence.' },
-      { value: 5, label: 'Long meal. I want us both fully present, not half-asleep.' },
+      { value: 1, label: 'Weird. Why would we need a book? Are we broken?' },
+      { value: 2, label: 'A little caught off guard, but I\'d consider it.' },
+      { value: 3, label: 'Sure. I\'m open to learning if they think it would help.' },
+      { value: 4, label: 'I\'d be into it. Investing in our connection shows maturity.' },
+      { value: 5, label: 'Love it. The couples who grow together stay together.' },
     ],
   },
 
-  // ── Replaces m8_ic_07 (desire_dynamics — keeping the spark) ──
+  // ── Replaces m8_ic_06 (intimacy_communication — sharing desires) ──
   {
-    id: 'm8_ic_07_v1', module: 8, quotient: 'IC', dimension: 'desire_dynamics', format: 'scenario',
+    id: 'm8_ic_06_v1', module: 8, quotient: 'IC', dimension: 'intimacy_communication', format: 'scenario',
+    replaces: 'm8_ic_06',
+    demographics: { age_brackets: ['young_professional', 'established'], cultural_contexts: ['universal'] },
+    text: 'You discover something new that you\'d like to explore with your partner. How do you bring it up?',
+    options: [
+      { value: 1, label: 'I don\'t. Some things stay in my head.' },
+      { value: 2, label: 'I might test the waters with a joke or vague comment.' },
+      { value: 3, label: 'I\'d wait for the right moment and mention it casually.' },
+      { value: 4, label: 'I\'d bring it up directly. Openness is how trust deepens.' },
+      { value: 5, label: 'I\'d tell them right away. Sharing desires is part of being close.' },
+    ],
+  },
+
+  // ── Replaces m8_ic_07 (intimacy_communication — receiving feedback on needs) ──
+  {
+    id: 'm8_ic_07_v1', module: 8, quotient: 'IC', dimension: 'intimacy_communication', format: 'scenario',
     replaces: 'm8_ic_07',
     demographics: { age_brackets: ['seasoned'], cultural_contexts: ['universal'] },
-    text: 'You\'ve been together 10+ years. The passion ebbs and flows. That\'s...',
+    text: 'Your long-term partner says: "I love you, but I need more from our intimate life." Your gut reaction:',
     options: [
-      { value: 1, label: 'Natural and fine. Real love is deeper than passion.' },
-      { value: 2, label: 'Normal, but we should still put in effort when it dips' },
-      { value: 3, label: 'Expected, and it takes real intention to bring it back' },
-      { value: 4, label: 'A signal. If it\'s fading, something needs to change.' },
-      { value: 5, label: 'Unacceptable. If we stop pursuing each other, what\'s the point?' },
+      { value: 1, label: 'Hurt. It feels like everything I\'ve done wasn\'t enough.' },
+      { value: 2, label: 'A little stung, but I know they mean well.' },
+      { value: 3, label: 'I can hear that without taking it personally.' },
+      { value: 4, label: 'I\'d want details. What specifically? Let\'s fix this together.' },
+      { value: 5, label: 'Grateful they said it out loud instead of letting resentment build.' },
     ],
   },
 
-  // ── Replaces m8_ic_08 (desire_dynamics — communication about needs) ──
+  // ── Replaces m8_ic_08 (physical_affection — couch closeness) ──
   {
-    id: 'm8_ic_08_v1', module: 8, quotient: 'IC', dimension: 'desire_dynamics', format: 'scenario',
+    id: 'm8_ic_08_v1', module: 8, quotient: 'IC', dimension: 'physical_affection', format: 'scenario',
     replaces: 'm8_ic_08',
-    demographics: { age_brackets: ['young_professional', 'established'], cultural_contexts: ['universal'] },
-    text: 'Have you ever faked satisfaction to avoid an awkward conversation? Be honest.',
+    demographics: { age_brackets: ['young_professional'], cultural_contexts: ['universal'] },
+    text: 'Sunday morning, no plans. You and your partner are in bed with coffee. What does your ideal look like?',
     options: [
-      { value: 1, label: 'Yes. And I\'d rather keep the peace than explain.' },
-      { value: 2, label: 'Yes, but I\'ve learned that helps no one' },
-      { value: 3, label: 'Sometimes. Depends on how comfortable I am with the person.' },
-      { value: 4, label: 'Rarely. I believe honesty makes everything better.' },
-      { value: 5, label: 'Never. I refuse to perform. We either communicate or we lose.' },
+      { value: 1, label: 'My own space. I love them but I need room to exist.' },
+      { value: 2, label: 'Close but not tangled up. A foot touching, maybe.' },
+      { value: 3, label: 'Leaning into each other. Comfortable closeness.' },
+      { value: 4, label: 'Wrapped around them. Mornings like that are the best part.' },
+      { value: 5, label: 'Full body contact. I want to feel every inch of their presence.' },
     ],
   },
 
-  // ── Replaces m8_ic_09 (desire_dynamics — trying something new) ──
+  // ── Replaces m8_ic_09 (physical_affection — public affection) ──
   {
-    id: 'm8_ic_09_v1', module: 8, quotient: 'IC', dimension: 'desire_dynamics', format: 'scenario',
+    id: 'm8_ic_09_v1', module: 8, quotient: 'IC', dimension: 'physical_affection', format: 'scenario',
     replaces: 'm8_ic_09',
-    demographics: { age_brackets: ['established', 'seasoned'], cultural_contexts: ['universal'] },
-    text: 'Your partner sends you an article about "keeping things exciting" with a "thoughts?" text. Your reaction?',
+    demographics: { age_brackets: ['established'], cultural_contexts: ['universal'] },
+    text: 'You\'re at a family gathering and your partner keeps touching your arm, holding your hand, staying physically close. That feels...',
     options: [
-      { value: 1, label: 'Uncomfortable. What\'s wrong with what we have?' },
-      { value: 2, label: 'A little defensive at first, but I\'d read it' },
-      { value: 3, label: 'Curious. I\'d want to talk about what specifically caught their eye.' },
-      { value: 4, label: 'Appreciated. It means they\'re invested in us.' },
-      { value: 5, label: 'Turned on, honestly. Proactive partners are the most attractive kind.' },
+      { value: 1, label: 'Like too much. I prefer to keep affection between us.' },
+      { value: 2, label: 'A little much in front of family, but I get it.' },
+      { value: 3, label: 'Sweet. I don\'t mind some PDA when it\'s natural.' },
+      { value: 4, label: 'Great. I like when they claim me in front of people.' },
+      { value: 5, label: 'Perfect. I\'d be doing the same thing.' },
     ],
   },
 
-  // ── Replaces m8_ic_10 (desire_dynamics — importance of physical intimacy) ──
+  // ── Replaces m8_ic_10 (physical_affection — non-sexual daily touch) ──
   {
-    id: 'm8_ic_10_v1', module: 8, quotient: 'IC', dimension: 'desire_dynamics', format: 'scenario',
+    id: 'm8_ic_10_v1', module: 8, quotient: 'IC', dimension: 'physical_affection', format: 'scenario',
     replaces: 'm8_ic_10',
     demographics: { age_brackets: ['seasoned'], cultural_contexts: ['universal'] },
-    text: 'You love your partner deeply but the physical side of things has gone quiet for months. What do you do?',
+    text: 'Your partner walks by and squeezes your shoulder, plays with your hair, or rubs your back -- just randomly throughout the day. That is...',
     options: [
-      { value: 1, label: 'Accept it. Connection exists on many levels.' },
-      { value: 2, label: 'Wait it out. These things are cyclical.' },
-      { value: 3, label: 'Bring it up gently. It matters enough to discuss.' },
-      { value: 4, label: 'Have a direct conversation. This is a priority, not a bonus.' },
-      { value: 5, label: 'Sound the alarm. If we\'re not addressing this, we\'re in trouble.' },
+      { value: 1, label: 'Not my thing. I prefer space unless it\'s intentional.' },
+      { value: 2, label: 'Fine occasionally, but I don\'t need it constantly.' },
+      { value: 3, label: 'Nice. Those little touches add up.' },
+      { value: 4, label: 'Really important. That\'s how I know they\'re thinking about me.' },
+      { value: 5, label: 'Everything. If those little touches stop, something\'s wrong.' },
     ],
   },
 ]
