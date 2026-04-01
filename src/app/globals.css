@@ -99,21 +99,4 @@ html, body {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
-
-  .print\\:hidden {
-    display: none !important;
-  }
-
-  .print\\:break-inside-avoid {
-    break-inside: avoid;
-  }
-
-  .print\\:space-y-8 > :not([hidden]) ~ :not([hidden]) {
-    margin-top: 2rem;
-  }
-
-  .print\\:py-0 {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
 }
