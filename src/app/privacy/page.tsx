@@ -67,7 +67,7 @@ export default function PrivacyPolicy() {
               <li>Communication &amp; Conflict Resolution</li>
               <li>Emotional Intelligence</li>
               <li>Lifestyle &amp; Ambition</li>
-              <li>How You Love</li>
+              <li>How You Connect</li>
             </ul>
             <div className="bg-purple-50 border border-purple-100 rounded-xl p-5 my-4">
               <p className="text-sm text-gray-600">

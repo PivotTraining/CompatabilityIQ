@@ -100,7 +100,7 @@ export const DIMENSION_CONFIGS: Record<string, DimensionConfig> = {
     name: 'Intimacy & Chemistry',
     weight: 7,
     compatibilityType: 'similarity',
-    subScales: ['physical_chemistry', 'emotional_intimacy', 'desire_dynamics'],
+    subScales: ['desire_dynamics', 'intimacy_communication', 'physical_affection'],
     reverseItems: [],
     paid: true,
     price: 4.99,
@@ -298,7 +298,7 @@ export const SUB_SCALE_QUESTIONS: Record<string, string[]> = {
   repair_attempts: ['m3_cc_04', 'm3_cc_05', 'm3_cc_06', 'm3_cc_12', 'm3_cc_13'],
   emotional_expression: ['m3_cc_07', 'm3_cc_08', 'm3_cc_14', 'm3_cc_15', 'm3_cc_16'],
 
-  // ── Module 4: How You Love (m4_ll_*) — forced choice ──
+  // ── Module 4: How You Connect (m4_ll_*) — forced choice ──
   receiving_language: ['m4_ll_01', 'm4_ll_02', 'm4_ll_03', 'm4_ll_07', 'm4_ll_08', 'm4_ll_09', 'm4_ll_10', 'm4_ll_11'],
   giving_language: ['m4_ll_04', 'm4_ll_05', 'm4_ll_06', 'm4_ll_12', 'm4_ll_13', 'm4_ll_14', 'm4_ll_15', 'm4_ll_16'],
   language_flexibility: [], // No separate Likert items — flexibility derived from tally spread
@@ -318,8 +318,8 @@ export const SUB_SCALE_QUESTIONS: Record<string, string[]> = {
   social_energy: [],
   future_orientation: [],
 
-  // ── Paid: Intimacy & Chemistry (future module) ──
-  physical_chemistry: [],
-  emotional_intimacy: [],
-  desire_dynamics: [],
+  // ── Paid: Intimacy & Chemistry / Sexual Compatibility (m8_ic_*) ──
+  desire_dynamics: ['m8_ic_01', 'm8_ic_02', 'm8_ic_03'],
+  intimacy_communication: ['m8_ic_04', 'm8_ic_05', 'm8_ic_06', 'm8_ic_07'],
+  physical_affection: ['m8_ic_08', 'm8_ic_09', 'm8_ic_10'],
 }

@@ -17,7 +17,7 @@ import type { DimensionId } from '@/lib/scoring/types'
  *   Module 1: VP (Values & Priorities)
  *   Module 2: AS (Attachment Style)
  *   Module 3: CC (Communication & Conflict)
- *   Module 4: LL (How You Love)
+ *   Module 4: LL (How You Connect)
  *   Module 5: HT (Hot Takes & Dealbreakers)
  *   Module 6: EI (Emotional Intelligence)
  */

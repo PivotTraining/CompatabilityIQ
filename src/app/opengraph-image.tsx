@@ -124,7 +124,7 @@ export default function OGImage() {
             display: 'flex',
           }}
         >
-          Date with proof.
+          The last dating app you'll need.
         </div>
 
         {/* Dimension pills */}

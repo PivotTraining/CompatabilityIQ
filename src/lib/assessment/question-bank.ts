@@ -493,7 +493,7 @@ const MODULE_3: AssessmentQuestion[] = [
 ]
 
 // ════════════════════════════════════════════
-// MODULE 4: How You Love (LL) — 16 questions
+// MODULE 4: How You Connect (LL) — 16 questions
 // FREE — Forced-choice pairs + flexibility
 // Sub-scales: receiving_language, giving_language
 // ════════════════════════════════════════════
@@ -1037,104 +1037,106 @@ const MODULE_7: AssessmentQuestion[] = [
 
 // ════════════════════════════════════════════
 // MODULE 8: Intimacy & Chemistry (IC) — 10 questions
-// PAID ADD-ON — $4.99 (The Spicy One)
-// Sub-scales: physical_chemistry, emotional_intimacy, desire_dynamics
+// PAID ADD-ON — $4.99 (Sexual Compatibility)
+// Scientific basis: Basson's circular model of desire (2000),
+// New Sexual Satisfaction Scale (Stulhofer et al., 2010)
+// Sub-scales: desire_dynamics, intimacy_communication, physical_affection
 // ════════════════════════════════════════════
 const MODULE_8: AssessmentQuestion[] = [
-  // ── physical_chemistry ──
-  { id: 'm8_ic_01', module: 8, quotient: 'IC', dimension: 'physical_chemistry', format: 'scenario',
-    text: 'Physical touch or deep eye contact -- which one sends you?',
+  // ── desire_dynamics (Basson's spontaneous vs. responsive desire model) ──
+  { id: 'm8_ic_01', module: 8, quotient: 'IC', dimension: 'desire_dynamics', format: 'scenario',
+    text: 'Your partner initiates intimacy at the end of a long day. How does desire typically show up for you?',
     options: [
-      { value: 1, label: 'Touch. 100%. Words are overrated.' },
-      { value: 2, label: 'Touch, but eye contact is a close second' },
-      { value: 3, label: 'Both equally. Depends on the moment.' },
-      { value: 4, label: 'Eye contact. Someone really seeing me? Dangerous.' },
-      { value: 5, label: 'Eye contact. That\'s where the real connection lives.' },
+      { value: 1, label: 'Instant. The moment they reach for me, I\'m there.' },
+      { value: 2, label: 'Usually quick. A little flirting and I\'m in.' },
+      { value: 3, label: 'It depends on the day. Sometimes instant, sometimes slow.' },
+      { value: 4, label: 'I usually need some time to transition and warm up.' },
+      { value: 5, label: 'Almost always need time. Connection and mood-building come first.' },
     ] },
-  { id: 'm8_ic_02', module: 8, quotient: 'IC', dimension: 'physical_chemistry', format: 'scenario',
-    text: 'How important is physical chemistry on a first date?',
+  { id: 'm8_ic_02', module: 8, quotient: 'IC', dimension: 'desire_dynamics', format: 'scenario',
+    text: 'When it comes to initiating intimacy in a relationship, which pattern sounds most like you?',
     options: [
-      { value: 5, label: 'Everything. If the spark isn\'t there, I\'m out.' },
-      { value: 4, label: 'Very important. It doesn\'t have to be fireworks, but I need something.' },
-      { value: 3, label: 'Important, but it can grow.' },
-      { value: 2, label: 'Nice to have, but emotional connection matters more.' },
-      { value: 1, label: 'Not at all. Attraction builds with time and trust.' },
+      { value: 1, label: 'I almost always initiate. Waiting feels unnatural to me.' },
+      { value: 2, label: 'I initiate more often than not.' },
+      { value: 3, label: 'We take turns pretty evenly. Both of us start things.' },
+      { value: 4, label: 'I prefer my partner to initiate most of the time.' },
+      { value: 5, label: 'I rarely initiate, but I\'m very responsive when they do.' },
     ] },
   { id: 'm8_ic_03', module: 8, quotient: 'IC', dimension: 'desire_dynamics', format: 'scenario',
-    text: 'How important is it that you and your partner openly discuss desires and boundaries in your intimate life?',
+    text: 'You and your partner haven\'t been intimate in a while due to busy schedules. What feels right?',
     options: [
-      { value: 1, label: 'Not important at all. Some things are better left unspoken.' },
-      { value: 2, label: 'Slightly important. I\'d rather things unfold naturally.' },
-      { value: 3, label: 'Moderately important. A few key conversations go a long way.' },
-      { value: 4, label: 'Very important. Clear communication makes everything better.' },
-      { value: 5, label: 'Absolutely essential. Full openness about desires and boundaries is non-negotiable.' },
+      { value: 1, label: 'I\'d feel disconnected fast. Physical closeness is how I stay bonded.' },
+      { value: 2, label: 'I\'d notice and want to prioritize it soon.' },
+      { value: 3, label: 'I\'d miss it but trust we\'d reconnect when the timing is right.' },
+      { value: 4, label: 'I wouldn\'t stress. Other forms of connection carry us through.' },
+      { value: 5, label: 'I\'d barely notice. Intimacy ebbs and flows and that\'s normal.' },
     ] },
 
-  // ── emotional_intimacy ──
-  { id: 'm8_ic_04', module: 8, quotient: 'IC', dimension: 'emotional_intimacy', format: 'scenario',
-    text: 'What\'s more intimate: someone seeing you at your absolute worst, or someone knowing your deepest fear?',
+  // ── intimacy_communication (NSSS-informed: openness, feedback, vulnerability) ──
+  { id: 'm8_ic_04', module: 8, quotient: 'IC', dimension: 'intimacy_communication', format: 'scenario',
+    text: 'How comfortable are you telling a partner what feels good and what doesn\'t during intimate moments?',
     options: [
-      { value: 1, label: 'My worst. That\'s the real me with no filter.' },
-      { value: 2, label: 'My worst, slightly. Both are terrifying.' },
-      { value: 3, label: 'Equally scary. Both require massive trust.' },
-      { value: 4, label: 'My deepest fear. That\'s the core of who I am.' },
-      { value: 5, label: 'My deepest fear. Vulnerability at that level changes everything.' },
+      { value: 1, label: 'Very uncomfortable. I\'d rather just go with the flow.' },
+      { value: 2, label: 'A little awkward, but I can manage the basics.' },
+      { value: 3, label: 'Fairly comfortable once I trust someone.' },
+      { value: 4, label: 'Pretty comfortable. Good communication makes everything better.' },
+      { value: 5, label: 'Completely comfortable. I see it as essential, not awkward.' },
     ] },
-  { id: 'm8_ic_05', module: 8, quotient: 'IC', dimension: 'emotional_intimacy', format: 'scenario',
-    text: 'How long into a relationship before you really let someone see all of you? The real, unfiltered you.',
+  { id: 'm8_ic_05', module: 8, quotient: 'IC', dimension: 'intimacy_communication', format: 'scenario',
+    text: 'Your partner wants to have a candid conversation about your intimate life -- what works, what could be better. How do you feel?',
     options: [
-      { value: 1, label: 'Pretty quickly. What you see is what you get.' },
-      { value: 2, label: 'A few months. Once trust is established.' },
-      { value: 3, label: '6 months to a year. I open up in layers.' },
-      { value: 4, label: 'Over a year. I need serious trust first.' },
-      { value: 5, label: 'I\'m not sure anyone has seen all of me yet.' },
+      { value: 1, label: 'Anxious. That conversation feels like criticism waiting to happen.' },
+      { value: 2, label: 'A little nervous, but I know it\'s probably healthy.' },
+      { value: 3, label: 'Open to it, as long as it stays constructive.' },
+      { value: 4, label: 'Glad they brought it up. I want us both to be satisfied.' },
+      { value: 5, label: 'Relieved. I\'d rather talk openly than guess what they need.' },
     ] },
-  { id: 'm8_ic_06', module: 8, quotient: 'IC', dimension: 'emotional_intimacy', format: 'scenario',
-    text: 'Pillow talk at 2 AM or a deep conversation over dinner? Which builds more connection?',
+  { id: 'm8_ic_06', module: 8, quotient: 'IC', dimension: 'intimacy_communication', format: 'scenario',
+    text: 'When it comes to sharing fantasies or desires with a partner, where do you land?',
     options: [
-      { value: 1, label: '2 AM pillow talk. Guards are down. That\'s where the real stuff lives.' },
-      { value: 2, label: 'Pillow talk, but dinner conversations matter too' },
-      { value: 3, label: 'Both equally. Different vibes, same depth.' },
-      { value: 4, label: 'Dinner. I like intentional, face-to-face conversation.' },
-      { value: 5, label: 'Dinner, fully. I connect better when I\'m alert and present.' },
+      { value: 1, label: 'I keep those private. Some things are just for me.' },
+      { value: 2, label: 'I might hint at things but rarely say them directly.' },
+      { value: 3, label: 'I\'d share if they asked and the trust was there.' },
+      { value: 4, label: 'I bring things up when it feels right. Openness builds closeness.' },
+      { value: 5, label: 'I\'m an open book. Sharing desires is part of real intimacy.' },
+    ] },
+  { id: 'm8_ic_07', module: 8, quotient: 'IC', dimension: 'intimacy_communication', format: 'scenario',
+    text: 'A partner tells you they need something different in your intimate life. Your honest first reaction:',
+    options: [
+      { value: 1, label: 'Defensive. It would feel like I\'ve been doing something wrong.' },
+      { value: 2, label: 'A little stung, but I\'d try to listen.' },
+      { value: 3, label: 'Neutral. Feedback is feedback -- I can handle it.' },
+      { value: 4, label: 'Curious. I\'d want to understand what they need.' },
+      { value: 5, label: 'Grateful. I\'d rather know than have them go unsatisfied.' },
     ] },
 
-  // ── desire_dynamics ──
-  { id: 'm8_ic_07', module: 8, quotient: 'IC', dimension: 'desire_dynamics', format: 'scenario',
-    text: 'In a long-term relationship, keeping the spark alive is...',
+  // ── physical_affection (day-to-day touch, non-sexual closeness, public affection) ──
+  { id: 'm8_ic_08', module: 8, quotient: 'IC', dimension: 'physical_affection', format: 'scenario',
+    text: 'You\'re watching a movie together on the couch. What does your ideal level of physical closeness look like?',
     options: [
-      { value: 1, label: 'Natural. If you\'re with the right person, it just stays.' },
-      { value: 2, label: 'Mostly natural, with occasional effort' },
-      { value: 3, label: 'A shared responsibility. Takes intentional work.' },
-      { value: 4, label: 'Effort-heavy, and both people have to show up for it.' },
-      { value: 5, label: 'A whole project. Date nights, surprises, creativity. All of it.' },
+      { value: 1, label: 'Our own space. I love being near them but don\'t need constant contact.' },
+      { value: 2, label: 'Sitting close, maybe a hand on their leg.' },
+      { value: 3, label: 'Leaning into each other. Comfortable and connected.' },
+      { value: 4, label: 'Fully cuddled up. Legs intertwined, the whole thing.' },
+      { value: 5, label: 'As close as physically possible. I want to melt into them.' },
     ] },
-  { id: 'm8_ic_08', module: 8, quotient: 'IC', dimension: 'desire_dynamics', format: 'scenario',
-    text: 'How important is it to you that your partner openly communicates what they want in the bedroom?',
+  { id: 'm8_ic_09', module: 8, quotient: 'IC', dimension: 'physical_affection', format: 'scenario',
+    text: 'You\'re out with friends and your partner reaches for your hand or puts their arm around you. How does that land?',
     options: [
-      { value: 1, label: 'Not very. Some things should just flow naturally.' },
-      { value: 2, label: 'Somewhat. A few hints here and there is enough.' },
-      { value: 3, label: 'Important. Communication makes everything better.' },
-      { value: 4, label: 'Very important. I need to know what works for them.' },
-      { value: 5, label: 'Non-negotiable. Full transparency or we\'re both losing.' },
+      { value: 1, label: 'Uncomfortable. I prefer to keep affection private.' },
+      { value: 2, label: 'A little self-conscious, but I wouldn\'t pull away.' },
+      { value: 3, label: 'Fine with it. A little PDA doesn\'t bother me.' },
+      { value: 4, label: 'I love it. I want people to see we\'re together.' },
+      { value: 5, label: 'I\'d probably beat them to it. I\'m the one reaching first.' },
     ] },
-  { id: 'm8_ic_09', module: 8, quotient: 'IC', dimension: 'desire_dynamics', format: 'scenario',
-    text: 'If your partner said they wanted to try something new and outside your comfort zone, your first reaction would be...',
+  { id: 'm8_ic_10', module: 8, quotient: 'IC', dimension: 'physical_affection', format: 'scenario',
+    text: 'How important is non-sexual physical touch -- hugs, back rubs, hand-holding -- in your day-to-day relationship?',
     options: [
-      { value: 1, label: 'No. I know what I like and I\'m good.' },
-      { value: 2, label: 'Hesitant but I\'d hear them out' },
-      { value: 3, label: 'Curious. I\'d want to know more before deciding.' },
-      { value: 4, label: 'Open. I\'m down to explore if we\'re both comfortable.' },
-      { value: 5, label: 'Excited. Growth happens outside your comfort zone.' },
-    ] },
-  { id: 'm8_ic_10', module: 8, quotient: 'IC', dimension: 'desire_dynamics', format: 'scenario',
-    text: 'Honest answer: how important is physical intimacy to you in a long-term relationship?',
-    options: [
-      { value: 1, label: 'It\'s nice but it\'s not the most important thing' },
-      { value: 2, label: 'Important, but emotional connection comes first' },
-      { value: 3, label: 'Very important. It\'s how I stay connected.' },
-      { value: 4, label: 'Essential. If that\'s missing, something\'s wrong.' },
-      { value: 5, label: 'Top priority. I need that to feel alive in a relationship.' },
+      { value: 1, label: 'Not very. I show love in other ways.' },
+      { value: 2, label: 'Nice to have, but I don\'t need it every day.' },
+      { value: 3, label: 'Important. Regular touch keeps me feeling connected.' },
+      { value: 4, label: 'Very important. I feel closest when there\'s consistent physical contact.' },
+      { value: 5, label: 'Essential. Without daily touch, I start feeling distant.' },
     ] },
 ]
 

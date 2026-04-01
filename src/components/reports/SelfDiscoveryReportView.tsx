@@ -552,7 +552,7 @@ export default function SelfDiscoveryReportView() {
               </div>
               <div>
                 <p className="text-white/50 text-[10px] font-semibold uppercase tracking-wider mb-1">
-                  Love Style
+                  Connection Style
                 </p>
                 <p className="text-white text-sm font-bold">
                   {report.loveLanguageRanking[0]?.label || 'Balanced'}
@@ -883,18 +883,18 @@ export default function SelfDiscoveryReportView() {
           </div>
         </ReportSectionCard>
 
-        {/* ═══════ Section: What You Need (Love Styles) ═══════ */}
+        {/* ═══════ Section: What You Need (Connection Styles) ═══════ */}
         <ReportSectionCard
           sectionKey="whatYouNeed"
           section={report.sections.whatYouNeed}
         >
-          {/* Love Language Ranking */}
+          {/* Connection Style Ranking */}
           <div className="space-y-3 mt-2">
             <p
               className="text-xs font-semibold uppercase tracking-wider"
               style={{ color: 'var(--text-muted)' }}
             >
-              Your Love Style Profile
+              Your Connection Style Profile
             </p>
             {report.loveLanguageRanking.map((lang, i) => (
               <div key={lang.language} className="space-y-1.5">
@@ -1037,7 +1037,7 @@ export default function SelfDiscoveryReportView() {
             firstName={report.firstName}
             topTraits={report.topTraits}
             attachmentStyleLabel={report.attachmentStyleLabel}
-            primaryLoveLanguage={report.loveLanguageRanking[0]?.label || 'Quality Time'}
+            primaryConnectionStyle={report.loveLanguageRanking[0]?.label || 'Focused Presence'}
             eqScore={Math.round(
               (Object.values(report.eqBreakdown).reduce((sum, v) => sum + v, 0) /
                 Object.values(report.eqBreakdown).length /

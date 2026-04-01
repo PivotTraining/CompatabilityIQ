@@ -174,7 +174,7 @@ export default function CIQCard({
 
           {/* Middle section */}
           <div className="space-y-6">
-            {/* How You Love */}
+            {/* How You Connect */}
             <div>
               <p className="text-white/50 text-[10px] font-semibold uppercase tracking-wider mb-1">
                 How You Connect

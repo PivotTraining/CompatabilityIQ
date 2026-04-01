@@ -24,6 +24,7 @@ import {
   CheckCircle2,
   Flame,
   Link2,
+  Lock,
 } from 'lucide-react'
 
 // ─── Types ──────────────────────────────────────────────
@@ -92,7 +93,7 @@ const ATTACHMENT_DEEP_PROFILES: Record<string, {
   },
   anxious_preoccupied: {
     summary: 'You love deeply and feel deeply. Your emotional radar is highly attuned to shifts in your partner\'s mood, availability, and energy. When things feel off, your system sounds the alarm — sometimes louder than the situation warrants.',
-    inRelationships: 'You invest heavily and early. You think about your partner constantly, want frequent reassurance, and may interpret silence or distance as rejection. Your love language is often proximity and verbal affirmation. You\'re the one texting "are we okay?" after a slightly off phone call.',
+    inRelationships: 'You invest heavily and early. You think about your partner constantly, want frequent reassurance, and may interpret silence or distance as rejection. Your connection style is often proximity and verbal affirmation. You\'re the one texting "are we okay?" after a slightly off phone call.',
     needsFromPartner: 'Consistency above all. Clear communication, regular check-ins, and someone who doesn\'t punish you for needing reassurance. You thrive when your partner is proactive about connection.',
     growthEdge: 'Learning to self-soothe before seeking external reassurance. The gap between "I feel anxious" and "something is actually wrong" is where your growth lives. Meditation, journaling, and secure friendships can help regulate your nervous system.',
     bestMatchWith: ['Secure (they ground you)', 'Earned Secure (they understand the journey)'],
@@ -387,14 +388,19 @@ export default function SelfDiscoveryDashboard() {
         headers: { 'Content-Type': 'application/json' },
       })
       const data = await res.json()
+      if (!res.ok) {
+        showToast(data.error || 'Something went wrong. Please try again.')
+        return
+      }
       if (data.url) {
         window.location.href = data.url
       } else if (data.reportId) {
         setReportPurchased(true)
         router.push('/app/self-discovery/report')
       }
-    } catch (err) {
-      console.error('Failed to purchase report:', err)
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to purchase report'
+      showToast(message)
     } finally {
       setPurchasingReport(false)
     }
@@ -484,7 +490,7 @@ export default function SelfDiscoveryDashboard() {
         })}
       </div>
 
-      {/* ══════ Attachment Style Card (DEEP) ══════ */}
+      {/* ══════ Attachment Style Card ══════ */}
       <SectionCard title="Attachment Style" icon={Heart} color="#5B8DB8">
         <div className="flex items-center gap-3 mb-4">
           <span className="px-3 py-1.5 rounded-full text-xs font-bold text-white" style={{ background: '#5B8DB8' }}>
@@ -497,94 +503,101 @@ export default function SelfDiscoveryDashboard() {
           )}
         </div>
 
-        {ATTACHMENT_DEEP_PROFILES[attachmentStyle] && (
-          <div className="space-y-4">
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              {ATTACHMENT_DEEP_PROFILES[attachmentStyle].summary}
-            </p>
+        {/* Premium: Deep profile, sub-scales, growth edges */}
+        {reportPurchased ? (
+          <>
+            {ATTACHMENT_DEEP_PROFILES[attachmentStyle] && (
+              <div className="space-y-4">
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                  {ATTACHMENT_DEEP_PROFILES[attachmentStyle].summary}
+                </p>
 
-            <div>
-              <p className="text-xs font-semibold mb-1.5" style={{ color: '#5B8DB8' }}>In Relationships</p>
-              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                {ATTACHMENT_DEEP_PROFILES[attachmentStyle].inRelationships}
-              </p>
-            </div>
-
-            <button
-              onClick={() => toggleSection('attachment')}
-              className="text-xs font-semibold flex items-center gap-1"
-              style={{ color: '#5B8DB8' }}
-            >
-              {expandedSections.attachment ? 'Show Less' : 'See Full Profile'}
-              {expandedSections.attachment ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-            </button>
-
-            {expandedSections.attachment && (
-              <div className="space-y-4 pt-2 border-t" style={{ borderColor: 'var(--border)' }}>
                 <div>
-                  <p className="text-xs font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>What You Need From a Partner</p>
+                  <p className="text-xs font-semibold mb-1.5" style={{ color: '#5B8DB8' }}>In Relationships</p>
                   <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                    {ATTACHMENT_DEEP_PROFILES[attachmentStyle].needsFromPartner}
+                    {ATTACHMENT_DEEP_PROFILES[attachmentStyle].inRelationships}
                   </p>
                 </div>
-                <div>
-                  <p className="text-xs font-semibold mb-1.5 flex items-center gap-1" style={{ color: '#D4A017' }}>
-                    <AlertTriangle className="w-3 h-3" /> Growth Edge
-                  </p>
-                  <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                    {ATTACHMENT_DEEP_PROFILES[attachmentStyle].growthEdge}
-                  </p>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <p className="text-xs font-semibold mb-1.5" style={{ color: '#22C55E' }}>Best Match With</p>
-                    <ul className="space-y-1">
-                      {ATTACHMENT_DEEP_PROFILES[attachmentStyle].bestMatchWith.map((m, i) => (
-                        <li key={i} className="text-[11px]" style={{ color: 'var(--text-secondary)' }}>+ {m}</li>
-                      ))}
-                    </ul>
+
+                <button
+                  onClick={() => toggleSection('attachment')}
+                  className="text-xs font-semibold flex items-center gap-1"
+                  style={{ color: '#5B8DB8' }}
+                >
+                  {expandedSections.attachment ? 'Show Less' : 'See Full Profile'}
+                  {expandedSections.attachment ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                </button>
+
+                {expandedSections.attachment && (
+                  <div className="space-y-4 pt-2 border-t" style={{ borderColor: 'var(--border)' }}>
+                    <div>
+                      <p className="text-xs font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>What You Need From a Partner</p>
+                      <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                        {ATTACHMENT_DEEP_PROFILES[attachmentStyle].needsFromPartner}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold mb-1.5 flex items-center gap-1" style={{ color: '#D4A017' }}>
+                        <AlertTriangle className="w-3 h-3" /> Growth Edge
+                      </p>
+                      <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                        {ATTACHMENT_DEEP_PROFILES[attachmentStyle].growthEdge}
+                      </p>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <p className="text-xs font-semibold mb-1.5" style={{ color: '#22C55E' }}>Best Match With</p>
+                        <ul className="space-y-1">
+                          {ATTACHMENT_DEEP_PROFILES[attachmentStyle].bestMatchWith.map((m, i) => (
+                            <li key={i} className="text-[11px]" style={{ color: 'var(--text-secondary)' }}>+ {m}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold mb-1.5" style={{ color: 'var(--ciq-coral)' }}>Challenges With</p>
+                        <ul className="space-y-1">
+                          {ATTACHMENT_DEEP_PROFILES[attachmentStyle].challengesWith.map((c, i) => (
+                            <li key={i} className="text-[11px]" style={{ color: 'var(--text-secondary)' }}>- {c}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-xs font-semibold mb-1.5" style={{ color: 'var(--ciq-coral)' }}>Challenges With</p>
-                    <ul className="space-y-1">
-                      {ATTACHMENT_DEEP_PROFILES[attachmentStyle].challengesWith.map((c, i) => (
-                        <li key={i} className="text-[11px]" style={{ color: 'var(--text-secondary)' }}>- {c}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+                )}
               </div>
             )}
-          </div>
-        )}
 
-        {/* Sub-scale bars */}
-        {attachmentDim && (
-          <div className="mt-4 pt-4 border-t space-y-2" style={{ borderColor: 'var(--border)' }}>
-            {[
-              { label: 'Anxiety', key: 'anxiety', invert: true },
-              { label: 'Avoidance', key: 'avoidance', invert: true },
-              { label: 'Security', key: 'security', invert: false },
-            ].map(({ label, key, invert }) => {
-              const raw = attachmentDim.subScaleScores[key] || 3
-              const pct = Math.round((raw / 5) * 100)
-              return (
-                <div key={key}>
-                  <div className="flex items-center justify-between mb-0.5">
-                    <span className="text-[11px] font-medium" style={{ color: 'var(--text-primary)' }}>{label}</span>
-                    <span className="text-[11px] font-bold" style={{ color: invert ? (pct > 60 ? 'var(--ciq-coral)' : '#22C55E') : (pct > 60 ? '#22C55E' : 'var(--ciq-coral)') }}>{pct}%</span>
-                  </div>
-                  <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
-                    <div className="h-full rounded-full" style={{ width: `${pct}%`, background: '#5B8DB8' }} />
-                  </div>
-                </div>
-              )
-            })}
-          </div>
+            {/* Sub-scale bars */}
+            {attachmentDim && (
+              <div className="mt-4 pt-4 border-t space-y-2" style={{ borderColor: 'var(--border)' }}>
+                {[
+                  { label: 'Anxiety', key: 'anxiety', invert: true },
+                  { label: 'Avoidance', key: 'avoidance', invert: true },
+                  { label: 'Security', key: 'security', invert: false },
+                ].map(({ label, key, invert }) => {
+                  const raw = attachmentDim.subScaleScores[key] || 3
+                  const pct = Math.round((raw / 5) * 100)
+                  return (
+                    <div key={key}>
+                      <div className="flex items-center justify-between mb-0.5">
+                        <span className="text-[11px] font-medium" style={{ color: 'var(--text-primary)' }}>{label}</span>
+                        <span className="text-[11px] font-bold" style={{ color: invert ? (pct > 60 ? 'var(--ciq-coral)' : '#22C55E') : (pct > 60 ? '#22C55E' : 'var(--ciq-coral)') }}>{pct}%</span>
+                      </div>
+                      <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
+                        <div className="h-full rounded-full" style={{ width: `${pct}%`, background: '#5B8DB8' }} />
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+          </>
+        ) : (
+          <PremiumGate onPurchase={handlePurchaseReport} purchasing={purchasingReport} />
         )}
       </SectionCard>
 
-      {/* ══════ Communication Profile Card (DEEP) ══════ */}
+      {/* ══════ Communication Profile Card ══════ */}
       <SectionCard title="Communication Profile" icon={MessageCircle} color="#D4A017">
         <div className="flex items-center gap-3 mb-4">
           <span className="px-3 py-1.5 rounded-full text-xs font-bold text-white" style={{ background: '#D4A017' }}>
@@ -592,202 +605,259 @@ export default function SelfDiscoveryDashboard() {
           </span>
         </div>
 
-        {CONFLICT_DEEP_PROFILES[conflictApproach] && (
-          <div className="space-y-4">
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              {CONFLICT_DEEP_PROFILES[conflictApproach].summary}
-            </p>
+        {/* Premium: Deep profile, sub-scales, strengths/blindspots */}
+        {reportPurchased ? (
+          <>
+            {CONFLICT_DEEP_PROFILES[conflictApproach] && (
+              <div className="space-y-4">
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                  {CONFLICT_DEEP_PROFILES[conflictApproach].summary}
+                </p>
 
-            <div>
-              <p className="text-xs font-semibold mb-1.5" style={{ color: '#D4A017' }}>When Conflict Arises</p>
-              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                {CONFLICT_DEEP_PROFILES[conflictApproach].inConflict}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <p className="text-xs font-semibold mb-2" style={{ color: '#22C55E' }}>Strengths</p>
-                <ul className="space-y-1.5">
-                  {CONFLICT_DEEP_PROFILES[conflictApproach].strengths.map((s, i) => (
-                    <li key={i} className="text-[11px] leading-snug" style={{ color: 'var(--text-secondary)' }}>+ {s}</li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <p className="text-xs font-semibold mb-2" style={{ color: 'var(--ciq-coral)' }}>Blind Spots</p>
-                <ul className="space-y-1.5">
-                  {CONFLICT_DEEP_PROFILES[conflictApproach].blindSpots.map((w, i) => (
-                    <li key={i} className="text-[11px] leading-snug" style={{ color: 'var(--text-secondary)' }}>- {w}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <button
-              onClick={() => toggleSection('communication')}
-              className="text-xs font-semibold flex items-center gap-1"
-              style={{ color: '#D4A017' }}
-            >
-              {expandedSections.communication ? 'Show Less' : 'See Full Profile'}
-              {expandedSections.communication ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-            </button>
-
-            {expandedSections.communication && (
-              <div className="space-y-4 pt-2 border-t" style={{ borderColor: 'var(--border)' }}>
                 <div>
-                  <p className="text-xs font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>How You Repair</p>
+                  <p className="text-xs font-semibold mb-1.5" style={{ color: '#D4A017' }}>When Conflict Arises</p>
                   <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                    {CONFLICT_DEEP_PROFILES[conflictApproach].repairStyle}
+                    {CONFLICT_DEEP_PROFILES[conflictApproach].inConflict}
                   </p>
                 </div>
-                <div>
-                  <p className="text-xs font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>Partner Compatibility</p>
-                  <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                    {CONFLICT_DEEP_PROFILES[conflictApproach].partnerAdvice}
-                  </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-xs font-semibold mb-2" style={{ color: '#22C55E' }}>Strengths</p>
+                    <ul className="space-y-1.5">
+                      {CONFLICT_DEEP_PROFILES[conflictApproach].strengths.map((s, i) => (
+                        <li key={i} className="text-[11px] leading-snug" style={{ color: 'var(--text-secondary)' }}>+ {s}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold mb-2" style={{ color: 'var(--ciq-coral)' }}>Blind Spots</p>
+                    <ul className="space-y-1.5">
+                      {CONFLICT_DEEP_PROFILES[conflictApproach].blindSpots.map((w, i) => (
+                        <li key={i} className="text-[11px] leading-snug" style={{ color: 'var(--text-secondary)' }}>- {w}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
+
+                <button
+                  onClick={() => toggleSection('communication')}
+                  className="text-xs font-semibold flex items-center gap-1"
+                  style={{ color: '#D4A017' }}
+                >
+                  {expandedSections.communication ? 'Show Less' : 'See Full Profile'}
+                  {expandedSections.communication ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                </button>
+
+                {expandedSections.communication && (
+                  <div className="space-y-4 pt-2 border-t" style={{ borderColor: 'var(--border)' }}>
+                    <div>
+                      <p className="text-xs font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>How You Repair</p>
+                      <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                        {CONFLICT_DEEP_PROFILES[conflictApproach].repairStyle}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>Partner Compatibility</p>
+                      <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                        {CONFLICT_DEEP_PROFILES[conflictApproach].partnerAdvice}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
-          </div>
-        )}
 
-        {/* Sub-scale bars */}
-        {commDim && (
-          <div className="mt-4 pt-4 border-t space-y-2" style={{ borderColor: 'var(--border)' }}>
-            {[
-              { label: 'Conflict Approach', key: 'conflict_approach' },
-              { label: 'Repair Attempts', key: 'repair_attempts' },
-              { label: 'Emotional Expression', key: 'emotional_expression' },
-            ].map(({ label, key }) => {
-              const raw = commDim.subScaleScores[key] || 3
-              const pct = Math.round((raw / 5) * 100)
-              return (
-                <div key={key}>
-                  <div className="flex items-center justify-between mb-0.5">
-                    <span className="text-[11px] font-medium" style={{ color: 'var(--text-primary)' }}>{label}</span>
-                    <span className="text-[11px] font-bold" style={{ color: '#D4A017' }}>{pct}%</span>
-                  </div>
-                  <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
-                    <div className="h-full rounded-full" style={{ width: `${pct}%`, background: '#D4A017' }} />
-                  </div>
-                </div>
-              )
-            })}
-          </div>
+            {/* Sub-scale bars */}
+            {commDim && (
+              <div className="mt-4 pt-4 border-t space-y-2" style={{ borderColor: 'var(--border)' }}>
+                {[
+                  { label: 'Conflict Approach', key: 'conflict_approach' },
+                  { label: 'Repair Attempts', key: 'repair_attempts' },
+                  { label: 'Emotional Expression', key: 'emotional_expression' },
+                ].map(({ label, key }) => {
+                  const raw = commDim.subScaleScores[key] || 3
+                  const pct = Math.round((raw / 5) * 100)
+                  return (
+                    <div key={key}>
+                      <div className="flex items-center justify-between mb-0.5">
+                        <span className="text-[11px] font-medium" style={{ color: 'var(--text-primary)' }}>{label}</span>
+                        <span className="text-[11px] font-bold" style={{ color: '#D4A017' }}>{pct}%</span>
+                      </div>
+                      <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
+                        <div className="h-full rounded-full" style={{ width: `${pct}%`, background: '#D4A017' }} />
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+          </>
+        ) : (
+          <PremiumGate onPurchase={handlePurchaseReport} purchasing={purchasingReport} />
         )}
       </SectionCard>
 
       {/* ══════ Emotional Intelligence Card ══════ */}
       <SectionCard title="Emotional Intelligence" icon={Brain} color="#E8735A">
-        <div className="space-y-3">
-          {Object.entries(eqBreakdown).map(([label, score]) => {
-            const percentage = Math.round((score / 5) * 100)
-            return (
-              <div key={label}>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs font-medium" style={{ color: 'var(--text-primary)' }}>{label}</span>
-                  <span className="text-xs font-bold" style={{ color: '#E8735A' }}>{percentage}%</span>
-                </div>
-                <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
-                  <div
-                    className="h-full rounded-full transition-all duration-700 ease-out"
-                    style={{ width: `${percentage}%`, background: '#E8735A' }}
-                  />
-                </div>
+        {eiDim ? (
+          reportPurchased ? (
+            <>
+              <div className="space-y-3">
+                {Object.entries(eqBreakdown).map(([label, score]) => {
+                  const percentage = Math.round((score / 5) * 100)
+                  return (
+                    <div key={label}>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-xs font-medium" style={{ color: 'var(--text-primary)' }}>{label}</span>
+                        <span className="text-xs font-bold" style={{ color: '#E8735A' }}>{percentage}%</span>
+                      </div>
+                      <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
+                        <div
+                          className="h-full rounded-full transition-all duration-700 ease-out"
+                          style={{ width: `${percentage}%`, background: '#E8735A' }}
+                        />
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
-            )
-          })}
-        </div>
-        {eiDim && (
-          <p className="text-xs mt-4 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-            {eiDim.overallScore >= 4.0
-              ? 'Your emotional intelligence is a significant relationship asset. You can read emotional cues, regulate your own reactions, and create psychological safety for a partner.'
-              : eiDim.overallScore >= 3.0
-                ? 'Your EQ is developing well. Focus on the gap between your highest and lowest sub-scales — that\'s where targeted growth will have the biggest impact on your relationships.'
-                : 'Emotional intelligence is the most trainable relationship skill. Small daily practices — naming emotions, active listening, pausing before reacting — compound into major relationship improvements.'
-            }
-          </p>
+              <p className="text-xs mt-4 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                {eiDim.overallScore >= 4.0
+                  ? 'Your emotional intelligence is a significant relationship asset. You can read emotional cues, regulate your own reactions, and create psychological safety for a partner.'
+                  : eiDim.overallScore >= 3.0
+                    ? 'Your EQ is developing well. Focus on the gap between your highest and lowest sub-scales — that\'s where targeted growth will have the biggest impact on your relationships.'
+                    : 'Emotional intelligence is the most trainable relationship skill. Small daily practices — naming emotions, active listening, pausing before reacting — compound into major relationship improvements.'
+                }
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+                  EQ Score: {Math.round((eiDim.overallScore / 5) * 100)}%
+                </span>
+              </div>
+              <PremiumGate onPurchase={handlePurchaseReport} purchasing={purchasingReport} />
+            </>
+          )
+        ) : (
+          <div className="text-center py-4">
+            <Lock className="w-6 h-6 mx-auto mb-2" style={{ color: 'var(--text-muted)' }} />
+            <p className="text-xs font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
+              EI Module Not Completed
+            </p>
+            <p className="text-[11px]" style={{ color: 'var(--text-muted)' }}>
+              Complete the Emotional Intelligence assessment to see your EQ breakdown.
+            </p>
+            <button
+              onClick={() => router.push('/app/assessment')}
+              className="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-white"
+              style={{ background: '#E8735A' }}
+            >
+              Take EI Assessment <ArrowRight className="w-3 h-3" />
+            </button>
+          </div>
         )}
       </SectionCard>
 
-      {/* ══════ Values Map - Enhanced Radar Chart ══════ */}
+      {/* ══════ Values Map ══════ */}
       <SectionCard title="Values Map" icon={Target} color="#7B68B5">
-        <ValuesRadarChart
-          lifeDirection={valuesDim?.subScaleScores?.life_direction || 3.0}
-          moralEthical={valuesDim?.subScaleScores?.moral_ethical || 3.0}
-          relationshipPriority={valuesDim?.subScaleScores?.relationship_priority || 3.0}
-        />
-        {valuesDim && (
-          <div className="mt-4 space-y-3">
-            {[
-              { label: 'Life Direction', key: 'life_direction', desc: 'How aligned your goals, ambitions, and life path are' },
-              { label: 'Moral & Ethical', key: 'moral_ethical', desc: 'Your flexibility vs. rigidity on right and wrong' },
-              { label: 'Relationship Priority', key: 'relationship_priority', desc: 'How central romantic partnership is to your identity' },
-            ].map(({ label, key, desc }) => {
-              const raw = valuesDim.subScaleScores[key] || 3
-              const pct = Math.round((raw / 5) * 100)
-              return (
-                <div key={key}>
-                  <div className="flex items-center justify-between mb-0.5">
-                    <div>
-                      <span className="text-xs font-medium" style={{ color: 'var(--text-primary)' }}>{label}</span>
-                      <p className="text-[10px]" style={{ color: 'var(--text-muted)' }}>{desc}</p>
+        {reportPurchased ? (
+          <>
+            <ValuesRadarChart
+              lifeDirection={valuesDim?.subScaleScores?.life_direction || 3.0}
+              moralEthical={valuesDim?.subScaleScores?.moral_ethical || 3.0}
+              relationshipPriority={valuesDim?.subScaleScores?.relationship_priority || 3.0}
+            />
+            {valuesDim && (
+              <div className="mt-4 space-y-3">
+                {[
+                  { label: 'Life Direction', key: 'life_direction', desc: 'How aligned your goals, ambitions, and life path are' },
+                  { label: 'Moral & Ethical', key: 'moral_ethical', desc: 'Your flexibility vs. rigidity on right and wrong' },
+                  { label: 'Relationship Priority', key: 'relationship_priority', desc: 'How central romantic partnership is to your identity' },
+                ].map(({ label, key, desc }) => {
+                  const raw = valuesDim.subScaleScores[key] || 3
+                  const pct = Math.round((raw / 5) * 100)
+                  return (
+                    <div key={key}>
+                      <div className="flex items-center justify-between mb-0.5">
+                        <div>
+                          <span className="text-xs font-medium" style={{ color: 'var(--text-primary)' }}>{label}</span>
+                          <p className="text-[10px]" style={{ color: 'var(--text-muted)' }}>{desc}</p>
+                        </div>
+                        <span className="text-xs font-bold" style={{ color: '#7B68B5' }}>{pct}%</span>
+                      </div>
+                      <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
+                        <div className="h-full rounded-full" style={{ width: `${pct}%`, background: '#7B68B5' }} />
+                      </div>
                     </div>
-                    <span className="text-xs font-bold" style={{ color: '#7B68B5' }}>{pct}%</span>
-                  </div>
-                  <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
-                    <div className="h-full rounded-full" style={{ width: `${pct}%`, background: '#7B68B5' }} />
-                  </div>
-                </div>
-              )
-            })}
-          </div>
+                  )
+                })}
+              </div>
+            )}
+          </>
+        ) : (
+          <PremiumGate onPurchase={handlePurchaseReport} purchasing={purchasingReport} />
         )}
       </SectionCard>
 
       {/* ══════ How You Connect ══════ */}
       <SectionCard title="How You Connect" icon={Heart} color="#C25B8A">
-        <div className="space-y-3">
-          {loveLanguageRanking.map((lang, i) => (
-            <div key={lang.key}>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-medium" style={{ color: 'var(--text-primary)' }}>
-                  {i === 0 && <span className="mr-1 font-bold" style={{ color: '#C25B8A' }}>#{i + 1}</span>}
-                  {i > 0 && <span className="mr-1 font-medium" style={{ color: 'var(--text-muted)' }}>#{i + 1}</span>}
-                  {lang.label}
-                </span>
-                <span className="text-xs font-bold" style={{ color: '#C25B8A' }}>{lang.percentage}%</span>
-              </div>
-              <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
-                <div
-                  className="h-full rounded-full transition-all duration-700 ease-out"
-                  style={{
-                    width: `${lang.percentage}%`,
-                    background: i === 0 ? '#C25B8A' : i === 1 ? '#D47FA3' : '#E0A3BC',
-                  }}
-                />
-              </div>
-            </div>
-          ))}
+        {/* Free: show primary connection style name */}
+        <div className="flex items-center gap-3 mb-4">
+          <span className="px-3 py-1.5 rounded-full text-xs font-bold text-white" style={{ background: '#C25B8A' }}>
+            {loveLanguageRanking[0]?.label || 'Balanced'}
+          </span>
         </div>
-        {loveLangDim?.loveLangProfile && (
-          <div className="mt-4 pt-3 border-t" style={{ borderColor: 'var(--border)' }}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <p className="text-[10px] font-semibold mb-1" style={{ color: '#C25B8A' }}>You Receive Connection Through</p>
-                <p className="text-xs" style={{ color: 'var(--text-primary)' }}>
-                  {loveLangDim.loveLangProfile.receivingLanguages.map(l => LOVE_STYLE_LABELS[l] || l).join(', ')}
-                </p>
-              </div>
-              <div>
-                <p className="text-[10px] font-semibold mb-1" style={{ color: '#C25B8A' }}>You Give Connection Through</p>
-                <p className="text-xs" style={{ color: 'var(--text-primary)' }}>
-                  {loveLangDim.loveLangProfile.givingLanguages.map(l => LOVE_STYLE_LABELS[l] || l).join(', ')}
-                </p>
-              </div>
+
+        {/* Premium: full ranking and give/receive breakdown */}
+        {reportPurchased ? (
+          <>
+            <div className="space-y-3">
+              {loveLanguageRanking.map((lang, i) => (
+                <div key={lang.key}>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs font-medium" style={{ color: 'var(--text-primary)' }}>
+                      {i === 0 && <span className="mr-1 font-bold" style={{ color: '#C25B8A' }}>#{i + 1}</span>}
+                      {i > 0 && <span className="mr-1 font-medium" style={{ color: 'var(--text-muted)' }}>#{i + 1}</span>}
+                      {lang.label}
+                    </span>
+                    <span className="text-xs font-bold" style={{ color: '#C25B8A' }}>{lang.percentage}%</span>
+                  </div>
+                  <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
+                    <div
+                      className="h-full rounded-full transition-all duration-700 ease-out"
+                      style={{
+                        width: `${lang.percentage}%`,
+                        background: i === 0 ? '#C25B8A' : i === 1 ? '#D47FA3' : '#E0A3BC',
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
+            {loveLangDim?.loveLangProfile && (
+              <div className="mt-4 pt-3 border-t" style={{ borderColor: 'var(--border)' }}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <p className="text-[10px] font-semibold mb-1" style={{ color: '#C25B8A' }}>You Receive Connection Through</p>
+                    <p className="text-xs" style={{ color: 'var(--text-primary)' }}>
+                      {loveLangDim.loveLangProfile.receivingLanguages.map(l => LOVE_STYLE_LABELS[l] || l).join(', ')}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-semibold mb-1" style={{ color: '#C25B8A' }}>You Give Connection Through</p>
+                    <p className="text-xs" style={{ color: 'var(--text-primary)' }}>
+                      {loveLangDim.loveLangProfile.givingLanguages.map(l => LOVE_STYLE_LABELS[l] || l).join(', ')}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
+        ) : (
+          <PremiumGate onPurchase={handlePurchaseReport} purchasing={purchasingReport} />
         )}
       </SectionCard>
 
@@ -829,27 +899,33 @@ export default function SelfDiscoveryDashboard() {
           </div>
         </div>
 
-        {/* Readiness breakdown by dimension */}
-        <div className="mt-5 pt-4 border-t space-y-2" style={{ borderColor: 'var(--border)' }}>
-          <p className="text-[10px] font-semibold uppercase tracking-wide mb-2" style={{ color: 'var(--text-muted)' }}>
-            Score Breakdown
-          </p>
-          {dimensions.sort((a, b) => b.overallScore - a.overallScore).map((dim) => {
-            const pct = Math.round((dim.overallScore / 5) * 100)
-            const color = DIMENSION_COLORS[dim.dimensionId] || '#7B68B5'
-            return (
-              <div key={dim.dimensionId} className="flex items-center gap-3">
-                <span className="text-[11px] font-medium w-32 truncate" style={{ color: 'var(--text-secondary)' }}>
-                  {dim.dimensionName}
-                </span>
-                <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
-                  <div className="h-full rounded-full" style={{ width: `${pct}%`, background: color }} />
+        {/* Readiness breakdown by dimension — premium only */}
+        {reportPurchased ? (
+          <div className="mt-5 pt-4 border-t space-y-2" style={{ borderColor: 'var(--border)' }}>
+            <p className="text-[10px] font-semibold uppercase tracking-wide mb-2" style={{ color: 'var(--text-muted)' }}>
+              Score Breakdown
+            </p>
+            {dimensions.sort((a, b) => b.overallScore - a.overallScore).map((dim) => {
+              const pct = Math.round((dim.overallScore / 5) * 100)
+              const color = DIMENSION_COLORS[dim.dimensionId] || '#7B68B5'
+              return (
+                <div key={dim.dimensionId} className="flex items-center gap-3">
+                  <span className="text-[11px] font-medium w-32 truncate" style={{ color: 'var(--text-secondary)' }}>
+                    {dim.dimensionName}
+                  </span>
+                  <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
+                    <div className="h-full rounded-full" style={{ width: `${pct}%`, background: color }} />
+                  </div>
+                  <span className="text-[11px] font-bold w-8 text-right" style={{ color }}>{pct}</span>
                 </div>
-                <span className="text-[11px] font-bold w-8 text-right" style={{ color }}>{pct}</span>
-              </div>
-            )
-          })}
-        </div>
+              )
+            })}
+          </div>
+        ) : (
+          <div className="mt-5 pt-4 border-t" style={{ borderColor: 'var(--border)' }}>
+            <PremiumGate onPurchase={handlePurchaseReport} purchasing={purchasingReport} />
+          </div>
+        )}
       </div>
 
       {/* ══════ Upsell: Full Report ══════ */}
@@ -940,6 +1016,45 @@ export default function SelfDiscoveryDashboard() {
           to { opacity: 1; transform: translate(-50%, 0); }
         }
       `}</style>
+    </div>
+  )
+}
+
+// ─── Premium Gate Component ─────────────────────────────
+
+function PremiumGate({
+  onPurchase,
+  purchasing,
+}: {
+  onPurchase: () => void
+  purchasing: boolean
+}) {
+  return (
+    <div className="relative mt-2">
+      {/* Blurred placeholder content */}
+      <div className="select-none pointer-events-none" style={{ filter: 'blur(6px)', opacity: 0.4 }}>
+        <div className="space-y-2">
+          <div className="h-2 rounded-full w-3/4" style={{ background: 'var(--bg-secondary)' }} />
+          <div className="h-2 rounded-full w-full" style={{ background: 'var(--bg-secondary)' }} />
+          <div className="h-2 rounded-full w-5/6" style={{ background: 'var(--bg-secondary)' }} />
+          <div className="h-2 rounded-full w-2/3" style={{ background: 'var(--bg-secondary)' }} />
+        </div>
+      </div>
+      {/* CTA overlay */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-transparent via-[var(--bg-card)] to-[var(--bg-card)]">
+        <Lock className="w-5 h-5 mb-2" style={{ color: 'var(--ciq-purple)' }} />
+        <p className="text-xs font-semibold text-center mb-3" style={{ color: 'var(--text-primary)' }}>
+          Unlock your full profile
+        </p>
+        <button
+          onClick={onPurchase}
+          disabled={purchasing}
+          className="px-5 py-2 rounded-xl text-xs font-semibold text-white disabled:opacity-50"
+          style={{ background: 'var(--ciq-purple)' }}
+        >
+          {purchasing ? 'Loading...' : 'Get Your Self-Discovery Report — $4.99'}
+        </button>
+      </div>
     </div>
   )
 }

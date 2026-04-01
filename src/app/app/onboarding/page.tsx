@@ -47,10 +47,9 @@ const INTERESTED_IN_OPTIONS: { value: InterestedIn; label: string }[] = [
 ]
 
 const RELATIONSHIP_GOAL_OPTIONS: { value: RelationshipGoal; label: string }[] = [
-  { value: 'long_term', label: 'Long-term relationship' },
-  { value: 'marriage', label: 'Marriage' },
-  { value: 'fun', label: 'Something casual' },
-  { value: 'not_sure', label: 'Not sure yet' },
+  { value: 'long_term', label: 'Looking for a committed relationship' },
+  { value: 'marriage', label: 'Ready for something serious — open to marriage' },
+  { value: 'not_sure', label: 'Open to a relationship if the right person comes along' },
 ]
 
 const CULTURAL_BACKGROUND_OPTIONS = [
@@ -544,7 +543,7 @@ export default function OnboardingPage() {
           Relationship Goals
         </h2>
         <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
-          What are you looking for? No wrong answers.
+          What kind of relationship are you looking for?
         </p>
 
         <div className="space-y-3">

@@ -67,7 +67,7 @@ export default async function AdminDashboard() {
     'Communication & Conflict',
     'Emotional Intelligence',
     'Lifestyle & Ambition',
-    'How You Love',
+    'How You Connect',
   ]
 
   return (

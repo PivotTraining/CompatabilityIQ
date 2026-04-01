@@ -758,11 +758,11 @@ function tallyOverlapScore(
   receivingTally: Record<LoveLanguage, number>
 ): number {
   const languages: LoveLanguage[] = [
-    'words_of_affirmation',
-    'acts_of_service',
-    'receiving_gifts',
-    'quality_time',
-    'physical_touch',
+    'verbal_appreciation',
+    'thoughtful_actions',
+    'meaningful_gestures',
+    'focused_presence',
+    'physical_closeness',
   ]
   const giveVec = languages.map((l) => givingTally[l] || 0)
   const receiveVec = languages.map((l) => receivingTally[l] || 0)

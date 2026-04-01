@@ -24,13 +24,13 @@ import WaitlistModal from '@/components/WaitlistModal'
 import LandingAnimations from '@/components/LandingAnimations'
 
 export const metadata: Metadata = {
-  title: 'CompatibleIQ — Science-Based Compatibility Assessment | Date with Proof',
+  title: 'CompatibleIQ — Serious Dating, Backed by Science',
   description:
-    'Take a free 6-dimension psychometric assessment and get a real compatibility score before your first date. No swiping, no guessing — just science.',
+    'The serious dating app for singles ready for a real relationship. Free 6-dimension psychometric assessment. Real compatibility scores before your first date. No swiping, no hookups — just science.',
   openGraph: {
-    title: 'CompatibleIQ — Science-Based Compatibility Assessment',
+    title: 'CompatibleIQ — Serious Dating, Backed by Science',
     description:
-      '6 science-backed dimensions. One compatibility score. Zero wasted time. The psychometric dating platform for people who are done guessing.',
+      'For singles who want something real. 6 science-backed dimensions. One compatibility score. The dating app that measures real compatibility.',
     url: 'https://compatibleiq.com',
   },
   alternates: {
@@ -42,7 +42,7 @@ const dimensions = [
   {
     icon: Heart,
     title: 'Values & Priorities',
-    desc: 'What actually matters to you in a partner — religion, family, finances, lifestyle non-negotiables.',
+    desc: 'What actually matters to you in a match — religion, family, finances, lifestyle non-negotiables.',
     color: '#E8735A',
     num: '01',
   },
@@ -99,6 +99,10 @@ const faqs = [
   {
     q: 'What is a Resonance Report?',
     a: 'A Resonance Report is a detailed compatibility breakdown for a specific match. It shows where you align, where you might clash, friction points to watch for, and personalized conversation starters. Think of it as a relationship roadmap before the first date.',
+  },
+  {
+    q: 'Is this for hookups?',
+    a: 'No. CompatibleIQ is designed for people seeking meaningful, long-term relationships. Our assessments measure the dimensions that predict lasting compatibility — not surface-level attraction. If you\'re looking for something casual, this isn\'t the app for you.',
   },
   {
     q: 'Can I use this without dating?',
@@ -162,17 +166,17 @@ export default function LandingPage() {
             </div>
 
             <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
-              Stop guessing.{' '}
+              The last dating app{' '}
               <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #9B8DD0 0%, #C25B8A 50%, #E8735A 100%)' }}>
-                Start knowing.
+                you&apos;ll need.
               </span>
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 font-medium leading-relaxed mb-4 max-w-2xl mx-auto">
-              6 psychometric dimensions. One compatibility score. Zero wasted first dates.
+              Not another swipe-right app. CompatibleIQ is for people who want something real.
             </p>
             <p className="text-sm sm:text-base text-gray-400 font-medium leading-relaxed mb-10 max-w-xl mx-auto">
-              CompatibleIQ measures what actually predicts relationship success — not what you look like or how clever your bio is.
+              6 psychometric dimensions. One compatibility score. For singles ready for a real relationship — not hookups, not games.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -297,7 +301,7 @@ export default function LandingPage() {
               How It Works
             </p>
             <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-4">Three steps to clarity</h2>
-            <p className="text-gray-300 font-medium max-w-2xl mx-auto text-base sm:text-lg">No algorithms guessing what you want. No swiping through strangers. Just science, applied to the thing that matters most.</p>
+            <p className="text-gray-300 font-medium max-w-2xl mx-auto text-base sm:text-lg">No algorithms guessing what you want. No swiping through strangers. Just science, applied to finding a relationship that lasts.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8" data-animate="fade-up" data-delay="100">
@@ -722,7 +726,7 @@ export default function LandingPage() {
             <div className="md:col-span-2">
               <Image src="/images/logo.svg" alt="CompatibleIQ" width={200} height={50} className="h-12 w-auto opacity-60 mb-4" />
               <p className="text-sm text-gray-400 font-medium max-w-sm leading-relaxed">
-                The psychometric dating platform that scores real compatibility across 6 science-backed dimensions. Stop guessing. Start knowing.
+                The serious dating platform that scores real compatibility across 6 science-backed dimensions. For singles who want a real relationship. Stop guessing. Start knowing.
               </p>
             </div>
             <div>

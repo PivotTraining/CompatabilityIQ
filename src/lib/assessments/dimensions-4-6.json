@@ -27,20 +27,20 @@
           "question_ids": ["m4_ll_04", "m4_ll_05", "m4_ll_06"]
         }
       ],
-      "languages": [
-        { "id": "words_of_affirmation", "label": "Words of Affirmation", "short": "Words" },
-        { "id": "acts_of_service", "label": "Acts of Service", "short": "Acts" },
-        { "id": "receiving_gifts", "label": "Receiving Gifts", "short": "Gifts" },
-        { "id": "quality_time", "label": "Quality Time", "short": "Time" },
-        { "id": "physical_touch", "label": "Physical Touch", "short": "Touch" }
+      "connection_styles": [
+        { "id": "verbal_appreciation", "label": "Verbal Appreciation", "short": "Verbal" },
+        { "id": "thoughtful_actions", "label": "Thoughtful Actions", "short": "Actions" },
+        { "id": "meaningful_gestures", "label": "Meaningful Gestures", "short": "Gestures" },
+        { "id": "focused_presence", "label": "Focused Presence", "short": "Presence" },
+        { "id": "physical_closeness", "label": "Physical Closeness", "short": "Closeness" }
       ],
       "questions": [
         {
           "id": "m4_ll_01",
           "text": "Which one would make your whole week?",
           "options": {
-            "a": { "text": "A surprise weekend getaway, just the two of you", "language": "quality_time" },
-            "b": { "text": "They cook your favorite meal and run you a bath after a long day", "language": "acts_of_service" }
+            "a": { "text": "A surprise weekend getaway, just the two of you", "language": "focused_presence" },
+            "b": { "text": "They cook your favorite meal and run you a bath after a long day", "language": "thoughtful_actions" }
           },
           "sub_scale": "receiving_language",
           "response_type": "forced_choice"
@@ -49,19 +49,19 @@
           "id": "m4_ll_02",
           "text": "Which hits different?",
           "options": {
-            "a": { "text": "They post you on their birthday with a paragraph about why you matter", "language": "words_of_affirmation" },
-            "b": { "text": "They write you a private love letter you find on your pillow", "language": "words_of_affirmation" }
+            "a": { "text": "They post you on their birthday with a paragraph about why you matter", "language": "verbal_appreciation" },
+            "b": { "text": "They write you a private love letter you find on your pillow", "language": "verbal_appreciation" }
           },
           "sub_scale": "receiving_language",
           "response_type": "forced_choice",
-          "scoring_note": "Both map to words_of_affirmation but distinguish public vs. private expression preference."
+          "scoring_note": "Both map to verbal_appreciation but distinguish public vs. private expression preference."
         },
         {
           "id": "m4_ll_03",
           "text": "After the worst week of your life, which heals you more?",
           "options": {
-            "a": { "text": "They pull you close and just hold you. No words needed.", "language": "physical_touch" },
-            "b": { "text": "They handle everything -- groceries, laundry, dinner -- so you don't have to think", "language": "acts_of_service" }
+            "a": { "text": "They pull you close and just hold you. No words needed.", "language": "physical_closeness" },
+            "b": { "text": "They handle everything -- groceries, laundry, dinner -- so you don't have to think", "language": "thoughtful_actions" }
           },
           "sub_scale": "receiving_language",
           "response_type": "forced_choice"
@@ -70,8 +70,8 @@
           "id": "m4_ll_04",
           "text": "Your partner just crushed a big goal. How do you celebrate them?",
           "options": {
-            "a": { "text": "Plan a night out or experience they'll never forget", "language": "quality_time" },
-            "b": { "text": "Buy them something meaningful that marks the moment", "language": "receiving_gifts" }
+            "a": { "text": "Plan a night out or experience they'll never forget", "language": "focused_presence" },
+            "b": { "text": "Buy them something meaningful that marks the moment", "language": "meaningful_gestures" }
           },
           "sub_scale": "giving_language",
           "response_type": "forced_choice"
@@ -80,8 +80,8 @@
           "id": "m4_ll_05",
           "text": "Random Tuesday night. How do you show love without being asked?",
           "options": {
-            "a": { "text": "Phone away, full attention, asking about their day like you mean it", "language": "quality_time" },
-            "b": { "text": "Walk up behind them, wrap your arms around them, and just stay there", "language": "physical_touch" }
+            "a": { "text": "Phone away, full attention, asking about their day like you mean it", "language": "focused_presence" },
+            "b": { "text": "Walk up behind them, wrap your arms around them, and just stay there", "language": "physical_closeness" }
           },
           "sub_scale": "giving_language",
           "response_type": "forced_choice"
@@ -90,8 +90,8 @@
           "id": "m4_ll_06",
           "text": "Your partner seems down. What's your first instinct?",
           "options": {
-            "a": { "text": "Tell them exactly what you love about them and why they matter", "language": "words_of_affirmation" },
-            "b": { "text": "Take something off their plate without being asked -- cook, clean, handle it", "language": "acts_of_service" }
+            "a": { "text": "Tell them exactly what you love about them and why they matter", "language": "verbal_appreciation" },
+            "b": { "text": "Take something off their plate without being asked -- cook, clean, handle it", "language": "thoughtful_actions" }
           },
           "sub_scale": "giving_language",
           "response_type": "forced_choice"
@@ -99,7 +99,7 @@
       ],
       "scoring": {
         "method": "forced_choice_tally",
-        "compatibility_function": "Check if Partner A's giving language matches Partner B's receiving language, and vice versa. Full match = 1.0, one-direction = 0.6, no match = 0.2.",
+        "compatibility_function": "Check if Partner A's giving style matches Partner B's receiving style, and vice versa. Full match = 1.0, one-direction = 0.6, no match = 0.2.",
         "weight_in_cis": 12
       }
     },
@@ -287,21 +287,21 @@
       "quotient_key": "IC",
       "title": "Intimacy & Chemistry",
       "display_name": "Intimacy & Chemistry",
-      "tagline": "The spicy one. You've been warned.",
-      "description": "Explores physical chemistry preferences, emotional intimacy depth, and desire dynamics. The dimension nobody talks about openly but everyone thinks about.",
-      "scientific_basis": "Integrates elements from the Sexual Desire Inventory (SDI; Spector et al., 1996), Sternberg's Triangular Theory of Love (passion component), and Schnarch's differentiation-based intimacy model.",
+      "tagline": "The one that actually matters. Science-backed, no fluff.",
+      "description": "Measures sexual compatibility across three evidence-based dimensions: how desire works for you (spontaneous vs. responsive), how openly you communicate about intimacy, and your day-to-day physical affection needs.",
+      "scientific_basis": "Grounded in Basson's circular model of sexual response (2000) for desire dynamics, the New Sexual Satisfaction Scale (NSSS; Stulhofer et al., 2010) for intimacy communication, and attachment-informed physical affection research.",
       "weight": 7,
       "tier": "paid",
       "price": 4.99,
       "compatibility_type": "similarity",
       "sub_scales": [
-        { "id": "physical_chemistry", "title": "Physical Chemistry", "question_ids": ["m8_ic_01", "m8_ic_02", "m8_ic_03"] },
-        { "id": "emotional_intimacy", "title": "Emotional Intimacy", "question_ids": ["m8_ic_04", "m8_ic_05", "m8_ic_06"] },
-        { "id": "desire_dynamics", "title": "Desire Dynamics", "question_ids": ["m8_ic_07", "m8_ic_08", "m8_ic_09", "m8_ic_10"] }
+        { "id": "desire_dynamics", "title": "Desire Dynamics", "question_ids": ["m8_ic_01", "m8_ic_02", "m8_ic_03"] },
+        { "id": "intimacy_communication", "title": "Intimacy Communication", "question_ids": ["m8_ic_04", "m8_ic_05", "m8_ic_06", "m8_ic_07"] },
+        { "id": "physical_affection", "title": "Physical Affection Style", "question_ids": ["m8_ic_08", "m8_ic_09", "m8_ic_10"] }
       ],
       "scoring": {
         "method": "mean_score",
-        "compatibility_function": "similarity: pair_score = 1 - (|A - B| / 4). Physical chemistry and desire dynamics weighted higher.",
+        "compatibility_function": "similarity: pair_score = 1 - (|A - B| / 4). Intimacy communication weighted slightly higher as strongest predictor of sexual satisfaction.",
         "weight_in_cis": 7
       }
     }

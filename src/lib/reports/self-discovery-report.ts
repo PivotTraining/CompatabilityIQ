@@ -99,7 +99,7 @@ const CONFLICT_DESCRIPTIONS: Record<string, string> = {
 }
 
 // ═══════════════════════════════════════════
-// How You Love Labels
+// How You Connect Labels (Affection Preferences)
 // ═══════════════════════════════════════════
 
 const LOVE_STYLE_LABELS: Record<string, string> = {

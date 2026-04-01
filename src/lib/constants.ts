@@ -22,7 +22,7 @@ export const CORE_QUOTIENTS = {
   EQ:  { name: 'Emotional Intelligence Quotient', weight: 0.20, matchType: 'mirror' as const,        color: '#E8735A' },
   CQ:  { name: 'Conflict Quotient',             weight: 0.18, matchType: 'complementary' as const,  color: '#D4A017' },
   NQ:  { name: 'Neurobiological Quotient',       weight: 0.15, matchType: 'complementary' as const,  color: '#4CAF8A' },
-  LQ:  { name: 'How You Love Quotient',         weight: 0.10, matchType: 'bidirectional' as const,  color: '#C25B8A' },
+  LQ:  { name: 'How You Connect Quotient',       weight: 0.10, matchType: 'bidirectional' as const,  color: '#C25B8A' },
   GQ:  { name: 'Growth Quotient',               weight: 0.08, matchType: 'mirror' as const,         color: '#E07B39' },
   CSQ: { name: 'Cognitive Style Quotient',       weight: 0.07, matchType: 'flexible' as const,       color: '#6B9BD2' },
 } as const
@@ -89,7 +89,7 @@ export const MODULE_CONFIG = [
   { module: 5, title: 'Hot Takes & Dealbreakers', subtitle: 'Boundaries, values & vulnerability',           quotients: ['boundaries', 'gender_dynamics', 'vulnerability'] as const,             questionCount: 16, unlockCount: 15, estimatedMinutes: 3, paid: false },
   { module: 6, title: 'Emotional Intelligence',   subtitle: 'Self-awareness, empathy & regulation',         quotients: ['self_awareness', 'empathy', 'emotional_regulation'] as const,          questionCount: 16, unlockCount: 20, estimatedMinutes: 3, paid: true, price: 4.99 },
   { module: 7, title: 'Lifestyle & Ambition',     subtitle: 'Pace, social energy & future vision',          quotients: ['pace_of_life', 'social_energy', 'future_vision'] as const,             questionCount: 10, unlockCount: 30, estimatedMinutes: 2, paid: true, price: 4.99 },
-  { module: 8, title: 'Intimacy & Chemistry',     subtitle: 'Physical, emotional & desire dynamics',        quotients: ['physical_chemistry', 'emotional_intimacy', 'desire_dynamics'] as const, questionCount: 10, unlockCount: -1, estimatedMinutes: 2, paid: true, price: 4.99 },
+  { module: 8, title: 'Sexual Compatibility',     subtitle: 'Desire, communication & physical affection',   quotients: ['desire_dynamics', 'intimacy_communication', 'physical_affection'] as const, questionCount: 10, unlockCount: -1, estimatedMinutes: 2, paid: true, price: 4.99 },
 ] as const
 
 // ── Progressive Unlock ──

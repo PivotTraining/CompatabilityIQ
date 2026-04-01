@@ -14,20 +14,22 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'CompatibleIQ — Science-Based Compatibility Assessment',
+    default: 'CompatibleIQ — Serious Dating, Backed by Science',
     template: '%s | CompatibleIQ',
   },
   description:
-    'The psychometric dating platform that scores real compatibility across 6 science-backed dimensions before your first date. Free assessments, real results — stop guessing and start knowing.',
+    'The serious dating app that scores real compatibility across 6 science-backed dimensions before your first date. For singles looking for a real relationship — not hookups. Free assessments, real results.',
   keywords: [
-    'compatibility',
+    'serious dating',
     'dating app',
-    'psychometric',
+    'relationship compatibility',
+    'find your match',
     'compatibility score',
     'science-backed dating',
-    'relationship compatibility',
+    'psychometric',
     'personality assessment',
     'compatibility test',
+    'long-term relationship',
     'CompatibleIQ',
     'CIS score',
   ],
@@ -39,24 +41,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'CompatibleIQ',
-    title: 'CompatibleIQ — Science-Based Compatibility Assessment',
+    title: 'CompatibleIQ — Serious Dating, Backed by Science',
     description:
-      '6 science-backed dimensions. One compatibility score. Zero wasted time. The psychometric dating platform for people who are done guessing.',
+      'The serious dating app for singles who want a real relationship. 6 science-backed dimensions. One compatibility score. Zero wasted time.',
     url: 'https://compatibleiq.com',
     images: [
       {
         url: 'https://compatibleiq.com/images/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'CompatibleIQ — Science-backed compatibility scoring for modern dating',
+        alt: 'CompatibleIQ — Serious dating, backed by science',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CompatibleIQ — Science-Based Compatibility Assessment',
+    title: 'CompatibleIQ — Serious Dating, Backed by Science',
     description:
-      '6 science-backed dimensions. One compatibility score. Zero wasted time.',
+      'For singles who want a real relationship. 6 science-backed dimensions. One compatibility score.',
     images: ['https://compatibleiq.com/images/og-image.png'],
   },
 }

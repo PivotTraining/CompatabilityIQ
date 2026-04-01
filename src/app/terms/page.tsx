@@ -6,7 +6,7 @@ import { ArrowLeft } from 'lucide-react'
 export const metadata: Metadata = {
   title: 'Terms of Service',
   description:
-    'Terms of Service for CompatibleIQ, the psychometric compatibility platform by Pivot Training & Development. Review usage terms, data handling, and user responsibilities.',
+    'Terms of Service for CompatibleIQ, the serious dating platform by Pivot Training & Development. Review usage terms, data handling, and user responsibilities.',
   alternates: {
     canonical: 'https://compatibleiq.com/terms',
   },
@@ -43,7 +43,8 @@ export default function TermsOfService() {
           {/* 2 */}
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">2. Eligibility</h2>
-            <p>You must be at least 18 years old to use CompatibleIQ. By using the Platform you represent and warrant that you are at least 18 years of age and have the legal capacity to enter into these Terms.</p>
+            <p className="mb-3">You must be at least 18 years old to use CompatibleIQ. By using the Platform you represent and warrant that you are at least 18 years of age and have the legal capacity to enter into these Terms.</p>
+            <p>CompatibleIQ is designed for singles seeking meaningful, long-term relationships. CompatibleIQ is not a hookup platform. By using the Platform in dating mode, you represent that you are single and genuinely seeking a committed relationship.</p>
           </section>
 
           {/* 3 */}

@@ -491,7 +491,7 @@ const MODULE_3_VARIANTS: QuestionVariant[] = [
 ]
 
 // ════════════════════════════════════════════
-// MODULE 4 VARIANTS: How You Love (LL)
+// MODULE 4 VARIANTS: How You Connect (LL)
 // Base: 6 questions | Variants: 8
 // ════════════════════════════════════════════
 
