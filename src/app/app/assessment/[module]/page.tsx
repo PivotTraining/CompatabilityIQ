@@ -593,7 +593,7 @@ function CompletionScreen({
         </h2>
 
         {/* Subtitle */}
-        <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
+        <p className="text-sm font-medium mb-6" style={{ color: 'var(--text-secondary)' }}>
           {isFullComplete
             ? 'Your Compatibility Index Score has been calculated. All matches are now unlocked.'
             : `${unlocked === null ? 'All remaining' : `+${moduleConfig.unlockCount}`} compatible profiles unlocked.`}

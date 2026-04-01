@@ -907,7 +907,7 @@ export default function ProfilePage() {
       {/* ── Toast Notification ── */}
       {toast && (
         <div
-          className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-xl text-sm font-medium text-white shadow-lg"
+          className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-xl text-sm font-semibold text-white shadow-lg"
           style={{
             background: 'var(--ciq-purple)',
             animation: 'fadeInUp 0.25s ease-out',

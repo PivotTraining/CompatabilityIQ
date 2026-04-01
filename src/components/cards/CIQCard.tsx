@@ -115,10 +115,9 @@ export default function CIQCard({
       {/* Card Preview — Instagram Story aspect ratio (9:16) */}
       <div
         ref={cardRef}
-        className="relative overflow-hidden rounded-3xl mx-auto"
+        className="relative overflow-hidden rounded-3xl mx-auto w-full max-w-[320px]"
         style={{
-          width: '320px',
-          height: '568px',
+          aspectRatio: '9/16',
           background: 'linear-gradient(135deg, #7B68B5 0%, #5A4A99 40%, #483D7A 100%)',
         }}
       >

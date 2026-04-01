@@ -118,18 +118,18 @@ export default function LandingPage() {
 
       {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-40 bg-[#0A0A0B]/80 backdrop-blur-xl border-b border-white/5">
-        <div className="flex items-center justify-between px-6 lg:px-12 py-4 max-w-7xl mx-auto">
+        <div className="flex items-center justify-between px-4 sm:px-6 lg:px-12 py-4 max-w-7xl mx-auto">
           <div className="flex items-center gap-2">
-            <Image src="/images/logo.svg" alt="CompatibleIQ" width={280} height={70} className="h-16 w-auto" priority />
+            <Image src="/images/logo.svg" alt="CompatibleIQ" width={280} height={70} className="h-10 sm:h-16 w-auto" priority />
           </div>
-          <div className="hidden md:flex items-center gap-8 text-sm text-gray-400">
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
             <a href="#dimensions" className="hover:text-white transition-colors">Dimensions</a>
             <a href="#how" className="hover:text-white transition-colors">How It Works</a>
             <a href="#science" className="hover:text-white transition-colors">The Science</a>
             <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
           </div>
           <div className="flex items-center gap-3">
-            <Link href="/login" className="px-4 py-2.5 text-sm font-medium text-gray-400 hover:text-white transition-colors">
+            <Link href="/login" className="hidden sm:inline-flex px-4 py-2.5 text-sm font-medium text-gray-300 hover:text-white transition-colors">
               Log in
             </Link>
             <Link
@@ -151,7 +151,7 @@ export default function LandingPage() {
         <div className="absolute top-40 right-0 w-[400px] h-[400px] rounded-full opacity-10 blur-3xl pointer-events-none"
           style={{ background: 'radial-gradient(ellipse, #C25B8A 0%, transparent 70%)' }} />
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           <div className="max-w-3xl mx-auto text-center" data-animate="fade-up">
             <div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold mb-8 border border-purple-500/20"
@@ -161,17 +161,17 @@ export default function LandingPage() {
               Science-backed compatibility scoring
             </div>
 
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
               Stop guessing.{' '}
               <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #9B8DD0 0%, #C25B8A 50%, #E8735A 100%)' }}>
                 Start knowing.
               </span>
             </h1>
 
-            <p className="text-lg lg:text-xl text-gray-400 leading-relaxed mb-4 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-300 font-medium leading-relaxed mb-4 max-w-2xl mx-auto">
               6 psychometric dimensions. One compatibility score. Zero wasted first dates.
             </p>
-            <p className="text-base text-gray-500 leading-relaxed mb-10 max-w-xl mx-auto">
+            <p className="text-sm sm:text-base text-gray-400 font-medium leading-relaxed mb-10 max-w-xl mx-auto">
               CompatibleIQ measures what actually predicts relationship success — not what you look like or how clever your bio is.
             </p>
 
@@ -192,7 +192,7 @@ export default function LandingPage() {
               </a>
             </div>
 
-            <div className="mt-8 flex items-center justify-center gap-6 text-sm text-gray-500">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm text-gray-400 font-medium">
               <span className="flex items-center gap-1.5">
                 <Check className="w-4 h-4 text-emerald-500" />
                 Free forever
@@ -210,11 +210,11 @@ export default function LandingPage() {
 
           {/* Hero visual: abstract score card mockup */}
           <div className="mt-16 max-w-4xl mx-auto" data-animate="fade-up" data-delay="200">
-            <div className="relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-8 lg:p-12 overflow-hidden">
+            <div className="relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-4 sm:p-8 lg:p-12 overflow-hidden">
               {/* Gradient border glow */}
               <div className="absolute inset-0 rounded-3xl pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(123,104,181,0.1) 0%, transparent 50%, rgba(194,91,138,0.1) 100%)' }} />
 
-              <div className="grid md:grid-cols-3 gap-8 relative z-10">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 relative z-10">
                 {/* Left: Profile mock */}
                 <div className="space-y-4">
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center border border-white/10">
@@ -267,7 +267,7 @@ export default function LandingPage() {
 
       {/* Stats strip */}
       <section className="border-y border-white/5 bg-white/[0.02]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 text-center">
           {[
             { value: '7-10 min', label: 'To complete all 6 assessments' },
             { value: '6', label: 'Science-backed dimensions' },
@@ -290,14 +290,14 @@ export default function LandingPage() {
         <div className="absolute top-1/2 left-0 w-[300px] h-[300px] rounded-full opacity-10 blur-3xl pointer-events-none -translate-y-1/2"
           style={{ background: 'radial-gradient(ellipse, #7B68B5 0%, transparent 70%)' }} />
 
-        <div className="max-w-5xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           <div className="text-center mb-16" data-animate="fade-up">
             <p className="text-sm font-semibold mb-3 tracking-wide uppercase bg-clip-text text-transparent"
               style={{ backgroundImage: 'linear-gradient(135deg, #9B8DD0, #C25B8A)' }}>
               How It Works
             </p>
-            <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">Three steps to clarity</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">No algorithms guessing what you want. No swiping through strangers. Just science, applied to the thing that matters most.</p>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-4">Three steps to clarity</h2>
+            <p className="text-gray-300 font-medium max-w-2xl mx-auto text-base sm:text-lg">No algorithms guessing what you want. No swiping through strangers. Just science, applied to the thing that matters most.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8" data-animate="fade-up" data-delay="100">
@@ -333,7 +333,7 @@ export default function LandingPage() {
                     <span className="text-xs font-bold text-gray-600">{item.step}</span>
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                  <p className="text-gray-300 text-sm font-medium leading-relaxed">{item.desc}</p>
                 </div>
                 {/* Connector arrow (hidden on last item and mobile) */}
                 {i < 2 && (
@@ -352,14 +352,14 @@ export default function LandingPage() {
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full opacity-10 blur-3xl pointer-events-none"
           style={{ background: 'radial-gradient(ellipse, #C25B8A 0%, transparent 70%)' }} />
 
-        <div className="max-w-6xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           <div className="text-center mb-16" data-animate="fade-up">
             <p className="text-sm font-semibold mb-3 tracking-wide uppercase bg-clip-text text-transparent"
               style={{ backgroundImage: 'linear-gradient(135deg, #9B8DD0, #C25B8A)' }}>
               The 6 Dimensions
             </p>
-            <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">What we measure — and why it matters</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-4">What we measure — and why it matters</h2>
+            <p className="text-gray-300 font-medium max-w-2xl mx-auto text-base sm:text-lg">
               Each dimension is grounded in peer-reviewed research. Together, they create the most complete picture of compatibility available outside a therapist&apos;s office.
             </p>
           </div>
@@ -375,7 +375,7 @@ export default function LandingPage() {
                   <span className="text-[10px] font-bold text-gray-600 tracking-widest">{dim.num}</span>
                 </div>
                 <h4 className="text-base font-semibold text-white mb-2">{dim.title}</h4>
-                <p className="text-sm text-gray-500 leading-relaxed">{dim.desc}</p>
+                <p className="text-sm text-gray-400 font-medium leading-relaxed">{dim.desc}</p>
               </div>
             ))}
           </div>
@@ -397,17 +397,17 @@ export default function LandingPage() {
       <section id="science" className="py-24 lg:py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/[0.03] to-transparent pointer-events-none" />
 
-        <div className="max-w-6xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div data-animate="fade-up">
               <p className="text-sm font-semibold mb-3 tracking-wide uppercase bg-clip-text text-transparent"
                 style={{ backgroundImage: 'linear-gradient(135deg, #9B8DD0, #C25B8A)' }}>
                 Built on Research
               </p>
-              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight">
                 This isn&apos;t a quiz.<br />It&apos;s psychometric science.
               </h2>
-              <p className="text-gray-400 leading-relaxed mb-8 text-lg">
+              <p className="text-gray-300 font-medium leading-relaxed mb-8 text-base sm:text-lg">
                 Every dimension in CompatibleIQ is grounded in published research from the scientists who defined how we understand human connection.
               </p>
 
@@ -439,7 +439,7 @@ export default function LandingPage() {
                     <div>
                       <p className="text-white font-semibold text-sm">{researcher.name}</p>
                       <p className="text-purple-400 text-xs font-medium mb-1">{researcher.field}</p>
-                      <p className="text-gray-500 text-sm leading-relaxed">{researcher.desc}</p>
+                      <p className="text-gray-400 text-sm font-medium leading-relaxed">{researcher.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -475,7 +475,7 @@ export default function LandingPage() {
                   </div>
                   <div>
                     <h4 className="text-white font-semibold text-sm mb-1">{item.title}</h4>
-                    <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                    <p className="text-gray-400 text-sm font-medium leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -486,9 +486,9 @@ export default function LandingPage() {
 
       {/* Self-Discovery CTA */}
       <section className="py-16">
-        <div className="max-w-5xl mx-auto px-6 lg:px-12">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12">
           <div
-            className="rounded-3xl p-8 lg:p-12 relative overflow-hidden border border-white/5"
+            className="rounded-3xl p-5 sm:p-8 lg:p-12 relative overflow-hidden border border-white/5"
             data-animate="fade-up"
             style={{ background: 'linear-gradient(135deg, rgba(76,175,138,0.08) 0%, rgba(123,104,181,0.08) 100%)' }}
           >
@@ -499,8 +499,8 @@ export default function LandingPage() {
                   <Brain className="w-3.5 h-3.5" />
                   Self-Discovery Mode
                 </div>
-                <h3 className="text-2xl lg:text-3xl font-bold text-white mb-3">Not ready to date?</h3>
-                <p className="text-gray-400 leading-relaxed mb-6">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3">Not ready to date?</h3>
+                <p className="text-gray-300 font-medium leading-relaxed mb-6">
                   Take the same science-backed assessments without entering the dating pool. Discover your attachment style, communication patterns, and relationship blind spots — on your own terms.
                 </p>
                 <ul className="space-y-2.5 mb-8">
@@ -510,7 +510,7 @@ export default function LandingPage() {
                     'Dating readiness insights',
                     'Shareable CIQ personality card',
                   ].map((text) => (
-                    <li key={text} className="flex items-center gap-2.5 text-sm text-gray-400">
+                    <li key={text} className="flex items-center gap-2.5 text-sm text-gray-300 font-medium">
                       <Check className="w-4 h-4 flex-shrink-0 text-emerald-500" />
                       {text}
                     </li>
@@ -538,19 +538,19 @@ export default function LandingPage() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-10 blur-3xl pointer-events-none"
           style={{ background: 'radial-gradient(ellipse, #7B68B5 0%, transparent 70%)' }} />
 
-        <div className="max-w-5xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           <div className="text-center mb-16" data-animate="fade-up">
             <p className="text-sm font-semibold mb-3 tracking-wide uppercase bg-clip-text text-transparent"
               style={{ backgroundImage: 'linear-gradient(135deg, #9B8DD0, #C25B8A)' }}>
               Pricing
             </p>
-            <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">Matching is free. Insight is premium.</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-4">Matching is free. Insight is premium.</h2>
+            <p className="text-gray-300 font-medium max-w-2xl mx-auto text-base sm:text-lg">
               Assess, match, and message for free. Unlock deeper compatibility intelligence when you&apos;re ready.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6" data-animate="fade-up" data-delay="100">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6" data-animate="fade-up" data-delay="100">
             {/* Free Tier */}
             <div className="rounded-2xl p-7 bg-white/[0.03] border border-white/5 hover:border-white/10 transition-all">
               <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Free</p>
@@ -558,7 +558,7 @@ export default function LandingPage() {
                 <span className="text-4xl font-bold text-white">$0</span>
                 <span className="text-sm text-gray-500">forever</span>
               </div>
-              <p className="text-sm text-gray-500 mb-6">Everything you need to find compatible matches. Seriously.</p>
+              <p className="text-sm text-gray-400 font-medium mb-6">Everything you need to find compatible matches. Seriously.</p>
               <ul className="space-y-3 mb-8">
                 {[
                   'All 6 core assessments',
@@ -567,7 +567,7 @@ export default function LandingPage() {
                   'Unlimited messaging',
                   'Self-discovery mode',
                 ].map((text) => (
-                  <li key={text} className="flex items-start gap-2.5 text-sm text-gray-400">
+                  <li key={text} className="flex items-start gap-2.5 text-sm text-gray-300 font-medium">
                     <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-emerald-500" />
                     {text}
                   </li>
@@ -585,7 +585,7 @@ export default function LandingPage() {
                 <span className="text-4xl font-bold text-white">$4.99</span>
                 <span className="text-sm text-gray-500">per match</span>
               </div>
-              <p className="text-sm text-gray-500 mb-6">The full compatibility deep dive for one match. Know exactly where you align.</p>
+              <p className="text-sm text-gray-400 font-medium mb-6">The full compatibility deep dive for one match. Know exactly where you align.</p>
               <ul className="space-y-3 mb-8">
                 {[
                   'Dimension-by-dimension breakdown',
@@ -593,7 +593,7 @@ export default function LandingPage() {
                   'Friction points & how to navigate them',
                   'Personalized conversation starters',
                 ].map((text) => (
-                  <li key={text} className="flex items-start gap-2.5 text-sm text-gray-400">
+                  <li key={text} className="flex items-start gap-2.5 text-sm text-gray-300 font-medium">
                     <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-emerald-500" />
                     {text}
                   </li>
@@ -617,7 +617,7 @@ export default function LandingPage() {
                 <span className="text-sm text-gray-500">/mo</span>
               </div>
               <p className="text-xs text-gray-500 mb-2">3 reports and you&apos;ve already paid for this</p>
-              <p className="text-sm text-gray-500 mb-6">Unlimited reports, priority matching, and the tools serious daters actually want.</p>
+              <p className="text-sm text-gray-400 font-medium mb-6">Unlimited reports, priority matching, and the tools serious daters actually want.</p>
               <ul className="space-y-3 mb-8">
                 {[
                   { text: 'Unlimited Resonance Reports', icon: Sparkles },
@@ -647,7 +647,7 @@ export default function LandingPage() {
                 <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white" style={{ background: 'var(--ciq-coral)' }}>LIMITED</span>
                 <p className="text-white font-semibold">Founding Member — $9.99/mo forever</p>
               </div>
-              <p className="text-sm text-gray-500">First 1,000 members lock in CIQ Pro at $9.99/mo. This rate never goes up. Help shape the product and get early access.</p>
+              <p className="text-sm text-gray-400 font-medium">First 1,000 members lock in CIQ Pro at $9.99/mo. This rate never goes up. Help shape the product and get early access.</p>
             </div>
             <Link href="/signup" className="px-6 py-3 rounded-xl text-sm font-semibold text-white whitespace-nowrap hover:opacity-90 transition-all"
               style={{ background: 'var(--ciq-coral)' }}>
@@ -659,13 +659,13 @@ export default function LandingPage() {
 
       {/* FAQ */}
       <section id="faq" className="py-24 lg:py-32 relative">
-        <div className="max-w-3xl mx-auto px-6 lg:px-12">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center mb-16" data-animate="fade-up">
             <p className="text-sm font-semibold mb-3 tracking-wide uppercase bg-clip-text text-transparent"
               style={{ backgroundImage: 'linear-gradient(135deg, #9B8DD0, #C25B8A)' }}>
               FAQ
             </p>
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">Common questions</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">Common questions</h2>
           </div>
 
           <div className="space-y-4" data-animate="fade-up" data-delay="100">
@@ -676,7 +676,7 @@ export default function LandingPage() {
                   <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0 transition-transform group-open:rotate-180" />
                 </summary>
                 <div className="px-6 pb-6 -mt-2">
-                  <p className="text-gray-400 text-sm leading-relaxed">{faq.a}</p>
+                  <p className="text-gray-300 text-sm font-medium leading-relaxed">{faq.a}</p>
                 </div>
               </details>
             ))}
@@ -686,9 +686,9 @@ export default function LandingPage() {
 
       {/* Final CTA */}
       <section className="py-16 lg:py-24">
-        <div className="max-w-5xl mx-auto px-6 lg:px-12">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12">
           <div
-            className="rounded-3xl p-12 lg:p-20 text-center relative overflow-hidden"
+            className="rounded-3xl p-6 sm:p-12 lg:p-20 text-center relative overflow-hidden"
             data-animate="fade-up"
             style={{ background: 'linear-gradient(135deg, #7B68B5 0%, #9B8DD0 40%, #C25B8A 100%)' }}
           >
@@ -696,7 +696,7 @@ export default function LandingPage() {
             <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15) 0%, transparent 50%)' }} />
 
             <div className="relative z-10">
-              <h2 className="text-3xl lg:text-5xl font-bold mb-4 text-white leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 text-white leading-tight">
                 7-10 minutes now.<br />Zero bad dates later.
               </h2>
               <p className="text-lg mb-10 max-w-lg mx-auto text-white/70">
@@ -717,11 +717,11 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
-          <div className="grid md:grid-cols-4 gap-8 mb-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-10">
             <div className="md:col-span-2">
               <Image src="/images/logo.svg" alt="CompatibleIQ" width={200} height={50} className="h-12 w-auto opacity-60 mb-4" />
-              <p className="text-sm text-gray-500 max-w-sm leading-relaxed">
+              <p className="text-sm text-gray-400 font-medium max-w-sm leading-relaxed">
                 The psychometric dating platform that scores real compatibility across 6 science-backed dimensions. Stop guessing. Start knowing.
               </p>
             </div>

@@ -78,11 +78,11 @@ export default function WaitlistModal() {
       style={{ background: 'rgba(0,0,0,0.65)', backdropFilter: 'blur(6px)' }}
       onClick={(e) => { if (e.target === e.currentTarget) handleDismiss() }}
     >
-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md relative overflow-hidden">
+      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md sm:max-w-md max-sm:max-w-[95vw] max-sm:mx-2 relative overflow-hidden max-sm:max-h-[90vh] max-sm:overflow-y-auto">
         {/* Purple accent top bar */}
         <div className="h-1.5 w-full" style={{ background: 'linear-gradient(90deg, #7B68B5, #9B8DD0, #C25B8A)' }} />
 
-        <div className="p-8 lg:p-10">
+        <div className="p-5 sm:p-8 lg:p-10">
           <button
             onClick={handleDismiss}
             className="absolute top-5 right-5 p-2 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all"
@@ -105,7 +105,7 @@ export default function WaitlistModal() {
                 <span style={{ color: 'var(--ciq-purple)' }}>That&apos;s exactly where<br />you want to be.</span>
               </h2>
 
-              <p className="text-gray-500 text-sm mb-6 leading-relaxed">
+              <p className="text-gray-600 text-sm font-medium mb-6 leading-relaxed">
                 CompatibleIQ is about to change how people date. Founding Members lock in their spot — and their price — before anyone else.
               </p>
 
@@ -115,7 +115,7 @@ export default function WaitlistModal() {
                   'Founding Member pricing locked forever',
                   'First shot at a real, science-backed match pool',
                 ].map((text) => (
-                  <li key={text} className="flex items-center gap-2.5 text-sm text-gray-600">
+                  <li key={text} className="flex items-center gap-2.5 text-sm text-gray-700 font-medium">
                     <div
                       className="w-4.5 h-4.5 rounded-full flex items-center justify-center flex-shrink-0"
                       style={{ background: 'var(--ciq-purple-light)' }}
@@ -155,7 +155,7 @@ export default function WaitlistModal() {
                 </button>
               </form>
 
-              <p className="mt-4 text-center text-xs text-gray-400">
+              <p className="mt-4 text-center text-xs text-gray-500 font-medium">
                 No spam. No credit card. Just your spot in line.
               </p>
             </>
@@ -168,7 +168,7 @@ export default function WaitlistModal() {
                 <Sparkles className="w-8 h-8" style={{ color: 'var(--ciq-purple)' }} />
               </div>
               <h2 className="text-2xl font-bold text-gray-900 mb-3">You&apos;re in.</h2>
-              <p className="text-gray-500 text-sm leading-relaxed max-w-sm mx-auto">
+              <p className="text-gray-600 text-sm font-medium leading-relaxed max-w-sm mx-auto">
                 {firstName ? `${firstName}, we` : 'We'}&apos;ll reach out the moment CompatibleIQ goes live.
                 You&apos;re among the first — and that matters here.
               </p>

@@ -438,8 +438,11 @@ export default function OnboardingPage() {
             <div>
               <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>
                 Cultural background{' '}
-                <span className="font-normal" style={{ color: 'var(--text-muted)' }}>(optional — helps personalize your experience)</span>
+                <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide" style={{ background: 'var(--bg-secondary)', color: 'var(--text-muted)' }}>Optional</span>
               </label>
+              <p className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>
+                Helps personalize your experience. Skip this if you prefer.
+              </p>
               <select
                 value={culturalBackground}
                 onChange={(e) => setCulturalBackground(e.target.value)}

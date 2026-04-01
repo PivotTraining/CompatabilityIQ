@@ -453,7 +453,7 @@ export default function SelfDiscoveryDashboard() {
       </div>
 
       {/* ══════ Dimension Score Rings ══════ */}
-      <div className="grid grid-cols-3 sm:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
         {dimensions.map((dim) => {
           const normalized = Math.round((dim.overallScore / 5) * 100)
           const color = DIMENSION_COLORS[dim.dimensionId] || '#7B68B5'
@@ -535,7 +535,7 @@ export default function SelfDiscoveryDashboard() {
                     {ATTACHMENT_DEEP_PROFILES[attachmentStyle].growthEdge}
                   </p>
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <p className="text-xs font-semibold mb-1.5" style={{ color: '#22C55E' }}>Best Match With</p>
                     <ul className="space-y-1">
@@ -605,7 +605,7 @@ export default function SelfDiscoveryDashboard() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <p className="text-xs font-semibold mb-2" style={{ color: '#22C55E' }}>Strengths</p>
                 <ul className="space-y-1.5">
@@ -773,7 +773,7 @@ export default function SelfDiscoveryDashboard() {
         </div>
         {loveLangDim?.loveLangProfile && (
           <div className="mt-4 pt-3 border-t" style={{ borderColor: 'var(--border)' }}>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <p className="text-[10px] font-semibold mb-1" style={{ color: '#C25B8A' }}>You Receive Love Through</p>
                 <p className="text-xs" style={{ color: 'var(--text-primary)' }}>
@@ -921,7 +921,7 @@ export default function SelfDiscoveryDashboard() {
       {/* ── Toast Notification ── */}
       {toast && (
         <div
-          className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-xl text-sm font-medium text-white shadow-lg"
+          className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-xl text-sm font-semibold text-white shadow-lg"
           style={{
             background: 'var(--ciq-purple)',
             animation: 'fadeInUp 0.25s ease-out',

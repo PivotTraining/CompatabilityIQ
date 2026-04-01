@@ -240,7 +240,7 @@ export default function NotificationBell() {
             top: '100%',
             right: '0',
             marginTop: '8px',
-            width: '360px',
+            width: 'min(360px, calc(100vw - 32px))',
             maxHeight: '480px',
             backgroundColor: '#1a1a2e',
             border: '1px solid rgba(123, 104, 181, 0.3)',
@@ -262,7 +262,7 @@ export default function NotificationBell() {
               borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
             }}
           >
-            <h3 style={{ margin: 0, fontSize: '15px', fontWeight: '600', color: '#f3f4f6' }}>
+            <h3 style={{ margin: 0, fontSize: '15px', fontWeight: '700', color: '#f3f4f6' }}>
               Notifications
             </h3>
             {unreadCount > 0 && (
@@ -299,8 +299,9 @@ export default function NotificationBell() {
                 style={{
                   padding: '40px 16px',
                   textAlign: 'center',
-                  color: '#6b7280',
+                  color: '#9ca3af',
                   fontSize: '14px',
+                  fontWeight: 500,
                 }}
               >
                 No notifications yet
@@ -376,7 +377,8 @@ export default function NotificationBell() {
                       style={{
                         margin: 0,
                         fontSize: '13px',
-                        color: '#9ca3af',
+                        color: '#d1d5db',
+                        fontWeight: 500,
                         lineHeight: '1.4',
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
