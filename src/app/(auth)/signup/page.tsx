@@ -108,6 +108,17 @@ export default function SignupPage() {
       // Supabase returns a fake user with no identities if email already exists
       setError('An account with this email already exists. Try logging in instead.')
     } else {
+      // Link referral if a code was provided
+      if (refCode && data?.user?.id) {
+        fetch('/api/referrals', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: refCode, refereeId: data.user.id }),
+        }).catch(() => {
+          // Non-blocking — referral tracking failure should not break signup
+        })
+        sessionStorage.removeItem('ciq_ref_code')
+      }
       router.push(`/verify?email=${encodeURIComponent(email)}`)
     }
   }
@@ -131,6 +142,21 @@ export default function SignupPage() {
             Science-driven compatibility starts here
           </p>
         </div>
+
+        {/* Referral banner */}
+        {refCode && (
+          <div
+            className="mb-4 p-3 rounded-xl text-center"
+            style={{ background: 'linear-gradient(135deg, rgba(123,104,181,0.15), rgba(219,112,147,0.15))' }}
+          >
+            <p className="text-xs font-medium" style={{ color: 'var(--text-primary)' }}>
+              You were referred by a friend!
+            </p>
+            <p className="text-[10px] mt-0.5" style={{ color: 'var(--text-muted)' }}>
+              Complete Module 1 and you both get a free Resonance Report.
+            </p>
+          </div>
+        )}
 
         {/* Google OAuth */}
         <button

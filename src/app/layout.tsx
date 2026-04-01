@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { DM_Sans } from 'next/font/google'
 import { AuthProvider } from '@/lib/auth-context'
 import CookieConsent from '@/components/CookieConsent'
+import PWAInstallPrompt from '@/components/PWAInstallPrompt'
 import './globals.css'
 
 const dmSans = DM_Sans({ variable: '--font-dm-sans', subsets: ['latin'], weight: ['400', '500', '600', '700'] })
@@ -14,6 +15,11 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+  },
   title: {
     default: 'CompatibleIQ — Serious Dating, Backed by Science',
     template: '%s | CompatibleIQ',
@@ -71,6 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AuthProvider>
           {children}
           <CookieConsent />
+          <PWAInstallPrompt />
         </AuthProvider>
       </body>
     </html>

@@ -22,6 +22,7 @@ import {
 } from 'lucide-react'
 import WaitlistModal from '@/components/WaitlistModal'
 import LandingAnimations from '@/components/LandingAnimations'
+import FoundingCounter from '@/components/pricing/FoundingCounter'
 
 export const metadata: Metadata = {
   title: 'CompatibleIQ — Serious Dating, Backed by Science',
@@ -652,6 +653,7 @@ export default function LandingPage() {
                 <p className="text-white font-semibold">Founding Member — $9.99/mo forever</p>
               </div>
               <p className="text-sm text-gray-400 font-medium">First 1,000 members lock in CIQ Pro at $9.99/mo. This rate never goes up. Help shape the product and get early access.</p>
+              <FoundingCounter />
             </div>
             <Link href="/signup" className="px-6 py-3 rounded-xl text-sm font-semibold text-white whitespace-nowrap hover:opacity-90 transition-all"
               style={{ background: 'var(--ciq-coral)' }}>

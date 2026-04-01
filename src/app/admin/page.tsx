@@ -1,5 +1,6 @@
 import { getSupabaseServiceClient } from '@/lib/supabase/server'
-import { Users, Mail, Brain, TrendingUp, Clock, Sparkles } from 'lucide-react'
+import { Users, Mail, Brain, TrendingUp, Clock, Sparkles, ImageIcon } from 'lucide-react'
+import Link from 'next/link'
 
 async function getStats() {
   const supabase = await getSupabaseServiceClient()
@@ -9,12 +10,14 @@ async function getStats() {
     { count: totalUsers },
     { count: waitlistCount },
     { count: assessmentsCompleted },
+    { count: pendingPhotos },
     { data: recentWaitlist },
     { data: recentUsers },
   ] = await Promise.all([
     supabase.from('profiles').select('id', { count: 'exact', head: true }),
     supabase.from('waitlist').select('id', { count: 'exact', head: true }),
     supabase.from('assessment_responses').select('id', { count: 'exact', head: true }),
+    supabase.from('photos').select('id', { count: 'exact', head: true }).eq('moderation_status', 'pending'),
     supabase.from('waitlist').select('email, first_name, created_at').order('created_at', { ascending: false }).limit(5),
     supabase.from('profiles').select('display_name, assessment_progress, created_at').order('created_at', { ascending: false }).limit(5),
   ])
@@ -23,6 +26,7 @@ async function getStats() {
     totalUsers: totalUsers ?? 0,
     waitlistCount: waitlistCount ?? 0,
     assessmentsCompleted: assessmentsCompleted ?? 0,
+    pendingPhotos: pendingPhotos ?? 0,
     recentWaitlist: recentWaitlist ?? [],
     recentUsers: recentUsers ?? [],
   }
@@ -79,7 +83,7 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
         <StatCard
           icon={Users}
           label="Registered Users"
@@ -112,6 +116,15 @@ export default async function AdminDashboard() {
           sub="Waitlist → Signup"
           color="#5B8DB8"
         />
+        <Link href="/admin/photos" className="block">
+          <StatCard
+            icon={ImageIcon}
+            label="Photos Pending Review"
+            value={stats?.pendingPhotos ?? '—'}
+            sub="Requires moderation"
+            color="#E8735A"
+          />
+        </Link>
       </div>
 
       {/* Two columns */}

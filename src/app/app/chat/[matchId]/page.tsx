@@ -7,6 +7,10 @@ import { getSupabaseBrowserClient } from '@/lib/supabase/client'
 import { ArrowLeft, Send, Shield, Flag } from 'lucide-react'
 import { LIMITS } from '@/lib/constants'
 import { filterMessage } from '@/lib/messaging/content-filter'
+import ConversationStarters from '@/components/chat/ConversationStarters'
+import ResonanceReportUpsell from '@/components/chat/ResonanceReportUpsell'
+import { generateConversationStarters } from '@/lib/matching/conversation-starters'
+import type { ConversationStarter } from '@/lib/matching/conversation-starters'
 
 interface Message {
   id: string
@@ -22,6 +26,11 @@ interface PartnerInfo {
   location_city: string | null
 }
 
+interface DimensionScoreRow {
+  dimension_id: string
+  overall_score: number
+}
+
 export default function ChatPage() {
   const params = useParams()
   const matchId = params.matchId as string
@@ -34,6 +43,7 @@ export default function ChatPage() {
   const [input, setInput] = useState('')
   const [sending, setSending] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [starters, setStarters] = useState<ConversationStarter[]>([])
   const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -61,6 +71,40 @@ export default function ChatPage() {
         .single()
 
       setPartner(profile as unknown as PartnerInfo)
+
+      // Load dimension scores for conversation starters
+      const [userScoresResult, partnerScoresResult] = await Promise.all([
+        supabase
+          .from('dimension_scores')
+          .select('dimension_id, overall_score')
+          .eq('user_id', user.id),
+        supabase
+          .from('dimension_scores')
+          .select('dimension_id, overall_score')
+          .eq('user_id', partnerId),
+      ])
+
+      const toScoreMap = (rows: DimensionScoreRow[]): Record<string, number> =>
+        rows.reduce<Record<string, number>>((acc, row) => ({
+          ...acc,
+          [row.dimension_id]: row.overall_score,
+        }), {})
+
+      const userScores = toScoreMap(
+        (userScoresResult.data ?? []) as unknown as DimensionScoreRow[],
+      )
+      const partnerScores = toScoreMap(
+        (partnerScoresResult.data ?? []) as unknown as DimensionScoreRow[],
+      )
+
+      const partnerName = (profile as unknown as PartnerInfo)?.first_name ?? 'them'
+      const generatedStarters = generateConversationStarters(
+        userScores,
+        partnerScores,
+        'You',
+        partnerName,
+      )
+      setStarters(generatedStarters)
 
       // Load messages
       const { data: msgs } = await supabase
@@ -203,30 +247,43 @@ export default function ChatPage() {
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
         {messages.length === 0 && (
-          <div className="text-center py-10">
-            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+          <div className="py-4">
+            <p className="text-sm text-center mb-2" style={{ color: 'var(--text-muted)' }}>
               You matched! Say hello.
             </p>
+            <ConversationStarters
+              starters={starters}
+              onSelect={(text) => setInput(text)}
+            />
           </div>
         )}
-        {messages.map((msg) => {
+        {messages.map((msg, index) => {
           const isMine = msg.sender_id === user?.id
           return (
-            <div
-              key={msg.id}
-              className={`flex ${isMine ? 'justify-end' : 'justify-start'}`}
-            >
+            <div key={msg.id}>
               <div
-                className="max-w-[75%] px-4 py-2.5 rounded-2xl text-sm"
-                style={{
-                  background: isMine ? 'var(--ciq-purple)' : 'var(--bg-secondary)',
-                  color: isMine ? 'white' : 'var(--text-primary)',
-                  borderBottomRightRadius: isMine ? '4px' : undefined,
-                  borderBottomLeftRadius: !isMine ? '4px' : undefined,
-                }}
+                className={`flex ${isMine ? 'justify-end' : 'justify-start'}`}
               >
-                {msg.content}
+                <div
+                  className="max-w-[75%] px-4 py-2.5 rounded-2xl text-sm"
+                  style={{
+                    background: isMine ? 'var(--ciq-purple)' : 'var(--bg-secondary)',
+                    color: isMine ? 'white' : 'var(--text-primary)',
+                    borderBottomRightRadius: isMine ? '4px' : undefined,
+                    borderBottomLeftRadius: !isMine ? '4px' : undefined,
+                  }}
+                >
+                  {msg.content}
+                </div>
               </div>
+              {/* Show upsell card after the 3rd message */}
+              {index === 2 && (
+                <ResonanceReportUpsell
+                  matchId={matchId}
+                  messageCount={messages.length}
+                  partnerName={partner?.first_name ?? 'your match'}
+                />
+              )}
             </div>
           )
         })}
