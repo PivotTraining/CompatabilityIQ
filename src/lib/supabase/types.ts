@@ -68,3 +68,5 @@ export type PaymentStatus = Enums['payment_status_type']
 export type NotificationType = Enums['notification_type']
 
 export type DimensionId = 'values' | 'attachment' | 'communication' | 'emotional_intelligence' | 'lifestyle' | 'how_you_love'
+
+export type VerificationStatus = 'unverified' | 'pending' | 'verified' | 'rejected'

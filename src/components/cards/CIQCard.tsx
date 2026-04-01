@@ -9,7 +9,7 @@ interface CIQCardProps {
   firstName: string
   topTraits: string[]
   attachmentStyleLabel: string
-  primaryLoveLanguage: string
+  primaryConnectionStyle: string
   eqScore: number // 0-100
   className?: string
 }
@@ -30,7 +30,7 @@ export default function CIQCard({
   firstName,
   topTraits,
   attachmentStyleLabel,
-  primaryLoveLanguage,
+  primaryConnectionStyle,
   eqScore,
   className = '',
 }: CIQCardProps) {
@@ -177,9 +177,9 @@ export default function CIQCard({
             {/* How You Love */}
             <div>
               <p className="text-white/50 text-[10px] font-semibold uppercase tracking-wider mb-1">
-                How You Love
+                How You Connect
               </p>
-              <p className="text-white text-base font-semibold">{primaryLoveLanguage}</p>
+              <p className="text-white text-base font-semibold">{primaryConnectionStyle}</p>
             </div>
 
             {/* EQ Score Ring */}

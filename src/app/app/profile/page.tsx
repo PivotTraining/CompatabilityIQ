@@ -32,6 +32,8 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import VerificationBadge from '@/components/profile/VerificationBadge'
+import type { VerificationStatus } from '@/lib/supabase/types'
 
 // ── Types ──
 
@@ -47,7 +49,7 @@ interface ProfileData {
   assessment_completed: boolean
   subscription_tier: string
   photo_urls: string[] | null
-  is_verified?: boolean
+  verification_status: VerificationStatus
 }
 
 interface EditableFields {
@@ -155,7 +157,7 @@ export default function ProfilePage() {
     supabase
       .from('profiles')
       .select(
-        'first_name, date_of_birth, gender_identity, sexual_orientation, relationship_goal, bio, location_city, location_state, assessment_completed, subscription_tier, photo_urls'
+        'first_name, date_of_birth, gender_identity, sexual_orientation, relationship_goal, bio, location_city, location_state, assessment_completed, subscription_tier, photo_urls, verification_status'
       )
       .eq('id', user.id)
       .single()
@@ -379,9 +381,21 @@ export default function ProfilePage() {
           )}
         </div>
 
-        <h1 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
-          {profile.first_name || 'Your Name'}
-        </h1>
+        <div className="flex items-center justify-center gap-2">
+          <h1 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
+            {profile.first_name || 'Your Name'}
+          </h1>
+          {profile.verification_status === 'verified' && (
+            <VerificationBadge status="verified" compact />
+          )}
+        </div>
+
+        {/* Verification CTA */}
+        {profile.verification_status !== 'verified' && (
+          <div className="mt-2">
+            <VerificationBadge status={profile.verification_status} showCTA />
+          </div>
+        )}
 
         <div className="flex items-center justify-center gap-3 mt-1 flex-wrap">
           {profile.date_of_birth && (

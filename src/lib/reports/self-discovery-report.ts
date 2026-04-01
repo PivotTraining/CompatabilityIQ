@@ -103,19 +103,19 @@ const CONFLICT_DESCRIPTIONS: Record<string, string> = {
 // ═══════════════════════════════════════════
 
 const LOVE_STYLE_LABELS: Record<string, string> = {
-  words_of_affirmation: 'Words of Affirmation',
-  acts_of_service: 'Acts of Service',
-  receiving_gifts: 'Receiving Gifts',
-  quality_time: 'Quality Time',
-  physical_touch: 'Physical Touch',
+  verbal_appreciation: 'Verbal Appreciation',
+  thoughtful_actions: 'Thoughtful Actions',
+  meaningful_gestures: 'Meaningful Gestures',
+  focused_presence: 'Focused Presence',
+  physical_closeness: 'Physical Closeness',
 }
 
 const LOVE_STYLE_IMPLICATIONS: Record<string, string> = {
-  words_of_affirmation: 'You feel most loved when a partner verbalizes their appreciation, admiration, and affection. A genuine compliment or a heartfelt "I\'m proud of you" lands deeper than any gift. In a relationship, you\'ll need a partner who isn\'t afraid to express themselves verbally -- and who understands that your need to hear it isn\'t insecurity, it\'s your love style.',
-  acts_of_service: 'You feel most loved when a partner shows up through action -- taking something off your plate, handling a chore without being asked, or making your life tangibly easier. Words are nice, but follow-through is what makes you feel secure. In a relationship, you\'ll need a partner who demonstrates love through what they do, not just what they say.',
-  receiving_gifts: 'You feel most loved through thoughtful gestures and tokens of affection. It\'s not about materialism -- it\'s about the thought behind it. A $5 coffee that shows someone was thinking about you can mean more than an expensive gift chosen without care. In a relationship, you\'ll need a partner who understands that small, intentional gestures are how you feel remembered.',
-  quality_time: 'You feel most loved when a partner is fully present -- phone down, eye contact, undivided attention. It\'s not about doing elaborate things together; it\'s about being together without distraction. In a relationship, you\'ll need a partner who prioritizes presence over productivity and who understands that half-attention feels worse than no attention.',
-  physical_touch: 'You feel most loved through physical connection -- a hand on your back, a spontaneous hug, sitting close on the couch. Touch is how your nervous system registers safety and belonging. In a relationship, you\'ll need a partner who is naturally physically affectionate and who understands that touch isn\'t just a precursor to sex -- it\'s its own language.',
+  verbal_appreciation: 'You feel most loved when a partner verbalizes their appreciation, admiration, and affection. A genuine compliment or a heartfelt "I\'m proud of you" lands deeper than any gift. In a relationship, you\'ll need a partner who isn\'t afraid to express themselves verbally -- and who understands that your need to hear it isn\'t insecurity, it\'s your connection style.',
+  thoughtful_actions: 'You feel most loved when a partner shows up through action -- taking something off your plate, handling a chore without being asked, or making your life tangibly easier. Words are nice, but follow-through is what makes you feel secure. In a relationship, you\'ll need a partner who demonstrates love through what they do, not just what they say.',
+  meaningful_gestures: 'You feel most loved through thoughtful gestures and tokens of affection. It\'s not about materialism -- it\'s about the thought behind it. A $5 coffee that shows someone was thinking about you can mean more than an expensive gift chosen without care. In a relationship, you\'ll need a partner who understands that small, intentional gestures are how you feel remembered.',
+  focused_presence: 'You feel most loved when a partner is fully present -- phone down, eye contact, undivided attention. It\'s not about doing elaborate things together; it\'s about being together without distraction. In a relationship, you\'ll need a partner who prioritizes presence over productivity and who understands that half-attention feels worse than no attention.',
+  physical_closeness: 'You feel most loved through physical connection -- a hand on your back, a spontaneous hug, sitting close on the couch. Touch is how your nervous system registers safety and belonging. In a relationship, you\'ll need a partner who is naturally physically affectionate and who understands that touch isn\'t just a precursor to intimacy -- it\'s its own form of connection.',
 }
 
 // ═══════════════════════════════════════════
@@ -270,11 +270,11 @@ function buildLoveLanguageRanking(
   loveLangDim?: DimensionScore
 ): { language: string; label: string; percentage: number }[] {
   const allLanguages: LoveLanguage[] = [
-    'words_of_affirmation',
-    'acts_of_service',
-    'receiving_gifts',
-    'quality_time',
-    'physical_touch',
+    'verbal_appreciation',
+    'thoughtful_actions',
+    'meaningful_gestures',
+    'focused_presence',
+    'physical_closeness',
   ]
 
   const profile = loveLangDim?.loveLangProfile
@@ -593,23 +593,23 @@ function buildWhatYouNeed(
     const primary = ranking[0]
     const secondary = ranking.length > 1 ? ranking[1] : null
 
-    narrative = `Your primary love style is ${primary.label}. ${LOVE_STYLE_IMPLICATIONS[primary.language] || ''}`
+    narrative = `Your primary connection style is ${primary.label}. ${LOVE_STYLE_IMPLICATIONS[primary.language] || ''}`
 
     highlights.push(`Primary: ${primary.label} (${primary.percentage}%)`)
     if (secondary && secondary.percentage > 10) {
       highlights.push(`Secondary: ${secondary.label} (${secondary.percentage}%)`)
-      narrative += ` Your secondary language, ${secondary.label}, also plays an important role -- a partner who can speak both will make you feel deeply understood.`
+      narrative += ` Your secondary style, ${secondary.label}, also plays an important role -- a partner who can express both will make you feel deeply understood.`
     }
   } else {
-    narrative = `${name}, your love style profile shows a balanced distribution, meaning you respond to multiple forms of affection without a strong dominant preference. This can be an asset -- you're adaptable -- but it also means you may need to communicate more explicitly about what makes you feel loved in any given moment.`
-    highlights.push('Balanced love style profile -- responsive to multiple forms')
+    narrative = `${name}, your connection style profile shows a balanced distribution, meaning you respond to multiple forms of affection without a strong dominant preference. This can be an asset -- you're adaptable -- but it also means you may need to communicate more explicitly about what makes you feel loved in any given moment.`
+    highlights.push('Balanced connection style profile -- responsive to multiple forms')
   }
 
   const flexibility = loveLangDim?.loveLangProfile?.flexibilityScore || 3.0
   if (flexibility >= 4.0) {
-    highlights.push('High flexibility -- you can adapt to a partner\'s love style')
+    highlights.push('High flexibility -- you can adapt to a partner\'s connection style')
   } else if (flexibility <= 2.5) {
-    highlights.push('Lower flexibility -- you need a partner who speaks your language')
+    highlights.push('Lower flexibility -- you need a partner who matches your connection style')
   }
 
   return {
@@ -729,9 +729,9 @@ function formatSubScaleName(subScaleId: string): string {
     pace_of_life: 'Pace of Life',
     social_energy: 'Social Energy',
     future_orientation: 'Future Orientation',
-    receiving_language: 'Receiving Love Style',
-    giving_language: 'Giving Love Style',
-    language_flexibility: 'Language Flexibility',
+    receiving_language: 'Receiving Connection Style',
+    giving_language: 'Giving Connection Style',
+    language_flexibility: 'Connection Flexibility',
   }
   return nameMap[subScaleId] || subScaleId.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 }

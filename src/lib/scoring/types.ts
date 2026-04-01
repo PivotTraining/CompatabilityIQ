@@ -84,24 +84,24 @@ export type ConflictApproach =
 export type ConflictPairingKey = `${ConflictApproach}_${ConflictApproach}`
 
 // ═══════════════════════════════════════════
-// How You Love Types
+// How You Connect Types (Affection Preferences)
 // ═══════════════════════════════════════════
 
 export type LoveLanguage =
-  | 'words_of_affirmation'
-  | 'acts_of_service'
-  | 'receiving_gifts'
-  | 'quality_time'
-  | 'physical_touch'
+  | 'verbal_appreciation'
+  | 'thoughtful_actions'
+  | 'meaningful_gestures'
+  | 'focused_presence'
+  | 'physical_closeness'
 
 export interface LoveLanguageProfile {
-  /** Primary language(s) for receiving love (can be co-primary if tied) */
+  /** Primary connection style(s) for receiving love (can be co-primary if tied) */
   receivingLanguages: LoveLanguage[]
-  /** Primary language(s) for giving love (can be co-primary if tied) */
+  /** Primary connection style(s) for giving love (can be co-primary if tied) */
   givingLanguages: LoveLanguage[]
-  /** Tally of how many times each language was selected for receiving */
+  /** Tally of how many times each style was selected for receiving */
   receivingTally: Record<LoveLanguage, number>
-  /** Tally of how many times each language was selected for giving */
+  /** Tally of how many times each style was selected for giving */
   givingTally: Record<LoveLanguage, number>
   /** Flexibility score from Likert items */
   flexibilityScore: number

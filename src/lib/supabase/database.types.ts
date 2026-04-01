@@ -365,6 +365,8 @@ export type Database = {
           stripe_customer_id: string | null
           subscription_tier: Database["public"]["Enums"]["subscription_tier_type"]
           updated_at: string
+          verification_selfie_url: string | null
+          verification_status: "unverified" | "pending" | "verified" | "rejected"
         }
         Insert: {
           assessment_completed?: boolean
@@ -393,6 +395,8 @@ export type Database = {
           stripe_customer_id?: string | null
           subscription_tier?: Database["public"]["Enums"]["subscription_tier_type"]
           updated_at?: string
+          verification_selfie_url?: string | null
+          verification_status?: "unverified" | "pending" | "verified" | "rejected"
         }
         Update: {
           assessment_completed?: boolean
@@ -421,6 +425,8 @@ export type Database = {
           stripe_customer_id?: string | null
           subscription_tier?: Database["public"]["Enums"]["subscription_tier_type"]
           updated_at?: string
+          verification_selfie_url?: string | null
+          verification_status?: "unverified" | "pending" | "verified" | "rejected"
         }
         Relationships: []
       }

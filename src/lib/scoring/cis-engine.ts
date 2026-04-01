@@ -361,27 +361,27 @@ function computeLifestyleScores(
   }
 }
 
-// ── How You Loves ──
+// ── How You Connect (Affection Preferences) ──
 
 function computeLoveLanguageScores(
   answers: Record<string, number | string>,
   reverseItems: string[]
 ): DimensionScore {
   const ALL_LANGUAGES: LoveLanguage[] = [
-    'words_of_affirmation',
-    'acts_of_service',
-    'receiving_gifts',
-    'quality_time',
-    'physical_touch',
+    'verbal_appreciation',
+    'thoughtful_actions',
+    'meaningful_gestures',
+    'focused_presence',
+    'physical_closeness',
   ]
 
   // Initialize tallies
   const receivingTally: Record<LoveLanguage, number> = {
-    words_of_affirmation: 0,
-    acts_of_service: 0,
-    receiving_gifts: 0,
-    quality_time: 0,
-    physical_touch: 0,
+    verbal_appreciation: 0,
+    thoughtful_actions: 0,
+    meaningful_gestures: 0,
+    focused_presence: 0,
+    physical_closeness: 0,
   }
   const givingTally: Record<LoveLanguage, number> = { ...receivingTally }
 
@@ -431,7 +431,7 @@ function computeLoveLanguageScores(
 
   return {
     dimensionId: 'how_you_love',
-    dimensionName: 'How You Loves',
+    dimensionName: 'How You Connect',
     overallScore: flexibilityScore, // The meaningful numeric score is flexibility
     subScaleScores,
     loveLangProfile: {

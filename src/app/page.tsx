@@ -429,9 +429,9 @@ export default function LandingPage() {
                     desc: 'The original EI model measuring how people perceive, use, understand, and manage emotions.',
                   },
                   {
-                    name: 'Gary Chapman',
-                    field: 'Love Languages',
-                    desc: 'A framework for understanding how individuals express and experience love differently.',
+                    name: 'Affection Research',
+                    field: 'Connection Styles',
+                    desc: 'A framework for understanding how individuals express and experience affection differently.',
                   },
                 ].map((researcher) => (
                   <div key={researcher.name} className="flex gap-4">

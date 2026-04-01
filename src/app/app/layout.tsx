@@ -113,7 +113,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   // Build nav items based on user mode
   const NAV_ITEMS = userMode === 'self_discovery'
     ? [
-        { href: '/app/self-discovery', icon: User, label: 'My Profile' },
+        { href: '/app/self-discovery', icon: User, label: 'MyIQ' },
         { href: '/app/assessment', icon: Brain, label: 'Assess' },
         { href: '/app/profile', icon: User, label: 'Profile' },
         { href: '/app/settings/notifications', icon: Settings, label: 'Settings' },

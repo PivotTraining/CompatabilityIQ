@@ -59,7 +59,7 @@ export const DIMENSION_CONFIGS: Record<string, DimensionConfig> = {
   },
   how_you_love: {
     id: 'how_you_love',
-    name: 'How You Love',
+    name: 'How You Connect',
     weight: 12,
     compatibilityType: 'complementarity',
     subScales: ['receiving_language', 'giving_language'],
@@ -217,7 +217,7 @@ export const LIFESTYLE_DIMENSION_WEIGHT = 0.40
 export const LIFESTYLE_SUBSCALE_WEIGHT = 0.60
 
 // ═══════════════════════════════════════════
-// How You Love Scoring
+// How You Connect Scoring (Affection Preferences)
 // ═══════════════════════════════════════════
 
 /** Base scores for give-receive cross-matching */
@@ -235,30 +235,30 @@ export const LOVE_LANG_BASE_WEIGHT = 0.6
 export const LOVE_LANG_FLEX_WEIGHT = 0.4
 
 // ═══════════════════════════════════════════
-// Question-to-Language Mappings (Forced Choice)
+// Question-to-Connection-Style Mappings (Forced Choice)
 // ═══════════════════════════════════════════
 
-/** Maps forced-choice question IDs to the two love languages in each pair */
+/** Maps forced-choice question IDs to the two connection styles in each pair */
 export const RECEIVING_LANGUAGE_PAIRS: Record<string, [LoveLanguage, LoveLanguage]> = {
-  m4_ll_01: ['quality_time', 'acts_of_service'],
-  m4_ll_02: ['words_of_affirmation', 'physical_touch'],
-  m4_ll_03: ['physical_touch', 'acts_of_service'],
-  m4_ll_07: ['quality_time', 'words_of_affirmation'],
-  m4_ll_08: ['receiving_gifts', 'quality_time'],
-  m4_ll_09: ['acts_of_service', 'receiving_gifts'],
-  m4_ll_10: ['words_of_affirmation', 'receiving_gifts'],
-  m4_ll_11: ['physical_touch', 'quality_time'],
+  m4_ll_01: ['focused_presence', 'thoughtful_actions'],
+  m4_ll_02: ['verbal_appreciation', 'physical_closeness'],
+  m4_ll_03: ['physical_closeness', 'thoughtful_actions'],
+  m4_ll_07: ['focused_presence', 'verbal_appreciation'],
+  m4_ll_08: ['meaningful_gestures', 'focused_presence'],
+  m4_ll_09: ['thoughtful_actions', 'meaningful_gestures'],
+  m4_ll_10: ['verbal_appreciation', 'meaningful_gestures'],
+  m4_ll_11: ['physical_closeness', 'focused_presence'],
 }
 
 export const GIVING_LANGUAGE_PAIRS: Record<string, [LoveLanguage, LoveLanguage]> = {
-  m4_ll_04: ['quality_time', 'receiving_gifts'],
-  m4_ll_05: ['quality_time', 'physical_touch'],
-  m4_ll_06: ['words_of_affirmation', 'acts_of_service'],
-  m4_ll_12: ['acts_of_service', 'physical_touch'],
-  m4_ll_13: ['receiving_gifts', 'words_of_affirmation'],
-  m4_ll_14: ['physical_touch', 'words_of_affirmation'],
-  m4_ll_15: ['acts_of_service', 'quality_time'],
-  m4_ll_16: ['receiving_gifts', 'acts_of_service'],
+  m4_ll_04: ['focused_presence', 'meaningful_gestures'],
+  m4_ll_05: ['focused_presence', 'physical_closeness'],
+  m4_ll_06: ['verbal_appreciation', 'thoughtful_actions'],
+  m4_ll_12: ['thoughtful_actions', 'physical_closeness'],
+  m4_ll_13: ['meaningful_gestures', 'verbal_appreciation'],
+  m4_ll_14: ['physical_closeness', 'verbal_appreciation'],
+  m4_ll_15: ['thoughtful_actions', 'focused_presence'],
+  m4_ll_16: ['meaningful_gestures', 'thoughtful_actions'],
 }
 
 // ═══════════════════════════════════════════

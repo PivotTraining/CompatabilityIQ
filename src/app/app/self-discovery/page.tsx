@@ -183,11 +183,11 @@ const CONFLICT_DEEP_PROFILES: Record<string, {
 }
 
 const LOVE_STYLE_LABELS: Record<string, string> = {
-  words_of_affirmation: 'Words of Affirmation',
-  acts_of_service: 'Acts of Service',
-  receiving_gifts: 'Receiving Gifts',
-  quality_time: 'Quality Time',
-  physical_touch: 'Physical Touch',
+  verbal_appreciation: 'Verbal Appreciation',
+  thoughtful_actions: 'Thoughtful Actions',
+  meaningful_gestures: 'Meaningful Gestures',
+  focused_presence: 'Focused Presence',
+  physical_closeness: 'Physical Closeness',
 }
 
 // ─── Component ──────────────────────────────────────────
@@ -222,7 +222,7 @@ export default function SelfDiscoveryDashboard() {
     const profileUrl = `${window.location.origin}/app/self-discovery`
     const shareData = {
       title: `${profile?.firstName || 'My'} Compatibility Profile - CompatibleIQ`,
-      text: `Check out my compatibility profile on CompatibleIQ! See my attachment style, EQ, love languages, and more.`,
+      text: `Check out my compatibility profile on CompatibleIQ! See my attachment style, EQ, connection styles, and more.`,
       url: profileUrl,
     }
 
@@ -325,7 +325,7 @@ export default function SelfDiscoveryDashboard() {
 
   // How you love ranking
   const loveLanguageRanking = useMemo(() => {
-    const allLangs = ['words_of_affirmation', 'acts_of_service', 'receiving_gifts', 'quality_time', 'physical_touch']
+    const allLangs = ['verbal_appreciation', 'thoughtful_actions', 'meaningful_gestures', 'focused_presence', 'physical_closeness']
     const tally = loveLangDim?.loveLangProfile?.receivingTally || {}
     const total = Object.values(tally).reduce((sum: number, v: number) => sum + v, 0) || 1
 
@@ -746,8 +746,8 @@ export default function SelfDiscoveryDashboard() {
         )}
       </SectionCard>
 
-      {/* ══════ How You Love ══════ */}
-      <SectionCard title="How You Love" icon={Heart} color="#C25B8A">
+      {/* ══════ How You Connect ══════ */}
+      <SectionCard title="How You Connect" icon={Heart} color="#C25B8A">
         <div className="space-y-3">
           {loveLanguageRanking.map((lang, i) => (
             <div key={lang.key}>
@@ -775,13 +775,13 @@ export default function SelfDiscoveryDashboard() {
           <div className="mt-4 pt-3 border-t" style={{ borderColor: 'var(--border)' }}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <p className="text-[10px] font-semibold mb-1" style={{ color: '#C25B8A' }}>You Receive Love Through</p>
+                <p className="text-[10px] font-semibold mb-1" style={{ color: '#C25B8A' }}>You Receive Connection Through</p>
                 <p className="text-xs" style={{ color: 'var(--text-primary)' }}>
                   {loveLangDim.loveLangProfile.receivingLanguages.map(l => LOVE_STYLE_LABELS[l] || l).join(', ')}
                 </p>
               </div>
               <div>
-                <p className="text-[10px] font-semibold mb-1" style={{ color: '#C25B8A' }}>You Give Love Through</p>
+                <p className="text-[10px] font-semibold mb-1" style={{ color: '#C25B8A' }}>You Give Connection Through</p>
                 <p className="text-xs" style={{ color: 'var(--text-primary)' }}>
                   {loveLangDim.loveLangProfile.givingLanguages.map(l => LOVE_STYLE_LABELS[l] || l).join(', ')}
                 </p>
@@ -913,7 +913,7 @@ export default function SelfDiscoveryDashboard() {
           firstName={profile?.firstName || 'You'}
           topTraits={topTraits}
           attachmentStyleLabel={ATTACHMENT_LABELS[attachmentStyle] || 'Secure'}
-          primaryLoveLanguage={loveLanguageRanking[0]?.label || 'Quality Time'}
+          primaryConnectionStyle={loveLanguageRanking[0]?.label || 'Focused Presence'}
           eqScore={Math.round((eiDim?.overallScore || 3.0) / 5 * 100)}
         />
       )}

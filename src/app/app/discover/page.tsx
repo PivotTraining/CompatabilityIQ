@@ -5,10 +5,12 @@ import { useAuth } from '@/lib/auth-context'
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
 import { useAssessmentStore } from '@/store/assessment-store'
 import { CIS_TIERS, getCISTier, getUnlockedProfileCount, type CISTierKey } from '@/lib/constants'
-import { Heart, X, MapPin, Brain, Sparkles, SlidersHorizontal, ChevronDown } from 'lucide-react'
+import { Heart, X, MapPin, Brain, Sparkles, SlidersHorizontal, ChevronDown, ImagePlus } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
+import VerificationBadge from '@/components/profile/VerificationBadge'
+import type { VerificationStatus } from '@/lib/supabase/types'
 
 // ── Types ──
 
@@ -23,6 +25,7 @@ interface DiscoverProfile {
   cis_score: number | null
   cis_tier: CISTierKey | null
   gender_identity: string | null
+  verification_status: VerificationStatus | null
 }
 
 interface Filters {
@@ -69,6 +72,7 @@ export default function DiscoverPage() {
   const [acting, setActing] = useState<string | null>(null)
   const [dismissed, setDismissed] = useState<Set<string>>(new Set())
   const [showFilters, setShowFilters] = useState(false)
+  const [hasPhotos, setHasPhotos] = useState<boolean | null>(null)
   const [filters, setFilters] = useState<Filters>({
     gender: 'all',
     ageMin: 18,
@@ -77,6 +81,20 @@ export default function DiscoverPage() {
   })
 
   const unlockCount = getUnlockedProfileCount(assessmentProgress)
+
+  // Check if the current user has at least 1 photo
+  useEffect(() => {
+    if (!user || !supabase) return
+    supabase
+      .from('profiles')
+      .select('photo_urls')
+      .eq('id', user.id)
+      .single()
+      .then(({ data }) => {
+        const row = data as { photo_urls: string[] | null } | null
+        setHasPhotos((row?.photo_urls?.length ?? 0) > 0)
+      })
+  }, [user, supabase])
 
   useEffect(() => {
     if (!user) return
@@ -126,7 +144,7 @@ export default function DiscoverPage() {
     let query = supabase
       .from('profiles')
       .select(
-        'id, first_name, date_of_birth, location_city, location_state, bio, photo_urls, gender_identity'
+        'id, first_name, date_of_birth, location_city, location_state, bio, photo_urls, gender_identity, verification_status'
       )
       .eq('assessment_completed', true)
       .not('id', 'in', `(${allExclude.join(',')})`)
@@ -180,6 +198,33 @@ export default function DiscoverPage() {
 
     return true
   })
+
+  // ── Photo gate ──
+  if (hasPhotos === false) {
+    return (
+      <div className="max-w-lg mx-auto px-4 py-16 text-center">
+        <div
+          className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6"
+          style={{ background: 'var(--ciq-purple-light)', color: 'var(--ciq-purple)' }}
+        >
+          <ImagePlus className="w-7 h-7" />
+        </div>
+        <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+          Add a photo to start discovering
+        </h2>
+        <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
+          Upload at least one photo to see and be seen by potential matches.
+        </p>
+        <Link
+          href="/app/profile"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90"
+          style={{ background: 'var(--ciq-purple)' }}
+        >
+          Upload Photo
+        </Link>
+      </div>
+    )
+  }
 
   // ── Empty state: no assessment ──
   if (assessmentProgress < 1) {
@@ -428,6 +473,9 @@ export default function DiscoverPage() {
                         <h2 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
                           {profile.first_name}
                         </h2>
+                        {profile.verification_status === 'verified' && (
+                          <VerificationBadge status="verified" compact />
+                        )}
                         {age !== null && (
                           <span className="text-base" style={{ color: 'var(--text-secondary)' }}>
                             {age}

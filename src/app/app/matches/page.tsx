@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '@/lib/auth-context'
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
 import { CIS_TIERS, getCISTier, type CISTierKey } from '@/lib/constants'
-import { MessageCircle, Heart, Sparkles, ArrowUpDown } from 'lucide-react'
+import { MessageCircle, Heart, Sparkles, ArrowUpDown, ImagePlus } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import VerificationBadge from '@/components/profile/VerificationBadge'
+import type { VerificationStatus } from '@/lib/supabase/types'
 
 // ── Types ──
 
@@ -21,6 +23,7 @@ interface MatchWithProfile {
     location_city: string | null
     date_of_birth: string | null
     photo_urls: string[] | null
+    verification_status: VerificationStatus | null
   }
   last_message?: {
     content: string
@@ -40,6 +43,21 @@ export default function MatchesPage() {
   const [matches, setMatches] = useState<MatchWithProfile[]>([])
   const [loading, setLoading] = useState(true)
   const [sortMode, setSortMode] = useState<SortMode>('recent')
+  const [hasPhotos, setHasPhotos] = useState<boolean | null>(null)
+
+  // Check if the current user has at least 1 photo
+  useEffect(() => {
+    if (!user || !supabase) return
+    supabase
+      .from('profiles')
+      .select('photo_urls')
+      .eq('id', user.id)
+      .single()
+      .then(({ data }) => {
+        const row = data as { photo_urls: string[] | null } | null
+        setHasPhotos((row?.photo_urls?.length ?? 0) > 0)
+      })
+  }, [user, supabase])
 
   useEffect(() => {
     if (!user || !supabase) return
@@ -110,7 +128,7 @@ export default function MatchesPage() {
 
     const { data: profileData } = await supabase
       .from('profiles')
-      .select('id, first_name, location_city, date_of_birth, photo_urls')
+      .select('id, first_name, location_city, date_of_birth, photo_urls, verification_status')
       .in('id', partnerIds)
 
     type ProfileRow = {
@@ -119,6 +137,7 @@ export default function MatchesPage() {
       location_city: string | null
       date_of_birth: string | null
       photo_urls: string[] | null
+      verification_status: VerificationStatus | null
     }
     const typedProfiles = (profileData ?? []) as unknown as ProfileRow[]
     const profileMap = new Map(typedProfiles.map((p) => [p.id, p]))
@@ -190,6 +209,33 @@ export default function MatchesPage() {
     const bTime = b.last_message?.created_at ?? b.matched_at
     return new Date(bTime).getTime() - new Date(aTime).getTime()
   })
+
+  // ── Photo gate ──
+  if (hasPhotos === false) {
+    return (
+      <div className="max-w-lg mx-auto px-4 py-16 text-center">
+        <div
+          className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6"
+          style={{ background: 'var(--ciq-purple-light)', color: 'var(--ciq-purple)' }}
+        >
+          <ImagePlus className="w-7 h-7" />
+        </div>
+        <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+          Add a photo to start discovering
+        </h2>
+        <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
+          Upload at least one photo to see and be seen by potential matches.
+        </p>
+        <Link
+          href="/app/profile"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90"
+          style={{ background: 'var(--ciq-purple)' }}
+        >
+          Upload Photo
+        </Link>
+      </div>
+    )
+  }
 
   if (loading) {
     return (
@@ -298,6 +344,9 @@ export default function MatchesPage() {
                       >
                         {match.partner.first_name}
                       </h3>
+                      {match.partner.verification_status === 'verified' && (
+                        <VerificationBadge status="verified" compact />
+                      )}
                       {tierInfo && match.cis_score !== null && (
                         <span
                           className="text-[10px] font-bold px-2 py-0.5 rounded-full flex-shrink-0"
