@@ -23,6 +23,7 @@ import {
   AlertTriangle,
   CheckCircle2,
   Flame,
+  Link2,
 } from 'lucide-react'
 
 // ─── Types ──────────────────────────────────────────────
@@ -208,6 +209,37 @@ export default function SelfDiscoveryDashboard() {
   const [purchasingReport, setPurchasingReport] = useState(false)
   const [showCIQCard, setShowCIQCard] = useState(false)
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({})
+  const [toast, setToast] = useState<string | null>(null)
+
+  // Show a brief toast notification
+  const showToast = (message: string) => {
+    setToast(message)
+    setTimeout(() => setToast(null), 2500)
+  }
+
+  // Share self-discovery profile via Web Share API with clipboard fallback
+  const handleShareProfile = async () => {
+    const profileUrl = `${window.location.origin}/app/self-discovery`
+    const shareData = {
+      title: `${profile?.firstName || 'My'} Compatibility Profile - CompatibleIQ`,
+      text: `Check out my compatibility profile on CompatibleIQ! See my attachment style, EQ, love languages, and more.`,
+      url: profileUrl,
+    }
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData)
+      } else {
+        await navigator.clipboard.writeText(profileUrl)
+        showToast('Link copied to clipboard!')
+      }
+    } catch (err: unknown) {
+      if (err instanceof Error && err.name !== 'AbortError') {
+        await navigator.clipboard.writeText(profileUrl)
+        showToast('Link copied to clipboard!')
+      }
+    }
+  }
 
   const toggleSection = (key: string) => setExpandedSections(prev => ({ ...prev, [key]: !prev[key] }))
 
@@ -407,6 +439,17 @@ export default function SelfDiscoveryDashboard() {
         <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
           {profile?.firstName}, here is what your assessments reveal about you.
         </p>
+        <button
+          onClick={handleShareProfile}
+          className="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold transition-all border"
+          style={{
+            borderColor: 'var(--border)',
+            background: 'var(--bg-card)',
+            color: 'var(--text-primary)',
+          }}
+        >
+          <Share2 className="w-3.5 h-3.5" /> Share Profile
+        </button>
       </div>
 
       {/* ══════ Dimension Score Rings ══════ */}
@@ -874,6 +917,29 @@ export default function SelfDiscoveryDashboard() {
           eqScore={Math.round((eiDim?.overallScore || 3.0) / 5 * 100)}
         />
       )}
+
+      {/* ── Toast Notification ── */}
+      {toast && (
+        <div
+          className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-xl text-sm font-medium text-white shadow-lg"
+          style={{
+            background: 'var(--ciq-purple)',
+            animation: 'fadeInUp 0.25s ease-out',
+          }}
+        >
+          <div className="flex items-center gap-2">
+            <Link2 className="w-4 h-4" />
+            {toast}
+          </div>
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translate(-50%, 8px); }
+          to { opacity: 1; transform: translate(-50%, 0); }
+        }
+      `}</style>
     </div>
   )
 }

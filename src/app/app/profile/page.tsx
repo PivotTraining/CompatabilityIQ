@@ -27,6 +27,8 @@ import {
   Brain,
   Check,
   Sparkles,
+  Share2,
+  Link2,
 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -114,6 +116,38 @@ export default function ProfilePage() {
   const [avgCIS, setAvgCIS] = useState<number | null>(null)
   const [displayPhotos, setDisplayPhotos] = useState<string[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const [toast, setToast] = useState<string | null>(null)
+
+  // Show a brief toast notification
+  const showToast = (message: string) => {
+    setToast(message)
+    setTimeout(() => setToast(null), 2500)
+  }
+
+  // Share profile via Web Share API with clipboard fallback
+  const handleShareProfile = async () => {
+    const profileUrl = `${window.location.origin}/app/profile`
+    const shareData = {
+      title: `${profile?.first_name || 'My'} CompatibleIQ Profile`,
+      text: `Check out my compatibility profile on CompatibleIQ!`,
+      url: profileUrl,
+    }
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData)
+      } else {
+        await navigator.clipboard.writeText(profileUrl)
+        showToast('Link copied to clipboard!')
+      }
+    } catch (err: unknown) {
+      // User cancelled share dialog — not an error
+      if (err instanceof Error && err.name !== 'AbortError') {
+        await navigator.clipboard.writeText(profileUrl)
+        showToast('Link copied to clipboard!')
+      }
+    }
+  }
 
   // Load profile + resolve signed URLs for photos
   useEffect(() => {
@@ -364,29 +398,45 @@ export default function ProfilePage() {
           )}
         </div>
 
-        {/* Edit toggle */}
-        <button
-          onClick={() => (editing ? handleSave() : setEditing(true))}
-          className="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold transition-all"
-          style={{
-            background: editing ? 'var(--ciq-purple)' : 'var(--ciq-purple-light)',
-            color: editing ? '#fff' : 'var(--ciq-purple)',
-          }}
-        >
-          {editing ? (
-            saving ? (
-              'Saving...'
+        {/* Action buttons */}
+        <div className="mt-3 flex items-center justify-center gap-2">
+          <button
+            onClick={() => (editing ? handleSave() : setEditing(true))}
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold transition-all"
+            style={{
+              background: editing ? 'var(--ciq-purple)' : 'var(--ciq-purple-light)',
+              color: editing ? '#fff' : 'var(--ciq-purple)',
+            }}
+          >
+            {editing ? (
+              saving ? (
+                'Saving...'
+              ) : (
+                <>
+                  <Check className="w-3.5 h-3.5" /> Save Changes
+                </>
+              )
             ) : (
               <>
-                <Check className="w-3.5 h-3.5" /> Save Changes
+                <Edit3 className="w-3.5 h-3.5" /> Edit Profile
               </>
-            )
-          ) : (
-            <>
-              <Edit3 className="w-3.5 h-3.5" /> Edit Profile
-            </>
+            )}
+          </button>
+
+          {!editing && (
+            <button
+              onClick={handleShareProfile}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold transition-all border"
+              style={{
+                borderColor: 'var(--border)',
+                background: 'var(--bg-card)',
+                color: 'var(--text-primary)',
+              }}
+            >
+              <Share2 className="w-3.5 h-3.5" /> Share
+            </button>
           )}
-        </button>
+        </div>
       </div>
 
       {/* ── Photo Grid ── */}
@@ -755,6 +805,30 @@ export default function ProfilePage() {
         </div>
       </div>
 
+      {/* ── Self-Discovery Link ── */}
+      <Link href="/app/self-discovery">
+        <div
+          className="p-4 rounded-2xl border flex items-center gap-3 transition-all hover:opacity-80"
+          style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+        >
+          <div
+            className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+            style={{ background: 'var(--ciq-purple-light)' }}
+          >
+            <Brain className="w-4.5 h-4.5" style={{ color: 'var(--ciq-purple)' }} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+              View Self-Discovery Dashboard
+            </p>
+            <p className="text-[10px]" style={{ color: 'var(--text-muted)' }}>
+              Deep insights into your attachment, EQ, values & more
+            </p>
+          </div>
+          <ChevronRight className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--text-muted)' }} />
+        </div>
+      </Link>
+
       {/* ── Settings Section ── */}
       <div
         className="rounded-2xl border overflow-hidden"
@@ -771,35 +845,87 @@ export default function ProfilePage() {
             icon: Bell,
             label: 'Notification Preferences',
             href: '/app/settings/notifications',
+            comingSoon: false,
           },
-          // TODO: Re-enable once /app/settings/subscription page exists
-          // {
-          //   icon: CreditCard,
-          //   label: 'Subscription Management',
-          //   href: '/app/settings/subscription',
-          // },
+          {
+            icon: CreditCard,
+            label: 'Subscription Management',
+            href: '#',
+            comingSoon: true,
+          },
           {
             icon: Shield,
             label: 'Privacy & Safety',
             href: '/privacy',
+            comingSoon: false,
           },
         ].map((item, idx) => (
-          <Link key={item.href} href={item.href}>
-            <div
-              className="flex items-center gap-3 px-4 py-3.5 transition-all hover:opacity-70"
-              style={{
-                borderTop: idx > 0 ? '1px solid var(--border)' : undefined,
-              }}
+          item.comingSoon ? (
+            <button
+              key={item.label}
+              onClick={() => showToast(`${item.label} is coming soon!`)}
+              className="w-full text-left"
             >
-              <item.icon className="w-4 h-4" style={{ color: 'var(--text-muted)' }} />
-              <span className="text-sm flex-1" style={{ color: 'var(--text-primary)' }}>
-                {item.label}
-              </span>
-              <ChevronRight className="w-4 h-4" style={{ color: 'var(--text-muted)' }} />
-            </div>
-          </Link>
+              <div
+                className="flex items-center gap-3 px-4 py-3.5 transition-all hover:opacity-70"
+                style={{
+                  borderTop: idx > 0 ? '1px solid var(--border)' : undefined,
+                }}
+              >
+                <item.icon className="w-4 h-4" style={{ color: 'var(--text-muted)' }} />
+                <span className="text-sm flex-1" style={{ color: 'var(--text-primary)' }}>
+                  {item.label}
+                </span>
+                <span
+                  className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
+                  style={{ background: 'var(--ciq-purple-light)', color: 'var(--ciq-purple)' }}
+                >
+                  Soon
+                </span>
+                <ChevronRight className="w-4 h-4" style={{ color: 'var(--text-muted)' }} />
+              </div>
+            </button>
+          ) : (
+            <Link key={item.href} href={item.href}>
+              <div
+                className="flex items-center gap-3 px-4 py-3.5 transition-all hover:opacity-70"
+                style={{
+                  borderTop: idx > 0 ? '1px solid var(--border)' : undefined,
+                }}
+              >
+                <item.icon className="w-4 h-4" style={{ color: 'var(--text-muted)' }} />
+                <span className="text-sm flex-1" style={{ color: 'var(--text-primary)' }}>
+                  {item.label}
+                </span>
+                <ChevronRight className="w-4 h-4" style={{ color: 'var(--text-muted)' }} />
+              </div>
+            </Link>
+          )
         ))}
       </div>
+
+      {/* ── Toast Notification ── */}
+      {toast && (
+        <div
+          className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-xl text-sm font-medium text-white shadow-lg"
+          style={{
+            background: 'var(--ciq-purple)',
+            animation: 'fadeInUp 0.25s ease-out',
+          }}
+        >
+          <div className="flex items-center gap-2">
+            <Link2 className="w-4 h-4" />
+            {toast}
+          </div>
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translate(-50%, 8px); }
+          to { opacity: 1; transform: translate(-50%, 0); }
+        }
+      `}</style>
     </div>
   )
 }
