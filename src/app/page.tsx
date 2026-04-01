@@ -22,6 +22,7 @@ import {
 } from 'lucide-react'
 import WaitlistModal from '@/components/WaitlistModal'
 import LandingAnimations from '@/components/LandingAnimations'
+import SocialProof from '@/components/SocialProof'
 import FoundingCounter from '@/components/pricing/FoundingCounter'
 
 export const metadata: Metadata = {
@@ -488,6 +489,9 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* Social Proof & Credibility */}
+      <SocialProof />
 
       {/* Self-Discovery CTA */}
       <section className="py-16">

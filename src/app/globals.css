@@ -69,6 +69,15 @@ body {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+/* Hide scrollbar for horizontal scroll containers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Prevent horizontal overflow on mobile */
 html, body {
   overflow-x: hidden;

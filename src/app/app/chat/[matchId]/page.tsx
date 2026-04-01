@@ -4,11 +4,12 @@ import { useEffect, useRef, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context'
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
-import { ArrowLeft, Send, Shield, Flag } from 'lucide-react'
+import { ArrowLeft, Send, Shield, Flag, Lightbulb } from 'lucide-react'
 import { LIMITS } from '@/lib/constants'
 import { filterMessage } from '@/lib/messaging/content-filter'
 import ConversationStarters from '@/components/chat/ConversationStarters'
 import ResonanceReportUpsell from '@/components/chat/ResonanceReportUpsell'
+import CompatibilityInsights from '@/components/chat/CompatibilityInsights'
 import { generateConversationStarters } from '@/lib/matching/conversation-starters'
 import type { ConversationStarter } from '@/lib/matching/conversation-starters'
 
@@ -44,6 +45,10 @@ export default function ChatPage() {
   const [sending, setSending] = useState(false)
   const [loading, setLoading] = useState(true)
   const [starters, setStarters] = useState<ConversationStarter[]>([])
+  const [insightsOpen, setInsightsOpen] = useState(false)
+  const [cisScore, setCisScore] = useState<number | null>(null)
+  const [userDimensionScores, setUserDimensionScores] = useState<Record<string, number>>({})
+  const [partnerDimensionScores, setPartnerDimensionScores] = useState<Record<string, number>>({})
   const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -53,11 +58,11 @@ export default function ChatPage() {
     const loadMatch = async () => {
       const { data: matchRaw } = await supabase
         .from('matches')
-        .select('id, user_a_id, user_b_id, status')
+        .select('id, user_a_id, user_b_id, status, cis_score')
         .eq('id', matchId)
         .single()
 
-      const match = matchRaw as { id: string; user_a_id: string; user_b_id: string; status: string } | null
+      const match = matchRaw as { id: string; user_a_id: string; user_b_id: string; status: string; cis_score: number | null } | null
       if (!match || match.status !== 'active') {
         router.replace('/app/matches')
         return
@@ -96,6 +101,10 @@ export default function ChatPage() {
       const partnerScores = toScoreMap(
         (partnerScoresResult.data ?? []) as unknown as DimensionScoreRow[],
       )
+
+      setCisScore(match.cis_score ?? null)
+      setUserDimensionScores(userScores)
+      setPartnerDimensionScores(partnerScores)
 
       const partnerName = (profile as unknown as PartnerInfo)?.first_name ?? 'them'
       const generatedStarters = generateConversationStarters(
@@ -209,7 +218,8 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="flex flex-col h-[calc(100vh-120px)]">
+    <div className="flex h-[calc(100vh-120px)]">
+    <div className="flex flex-col flex-1 min-w-0">
       {/* Chat header */}
       <div
         className="flex items-center gap-3 px-4 py-3 border-b"
@@ -233,6 +243,17 @@ export default function ChatPage() {
           )}
         </div>
         <div className="flex gap-1">
+          <button
+            onClick={() => setInsightsOpen((prev) => !prev)}
+            className="p-2 rounded-lg transition-colors"
+            style={{
+              color: insightsOpen ? 'var(--ciq-purple)' : 'var(--text-muted)',
+              background: insightsOpen ? '#F3E8FF' : 'transparent',
+            }}
+            title="Compatibility insights"
+          >
+            <Lightbulb className="w-4 h-4" />
+          </button>
           <button
             onClick={handleBlock}
             className="p-2 rounded-lg"
@@ -314,6 +335,17 @@ export default function ChatPage() {
           <Send className="w-4 h-4" />
         </button>
       </div>
+    </div>
+
+      {/* Compatibility Insights Panel */}
+      <CompatibilityInsights
+        isOpen={insightsOpen}
+        onClose={() => setInsightsOpen(false)}
+        cisScore={cisScore}
+        userScores={userDimensionScores}
+        partnerScores={partnerDimensionScores}
+        partnerName={partner?.first_name ?? 'your match'}
+      />
     </div>
   )
 }
