@@ -546,7 +546,7 @@ function CompletionScreen({
   router: ReturnType<typeof useRouter>
 }) {
   const unlocked = getUnlockedProfileCount(moduleNum)
-  const isFullComplete = moduleNum === 6
+  const isFullComplete = moduleNum === MODULE_CONFIG.length
 
   // Confetti colors
   const confettiColors = ['var(--ciq-purple)', 'var(--ciq-green)', 'var(--ciq-coral)', '#FFD700', '#00BFFF']

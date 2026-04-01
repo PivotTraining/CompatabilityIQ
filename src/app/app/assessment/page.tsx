@@ -50,7 +50,7 @@ export default function AssessmentHub() {
           Your Assessment
         </h1>
         <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
-          {progress === 6
+          {progress === MODULE_CONFIG.length
             ? 'Assessment complete — all matches unlocked'
             : `${percentComplete}% complete — ${unlocked === null ? 'all' : unlocked} profiles unlocked`}
         </p>
@@ -64,7 +64,7 @@ export default function AssessmentHub() {
         </div>
 
         {/* Profiles unlocked badge */}
-        {unlocked !== null && unlocked > 0 && progress < 6 && (
+        {unlocked !== null && unlocked > 0 && progress < MODULE_CONFIG.length && (
           <div
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium mt-4"
             style={{ background: 'var(--bg-secondary)', color: 'var(--ciq-green)' }}

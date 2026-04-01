@@ -80,18 +80,22 @@ export const CIS_WEIGHTS = {
 } as const
 
 // ── Assessment Module Config ──
+// Aligned with question-bank modules and scoring/constants DIMENSION_CONFIGS
 export const MODULE_CONFIG = [
-  { module: 1, title: 'Who You Are',        subtitle: 'Values & Growth',        quotients: ['VQ', 'GQ'] as const,                      questionCount: 16, unlockCount: 3,  estimatedMinutes: 3  },
-  { module: 2, title: 'How You Love',       subtitle: 'Attachment & Love',       quotients: ['AQ', 'LQ'] as const,                      questionCount: 16, unlockCount: 5,  estimatedMinutes: 3  },
-  { module: 3, title: 'How You Feel',       subtitle: 'Emotional & Neurobiological', quotients: ['EQ', 'NQ'] as const,                  questionCount: 16, unlockCount: 7,  estimatedMinutes: 3  },
-  { module: 4, title: 'How You Communicate', subtitle: 'Conflict & Cognitive Style', quotients: ['CQ', 'CSQ'] as const,                 questionCount: 16, unlockCount: 10, estimatedMinutes: 3  },
-  { module: 5, title: 'Your Depth Profile', subtitle: 'Relational History',      quotients: ['ACC', 'EMP', 'STB', 'SAF', 'DEP'] as const, questionCount: 16, unlockCount: 15, estimatedMinutes: 3  },
-  { module: 6, title: 'Money & Life',       subtitle: 'Financial Alignment',     quotients: ['FMI', 'FSB', 'FPL', 'FIQ', 'FCM', 'CDF'] as const, questionCount: 16, unlockCount: -1, estimatedMinutes: 3  },
+  { module: 1, title: 'Values & Priorities',     subtitle: 'Life direction, ethics & relationship priority', quotients: ['life_direction', 'moral_ethical', 'relationship_priority'] as const,  questionCount: 16, unlockCount: 3,  estimatedMinutes: 3, paid: false },
+  { module: 2, title: 'Attachment Style',         subtitle: 'How you bond and relate',                      quotients: ['anxiety', 'avoidance', 'security'] as const,                          questionCount: 16, unlockCount: 5,  estimatedMinutes: 3, paid: false },
+  { module: 3, title: 'Communication & Conflict', subtitle: 'How you handle disagreements',                 quotients: ['conflict_approach', 'repair_attempts', 'emotional_expression'] as const, questionCount: 16, unlockCount: 7,  estimatedMinutes: 3, paid: false },
+  { module: 4, title: 'How You Love',             subtitle: 'Giving & receiving love languages',            quotients: ['receiving_language', 'giving_language'] as const,                      questionCount: 16, unlockCount: 10, estimatedMinutes: 3, paid: false },
+  { module: 5, title: 'Hot Takes & Dealbreakers', subtitle: 'Boundaries, values & vulnerability',           quotients: ['boundaries', 'gender_dynamics', 'vulnerability'] as const,             questionCount: 16, unlockCount: 15, estimatedMinutes: 3, paid: false },
+  { module: 6, title: 'Emotional Intelligence',   subtitle: 'Self-awareness, empathy & regulation',         quotients: ['self_awareness', 'empathy', 'emotional_regulation'] as const,          questionCount: 16, unlockCount: 20, estimatedMinutes: 3, paid: true, price: 4.99 },
+  { module: 7, title: 'Lifestyle & Ambition',     subtitle: 'Pace, social energy & future vision',          quotients: ['pace_of_life', 'social_energy', 'future_vision'] as const,             questionCount: 10, unlockCount: 30, estimatedMinutes: 2, paid: true, price: 4.99 },
+  { module: 8, title: 'Intimacy & Chemistry',     subtitle: 'Physical, emotional & desire dynamics',        quotients: ['physical_chemistry', 'emotional_intimacy', 'desire_dynamics'] as const, questionCount: 10, unlockCount: -1, estimatedMinutes: 2, paid: true, price: 4.99 },
 ] as const
 
 // ── Progressive Unlock ──
 export function getUnlockedProfileCount(modulesCompleted: number): number | null {
-  const cumulative = [0, 3, 8, 15, 25, 40, null] // null = unlimited
+  // Index = modules completed → cumulative profiles unlocked; null = unlimited
+  const cumulative = [0, 3, 8, 15, 25, 40, 60, 90, null]
   return cumulative[modulesCompleted] ?? 0
 }
 

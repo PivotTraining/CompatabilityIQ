@@ -107,11 +107,13 @@ export async function POST(request: NextRequest) {
       metadata: {
         supabase_user_id: user.id,
         product_type: 'self_discovery_report',
+        price_id: STRIPE_PRICES.SELF_DISCOVERY_REPORT,
       },
       payment_intent_data: {
         metadata: {
           supabase_user_id: user.id,
           product_type: 'self_discovery_report',
+          price_id: STRIPE_PRICES.SELF_DISCOVERY_REPORT,
         },
       },
     })

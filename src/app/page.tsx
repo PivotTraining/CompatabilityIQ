@@ -5,13 +5,13 @@ import { Brain, Heart, TrendingUp, Lock, Sparkles, ArrowRight, Check, Clock, Mes
 import WaitlistModal from '@/components/WaitlistModal'
 
 export const metadata: Metadata = {
-  title: 'CompatibleIQ — Date with Proof | Science-Backed Compatibility Scoring',
+  title: 'CompatibleIQ — Science-Based Compatibility Assessment | Date with Proof',
   description:
-    'Take a free 6-dimension psychometric assessment and get a real compatibility score before your first date. No swiping, no guessing -- just science.',
+    'Take a free 6-dimension psychometric assessment and get a real compatibility score before your first date. No swiping, no guessing — just science.',
   openGraph: {
-    title: 'CompatibleIQ — Date with Proof',
+    title: 'CompatibleIQ — Science-Based Compatibility Assessment',
     description:
-      '6 science-backed dimensions. One compatibility score. Zero wasted time.',
+      '6 science-backed dimensions. One compatibility score. Zero wasted time. The psychometric dating platform for people who are done guessing.',
     url: 'https://compatibleiq.com',
   },
   alternates: {
