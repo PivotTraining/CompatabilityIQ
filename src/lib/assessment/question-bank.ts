@@ -3,7 +3,7 @@ import type { AssessmentQuestion } from './types'
 // ════════════════════════════════════════════
 // MODULE 1: Values & Priorities (VP) — 16 questions
 // FREE — Hot takes and scenarios that reveal life priorities
-// Sub-scales: life_direction, moral_flexibility, relationship_priority
+// Sub-scales: life_direction, moral_ethical, relationship_priority
 // ════════════════════════════════════════════
 const MODULE_1: AssessmentQuestion[] = [
   // ── life_direction ──
@@ -26,26 +26,26 @@ const MODULE_1: AssessmentQuestion[] = [
       { value: 5, label: 'Take care of my family first, then figure out the rest' },
     ] },
   { id: 'm1_vp_03', module: 1, quotient: 'VP', dimension: 'life_direction', format: 'scenario',
-    text: 'Curb Your Enthusiasm or Martin?',
+    text: 'When making a major life decision, I prioritize stability and security over excitement and new experiences.',
     options: [
-      { value: 1, label: 'Curb, every time. The awkwardness is art.' },
-      { value: 2, label: 'Curb, but I respect Martin' },
-      { value: 3, label: 'Honestly depends on my mood' },
-      { value: 4, label: 'Martin, but I get the Curb appeal' },
-      { value: 5, label: 'Martin. Not even close.' },
+      { value: 1, label: 'Strongly disagree. I chase excitement and novelty every time.' },
+      { value: 2, label: 'I lean toward new experiences, but I weigh the risks' },
+      { value: 3, label: 'It depends on the decision. I balance both.' },
+      { value: 4, label: 'I lean toward stability. Excitement is nice but security matters more.' },
+      { value: 5, label: 'Strongly agree. Stability and security come first, always.' },
     ] },
 
-  // ── moral_flexibility ──
-  { id: 'm1_vp_04', module: 1, quotient: 'VP', dimension: 'moral_flexibility', format: 'scenario',
-    text: 'Should Barry Bonds be in the Hall of Fame even though he used steroids at the end of his career?',
+  // ── moral_ethical ──
+  { id: 'm1_vp_04', module: 1, quotient: 'VP', dimension: 'moral_ethical', format: 'scenario',
+    text: 'A close friend confides they lied on their resume to get their dream job. How do you feel about it?',
     options: [
-      { value: 1, label: 'Absolutely not. Rules are rules.' },
-      { value: 2, label: 'Probably not, but the whole era was dirty' },
-      { value: 3, label: 'Tough call. I genuinely can\'t decide.' },
-      { value: 4, label: 'Yes, but with an asterisk' },
-      { value: 5, label: 'Put him in. He was already the greatest before the juice.' },
+      { value: 1, label: 'Rules are rules. That\'s dishonest and completely unacceptable.' },
+      { value: 2, label: 'I\'d be uncomfortable with it. Integrity matters.' },
+      { value: 3, label: 'Torn. I get the temptation but it doesn\'t sit right.' },
+      { value: 4, label: 'I wouldn\'t do it myself, but I understand why they did.' },
+      { value: 5, label: 'The end justifies the means. They got the job -- I get it.' },
     ] },
-  { id: 'm1_vp_05', module: 1, quotient: 'VP', dimension: 'moral_flexibility', format: 'scenario',
+  { id: 'm1_vp_05', module: 1, quotient: 'VP', dimension: 'moral_ethical', format: 'scenario',
     text: 'Your best friend tells you they cheated on their partner. They\'re crying. What do you do?',
     options: [
       { value: 1, label: 'Tell them they need to confess. Full stop.' },
@@ -54,7 +54,8 @@ const MODULE_1: AssessmentQuestion[] = [
       { value: 4, label: 'That\'s their business. I\'m just here for support.' },
       { value: 5, label: 'We all make mistakes. I\'m not here to judge.' },
     ] },
-  { id: 'm1_vp_06', module: 1, quotient: 'VP', dimension: 'moral_flexibility', format: 'scenario',
+  { id: 'm1_vp_06', module: 1, quotient: 'VP', dimension: 'moral_ethical', format: 'scenario',
+    reverseScored: true,
     text: 'How someone treats a waiter tells you everything you need to know about them.',
     options: [
       { value: 5, label: 'Facts. Non-negotiable.' },
@@ -113,8 +114,8 @@ const MODULE_1: AssessmentQuestion[] = [
       { value: 5, label: 'We co-create everything together. No one\'s playbook wins by default.' },
     ] },
 
-  // ── moral_flexibility (continued) ──
-  { id: 'm1_vp_12', module: 1, quotient: 'VP', dimension: 'moral_flexibility', format: 'scenario',
+  // ── moral_ethical (continued) ──
+  { id: 'm1_vp_12', module: 1, quotient: 'VP', dimension: 'moral_ethical', format: 'scenario',
     text: 'A stranger drops a $100 bill and doesn\'t notice. Nobody else saw it. What do you actually do?',
     options: [
       { value: 1, label: 'Run it back to them. No question.' },
@@ -123,7 +124,7 @@ const MODULE_1: AssessmentQuestion[] = [
       { value: 4, label: 'Pocket it. That\'s the universe providing.' },
       { value: 5, label: 'Keep it. They should\'ve been more careful.' },
     ] },
-  { id: 'm1_vp_13', module: 1, quotient: 'VP', dimension: 'moral_flexibility', format: 'scenario',
+  { id: 'm1_vp_13', module: 1, quotient: 'VP', dimension: 'moral_ethical', format: 'scenario',
     text: 'Your partner tells a white lie to get out of a friend\'s boring event. How do you feel about it?',
     options: [
       { value: 1, label: 'Not okay. Lying is lying, even small ones.' },
@@ -343,6 +344,7 @@ const MODULE_3: AssessmentQuestion[] = [
       { value: 5, label: 'Address it right there. That was disrespectful.' },
     ] },
   { id: 'm3_cc_02', module: 3, quotient: 'CC', dimension: 'conflict_style', format: 'scenario',
+    reverseScored: true,
     text: 'During a heated argument, I have a hard time stopping myself from saying things I know will hurt.',
     options: [
       { value: 1, label: 'Never. I always choose my words carefully.' },
@@ -352,6 +354,7 @@ const MODULE_3: AssessmentQuestion[] = [
       { value: 5, label: 'When I\'m hurt, the filter comes off. I own that.' },
     ] },
   { id: 'm3_cc_03', module: 3, quotient: 'CC', dimension: 'conflict_style', format: 'scenario',
+    reverseScored: true,
     text: 'Your partner says "we need to talk." Your heart rate goes from 0 to...',
     options: [
       { value: 1, label: '0. That phrase doesn\'t faze me at all.' },
@@ -657,6 +660,7 @@ const MODULE_5: AssessmentQuestion[] = [
 
   // ── vulnerability ──
   { id: 'm5_ht_06', module: 5, quotient: 'HT', dimension: 'vulnerability', format: 'scenario',
+    reverseScored: true,
     text: 'Kids or no kids -- is that a day-one conversation or a year-two conversation?',
     options: [
       { value: 1, label: 'Day one. Why waste anyone\'s time?' },
@@ -666,15 +670,16 @@ const MODULE_5: AssessmentQuestion[] = [
       { value: 5, label: 'Year two is fine. People change their minds.' },
     ] },
   { id: 'm5_ht_07', module: 5, quotient: 'HT', dimension: 'vulnerability', format: 'scenario',
-    text: 'Beyonce or Rihanna? And this says more about you than you think.',
+    text: 'I believe showing emotional vulnerability in a relationship is a sign of strength, not weakness.',
     options: [
-      { value: 1, label: 'Beyonce. Excellence, discipline, legacy.' },
-      { value: 2, label: 'Beyonce, but Rihanna is a close second' },
-      { value: 3, label: 'Can\'t choose. Different vibes for different moods.' },
-      { value: 4, label: 'Rihanna, but respect to Bey always' },
-      { value: 5, label: 'Rihanna. Authenticity, freedom, zero apologies.' },
+      { value: 1, label: 'Strongly disagree. Vulnerability gets you hurt.' },
+      { value: 2, label: 'Disagree. I keep my guard up for good reason.' },
+      { value: 3, label: 'Neutral. It depends on the person and the situation.' },
+      { value: 4, label: 'Agree. Opening up builds trust and deepens connection.' },
+      { value: 5, label: 'Strongly agree. Vulnerability is the foundation of real intimacy.' },
     ] },
   { id: 'm5_ht_08', module: 5, quotient: 'HT', dimension: 'vulnerability', format: 'scenario',
+    reverseScored: true,
     text: 'Your partner gains 30 pounds. How does that actually affect things for you?',
     options: [
       { value: 1, label: 'It doesn\'t. At all. Love isn\'t conditional on a number.' },
@@ -753,6 +758,7 @@ const MODULE_5: AssessmentQuestion[] = [
       { value: 5, label: 'I\'d feel closer to them. Trust like that deepens everything.' },
     ] },
   { id: 'm5_ht_16', module: 5, quotient: 'HT', dimension: 'vulnerability', format: 'scenario',
+    reverseScored: true,
     text: 'Body count conversation: do you want to know your partner\'s number?',
     options: [
       { value: 1, label: 'Yes. Full transparency. I want to know everything.' },
@@ -770,7 +776,7 @@ const MODULE_5: AssessmentQuestion[] = [
 // ════════════════════════════════════════════
 const MODULE_6: AssessmentQuestion[] = [
   // ── self_awareness ──
-  { id: 'm6_ei_01', module: 6, quotient: 'EI', dimension: 'self_awareness', format: 'scenario',
+  { id: 'm6_ei_01', module: 6, quotient: 'EI', dimension: 'empathy', format: 'scenario',
     text: 'Your friend is clearly going through it but says "I\'m fine." You...',
     options: [
       { value: 1, label: 'Take them at their word. They said they\'re fine.' },
@@ -1054,14 +1060,14 @@ const MODULE_8: AssessmentQuestion[] = [
       { value: 2, label: 'Nice to have, but emotional connection matters more.' },
       { value: 1, label: 'Not at all. Attraction builds with time and trust.' },
     ] },
-  { id: 'm8_ic_03', module: 8, quotient: 'IC', dimension: 'physical_chemistry', format: 'scenario',
-    text: 'Your love life soundtrack: R&B slow jams or something more... adventurous?',
+  { id: 'm8_ic_03', module: 8, quotient: 'IC', dimension: 'desire_dynamics', format: 'scenario',
+    text: 'How important is it that you and your partner openly discuss desires and boundaries in your intimate life?',
     options: [
-      { value: 1, label: 'Classic R&B. Jodeci, SWV, Sade. Set the mood right.' },
-      { value: 2, label: 'Neo-soul. Erykah, Frank Ocean, Daniel Caesar.' },
-      { value: 3, label: 'A mix. My playlist has range.' },
-      { value: 4, label: 'Something with energy. I like intensity.' },
-      { value: 5, label: 'No music needed. The energy in the room is enough.' },
+      { value: 1, label: 'Not important at all. Some things are better left unspoken.' },
+      { value: 2, label: 'Slightly important. I\'d rather things unfold naturally.' },
+      { value: 3, label: 'Moderately important. A few key conversations go a long way.' },
+      { value: 4, label: 'Very important. Clear communication makes everything better.' },
+      { value: 5, label: 'Absolutely essential. Full openness about desires and boundaries is non-negotiable.' },
     ] },
 
   // ── emotional_intimacy ──
@@ -1133,6 +1139,45 @@ const MODULE_8: AssessmentQuestion[] = [
 ]
 
 // ════════════════════════════════════════════
+// VALIDITY CHECK ITEMS — Social Desirability Detection
+// Sprinkle across modules to detect response bias
+// A score of 5 on these items suggests the respondent
+// is presenting an unrealistically favorable self-image
+// ════════════════════════════════════════════
+const VALIDITY_CHECKS: AssessmentQuestion[] = [
+  { id: 'val_01', module: 1, quotient: 'VP', dimension: 'validity', format: 'scenario',
+    validityCheck: true,
+    text: 'I have never told even a small lie to someone I care about.',
+    options: [
+      { value: 1, label: 'Definitely not true. I\'ve told small lies like everyone.' },
+      { value: 2, label: 'Rarely true. I try to be honest but nobody\'s perfect.' },
+      { value: 3, label: 'Sometimes true. I avoid lying but it has happened.' },
+      { value: 4, label: 'Mostly true. I almost never lie to people I love.' },
+      { value: 5, label: 'Completely true. I have never lied to someone I care about.' },
+    ] },
+  { id: 'val_02', module: 2, quotient: 'AS', dimension: 'validity', format: 'scenario',
+    validityCheck: true,
+    text: 'I have never felt even slightly jealous in a relationship.',
+    options: [
+      { value: 1, label: 'Not true at all. Jealousy is a normal human feeling.' },
+      { value: 2, label: 'Rarely true. I\'ve felt it even if I didn\'t act on it.' },
+      { value: 3, label: 'Sometimes true. It depends on the relationship.' },
+      { value: 4, label: 'Mostly true. I hardly ever feel jealous.' },
+      { value: 5, label: 'Completely true. I have never experienced jealousy.' },
+    ] },
+  { id: 'val_03', module: 3, quotient: 'CC', dimension: 'validity', format: 'scenario',
+    validityCheck: true,
+    text: 'I always handle conflict perfectly without ever raising my voice or getting frustrated.',
+    options: [
+      { value: 1, label: 'Not true at all. Conflict is messy and I\'m human.' },
+      { value: 2, label: 'Rarely true. I try but I definitely slip up.' },
+      { value: 3, label: 'Sometimes true. I can stay calm in some situations.' },
+      { value: 4, label: 'Mostly true. I almost never lose my composure.' },
+      { value: 5, label: 'Completely true. I handle every conflict perfectly.' },
+    ] },
+]
+
+// ════════════════════════════════════════════
 // Export
 // ════════════════════════════════════════════
 export const QUESTION_BANK: AssessmentQuestion[] = [
@@ -1144,6 +1189,7 @@ export const QUESTION_BANK: AssessmentQuestion[] = [
   ...MODULE_6,
   ...MODULE_7,
   ...MODULE_8,
+  ...VALIDITY_CHECKS,
 ]
 
 export function getModuleQuestions(module: number): AssessmentQuestion[] {
@@ -1163,4 +1209,5 @@ export {
   MODULE_6,
   MODULE_7,
   MODULE_8,
+  VALIDITY_CHECKS,
 }

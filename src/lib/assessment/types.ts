@@ -21,6 +21,8 @@ export interface AssessmentQuestion {
   subtype?: 'give' | 'receive'
   /** If true, high values indicate risk or reverse direction */
   reverseScored?: boolean
+  /** If true, this is a social desirability check item (scores of 5 suggest response bias) */
+  validityCheck?: boolean
   /** Whether this module is a paid add-on */
   paid?: boolean
   /** Price in USD for the paid module this question belongs to */

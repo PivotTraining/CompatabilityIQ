@@ -1021,3 +1021,32 @@ function detectBonuses(
 
   return bonuses
 }
+
+// ═══════════════════════════════════════════
+// Validity / Social Desirability Check
+// ═══════════════════════════════════════════
+
+/**
+ * Detect social desirability bias / impression management.
+ * Validity items (e.g. "I have never lied") where a score of 5 is suspiciously perfect.
+ * Returns a 0-1 score (1 = likely honest, 0 = likely faking) and a flagged boolean.
+ */
+export function computeValidityScore(answers: Record<string, number>): {
+  score: number
+  flagged: boolean
+} {
+  const validityItems = ['val_01', 'val_02', 'val_03']
+  const validityAnswers = validityItems
+    .map((id) => answers[id])
+    .filter((v) => v !== undefined)
+
+  if (validityAnswers.length === 0) return { score: 1, flagged: false }
+
+  // If someone scores 5 on "I have never lied" etc., that's suspicious
+  const avgValidity =
+    validityAnswers.reduce((a, b) => a + b, 0) / validityAnswers.length
+
+  // Score > 4 on validity items = likely impression management
+  const score = Math.max(0, 1 - (avgValidity - 3) / 2)
+  return { score, flagged: avgValidity >= 4.5 }
+}

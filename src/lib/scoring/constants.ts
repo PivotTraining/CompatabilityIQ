@@ -36,7 +36,7 @@ export const DIMENSION_CONFIGS: Record<string, DimensionConfig> = {
     weight: 18,
     compatibilityType: 'similarity',
     subScales: ['life_direction', 'moral_ethical', 'relationship_priority'],
-    reverseItems: [],
+    reverseItems: ['m1_vp_06'],
     paid: false,
   },
   attachment: {
@@ -54,7 +54,7 @@ export const DIMENSION_CONFIGS: Record<string, DimensionConfig> = {
     weight: 17,
     compatibilityType: 'complementarity',
     subScales: ['conflict_approach', 'repair_attempts', 'emotional_expression'],
-    reverseItems: [],
+    reverseItems: ['m3_cc_02', 'm3_cc_03'],
     paid: false,
   },
   how_you_love: {
@@ -72,7 +72,7 @@ export const DIMENSION_CONFIGS: Record<string, DimensionConfig> = {
     weight: 8,
     compatibilityType: 'similarity',
     subScales: ['boundaries', 'gender_dynamics', 'vulnerability'],
-    reverseItems: [],
+    reverseItems: ['m5_ht_06', 'm5_ht_08', 'm5_ht_16'],
     paid: false,
   },
   emotional_intelligence: {
@@ -309,8 +309,8 @@ export const SUB_SCALE_QUESTIONS: Record<string, string[]> = {
   vulnerability: ['m5_ht_06', 'm5_ht_07', 'm5_ht_08', 'm5_ht_14', 'm5_ht_15', 'm5_ht_16'],
 
   // ── Module 6: Emotional Intelligence (m6_ei_*) ──
-  self_awareness: ['m6_ei_01', 'm6_ei_02', 'm6_ei_03', 'm6_ei_11', 'm6_ei_12'],
-  empathy: ['m6_ei_04', 'm6_ei_05', 'm6_ei_06', 'm6_ei_13', 'm6_ei_14'],
+  self_awareness: ['m6_ei_02', 'm6_ei_03', 'm6_ei_11', 'm6_ei_12'],
+  empathy: ['m6_ei_01', 'm6_ei_04', 'm6_ei_05', 'm6_ei_06', 'm6_ei_13', 'm6_ei_14'],
   emotional_regulation: ['m6_ei_07', 'm6_ei_08', 'm6_ei_09', 'm6_ei_10', 'm6_ei_15', 'm6_ei_16'],
 
   // ── Paid: Lifestyle & Ambition (future module) ──
