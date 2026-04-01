@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import Logo from '@/components/Logo'
 import { ArrowLeft } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -18,7 +19,7 @@ export default function PrivacyPolicy() {
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 lg:px-12 py-5 max-w-7xl mx-auto border-b border-gray-100">
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/images/logo.svg" alt="CompatibleIQ" width={200} height={50} className="h-12 w-auto" priority />
+          <Logo className="h-12 w-auto text-gray-900" />
         </Link>
         <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">
           <ArrowLeft className="w-4 h-4" />
@@ -264,7 +265,7 @@ export default function PrivacyPolicy() {
       <footer className="max-w-7xl mx-auto px-6 lg:px-12 py-10 border-t border-gray-100">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-3">
-            <Image src="/images/logo.svg" alt="CompatibleIQ" width={150} height={38} className="h-9 w-auto opacity-60" />
+            <Logo className="h-9 w-auto opacity-60 text-gray-900" showTagline={false} />
             <span className="text-sm text-gray-400">&copy; {new Date().getFullYear()} Pivot Training &amp; Development</span>
           </div>
           <div className="flex items-center gap-6">

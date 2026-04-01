@@ -24,6 +24,7 @@ import WaitlistModal from '@/components/WaitlistModal'
 import LandingAnimations from '@/components/LandingAnimations'
 import SocialProof from '@/components/SocialProof'
 import FoundingCounter from '@/components/pricing/FoundingCounter'
+import Logo from '@/components/Logo'
 
 export const metadata: Metadata = {
   title: 'CompatibleIQ — Serious Dating, Backed by Science',
@@ -126,7 +127,7 @@ export default function LandingPage() {
       <nav className="fixed top-0 left-0 right-0 z-40 bg-[#0A0A0B]/80 backdrop-blur-xl border-b border-white/5">
         <div className="flex items-center justify-between px-4 sm:px-6 lg:px-12 py-4 max-w-7xl mx-auto">
           <div className="flex items-center gap-2">
-            <Image src="/images/logo.svg" alt="CompatibleIQ" width={280} height={70} className="h-10 sm:h-16 w-auto" priority />
+            <Logo className="h-14 sm:h-20 w-auto text-white" />
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
             <a href="#dimensions" className="hover:text-white transition-colors">Dimensions</a>
@@ -730,7 +731,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-10">
             <div className="md:col-span-2">
-              <Image src="/images/logo.svg" alt="CompatibleIQ" width={200} height={50} className="h-12 w-auto opacity-60 mb-4" />
+              <Logo className="h-12 w-auto opacity-60 mb-4 text-white" showTagline={false} />
               <p className="text-sm text-gray-400 font-medium max-w-sm leading-relaxed">
                 The serious dating platform that scores real compatibility across 6 science-backed dimensions. For singles who want a real relationship. Stop guessing. Start knowing.
               </p>
