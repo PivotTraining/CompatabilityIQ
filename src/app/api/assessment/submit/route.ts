@@ -4,6 +4,7 @@
 import { NextResponse } from 'next/server'
 import { getSupabaseServerClient, getSupabaseServiceClient } from '@/lib/supabase/server'
 import { getUnlockedProfileCount } from '@/lib/constants'
+import { triggerAssessmentReminder, triggerReportReadyEmail } from '@/lib/email/triggers'
 
 export async function POST(request: Request) {
   try {
@@ -102,9 +103,47 @@ export async function POST(request: Request) {
       console.error('Scoring pipeline error (non-fatal):', scoringErr)
     }
 
-    // ── 5. Return success ──
+    // ── 5. Check total assessment progress & send email triggers ──
     const unlocked = getUnlockedProfileCount(module)
 
+    try {
+      const { count: completedCount } = await serviceClient
+        .from('assessment_responses')
+        .select('*', { count: 'exact', head: true })
+        .eq('user_id', user.id)
+
+      const totalCompleted = completedCount ?? 0
+
+      // Resolve user info for emails
+      const { data: profile } = await serviceClient
+        .from('profiles')
+        .select('first_name')
+        .eq('id', user.id)
+        .single()
+
+      const firstName = profile?.first_name || 'there'
+      const userEmail = user.email ?? ''
+
+      if (totalCompleted >= 6) {
+        // All modules complete -- send "assessment complete / report ready" email
+        triggerReportReadyEmail(user.id, userEmail, firstName, 'self-discovery')
+          .catch((err) => console.error('[AssessmentSubmit] Report ready email error:', err))
+      } else {
+        // Not all complete -- schedule a reminder (fire-and-forget after 3-day delay via setTimeout)
+        // Note: setTimeout is best-effort; in serverless it may not survive cold starts.
+        // For production, consider Vercel Cron or a DB-backed queue.
+        const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000
+        setTimeout(() => {
+          triggerAssessmentReminder(user.id, userEmail, firstName, totalCompleted)
+            .catch((err) => console.error('[AssessmentSubmit] Reminder email error:', err))
+        }, THREE_DAYS_MS)
+      }
+    } catch (emailErr) {
+      // Non-fatal -- do not block the response
+      console.error('[AssessmentSubmit] Email trigger error:', emailErr)
+    }
+
+    // ── 6. Return success ──
     return NextResponse.json({
       module,
       completed: true,

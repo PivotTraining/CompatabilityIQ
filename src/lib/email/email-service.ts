@@ -83,6 +83,24 @@ async function sendViaResend(
 }
 
 // ═══════════════════════════════════════════
+// Templated email sender (used by triggers)
+// ═══════════════════════════════════════════
+
+export async function sendTemplatedEmail(
+  to: string,
+  subject: string,
+  htmlContent: string
+): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  try {
+    return await sendEmail(to, subject, htmlContent)
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err)
+    console.error('[EmailService] sendTemplatedEmail error:', message)
+    return { success: false, error: message }
+  }
+}
+
+// ═══════════════════════════════════════════
 // Helper: resolve user email from Supabase auth
 // ═══════════════════════════════════════════
 

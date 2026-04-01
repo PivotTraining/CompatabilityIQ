@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { NextResponse } from 'next/server'
 import { getSupabaseServerClient } from '@/lib/supabase/server'
+import { triggerWelcomeEmail } from '@/lib/email/triggers'
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url)
@@ -32,11 +33,18 @@ export async function GET(request: Request) {
         .eq('id', user.id)
         .single()
 
-      if (profile?.onboarding_complete) {
-        return NextResponse.redirect(`${origin}/app/assessment`)
-      } else {
+      // Send welcome email to new users (those who haven't completed onboarding)
+      if (!profile?.onboarding_complete) {
+        triggerWelcomeEmail(
+          user.id,
+          user.email ?? '',
+          profile?.display_name?.split(' ')[0] || 'there'
+        ).catch((err) => console.error('[AuthCallback] Welcome email error:', err))
+
         return NextResponse.redirect(`${origin}/app/onboarding`)
       }
+
+      return NextResponse.redirect(`${origin}/app/assessment`)
     }
 
     // Fallback: send to onboarding

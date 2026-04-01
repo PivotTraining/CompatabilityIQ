@@ -325,6 +325,29 @@ export default function NotificationPreferencesPage() {
         {saving ? 'Saving...' : 'Save Preferences'}
       </button>
 
+      {/* ── Data & Privacy Link ────────────── */}
+      <section style={{ marginTop: '16px' }}>
+        <a
+          href="/app/settings/data"
+          style={{
+            display: 'block',
+            backgroundColor: 'rgba(255, 255, 255, 0.03)',
+            borderRadius: '12px',
+            padding: '16px 20px',
+            border: '1px solid rgba(255, 255, 255, 0.06)',
+            textDecoration: 'none',
+            transition: 'background-color 0.15s',
+          }}
+        >
+          <p style={{ margin: '0 0 4px', fontSize: '15px', fontWeight: '600', color: '#f3f4f6' }}>
+            Data & Privacy
+          </p>
+          <p style={{ margin: 0, fontSize: '13px', color: '#6b7280' }}>
+            Manage your data, export, or delete your account
+          </p>
+        </a>
+      </section>
+
       {/* ── Toast ─────────────────────────── */}
       {toast && (
         <div

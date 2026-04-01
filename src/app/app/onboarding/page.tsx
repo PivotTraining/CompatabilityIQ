@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context'
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
-import { ArrowRight, ArrowLeft, Check, Heart, Brain } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Check, Heart, Brain, ShieldAlert } from 'lucide-react'
 import type {
   GenderIdentity,
   SexualOrientation,
@@ -105,8 +105,21 @@ export default function OnboardingPage() {
   const STEPS = mode === 'self_discovery' ? SELF_DISCOVERY_STEPS : DATING_STEPS
   const TOTAL_STEPS = STEPS.length
 
+  // ─── Age Gate ────────────────────────────────────────
+  const isUnderage = (() => {
+    if (!dateOfBirth) return false
+    const dob = new Date(dateOfBirth)
+    const today = new Date()
+    let age = today.getFullYear() - dob.getFullYear()
+    const monthDiff = today.getMonth() - dob.getMonth()
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+      age--
+    }
+    return age < 18
+  })()
+
   // ─── Validation ──────────────────────────────────────
-  const isStep1Valid = firstName.trim() && dateOfBirth && locationCity.trim() && locationState
+  const isStep1Valid = firstName.trim() && dateOfBirth && !isUnderage && locationCity.trim() && locationState
 
   // For self_discovery mode, only gender + orientation (no interested_in)
   const isStep2ValidDating = genderIdentity && sexualOrientation && interestedIn
@@ -397,7 +410,21 @@ export default function OnboardingPage() {
                 className="w-full px-4 py-2.5 rounded-xl border text-sm outline-none transition-colors focus:border-[var(--border-focus)]"
                 style={{ background: 'var(--bg-card)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
               />
-              <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>You must be 18 or older</p>
+              {isUnderage ? (
+                <div className="flex items-start gap-2 mt-2 p-3 rounded-xl" style={{ background: 'rgba(239,68,68,0.1)' }}>
+                  <ShieldAlert className="w-5 h-5 flex-shrink-0 text-red-500 mt-0.5" />
+                  <div>
+                    <p className="text-sm text-red-500 font-semibold">
+                      You must be 18 or older to use CompatibleIQ
+                    </p>
+                    <p className="text-xs text-red-400 mt-0.5">
+                      Please come back when you&apos;re eligible!
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>You must be 18 or older</p>
+              )}
             </div>
 
             <div>

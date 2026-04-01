@@ -48,6 +48,10 @@ export type NotificationPreference = Tables['notification_preferences']['Row']
 export type SelfDiscoveryReport = Tables['self_discovery_reports']['Row']
 export type SelfDiscoveryReportInsert = Tables['self_discovery_reports']['Insert']
 
+export type Referral = Tables['referrals']['Row']
+export type ReferralInsert = Tables['referrals']['Insert']
+export type ReferralUpdate = Tables['referrals']['Update']
+
 // ═══════════════════════════════════════════
 // Convenience Aliases — Enums
 // ═══════════════════════════════════════════
@@ -70,3 +74,5 @@ export type NotificationType = Enums['notification_type']
 export type DimensionId = 'values' | 'attachment' | 'communication' | 'emotional_intelligence' | 'lifestyle' | 'how_you_love'
 
 export type VerificationStatus = 'unverified' | 'pending' | 'verified' | 'rejected'
+
+export type ReferralStatus = 'pending' | 'signed_up' | 'completed' | 'rewarded'

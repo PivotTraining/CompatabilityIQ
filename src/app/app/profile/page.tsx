@@ -843,6 +843,32 @@ export default function ProfilePage() {
         </div>
       </Link>
 
+      {/* ── Invite Friends CTA ── */}
+      <Link
+        href="/app/referrals"
+        className="flex items-center gap-3 p-4 rounded-2xl border transition-all hover:opacity-90"
+        style={{
+          background: 'linear-gradient(135deg, rgba(123,104,181,0.15), rgba(219,112,147,0.15))',
+          borderColor: 'rgba(123,104,181,0.3)',
+        }}
+      >
+        <div
+          className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+          style={{ background: 'rgba(123,104,181,0.2)' }}
+        >
+          <Sparkles className="w-5 h-5" style={{ color: 'var(--ciq-purple)' }} />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+            Invite Friends, Get Rewards
+          </p>
+          <p className="text-[10px]" style={{ color: 'var(--text-muted)' }}>
+            Both of you earn a free Resonance Report
+          </p>
+        </div>
+        <ChevronRight className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--text-muted)' }} />
+      </Link>
+
       {/* ── Settings Section ── */}
       <div
         className="rounded-2xl border overflow-hidden"

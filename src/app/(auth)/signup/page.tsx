@@ -1,9 +1,9 @@
 // @ts-nocheck
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
 import { ArrowRight, Eye, EyeOff } from 'lucide-react'
 
@@ -25,9 +25,24 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
+  const [ageConfirmed, setAgeConfirmed] = useState(false)
   const [error, setError] = useState('')
+  const [refCode, setRefCode] = useState<string | null>(null)
   const router = useRouter()
+  const searchParams = useSearchParams()
   const supabase = getSupabaseBrowserClient()
+
+  // Capture referral code from URL
+  useEffect(() => {
+    const ref = searchParams.get('ref')
+    if (ref) {
+      setRefCode(ref)
+      sessionStorage.setItem('ciq_ref_code', ref)
+    } else {
+      const stored = sessionStorage.getItem('ciq_ref_code')
+      if (stored) setRefCode(stored)
+    }
+  }, [searchParams])
 
   const handleGoogleSignUp = async () => {
     if (!supabase) {
@@ -37,10 +52,14 @@ export default function SignupPage() {
     setGoogleLoading(true)
     setError('')
 
+    const redirectUrl = refCode
+      ? `${window.location.origin}/api/auth/callback?ref=${refCode}`
+      : `${window.location.origin}/api/auth/callback`
+
     const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/api/auth/callback`,
+        redirectTo: redirectUrl,
       },
     })
 
@@ -219,9 +238,25 @@ export default function SignupPage() {
             <p className="text-sm text-red-500">{error}</p>
           )}
 
+          <label className="flex items-start gap-2.5 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={ageConfirmed}
+              onChange={(e) => setAgeConfirmed(e.target.checked)}
+              className="mt-0.5 w-4 h-4 rounded border-gray-600 accent-[var(--ciq-purple)]"
+            />
+            <span className="text-sm text-gray-400">
+              I confirm I am 18 years or older
+            </span>
+          </label>
+
+          <p className="text-xs text-gray-400 leading-relaxed">
+            You must be 18 or older to use CompatibleIQ. By signing up, you confirm you meet this requirement.
+          </p>
+
           <button
             type="submit"
-            disabled={loading || googleLoading || !email || !password || !confirmPassword}
+            disabled={loading || googleLoading || !email || !password || !confirmPassword || !ageConfirmed}
             className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 disabled:opacity-50"
             style={{ background: 'var(--ciq-purple)' }}
           >

@@ -517,6 +517,54 @@ export type Database = {
           },
         ]
       }
+      referrals: {
+        Row: {
+          id: string
+          referrer_id: string
+          referee_id: string | null
+          code: string
+          status: "pending" | "signed_up" | "completed" | "rewarded"
+          reward_claimed: boolean
+          created_at: string
+          converted_at: string | null
+        }
+        Insert: {
+          id?: string
+          referrer_id: string
+          referee_id?: string | null
+          code: string
+          status?: "pending" | "signed_up" | "completed" | "rewarded"
+          reward_claimed?: boolean
+          created_at?: string
+          converted_at?: string | null
+        }
+        Update: {
+          id?: string
+          referrer_id?: string
+          referee_id?: string | null
+          code?: string
+          status?: "pending" | "signed_up" | "completed" | "rewarded"
+          reward_claimed?: boolean
+          created_at?: string
+          converted_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "referrals_referrer_id_fkey"
+            columns: ["referrer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "referrals_referee_id_fkey"
+            columns: ["referee_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       self_discovery_reports: {
         Row: {
           generated_at: string
