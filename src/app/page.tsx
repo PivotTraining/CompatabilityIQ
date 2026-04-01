@@ -127,7 +127,7 @@ export default function LandingPage() {
       <nav className="fixed top-0 left-0 right-0 z-40 bg-[#0A0A0B]/80 backdrop-blur-xl border-b border-white/5">
         <div className="flex items-center justify-between px-4 sm:px-6 lg:px-12 py-4 max-w-7xl mx-auto">
           <div className="flex items-center gap-2">
-            <Logo className="h-14 sm:h-20 w-auto text-white" />
+            <Logo className="h-28 sm:h-40 w-auto text-white" />
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
             <a href="#dimensions" className="hover:text-white transition-colors">Dimensions</a>
