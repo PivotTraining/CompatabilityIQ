@@ -3,6 +3,7 @@
 // Creates a Stripe Checkout Session for one-time purchases or subscriptions
 
 import { NextRequest, NextResponse } from 'next/server'
+import Stripe from 'stripe'
 import { stripe } from '@/lib/stripe/client'
 import {
   STRIPE_PRICES,
@@ -96,7 +97,7 @@ export async function POST(request: NextRequest) {
     const isSubscription = SUBSCRIPTION_PRICES.has(priceId as StripePriceId)
     const origin = request.headers.get('origin') || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
-    const sessionParams: Parameters<typeof stripe.checkout.sessions.create>[0] = {
+    const sessionParams: Stripe.Checkout.SessionCreateParams = {
       customer: stripeCustomerId,
       mode: isSubscription ? 'subscription' : 'payment',
       allow_promotion_codes: true,

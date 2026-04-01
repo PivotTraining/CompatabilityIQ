@@ -328,13 +328,13 @@ function buildDimensionSummaries(
 
 function computeDatingReadiness(dimensions: Map<DimensionId, DimensionScore>): number {
   // Weighted composite: attachment security and EQ matter most
-  const weights: Record<DimensionId, number> = {
+  const weights: Partial<Record<DimensionId, number>> = {
     values: 0.12,
     attachment: 0.28,
     communication: 0.20,
     emotional_intelligence: 0.22,
     lifestyle_ambition: 0.08,
-    how_you_loves: 0.10,
+    how_you_love: 0.10,
   }
 
   let totalScore = 0

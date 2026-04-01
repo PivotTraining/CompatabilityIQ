@@ -66,7 +66,7 @@ export default function NotificationBell() {
   const [loading, setLoading] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  const supabase = getSupabaseBrowserClient()
+  const supabase = getSupabaseBrowserClient()!
 
   // ─── Fetch notifications ───────────────
   const fetchNotifications = useCallback(async () => {

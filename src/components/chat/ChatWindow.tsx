@@ -66,7 +66,7 @@ export default function ChatWindow({
 
   // ── Get current user ──
   useEffect(() => {
-    const supabase = getSupabaseBrowserClient()
+    const supabase = getSupabaseBrowserClient()!
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (user) setCurrentUserId(user.id)
     })

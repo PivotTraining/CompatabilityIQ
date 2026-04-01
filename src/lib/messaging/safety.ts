@@ -13,7 +13,7 @@ export async function reportUser(
   reason: ReportReason,
   details?: string
 ): Promise<void> {
-  const supabase = getSupabaseBrowserClient()
+  const supabase = getSupabaseBrowserClient()!
 
   const {
     data: { user },
@@ -38,7 +38,7 @@ export async function reportUser(
 // ─────────────────────────────────────────────
 
 export async function blockUser(blockedUserId: string): Promise<void> {
-  const supabase = getSupabaseBrowserClient()
+  const supabase = getSupabaseBrowserClient()!
 
   const {
     data: { user },
@@ -86,7 +86,7 @@ export async function blockUser(blockedUserId: string): Promise<void> {
 // ─────────────────────────────────────────────
 
 export async function unblockUser(blockedUserId: string): Promise<void> {
-  const supabase = getSupabaseBrowserClient()
+  const supabase = getSupabaseBrowserClient()!
 
   const {
     data: { user },
@@ -113,7 +113,7 @@ export async function isBlocked(
   userId: string,
   otherUserId: string
 ): Promise<boolean> {
-  const supabase = getSupabaseBrowserClient()
+  const supabase = getSupabaseBrowserClient()!
 
   // Check both directions: either user could have blocked the other
   const { data, error } = await supabase
@@ -137,7 +137,7 @@ export async function isBlocked(
 // ─────────────────────────────────────────────
 
 export async function getBlockedUsers(): Promise<string[]> {
-  const supabase = getSupabaseBrowserClient()
+  const supabase = getSupabaseBrowserClient()!
 
   const {
     data: { user },

@@ -154,7 +154,7 @@ async function fetchMatchData(
 }
 
 async function fetchUserProfile(
-  supabase: ReturnType<typeof createClient>,
+  supabase: ReturnType<typeof createClient<any>>,
   userId: string
 ): Promise<ReportUserProfile> {
   const [profileResult, scoresResult] = await Promise.all([
@@ -216,7 +216,7 @@ function generateDimensionReports(
   userB: ReportUserProfile
 ): DimensionReport[] {
   return dimensionScores.map((dimCompat) => {
-    const dimId = dimCompat.dimensionId
+    const dimId = dimCompat.dimensionId as DimensionId
     const score = dimCompat.score
     const indicator = getMatchIndicator(score)
 
@@ -399,13 +399,14 @@ function generateStrengths(
   userB: ReportUserProfile
 ): StrengthNarrative[] {
   return topDimensions.map((dim) => {
-    const templates = STRENGTH_NARRATIVES[dim.dimensionId] || []
+    const dimId = dim.dimensionId as DimensionId
+    const templates = STRENGTH_NARRATIVES[dimId] || []
     const narrative = templates.length > 0
       ? pickVariant(templates, dim.score)
       : `Your ${dim.dimensionName} compatibility (${dim.score}/100) is a genuine strength in this relationship.`
 
     return {
-      dimensionId: dim.dimensionId,
+      dimensionId: dimId,
       dimensionName: dim.dimensionName,
       score: dim.score,
       narrative,
@@ -423,13 +424,14 @@ function generateFrictionPoints(
   userB: ReportUserProfile
 ): FrictionNarrative[] {
   return bottomDimensions.map((dim) => {
-    const templates = FRICTION_NARRATIVES[dim.dimensionId] || []
+    const dimId = dim.dimensionId as DimensionId
+    const templates = FRICTION_NARRATIVES[dimId] || []
     const narrative = templates.length > 0
       ? pickVariant(templates, dim.score)
       : `Your ${dim.dimensionName} compatibility (${dim.score}/100) is an area that will benefit from intentional attention and honest conversation.`
 
     return {
-      dimensionId: dim.dimensionId,
+      dimensionId: dimId,
       dimensionName: dim.dimensionName,
       score: dim.score,
       narrative,
@@ -461,7 +463,8 @@ function generateConversationStarters(
   for (const dim of targetDimensions) {
     if (starters.length >= 5) break
 
-    const dimStarters = CONVERSATION_STARTERS[dim.dimensionId] || []
+    const dimId = dim.dimensionId as DimensionId
+    const dimStarters = CONVERSATION_STARTERS[dimId] || []
     if (dimStarters.length === 0) continue
 
     // Pick a starter that hasn't been used yet
@@ -471,7 +474,7 @@ function generateConversationStarters(
     const range = getScoreRange(dim.score)
     const scoreLabel = SCORE_LABELS[range] || 'moderately'
 
-    const userADim = findDimensionScore(userA.dimensionScores, dim.dimensionId)
+    const userADim = findDimensionScore(userA.dimensionScores, dimId)
     const topSub = userADim ? formatSubScaleName(getTopSubScale(userADim.subScaleScores)) : dim.dimensionName
 
     const filled = template

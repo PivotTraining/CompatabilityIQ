@@ -16,7 +16,7 @@ export async function sendMessage(
   matchId: string,
   content: string
 ): Promise<Message | null> {
-  const supabase = getSupabaseBrowserClient()
+  const supabase = getSupabaseBrowserClient()!
 
   const {
     data: { user },
@@ -61,7 +61,7 @@ export async function getMessages(
   limit: number = DEFAULT_PAGE_SIZE,
   before?: string
 ): Promise<Message[]> {
-  const supabase = getSupabaseBrowserClient()
+  const supabase = getSupabaseBrowserClient()!
 
   let query = supabase
     .from('messages')
@@ -90,7 +90,7 @@ export async function getMessages(
 // ─────────────────────────────────────────────
 
 export async function markAsRead(matchId: string): Promise<void> {
-  const supabase = getSupabaseBrowserClient()
+  const supabase = getSupabaseBrowserClient()!
 
   const {
     data: { user },
@@ -114,7 +114,7 @@ export async function markAsRead(matchId: string): Promise<void> {
 // ─────────────────────────────────────────────
 
 export async function getUnreadCount(userId: string): Promise<number> {
-  const supabase = getSupabaseBrowserClient()
+  const supabase = getSupabaseBrowserClient()!
 
   // Get all active matches for the user
   const { data: matches, error: matchError } = await supabase
@@ -150,7 +150,7 @@ export function subscribeToMessages(
   matchId: string,
   onNewMessage: (message: Message) => void
 ) {
-  const supabase = getSupabaseBrowserClient()
+  const supabase = getSupabaseBrowserClient()!
 
   const channel = supabase
     .channel(`messages:${matchId}`)
@@ -180,7 +180,7 @@ export function subscribeToMessages(
 // ─────────────────────────────────────────────
 
 export async function getMessageCount(matchId: string): Promise<number> {
-  const supabase = getSupabaseBrowserClient()
+  const supabase = getSupabaseBrowserClient()!
 
   const { count, error } = await supabase
     .from('messages')
