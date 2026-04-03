@@ -191,14 +191,14 @@ export default function SocialProof() {
               backgroundImage: 'linear-gradient(135deg, #9B8DD0, #C25B8A)',
             }}
           >
-            Credibility
+            The Research
           </p>
           <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-4">
-            Built on decades of relationship science
+            Based on attachment, communication, values, and emotional intelligence
           </h2>
           <p className="text-gray-300 font-medium max-w-2xl mx-auto text-base sm:text-lg">
             Every dimension is grounded in peer-reviewed research from the
-            scientists who defined modern relationship psychology.
+            scientists who defined how real relationships work.
           </p>
         </div>
 

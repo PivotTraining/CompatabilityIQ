@@ -27,13 +27,13 @@ import FoundingCounter from '@/components/pricing/FoundingCounter'
 import Logo from '@/components/Logo'
 
 export const metadata: Metadata = {
-  title: 'CompatibleIQ — Serious Dating, Backed by Science',
+  title: 'CompatibleIQ — Stop Swiping. Start Matching on What Matters.',
   description:
-    'The serious dating app for singles ready for a real relationship. Free 6-dimension psychometric assessment. Real compatibility scores before your first date. No swiping, no hookups — just science.',
+    'Real compatibility before the first date. CompatibleIQ helps serious singles find better-fit matches using science-backed compatibility data across values, attachment, communication, and more. Free to assess and match.',
   openGraph: {
-    title: 'CompatibleIQ — Serious Dating, Backed by Science',
+    title: 'CompatibleIQ — Stop Swiping. Start Matching on What Matters.',
     description:
-      'For singles who want something real. 6 science-backed dimensions. One compatibility score. The dating app that measures real compatibility.',
+      'Real compatibility before the first date. For serious singles tired of dead-end matches. See where you align before you invest your time.',
     url: 'https://compatibleiq.com',
   },
   alternates: {
@@ -144,7 +144,7 @@ export default function LandingPage() {
               className="px-5 py-2.5 text-sm font-semibold rounded-xl text-white hover:opacity-90 transition-all shadow-lg shadow-purple-500/20"
               style={{ background: 'linear-gradient(135deg, #7B68B5 0%, #9B8DD0 100%)' }}
             >
-              Get Started Free
+              Find Better Matches
             </Link>
           </div>
         </div>
@@ -165,21 +165,21 @@ export default function LandingPage() {
               style={{ background: 'rgba(123,104,181,0.1)', color: '#9B8DD0' }}
             >
               <Sparkles className="w-3.5 h-3.5" />
-              Science-backed compatibility scoring
+              Compatibility-based dating
             </div>
 
             <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
-              The last dating app{' '}
+              Stop swiping.{' '}
               <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #9B8DD0 0%, #C25B8A 50%, #E8735A 100%)' }}>
-                you&apos;ll need.
+                Start matching on what actually matters.
               </span>
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 font-medium leading-relaxed mb-4 max-w-2xl mx-auto">
-              Not another swipe-right app. CompatibleIQ is for people who want something real.
+              Know your fit before you invest your time. CompatibleIQ shows you where you align across values, attachment, communication, and emotional intelligence — before the first date.
             </p>
             <p className="text-sm sm:text-base text-gray-400 font-medium leading-relaxed mb-10 max-w-xl mx-auto">
-              6 psychometric dimensions. One compatibility score. For singles ready for a real relationship — not hookups, not games.
+              For serious singles done wasting energy on the wrong matches.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -188,7 +188,7 @@ export default function LandingPage() {
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-2xl text-white hover:shadow-xl hover:shadow-purple-500/25 transition-all"
                 style={{ background: 'linear-gradient(135deg, #7B68B5 0%, #9B8DD0 100%)' }}
               >
-                Take the Assessment — Free
+                See Your Real Compatibility
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
@@ -211,6 +211,10 @@ export default function LandingPage() {
               <span className="flex items-center gap-1.5">
                 <Check className="w-4 h-4 text-emerald-500" />
                 No credit card
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Check className="w-4 h-4 text-emerald-500" />
+                Works on phone & desktop
               </span>
             </div>
           </div>
@@ -272,23 +276,63 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Stats strip */}
+      {/* Value props strip */}
       <section className="border-y border-white/5 bg-white/[0.02]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 text-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 flex flex-wrap items-center justify-center gap-4 sm:gap-10">
           {[
-            { value: '7-10 min', label: 'To complete all 6 assessments' },
-            { value: '6', label: 'Science-backed dimensions' },
-            { value: '100%', label: 'Free to assess & match' },
-            { value: '0', label: 'Swipes required', highlight: true },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <p className={`text-3xl font-bold ${stat.highlight ? 'bg-clip-text text-transparent' : 'text-white'}`}
-                style={stat.highlight ? { backgroundImage: 'linear-gradient(135deg, #9B8DD0, #C25B8A)' } : undefined}>
-                {stat.value}
-              </p>
-              <p className="text-xs text-gray-500 font-medium mt-1">{stat.label}</p>
-            </div>
+            'No swiping',
+            'No credit card required',
+            'Match & message free',
+            'Built on established relationship research',
+          ].map((text) => (
+            <span key={text} className="flex items-center gap-2 text-sm text-gray-300 font-medium">
+              <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+              {text}
+            </span>
           ))}
+        </div>
+      </section>
+
+      {/* Why Switch — Enemy framing */}
+      <section className="py-24 lg:py-32 relative">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div data-animate="fade-up">
+              <p className="text-sm font-semibold mb-3 tracking-wide uppercase bg-clip-text text-transparent"
+                style={{ backgroundImage: 'linear-gradient(135deg, #9B8DD0, #C25B8A)' }}>
+                Sound Familiar?
+              </p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight">
+                Still getting matches, but not getting anywhere?
+              </h2>
+              <p className="text-gray-300 font-medium leading-relaxed text-base sm:text-lg">
+                You&apos;re not crazy. You&apos;re probably just matching on the wrong things. On most apps, you talk first and find out later that your values, communication style, emotional depth, or life rhythm are completely off. CompatibleIQ flips that. You see your fit before you waste your time.
+              </p>
+            </div>
+
+            <div className="space-y-4" data-animate="fade-up" data-delay="150">
+              {[
+                'See real compatibility before the first date',
+                'Avoid dead-end conversations with the wrong people',
+                'Match on substance, not just surface attraction',
+                'Get a deeper breakdown when a match is worth exploring',
+              ].map((text) => (
+                <div key={text} className="flex items-start gap-3 rounded-xl p-4 bg-white/[0.03] border border-white/5">
+                  <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                  <p className="text-gray-200 font-medium text-sm">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-16 rounded-2xl p-6 lg:p-8 border border-white/5 bg-white/[0.02] text-center" data-animate="fade-up" data-delay="200">
+            <p className="text-lg sm:text-xl font-bold text-white mb-2">
+              Tinder helps you meet more people. CompatibleIQ helps you meet <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #9B8DD0, #C25B8A)' }}>better-fit people.</span>
+            </p>
+            <p className="text-sm text-gray-400 font-medium max-w-2xl mx-auto">
+              Because being attracted is easy. Being aligned is rare.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -303,8 +347,8 @@ export default function LandingPage() {
               style={{ backgroundImage: 'linear-gradient(135deg, #9B8DD0, #C25B8A)' }}>
               How It Works
             </p>
-            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-4">Three steps to clarity</h2>
-            <p className="text-gray-300 font-medium max-w-2xl mx-auto text-base sm:text-lg">No algorithms guessing what you want. No swiping through strangers. Just science, applied to finding a relationship that lasts.</p>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-4">Three steps. Less chaos. Better matches.</h2>
+            <p className="text-gray-300 font-medium max-w-2xl mx-auto text-base sm:text-lg">No algorithms guessing what you want. No swiping through strangers. Just science, applied to finding someone who actually fits your life.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8" data-animate="fade-up" data-delay="100">
@@ -312,22 +356,22 @@ export default function LandingPage() {
               {
                 step: '01',
                 icon: BarChart3,
-                title: 'Assess',
-                desc: 'Complete 6 short psychometric assessments across the dimensions that predict real compatibility. Takes 7-10 minutes total.',
+                title: 'Take the assessment',
+                desc: 'Answer a short, science-backed compatibility assessment in about 7-10 minutes. No trick questions, no vague prompts — just the stuff that actually matters.',
                 gradient: 'from-purple-500/20 to-purple-500/5',
               },
               {
                 step: '02',
                 icon: Users,
-                title: 'Profile',
-                desc: 'Get your Compatibility Intelligence profile — a multi-dimensional map of how you connect, communicate, and love.',
+                title: 'Know your pattern',
+                desc: 'See your profile across the six dimensions that shape real relationship fit — values, attachment, communication, emotional intelligence, lifestyle, and love expression.',
                 gradient: 'from-pink-500/20 to-pink-500/5',
               },
               {
                 step: '03',
                 icon: Zap,
-                title: 'Match',
-                desc: 'See your scored matches instantly. Real names, real scores, real compatibility data — before you ever say hello.',
+                title: 'Match smarter',
+                desc: 'View your compatibility scores before you invest your time, attention, and effort. No guessing. No games. Just clarity.',
                 gradient: 'from-orange-500/20 to-orange-500/5',
               },
             ].map((item, i) => (
@@ -393,7 +437,7 @@ export default function LandingPage() {
               className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold rounded-2xl text-white hover:shadow-xl hover:shadow-purple-500/25 transition-all"
               style={{ background: 'linear-gradient(135deg, #7B68B5 0%, #9B8DD0 100%)' }}
             >
-              Start Your Assessment — Free
+              Take the 7-Minute Assessment
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -412,10 +456,10 @@ export default function LandingPage() {
                 Built on Research
               </p>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight">
-                This isn&apos;t a quiz.<br />It&apos;s psychometric science.
+                Built on real relationship science, not swipe roulette.
               </h2>
               <p className="text-gray-300 font-medium leading-relaxed mb-8 text-base sm:text-lg">
-                Every dimension in CompatibleIQ is grounded in published research from the scientists who defined how we understand human connection.
+                CompatibleIQ uses established research in attachment, communication, emotional intelligence, and relationship dynamics to help you match with more clarity and less guesswork. More than chemistry. More than vibes.
               </p>
 
               <div className="space-y-6">
@@ -509,16 +553,16 @@ export default function LandingPage() {
                   <Brain className="w-3.5 h-3.5" />
                   Self-Discovery Mode
                 </div>
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3">Not ready to date?</h3>
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3">Not ready to date? Start with yourself.</h3>
                 <p className="text-gray-300 font-medium leading-relaxed mb-6">
-                  Take the same science-backed assessments without entering the dating pool. Discover your attachment style, communication patterns, and relationship blind spots — on your own terms.
+                  Learn your relationship patterns, blind spots, and strengths before your next connection. Take the same science-backed assessments without entering the dating pool. Know yourself first — date better later.
                 </p>
                 <ul className="space-y-2.5 mb-8">
                   {[
-                    'Personal compatibility profile',
-                    'Attachment style deep dive',
-                    'Dating readiness insights',
-                    'Shareable CIQ personality card',
+                    'Full compatibility profile without dating',
+                    'Attachment style & communication deep dive',
+                    'Know your blind spots before your next relationship',
+                    'Switch to dating mode anytime',
                   ].map((text) => (
                     <li key={text} className="flex items-center gap-2.5 text-sm text-gray-300 font-medium">
                       <Check className="w-4 h-4 flex-shrink-0 text-emerald-500" />
@@ -554,9 +598,9 @@ export default function LandingPage() {
               style={{ backgroundImage: 'linear-gradient(135deg, #9B8DD0, #C25B8A)' }}>
               Pricing
             </p>
-            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-4">Matching is free. Insight is premium.</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-4">Matching is free. Clarity is optional.</h2>
             <p className="text-gray-300 font-medium max-w-2xl mx-auto text-base sm:text-lg">
-              Assess, match, and message for free. Unlock deeper compatibility intelligence when you&apos;re ready.
+              Assess, match, and message for free. Upgrade only when you want a deeper breakdown of a promising match.
             </p>
           </div>
 
@@ -568,7 +612,7 @@ export default function LandingPage() {
                 <span className="text-4xl font-bold text-white">$0</span>
                 <span className="text-sm text-gray-500">forever</span>
               </div>
-              <p className="text-sm text-gray-400 font-medium mb-6">Everything you need to find compatible matches. Seriously.</p>
+              <p className="text-sm text-gray-400 font-medium mb-6">Everything you need to meet better-fit people.</p>
               <ul className="space-y-3 mb-8">
                 {[
                   'All 6 core assessments',
@@ -584,7 +628,7 @@ export default function LandingPage() {
                 ))}
               </ul>
               <Link href="/signup" className="block w-full py-3.5 rounded-xl text-sm font-semibold border border-white/10 text-gray-300 hover:bg-white/5 transition-all text-center">
-                Get Started Free
+                Find Better Matches Free
               </Link>
             </div>
 
@@ -595,7 +639,7 @@ export default function LandingPage() {
                 <span className="text-4xl font-bold text-white">$4.99</span>
                 <span className="text-sm text-gray-500">per match</span>
               </div>
-              <p className="text-sm text-gray-400 font-medium mb-6">The full compatibility deep dive for one match. Know exactly where you align.</p>
+              <p className="text-sm text-gray-400 font-medium mb-6">A deeper read on one match. Get the full picture before the first date.</p>
               <ul className="space-y-3 mb-8">
                 {[
                   'Dimension-by-dimension breakdown',
@@ -626,8 +670,8 @@ export default function LandingPage() {
                 <span className="text-4xl font-bold text-white">$14.99</span>
                 <span className="text-sm text-gray-500">/mo</span>
               </div>
-              <p className="text-xs text-gray-500 mb-2">3 reports and you&apos;ve already paid for this</p>
-              <p className="text-sm text-gray-400 font-medium mb-6">Unlimited reports, priority matching, and the tools serious daters actually want.</p>
+              <p className="text-xs text-gray-500 mb-2">CIQ Pro pays for itself after 3 reports</p>
+              <p className="text-sm text-gray-400 font-medium mb-6">Unlimited deep-dive reports for serious daters who want the full picture.</p>
               <ul className="space-y-3 mb-8">
                 {[
                   { text: 'Unlimited Resonance Reports', icon: Sparkles },
@@ -708,19 +752,19 @@ export default function LandingPage() {
 
             <div className="relative z-10">
               <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 text-white leading-tight">
-                7-10 minutes now.<br />Zero bad dates later.
+                Stop guessing.<br />Start free.
               </h2>
               <p className="text-lg mb-10 max-w-lg mx-auto text-white/70">
-                Your free assessment is waiting. Six dimensions, no credit card, and the kind of clarity you wish you had three relationships ago.
+                7-10 minutes now. Better matches from here on out. The kind of clarity you wish you had three relationships ago.
               </p>
               <Link
                 href="/signup"
                 className="inline-flex items-center gap-2 px-10 py-4 text-base font-semibold rounded-2xl bg-white hover:shadow-2xl transition-all text-[#7B68B5]"
               >
-                Start Free Assessment
+                See Your Real Compatibility
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <p className="mt-6 text-sm text-white/50">Free forever for 6 core assessments. No credit card needed.</p>
+              <p className="mt-6 text-sm text-white/50">Free forever for all 6 core assessments. No credit card needed.</p>
             </div>
           </div>
         </div>
@@ -733,7 +777,7 @@ export default function LandingPage() {
             <div className="md:col-span-2">
               <Logo className="h-12 w-auto opacity-60 mb-4 text-white" showTagline={false} />
               <p className="text-sm text-gray-400 font-medium max-w-sm leading-relaxed">
-                The serious dating platform that scores real compatibility across 6 science-backed dimensions. For singles who want a real relationship. Stop guessing. Start knowing.
+                The compatibility-based dating platform for serious singles. Stop swiping through people who were never a real fit. See where you align before you invest your time.
               </p>
             </div>
             <div>
