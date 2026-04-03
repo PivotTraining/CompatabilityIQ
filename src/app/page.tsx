@@ -178,7 +178,7 @@ export default function LandingPage() {
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 font-medium leading-relaxed mb-4 max-w-2xl mx-auto">
               Know your fit before you invest your time. CompatibleIQ shows you where you align across values, attachment, communication, and emotional intelligence — before the first date.
             </p>
-            <p className="text-sm sm:text-base text-gray-400 font-medium leading-relaxed mb-10 max-w-xl mx-auto">
+            <p className="text-sm sm:text-base text-gray-200 font-medium leading-relaxed mb-10 max-w-xl mx-auto">
               For serious singles done wasting energy on the wrong matches.
             </p>
 
@@ -232,9 +232,9 @@ export default function LandingPage() {
                     <Users className="w-8 h-8 text-purple-400" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500 mb-1">Your CIQ Profile</p>
+                    <p className="text-sm text-gray-400 mb-1">Your CIQ Profile</p>
                     <p className="text-2xl font-bold text-white">6 Dimensions</p>
-                    <p className="text-sm text-gray-500 mt-1">Measured & scored</p>
+                    <p className="text-sm text-gray-400 mt-1">Measured & scored</p>
                   </div>
                 </div>
 
@@ -244,7 +244,7 @@ export default function LandingPage() {
                     <div className="absolute inset-2 rounded-full" style={{ background: 'conic-gradient(#7B68B5 0deg, #C25B8A 120deg, #E8735A 240deg, #7B68B5 360deg)', opacity: 0.15 }} />
                     <div className="relative">
                       <p className="text-3xl font-bold text-white">84</p>
-                      <p className="text-xs text-gray-500">CIS Score</p>
+                      <p className="text-xs text-gray-400">CIS Score</p>
                     </div>
                   </div>
                   <p className="text-sm text-emerald-400 font-medium">Highly Compatible</p>
@@ -252,7 +252,7 @@ export default function LandingPage() {
 
                 {/* Right: Match preview */}
                 <div className="space-y-3">
-                  <p className="text-sm text-gray-500">Dimension Breakdown</p>
+                  <p className="text-sm text-gray-400">Dimension Breakdown</p>
                   {[
                     { name: 'Values', score: 92, color: '#E8735A' },
                     { name: 'Attachment', score: 87, color: '#7B68B5' },
@@ -262,7 +262,7 @@ export default function LandingPage() {
                     { name: 'Love Expression', score: 79, color: '#C25B8A' },
                   ].map((d) => (
                     <div key={d.name} className="flex items-center gap-3">
-                      <span className="text-xs text-gray-500 w-24 text-right">{d.name}</span>
+                      <span className="text-xs text-gray-400 w-24 text-right">{d.name}</span>
                       <div className="flex-1 h-1.5 rounded-full bg-white/5 overflow-hidden">
                         <div className="h-full rounded-full" style={{ width: `${d.score}%`, background: d.color, opacity: 0.7 }} />
                       </div>
@@ -329,7 +329,7 @@ export default function LandingPage() {
             <p className="text-lg sm:text-xl font-bold text-white mb-2">
               Tinder helps you meet more people. CompatibleIQ helps you meet <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #9B8DD0, #C25B8A)' }}>better-fit people.</span>
             </p>
-            <p className="text-sm text-gray-400 font-medium max-w-2xl mx-auto">
+            <p className="text-sm text-gray-200 font-medium max-w-2xl mx-auto">
               Because being attracted is easy. Being aligned is rare.
             </p>
           </div>
@@ -426,7 +426,7 @@ export default function LandingPage() {
                   <span className="text-[10px] font-bold text-gray-600 tracking-widest">{dim.num}</span>
                 </div>
                 <h4 className="text-base font-semibold text-white mb-2">{dim.title}</h4>
-                <p className="text-sm text-gray-400 font-medium leading-relaxed">{dim.desc}</p>
+                <p className="text-sm text-gray-200 font-medium leading-relaxed">{dim.desc}</p>
               </div>
             ))}
           </div>
@@ -490,7 +490,7 @@ export default function LandingPage() {
                     <div>
                       <p className="text-white font-semibold text-sm">{researcher.name}</p>
                       <p className="text-purple-400 text-xs font-medium mb-1">{researcher.field}</p>
-                      <p className="text-gray-400 text-sm font-medium leading-relaxed">{researcher.desc}</p>
+                      <p className="text-gray-300 text-sm font-medium leading-relaxed">{researcher.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -526,7 +526,7 @@ export default function LandingPage() {
                   </div>
                   <div>
                     <h4 className="text-white font-semibold text-sm mb-1">{item.title}</h4>
-                    <p className="text-gray-400 text-sm font-medium leading-relaxed">{item.desc}</p>
+                    <p className="text-gray-300 text-sm font-medium leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -580,7 +580,7 @@ export default function LandingPage() {
                   Know Yourself — Free
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-                <p className="mt-3 text-xs text-gray-500">Same assessments. No dating pool. Switch anytime.</p>
+                <p className="mt-3 text-xs text-gray-400">Same assessments. No dating pool. Switch anytime.</p>
               </div>
             </div>
           </div>
@@ -610,9 +610,9 @@ export default function LandingPage() {
               <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Free</p>
               <div className="flex items-baseline gap-1 mb-2">
                 <span className="text-4xl font-bold text-white">$0</span>
-                <span className="text-sm text-gray-500">forever</span>
+                <span className="text-sm text-gray-400">forever</span>
               </div>
-              <p className="text-sm text-gray-400 font-medium mb-6">Everything you need to meet better-fit people.</p>
+              <p className="text-sm text-gray-200 font-medium mb-6">Everything you need to meet better-fit people.</p>
               <ul className="space-y-3 mb-8">
                 {[
                   'All 6 core assessments',
@@ -637,9 +637,9 @@ export default function LandingPage() {
               <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Resonance Report</p>
               <div className="flex items-baseline gap-1 mb-2">
                 <span className="text-4xl font-bold text-white">$4.99</span>
-                <span className="text-sm text-gray-500">per match</span>
+                <span className="text-sm text-gray-400">per match</span>
               </div>
-              <p className="text-sm text-gray-400 font-medium mb-6">A deeper read on one match. Get the full picture before the first date.</p>
+              <p className="text-sm text-gray-200 font-medium mb-6">A deeper read on one match. Get the full picture before the first date.</p>
               <ul className="space-y-3 mb-8">
                 {[
                   'Dimension-by-dimension breakdown',
@@ -668,10 +668,10 @@ export default function LandingPage() {
               <p className="text-xs font-semibold uppercase tracking-wide mb-4 text-purple-400">CIQ Pro</p>
               <div className="flex items-baseline gap-1 mb-1">
                 <span className="text-4xl font-bold text-white">$14.99</span>
-                <span className="text-sm text-gray-500">/mo</span>
+                <span className="text-sm text-gray-400">/mo</span>
               </div>
-              <p className="text-xs text-gray-500 mb-2">CIQ Pro pays for itself after 3 reports</p>
-              <p className="text-sm text-gray-400 font-medium mb-6">Unlimited deep-dive reports for serious daters who want the full picture.</p>
+              <p className="text-xs text-gray-400 mb-2">CIQ Pro pays for itself after 3 reports</p>
+              <p className="text-sm text-gray-200 font-medium mb-6">Unlimited deep-dive reports for serious daters who want the full picture.</p>
               <ul className="space-y-3 mb-8">
                 {[
                   { text: 'Unlimited Resonance Reports', icon: Sparkles },
@@ -728,7 +728,7 @@ export default function LandingPage() {
               <details key={faq.q} className="group rounded-2xl bg-white/[0.03] border border-white/5 hover:border-white/10 transition-all">
                 <summary className="flex items-center justify-between cursor-pointer p-6 list-none [&::-webkit-details-marker]:hidden">
                   <span className="text-white font-medium text-sm pr-4">{faq.q}</span>
-                  <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0 transition-transform group-open:rotate-180" />
+                  <ChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0 transition-transform group-open:rotate-180" />
                 </summary>
                 <div className="px-6 pb-6 -mt-2">
                   <p className="text-gray-300 text-sm font-medium leading-relaxed">{faq.a}</p>
@@ -776,25 +776,25 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-10">
             <div className="md:col-span-2">
               <Logo className="h-12 w-auto opacity-60 mb-4 text-white" showTagline={false} />
-              <p className="text-sm text-gray-400 font-medium max-w-sm leading-relaxed">
+              <p className="text-sm text-gray-200 font-medium max-w-sm leading-relaxed">
                 The compatibility-based dating platform for serious singles. Stop swiping through people who were never a real fit. See where you align before you invest your time.
               </p>
             </div>
             <div>
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Product</p>
               <ul className="space-y-2.5">
-                <li><a href="#how" className="text-sm text-gray-500 hover:text-white transition-colors">How It Works</a></li>
-                <li><a href="#dimensions" className="text-sm text-gray-500 hover:text-white transition-colors">The 6 Dimensions</a></li>
-                <li><a href="#science" className="text-sm text-gray-500 hover:text-white transition-colors">The Science</a></li>
-                <li><a href="#pricing" className="text-sm text-gray-500 hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="#faq" className="text-sm text-gray-500 hover:text-white transition-colors">FAQ</a></li>
+                <li><a href="#how" className="text-sm text-gray-400 hover:text-white transition-colors">How It Works</a></li>
+                <li><a href="#dimensions" className="text-sm text-gray-400 hover:text-white transition-colors">The 6 Dimensions</a></li>
+                <li><a href="#science" className="text-sm text-gray-400 hover:text-white transition-colors">The Science</a></li>
+                <li><a href="#pricing" className="text-sm text-gray-400 hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="#faq" className="text-sm text-gray-400 hover:text-white transition-colors">FAQ</a></li>
               </ul>
             </div>
             <div>
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Legal</p>
               <ul className="space-y-2.5">
-                <li><Link href="/terms" className="text-sm text-gray-500 hover:text-white transition-colors">Terms of Service</Link></li>
-                <li><Link href="/privacy" className="text-sm text-gray-500 hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="text-sm text-gray-400 hover:text-white transition-colors">Terms of Service</Link></li>
+                <li><Link href="/privacy" className="text-sm text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
               </ul>
             </div>
           </div>

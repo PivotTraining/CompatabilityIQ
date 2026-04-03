@@ -130,7 +130,7 @@ function StatsBar() {
               {formatNumber(stat.counter.value)}
               {stat.suffix}
             </p>
-            <p className="text-xs text-gray-500 font-medium mt-1">
+            <p className="text-xs text-gray-400 font-medium mt-1">
               {stat.label}
             </p>
           </div>
@@ -243,15 +243,12 @@ export default function SocialProof() {
                   {card.badge}
                 </span>
               </div>
-              <p className="text-sm text-gray-400 font-medium leading-relaxed">
+              <p className="text-sm text-gray-300 font-medium leading-relaxed">
                 {card.description}
               </p>
             </div>
           ))}
         </div>
-
-        {/* Live stats bar */}
-        <StatsBar />
 
         {/* Trust signals strip */}
         <TrustStrip />
