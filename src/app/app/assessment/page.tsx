@@ -63,15 +63,17 @@ export default function AssessmentHub() {
           />
         </div>
 
-        {/* Profiles unlocked badge */}
+        {/* Profiles unlocked badge — links to discover */}
         {unlocked !== null && unlocked > 0 && progress < MODULE_CONFIG.length && (
-          <div
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium mt-4"
+          <Link
+            href="/app/discover"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium mt-4 transition-opacity hover:opacity-80"
             style={{ background: 'var(--bg-secondary)', color: 'var(--ciq-green)' }}
           >
             <Users className="w-3.5 h-3.5" />
             {unlocked} compatible profiles waiting
-          </div>
+            <ChevronRight className="w-3 h-3" />
+          </Link>
         )}
       </div>
 

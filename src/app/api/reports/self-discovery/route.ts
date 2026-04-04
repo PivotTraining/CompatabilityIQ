@@ -36,20 +36,7 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // 3. Check if user has completed all 6 assessments
-    const { data: scores, error: scoresError } = await supabase
-      .from('dimension_scores')
-      .select('dimension_id')
-      .eq('user_id', user.id)
-
-    if (scoresError || !scores || scores.length < 6) {
-      return NextResponse.json(
-        { error: 'All 6 assessments must be completed before generating a report' },
-        { status: 400 }
-      )
-    }
-
-    // 4. Get or create Stripe customer
+    // 3. Get or create Stripe customer
     const { data: profile } = await supabase
       .from('profiles')
       .select('stripe_customer_id, first_name, subscription_tier')

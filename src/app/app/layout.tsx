@@ -6,6 +6,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Brain, Compass, Heart, User, Settings, LogOut } from 'lucide-react'
 import Link from 'next/link'
+import Logo from '@/components/Logo'
 
 type UserMode = 'dating' | 'self_discovery'
 
@@ -139,18 +140,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           }}
         >
           <div className="flex items-center gap-2">
-            <div
-              className="w-7 h-7 rounded-md flex items-center justify-center"
-              style={{ background: 'var(--ciq-purple)' }}
-            >
-              <span className="text-white font-bold text-xs">C</span>
-            </div>
-            <span className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>
-              CompatibleIQ
-            </span>
+            <Link href="/" className="flex items-center">
+              <Logo className="h-7 w-auto" showTagline={false} />
+            </Link>
             {userMode === 'self_discovery' && (
               <span
-                className="ml-2 px-2 py-0.5 rounded-full text-[10px] font-semibold"
+                className="ml-1 px-2 py-0.5 rounded-full text-[10px] font-semibold"
                 style={{ background: '#E8F5E9', color: 'var(--ciq-green)' }}
               >
                 Self-Discovery

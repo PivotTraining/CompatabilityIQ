@@ -7,7 +7,7 @@ import { getSupabaseBrowserClient } from '@/lib/supabase/client'
 import { useAssessmentStore } from '@/store/assessment-store'
 import { getPersonalizedQuestions } from '@/lib/assessment/question-router'
 import { MODULE_CONFIG, getUnlockedProfileCount } from '@/lib/constants'
-import { ArrowLeft, ArrowRight, CheckCircle2, Sparkles, X } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CheckCircle2, Save, Sparkles, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { AssessmentQuestion } from '@/lib/assessment/types'
 
@@ -229,7 +229,17 @@ export default function ModuleAssessmentPage() {
               {moduleConfig.title}
             </p>
           </div>
-          <div className="w-9" />
+          <button
+            onClick={() => {
+              router.push('/app/assessment')
+            }}
+            className="flex items-center gap-1 px-2 py-1.5 rounded-lg text-[10px] font-semibold transition-colors hover:opacity-80"
+            style={{ color: 'var(--ciq-purple)' }}
+            aria-label="Save and exit"
+          >
+            <Save className="w-3.5 h-3.5" />
+            Save
+          </button>
         </div>
 
         {/* Progress bar */}

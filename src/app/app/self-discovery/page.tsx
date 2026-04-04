@@ -960,9 +960,9 @@ export default function SelfDiscoveryDashboard() {
             {purchasingReport ? 'Loading...' : `Get Your Self-Discovery Report — $4.99`}
           </button>
         )}
-        {dimensions.length < 6 && !reportPurchased && (
+        {!reportPurchased && (
           <p className="text-[10px] mt-2 text-center" style={{ color: 'var(--text-muted)' }}>
-            Complete all 6 assessments to unlock the full report
+            Your report includes insights from all completed assessments
           </p>
         )}
       </div>

@@ -106,6 +106,7 @@ export default function ProfilePage() {
   const { assessmentProgress } = useAssessmentStore()
 
   const [profile, setProfile] = useState<ProfileData | null>(null)
+  const [profileLoading, setProfileLoading] = useState(true)
   const [editing, setEditing] = useState(false)
   const [saving, setSaving] = useState(false)
   const [editFields, setEditFields] = useState<EditableFields>({
@@ -153,7 +154,10 @@ export default function ProfilePage() {
 
   // Load profile + resolve signed URLs for photos
   useEffect(() => {
-    if (!user || !supabase) return
+    if (!user || !supabase) {
+      setProfileLoading(false)
+      return
+    }
     supabase
       .from('profiles')
       .select(
@@ -184,6 +188,7 @@ export default function ProfilePage() {
           }
         }
       })
+      .finally(() => setProfileLoading(false))
 
     // Load average CIS across matches
     supabase
@@ -337,13 +342,34 @@ export default function ProfilePage() {
   }
 
   // ── Loading state ──
-  if (!profile) {
+  if (profileLoading) {
     return (
       <div className="flex items-center justify-center py-20">
         <div
           className="w-6 h-6 rounded-full border-2 border-t-transparent animate-spin"
           style={{ borderColor: 'var(--ciq-purple)', borderTopColor: 'transparent' }}
         />
+      </div>
+    )
+  }
+
+  if (!profile) {
+    return (
+      <div className="max-w-lg mx-auto px-4 py-12 text-center">
+        <User className="w-12 h-12 mx-auto mb-4" style={{ color: 'var(--text-muted)' }} />
+        <h2 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
+          Profile Not Found
+        </h2>
+        <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
+          Complete onboarding to set up your profile.
+        </p>
+        <Link
+          href="/app/onboarding"
+          className="inline-block px-6 py-3 rounded-xl text-sm font-semibold text-white"
+          style={{ background: 'var(--ciq-purple)' }}
+        >
+          Start Onboarding
+        </Link>
       </div>
     )
   }
